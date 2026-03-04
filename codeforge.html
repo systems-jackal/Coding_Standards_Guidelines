@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java & Rust — Full Learning Path</title>
+    <title>CODEFORGE</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
         rel="stylesheet">
@@ -84,11 +84,154 @@
         }
 
         .wrap {
-            max-width: 1060px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px 100px;
+            padding: 0 20px 40px;
             position: relative;
             z-index: 1
+        }
+
+        /* SPLIT PANEL — Today view */
+        .split-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            height: calc(100vh - 220px);
+            min-height: 500px
+        }
+
+        .split-col {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative
+        }
+
+        .split-col::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 2
+        }
+
+        .split-col.jcol::before {
+            background: linear-gradient(90deg, var(--java), rgba(255, 179, 71, 0))
+        }
+
+        .split-col.rcol::before {
+            background: linear-gradient(90deg, var(--rust), rgba(232, 97, 74, 0))
+        }
+
+        .col-header {
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card)
+        }
+
+        .col-header .lic {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .1em;
+            flex-shrink: 0
+        }
+
+        .col-header .col-meta {
+            flex: 1
+        }
+
+        .col-header .col-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .56rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .08em
+        }
+
+        .col-header .col-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: .06em;
+            margin-top: 1px
+        }
+
+        .jcol .col-header .col-title {
+            color: var(--java)
+        }
+
+        .rcol .col-header .col-title {
+            color: var(--rust)
+        }
+
+        .col-header .col-frac {
+            margin-left: auto;
+            text-align: right
+        }
+
+        .col-header .col-frac .big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: .04em
+        }
+
+        .jcol .col-frac .big {
+            color: var(--java)
+        }
+
+        .rcol .col-frac .big {
+            color: var(--rust)
+        }
+
+        .col-header .col-frac .sm {
+            font-size: .72rem;
+            color: var(--t3)
+        }
+
+        .col-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px 16px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border2) transparent
+        }
+
+        .col-scroll::-webkit-scrollbar {
+            width: 4px
+        }
+
+        .col-scroll::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        .col-scroll::-webkit-scrollbar-thumb {
+            background: var(--border2);
+            border-radius: 2px
+        }
+
+        @media(max-width:800px) {
+            .split-wrap {
+                grid-template-columns: 1fr;
+                height: auto
+            }
+
+            .split-col {
+                height: 80vh
+            }
         }
 
         /* NAV */
@@ -96,8 +239,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 22px 0 18px;
-            margin-bottom: 28px;
+            padding: 18px 0 14px;
+            margin-bottom: 16px;
             border-bottom: 1px solid var(--border);
             flex-wrap: wrap;
             gap: 12px
@@ -125,9 +268,9 @@
 
         .brand .sub {
             font-family: 'DM Mono', monospace;
-            font-size: .6rem;
+            font-size: .58rem;
             color: var(--t3);
-            letter-spacing: .1em;
+            letter-spacing: .08em;
             margin-left: 8px;
             vertical-align: middle
         }
@@ -169,14 +312,14 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-bottom: 28px
+            margin-bottom: 14px
         }
 
         .sc {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px 15px;
             position: relative;
             overflow: hidden
         }
@@ -217,7 +360,7 @@
 
         .sv {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
+            font-size: 1.9rem;
             line-height: 1;
             letter-spacing: .04em
         }
@@ -1088,8 +1231,8 @@
     <div class="blob br"></div>
     <div class="wrap">
         <nav>
-            <div class="brand"><span class="j">Java</span><span class="s">&</span><span class="r">Rust</span><span
-                    class="sub">// exhaustive learning path</span></div>
+            <div class="brand"><span class="j">jackal</span><span class="s">@</span><span class="r">vintage</span><span
+                    class="sub">:~/learn</span></div>
             <div class="tabs">
                 <button class="tab on" onclick="sv('today',this)">Today</button>
                 <button class="tab" onclick="sv('topics',this)">Topics</button>
@@ -1121,15 +1264,42 @@
         </div>
         <!-- TODAY VIEW -->
         <div id="view-today" class="view on">
-            <div class="shdr">
+            <div class="shdr" style="margin-bottom:14px">
                 <h2>// <span>Today's Tasks</span></h2>
                 <div class="dchip" id="dchip"></div>
             </div>
             <div class="adb" id="adb">🏆 Every task done! Incredible discipline — you're building real skills. See you
                 tomorrow.</div>
-            <div class="lb jb" id="jbl"></div>
-            <div class="lb rb" id="rbl"></div>
-            <div class="brow"><button class="btn dng" onclick="resetToday()">↺ Reset Today</button></div>
+            <div class="split-wrap">
+                <!-- JAVA COLUMN -->
+                <div class="split-col jcol">
+                    <div class="col-header">
+                        <div class="lic jic">JAVA</div>
+                        <div class="col-meta">
+                            <div class="col-lbl">Today's Focus</div>
+                            <div class="col-title">Java Tasks</div>
+                        </div>
+                        <div class="col-frac"><span class="big" id="jfrac-done">0</span><span class="sm"> / <span
+                                    id="jfrac-total">0</span></span></div>
+                    </div>
+                    <div class="col-scroll jb" id="jbl"></div>
+                </div>
+                <!-- RUST COLUMN -->
+                <div class="split-col rcol">
+                    <div class="col-header">
+                        <div class="lic ric">RUST</div>
+                        <div class="col-meta">
+                            <div class="col-lbl">Today's Focus</div>
+                            <div class="col-title">Rust Tasks</div>
+                        </div>
+                        <div class="col-frac"><span class="big" id="rfrac-done">0</span><span class="sm"> / <span
+                                    id="rfrac-total">0</span></span></div>
+                    </div>
+                    <div class="col-scroll rb" id="rbl"></div>
+                </div>
+            </div>
+            <div class="brow" style="margin-top:12px"><button class="btn dng" onclick="resetToday()">↺ Reset
+                    Today</button></div>
         </div>
         <!-- TOPICS VIEW -->
         <div id="view-topics" class="view">
@@ -1523,11 +1693,17 @@
             const topics = CUR[lang];
             const dayItems = topics.map(t => ({ topic: t, task: getDayTask(t) }));
             const doneCount = dayItems.filter(di => done.includes(di.task.id)).length;
-            let h = `<div class="lbh">
-    <div class="lic ${isJ ? 'jic' : 'ric'}">${isJ ? 'JAVA' : 'RUST'}</div>
-    <div><div class="lbl">Today's Focus</div><div class="lnm">${topics.length} topics · one task each</div></div>
-    <div class="lfr"><span class="big">${doneCount}</span><span class="sm"> / ${dayItems.length}</span></div>
-  </div>`;
+
+            // Update column header fracs
+            if (isJ) {
+                document.getElementById('jfrac-done').textContent = doneCount;
+                document.getElementById('jfrac-total').textContent = dayItems.length;
+            } else {
+                document.getElementById('rfrac-done').textContent = doneCount;
+                document.getElementById('rfrac-total').textContent = dayItems.length;
+            }
+
+            let h = '';
             dayItems.forEach(({ topic, task }) => {
                 const isDone = done.includes(task.id);
                 h += `<div class="tg">
@@ -1614,6 +1790,15 @@
             document.getElementById('srt').textContent = CUR.rust.length;
             document.getElementById('sxp').textContent = calcXP();
             document.getElementById('sst').textContent = calcStreak();
+            // update col header fracs if elements exist
+            const jfd = document.getElementById('jfrac-done');
+            const rfd = document.getElementById('rfrac-done');
+            if (jfd) jfd.textContent = jD;
+            if (rfd) rfd.textContent = rD;
+            const jft = document.getElementById('jfrac-total');
+            const rft = document.getElementById('rfrac-total');
+            if (jft) jft.textContent = CUR.java.length;
+            if (rft) rft.textContent = CUR.rust.length;
         }
 
         // TOPICS
