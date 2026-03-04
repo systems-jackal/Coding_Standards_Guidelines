@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java & Rust — Full Learning Path</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07070f;
+            --bg2: #0d0d1a;
+            --card: #101020;
+            --card2: #151528;
+            --border: #1c1c32;
+            --border2: #242440;
+            --java: #ffb347;
+            --java2: #e07800;
+            --jg: rgba(255, 179, 71, .11);
+            --rust: #e8614a;
+            --rust2: #b03020;
+            --rg: rgba(232, 97, 74, .11);
+            --xp: #8b7aff;
+            --xpg: rgba(139, 122, 255, .11);
+            --done: #2ed88a;
+            --doneg: rgba(46, 216, 138, .07);
+            --t1: #e0e0f0;
+            --t2: #8888aa;
+            --t3: #44445a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--t1);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, .006) 2px, rgba(255, 255, 255, .006) 4px);
+            pointer-events: none;
+            z-index: 0
+        }
+
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: .15
+        }
+
+        .bj {
+            width: 600px;
+            height: 600px;
+            background: var(--java2);
+            top: -250px;
+            right: -150px
+        }
+
+        .br {
+            width: 500px;
+            height: 500px;
+            background: var(--rust2);
+            bottom: -200px;
+            left: -150px
+        }
+
+        .wrap {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+            position: relative;
+            z-index: 1
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 0 18px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        .brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.7rem;
+            letter-spacing: .1em;
+            line-height: 1
+        }
+
+        .brand .j {
+            color: var(--java)
+        }
+
+        .brand .r {
+            color: var(--rust)
+        }
+
+        .brand .s {
+            color: var(--t3);
+            margin: 0 5px
+        }
+
+        .brand .sub {
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            color: var(--t3);
+            letter-spacing: .1em;
+            margin-left: 8px;
+            vertical-align: middle
+        }
+
+        .tabs {
+            display: flex;
+            gap: 3px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px
+        }
+
+        .tab {
+            background: transparent;
+            border: none;
+            color: var(--t3);
+            font-family: 'DM Mono', monospace;
+            font-size: .66rem;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            padding: 7px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .tab.on {
+            background: var(--card2);
+            color: var(--t1)
+        }
+
+        .tab:hover:not(.on) {
+            color: var(--t2)
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 28px
+        }
+
+        .sc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .sc::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px
+        }
+
+        .sc.sj::after {
+            background: linear-gradient(90deg, var(--java), transparent)
+        }
+
+        .sc.sr::after {
+            background: linear-gradient(90deg, var(--rust), transparent)
+        }
+
+        .sc.sx::after {
+            background: linear-gradient(90deg, var(--xp), transparent)
+        }
+
+        .sc.sd::after {
+            background: linear-gradient(90deg, var(--done), transparent)
+        }
+
+        .sl {
+            font-family: 'DM Mono', monospace;
+            font-size: .57rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--t3);
+            margin-bottom: 7px
+        }
+
+        .sv {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            line-height: 1;
+            letter-spacing: .04em
+        }
+
+        .sc.sj .sv {
+            color: var(--java)
+        }
+
+        .sc.sr .sv {
+            color: var(--rust)
+        }
+
+        .sc.sx .sv {
+            color: var(--xp)
+        }
+
+        .sc.sd .sv {
+            color: var(--done)
+        }
+
+        .ss {
+            font-size: .61rem;
+            color: var(--t3);
+            margin-top: 3px
+        }
+
+        /* VIEWS */
+        .view {
+            display: none
+        }
+
+        .view.on {
+            display: block
+        }
+
+        /* SECTION HDR */
+        .shdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .shdr h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: .1em;
+            color: var(--t2)
+        }
+
+        .shdr h2 span {
+            color: var(--t1)
+        }
+
+        .dchip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 5px 13px;
+            font-family: 'DM Mono', monospace;
+            font-size: .66rem;
+            color: var(--t2)
+        }
+
+        /* ALL DONE */
+        .adb {
+            display: none;
+            background: linear-gradient(135deg, rgba(46, 216, 138, .09), rgba(46, 216, 138, .03));
+            border: 1px solid rgba(46, 216, 138, .2);
+            border-radius: 10px;
+            padding: 13px 20px;
+            text-align: center;
+            color: var(--done);
+            font-size: .83rem;
+            margin-bottom: 26px;
+            animation: pop .4s cubic-bezier(.175, .885, .32, 1.275)
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.95)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        /* LANG BLOCK */
+        .lb {
+            margin-bottom: 36px
+        }
+
+        .lbh {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 16px
+        }
+
+        .lic {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .78rem;
+            letter-spacing: .1em;
+            flex-shrink: 0
+        }
+
+        .jic {
+            background: var(--jg);
+            color: var(--java);
+            border: 1px solid rgba(255, 179, 71, .16)
+        }
+
+        .ric {
+            background: var(--rg);
+            color: var(--rust);
+            border: 1px solid rgba(232, 97, 74, .16)
+        }
+
+        .lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .08em
+        }
+
+        .lnm {
+            font-size: .78rem;
+            color: var(--t2);
+            margin-top: 2px
+        }
+
+        .lfr {
+            margin-left: auto;
+            text-align: right
+        }
+
+        .lfr .big {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: .04em
+        }
+
+        .jb .lfr .big {
+            color: var(--java)
+        }
+
+        .rb .lfr .big {
+            color: var(--rust)
+        }
+
+        .lfr .sm {
+            font-size: .76rem;
+            color: var(--t3)
+        }
+
+        /* TASK GROUP */
+        .tg {
+            margin-bottom: 16px
+        }
+
+        .tgl {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px
+        }
+
+        .tgn {
+            font-family: 'DM Mono', monospace;
+            font-size: .57rem;
+            color: var(--t3);
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 7px
+        }
+
+        .tgt {
+            font-size: .77rem;
+            font-weight: 600;
+            color: var(--t2)
+        }
+
+        .xpc {
+            margin-left: auto;
+            font-family: 'DM Mono', monospace;
+            font-size: .57rem;
+            color: var(--xp);
+            background: var(--xpg);
+            border: 1px solid rgba(139, 122, 255, .16);
+            border-radius: 20px;
+            padding: 2px 8px
+        }
+
+        /* TASK CARD */
+        .tc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
+            margin-bottom: 5px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .tc:last-child {
+            margin-bottom: 0
+        }
+
+        .jb .tc:hover {
+            border-color: rgba(255, 179, 71, .2)
+        }
+
+        .rb .tc:hover {
+            border-color: rgba(232, 97, 74, .2)
+        }
+
+        .tc.dn {
+            background: var(--doneg);
+            border-color: rgba(46, 216, 138, .13)
+        }
+
+        .tc.dn .tt {
+            text-decoration: line-through;
+            color: var(--t3)
+        }
+
+        .tc.dn .td {
+            color: var(--t3);
+            opacity: .4
+        }
+
+        .cb {
+            width: 21px;
+            height: 21px;
+            border-radius: 6px;
+            border: 1.5px solid var(--border2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            margin-top: 1px
+        }
+
+        .jb .cb {
+            border-color: rgba(255, 179, 71, .25)
+        }
+
+        .rb .cb {
+            border-color: rgba(232, 97, 74, .25)
+        }
+
+        .tc.dn .cb {
+            background: var(--done);
+            border-color: var(--done)
+        }
+
+        .ck {
+            display: none
+        }
+
+        .tc.dn .ck {
+            display: block
+        }
+
+        .tbody {
+            flex: 1;
+            min-width: 0
+        }
+
+        .tt {
+            font-size: .83rem;
+            font-weight: 600;
+            color: var(--t1);
+            margin-bottom: 3px;
+            line-height: 1.4
+        }
+
+        .td {
+            font-size: .71rem;
+            color: var(--t2);
+            line-height: 1.6;
+            margin-bottom: 7px
+        }
+
+        .tm {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .pill {
+            font-family: 'DM Mono', monospace;
+            font-size: .56rem;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            padding: 2px 7px;
+            border-radius: 20px;
+            font-weight: 500
+        }
+
+        .pe {
+            background: rgba(46, 216, 138, .07);
+            color: var(--done);
+            border: 1px solid rgba(46, 216, 138, .12)
+        }
+
+        .pm {
+            background: rgba(255, 179, 71, .07);
+            color: var(--java);
+            border: 1px solid rgba(255, 179, 71, .12)
+        }
+
+        .ph {
+            background: rgba(232, 97, 74, .07);
+            color: var(--rust);
+            border: 1px solid rgba(232, 97, 74, .12)
+        }
+
+        .pt {
+            background: var(--card2);
+            color: var(--t3);
+            border: 1px solid var(--border)
+        }
+
+        .hbtn {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--t3);
+            font-family: 'DM Mono', monospace;
+            font-size: .56rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding: 3px 9px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all .2s;
+            flex-shrink: 0
+        }
+
+        .hbtn:hover {
+            border-color: var(--xp);
+            color: var(--xp)
+        }
+
+        .hbox {
+            display: none;
+            background: var(--xpg);
+            border: 1px solid rgba(139, 122, 255, .16);
+            border-radius: 6px;
+            padding: 9px 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: .67rem;
+            color: #b0adff;
+            line-height: 1.65;
+            margin-top: 9px
+        }
+
+        .hbox.op {
+            display: block
+        }
+
+        /* TOPICS VIEW */
+        .tgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px
+        }
+
+        .tcard {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            transition: all .2s;
+            position: relative;
+            overflow: hidden;
+            cursor: default
+        }
+
+        .tcard:hover {
+            border-color: var(--border2);
+            transform: translateY(-1px)
+        }
+
+        .tcard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px
+        }
+
+        .tcard.jtc::before {
+            background: linear-gradient(90deg, var(--java), transparent)
+        }
+
+        .tcard.rtc::before {
+            background: linear-gradient(90deg, var(--rust), transparent)
+        }
+
+        .tcbdg {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .6rem;
+            letter-spacing: .12em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 9px
+        }
+
+        .jbdg {
+            background: var(--jg);
+            color: var(--java)
+        }
+
+        .rbdg {
+            background: var(--rg);
+            color: var(--rust)
+        }
+
+        .tctitle {
+            font-weight: 600;
+            font-size: .88rem;
+            color: var(--t1);
+            margin-bottom: 5px
+        }
+
+        .tcdesc {
+            font-size: .71rem;
+            color: var(--t2);
+            line-height: 1.5;
+            margin-bottom: 13px
+        }
+
+        .tcfoot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .tccnt {
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            color: var(--t3)
+        }
+
+        .tcbar {
+            width: 80px;
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        .tcfill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width .4s
+        }
+
+        .jtc .tcfill {
+            background: var(--java)
+        }
+
+        .rtc .tcfill {
+            background: var(--rust)
+        }
+
+        /* TOPIC DETAIL */
+        .tdback {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--t3);
+            font-family: 'DM Mono', monospace;
+            font-size: .64rem;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            padding: 7px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s;
+            margin-bottom: 22px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .tdback:hover {
+            border-color: var(--t2);
+            color: var(--t2)
+        }
+
+        .tdtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: .08em;
+            margin-bottom: 6px
+        }
+
+        .tddesc {
+            font-size: .78rem;
+            color: var(--t2);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 600px
+        }
+
+        .all-tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        /* NOTES */
+        .ngrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px
+        }
+
+        .nb {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px
+        }
+
+        .nb h4 {
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--t3);
+            margin-bottom: 11px
+        }
+
+        .nb textarea {
+            width: 100%;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            color: var(--t1);
+            font-family: 'DM Mono', monospace;
+            font-size: .72rem;
+            line-height: 1.7;
+            padding: 11px 13px;
+            resize: vertical;
+            min-height: 115px;
+            outline: none;
+            transition: border-color .2s
+        }
+
+        .nb textarea:focus {
+            border-color: rgba(139, 122, 255, .28)
+        }
+
+        .nb textarea::placeholder {
+            color: var(--t3)
+        }
+
+        .clist {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .ci {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: border-color .2s
+        }
+
+        .ci:hover {
+            border-color: var(--border2)
+        }
+
+        .ci.fl {
+            border-color: rgba(255, 179, 71, .22);
+            background: rgba(255, 179, 71, .03)
+        }
+
+        .ci .cf {
+            font-size: .82rem;
+            flex-shrink: 0
+        }
+
+        .ci input {
+            background: transparent;
+            border: none;
+            color: var(--t2);
+            font-family: 'DM Sans', sans-serif;
+            font-size: .75rem;
+            outline: none;
+            width: 100%
+        }
+
+        .addbtn {
+            background: transparent;
+            border: 1px dashed var(--border);
+            color: var(--t3);
+            font-family: 'DM Mono', monospace;
+            font-size: .66rem;
+            padding: 7px;
+            border-radius: 7px;
+            cursor: pointer;
+            width: 100%;
+            transition: all .2s;
+            text-align: center;
+            margin-top: 6px
+        }
+
+        .addbtn:hover {
+            border-color: var(--xp);
+            color: var(--xp)
+        }
+
+        /* HISTORY */
+        .hlist {
+            display: flex;
+            flex-direction: column;
+            gap: 9px
+        }
+
+        .hrow {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 15px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .hdate {
+            font-family: 'DM Mono', monospace;
+            font-size: .66rem;
+            color: var(--t3);
+            min-width: 88px
+        }
+
+        .hbars {
+            display: flex;
+            gap: 9px;
+            flex: 1;
+            min-width: 150px
+        }
+
+        .hbw {
+            flex: 1
+        }
+
+        .hbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .53rem;
+            color: var(--t3);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .07em
+        }
+
+        .ht {
+            height: 5px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .hfj {
+            height: 100%;
+            background: var(--java);
+            border-radius: 3px
+        }
+
+        .hfr {
+            height: 100%;
+            background: var(--rust);
+            border-radius: 3px
+        }
+
+        .hxp {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .95rem;
+            color: var(--xp);
+            letter-spacing: .05em;
+            min-width: 52px;
+            text-align: right
+        }
+
+        /* BTN */
+        .btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--t3);
+            font-family: 'DM Mono', monospace;
+            font-size: .64rem;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            padding: 8px 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .btn:hover {
+            border-color: var(--done);
+            color: var(--done)
+        }
+
+        .btn.dng:hover {
+            border-color: var(--rust);
+            color: var(--rust)
+        }
+
+        .btn.pri {
+            border-color: var(--xp);
+            color: var(--xp)
+        }
+
+        .btn.pri:hover {
+            background: var(--xpg)
+        }
+
+        .brow {
+            display: flex;
+            gap: 9px;
+            justify-content: flex-end;
+            margin-top: 16px
+        }
+
+        /* XP FLOAT */
+        @keyframes xpf {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(.5)
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-28px) scale(1.2)
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-56px) scale(.8)
+            }
+        }
+
+        .xpfl {
+            position: fixed;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.15rem;
+            color: var(--xp);
+            pointer-events: none;
+            animation: xpf .85s ease forwards;
+            z-index: 999
+        }
+
+        .empty {
+            color: var(--t3);
+            font-size: .78rem;
+            padding: 28px;
+            text-align: center
+        }
+
+        /* PROGRESS RING (topic detail) */
+        .tprog {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 16px
+        }
+
+        .tpring {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0
+        }
+
+        .tpinfo .tplbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .09em
+        }
+
+        .tpinfo .tpval {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--t1)
+        }
+
+        .tpxp {
+            margin-left: auto;
+            text-align: right
+        }
+
+        .tpxp .xplbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .09em
+        }
+
+        .tpxp .xpval {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--xp)
+        }
+
+        @media(max-width:700px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .tgrid {
+                grid-template-columns: 1fr
+            }
+
+            .ngrid {
+                grid-template-columns: 1fr
+            }
+
+            nav {
+                flex-wrap: wrap
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob bj"></div>
+    <div class="blob br"></div>
+    <div class="wrap">
+        <nav>
+            <div class="brand"><span class="j">Java</span><span class="s">&</span><span class="r">Rust</span><span
+                    class="sub">// exhaustive learning path</span></div>
+            <div class="tabs">
+                <button class="tab on" onclick="sv('today',this)">Today</button>
+                <button class="tab" onclick="sv('topics',this)">Topics</button>
+                <button class="tab" onclick="sv('notes',this)">Notes</button>
+                <button class="tab" onclick="sv('history',this)">History</button>
+            </div>
+        </nav>
+        <div class="stats">
+            <div class="sc sj">
+                <div class="sl">Java Today</div>
+                <div class="sv" id="sj">0</div>
+                <div class="ss">of <span id="sjt">0</span> tasks</div>
+            </div>
+            <div class="sc sr">
+                <div class="sl">Rust Today</div>
+                <div class="sv" id="sr">0</div>
+                <div class="ss">of <span id="srt">0</span> tasks</div>
+            </div>
+            <div class="sc sx">
+                <div class="sl">Total XP</div>
+                <div class="sv" id="sxp">0</div>
+                <div class="ss">experience earned</div>
+            </div>
+            <div class="sc sd">
+                <div class="sl">Day Streak</div>
+                <div class="sv" id="sst">0</div>
+                <div class="ss">days in a row 🔥</div>
+            </div>
+        </div>
+        <!-- TODAY VIEW -->
+        <div id="view-today" class="view on">
+            <div class="shdr">
+                <h2>// <span>Today's Tasks</span></h2>
+                <div class="dchip" id="dchip"></div>
+            </div>
+            <div class="adb" id="adb">🏆 Every task done! Incredible discipline — you're building real skills. See you
+                tomorrow.</div>
+            <div class="lb jb" id="jbl"></div>
+            <div class="lb rb" id="rbl"></div>
+            <div class="brow"><button class="btn dng" onclick="resetToday()">↺ Reset Today</button></div>
+        </div>
+        <!-- TOPICS VIEW -->
+        <div id="view-topics" class="view">
+            <div id="topics-main">
+                <div class="shdr">
+                    <h2>// <span>All Topics</span></h2>
+                </div>
+                <div class="tgrid" id="tgrid"></div>
+            </div>
+            <div id="topic-detail" style="display:none"></div>
+        </div>
+        <!-- NOTES VIEW -->
+        <div id="view-notes" class="view">
+            <div class="shdr">
+                <h2>// <span>Notes & Concepts</span></h2>
+            </div>
+            <div class="ngrid">
+                <div class="nb">
+                    <h4>📝 Daily Log</h4><textarea id="n1"
+                        placeholder="What did you learn today? Paste code, confusion points, anything worth remembering..."></textarea>
+                </div>
+                <div class="nb">
+                    <h4>⚠️ Concepts to Revisit<br></h4>
+                    <div class="clist" id="clist"></div><button class="addbtn" onclick="addC()">+ Add Concept</button>
+                </div>
+            </div>
+            <div class="nb" style="margin-bottom:4px">
+                <h4>💡 Aha! Moments — breakthroughs that clicked</h4><textarea id="n2"
+                    placeholder="Document your breakthroughs. Understanding Rust ownership, Java generics, recursive thinking — write those moments here so you never forget them."></textarea>
+            </div>
+            <div class="brow"><button class="btn pri" onclick="saveN()">Save Notes</button></div>
+        </div>
+        <!-- HISTORY VIEW -->
+        <div id="view-history" class="view">
+            <div class="shdr">
+                <h2>// <span>Progress History</span></h2>
+            </div>
+            <div class="hlist" id="hlist"></div>
+        </div>
+    </div>
+    <script>
+
+        const CUR = {
+            java: [
+                {
+                    id: 'jt01', title: 'Java Basics & Setup', desc: 'Variables, data types, operators, type casting, and first programs. The bedrock that every Java concept builds upon.',
+                    tasks: [
+                        { id: 'j001', title: 'Hello World + printf formatting', desc: 'Print your name, today\'s date, and a fun fact using both println() and printf(). Use %s, %d, %f, %n format specifiers. Understand the difference between print, println, printf.', difficulty: 'easy', xp: 10, hint: 'System.out.printf("Hello %s! You are %d years old.%n", name, age); — %n is portable newline, better than \\n.' },
+                        { id: 'j002', title: 'All primitive types explorer', desc: 'Declare and print: byte, short, int, long, float, double, boolean, char. Find the max value of int using Integer.MAX_VALUE. Try MAX_VALUE + 1 and observe integer overflow!', difficulty: 'easy', xp: 10, hint: 'Integer.MAX_VALUE + 1 wraps to Integer.MIN_VALUE — this is overflow. It\'s a real bug source in production code! Also try Long.MAX_VALUE.' },
+                        { id: 'j003', title: 'Type casting & integer division', desc: 'Compute area of circle (r=7) with Math.PI. Write 5/2 and print — it\'s 2! Fix it with casting. Also convert int to char and back. Understand widening vs narrowing.', difficulty: 'easy', xp: 15, hint: '(double)5/2 = 2.5. Or use 5.0/2. char c = \'A\'; int n = c; gives 65. This is widening. int to char is narrowing and needs explicit cast.' },
+                        { id: 'j004', title: 'String methods deep dive', desc: 'Take "  Hello World  ". Apply: trim(), toLowerCase(), replace(), split(), contains(), indexOf(), substring(), charAt(), length(). Print every result and understand immutability.', difficulty: 'easy', xp: 15, hint: 'Strings are IMMUTABLE — every method returns a NEW String. str.trim().toLowerCase() chains work because each returns a new String object.' },
+                        { id: 'j005', title: 'StringBuilder vs String concatenation', desc: 'Build a string of 1000 "a" characters using: (1) += in a loop, (2) StringBuilder. Time both with System.currentTimeMillis(). See the massive performance difference.', difficulty: 'medium', xp: 20, hint: 'String += in a loop creates a new object every iteration (O(n²)). StringBuilder.append() modifies in-place (O(n)). At scale this matters enormously.' },
+                    ]
+                },
+                {
+                    id: 'jt02', title: 'Control Flow', desc: 'If/else, switch expressions, for/while/do-while loops. The logic skeleton of every program you\'ll ever write.',
+                    tasks: [
+                        { id: 'j006', title: 'FizzBuzz extended', desc: '1–100: multiples of 3→"Fizz", 5→"Buzz", 3&5→"FizzBuzz", 7→your name. Use for-loop + if/else if chain. Count how many of each category printed.', difficulty: 'easy', xp: 10, hint: 'Check divisibility by 15 (3×5) FIRST — otherwise 15 matches the 3 case before you check 5. Order of conditions matters!' },
+                        { id: 'j007', title: 'Modern switch expressions', desc: 'Write gradeLabel(int score) using the new switch expression syntax (Java 14+): return switch(score/10) { case 10,9 -> "A"; case 8 -> "B"; ... default -> "F"; }', difficulty: 'easy', xp: 15, hint: 'Arrow -> syntax returns directly, no fall-through, no break. You can group cases with commas: case 10, 9 -> "A". Much cleaner than old switch!' },
+                        { id: 'j008', title: 'Nested loops: patterns', desc: 'Print a right triangle of * (5 rows), then a number pyramid centered, then a multiplication table 1–10. Use nested for-loops and printf for alignment.', difficulty: 'medium', xp: 20, hint: 'For centered pyramid: print (rows-row) spaces, then (2*row-1) stars. For table alignment: printf("%4d", val) pads to 4 characters width.' },
+                        { id: 'j009', title: 'Do-while: input validation simulation', desc: 'Simulate user input validation with a do-while loop. Use a hardcoded array of "inputs" including invalid ones. Keep looping until valid input is found. Print each attempt.', difficulty: 'medium', xp: 15, hint: 'do { input = inputs[i++]; } while(!isValid(input) && i < inputs.length) — do-while guarantees at least one execution, perfect for validation loops.' },
+                        { id: 'j010', title: 'Labeled break & continue', desc: 'Write a nested loop searching a 5×5 grid (2D array). Use a labeled break (outer: for...) to exit BOTH loops when a target value is found. Also use labeled continue.', difficulty: 'hard', xp: 25, hint: 'outer: for(int i...) { for(int j...) { if(found) break outer; } } — the label lets break/continue target the outer loop, not just the inner one.' },
+                    ]
+                },
+                {
+                    id: 'jt03', title: 'Methods & Recursion', desc: 'Defining and calling methods, overloading, pass-by-value, varargs, and the elegant power of recursive thinking.',
+                    tasks: [
+                        { id: 'j011', title: 'Method overloading', desc: 'Create overloaded area() methods: area(double radius) for circle, area(double w, double h) for rectangle, area(double a, double b, double c) for triangle (Heron\'s formula). Java picks the right one.', difficulty: 'easy', xp: 15, hint: 'Overloading = same name, different parameters. Java resolves at compile time. You cannot overload by return type alone — parameters must differ.' },
+                        { id: 'j012', title: 'Pass-by-value proof', desc: 'Write a method swap(int a, int b) that tries to swap two ints. Call it and prove the originals don\'t change. Then write swapArray(int[] arr) and prove arrays ARE modified.', difficulty: 'medium', xp: 20, hint: 'Java is ALWAYS pass-by-value. For primitives, the value is copied. For objects/arrays, the REFERENCE is copied — but they both point to the same object!' },
+                        { id: 'j013', title: 'Recursive factorial & Fibonacci', desc: 'Write factorial(n) and fibonacci(n) recursively. Add a counter to count recursive calls for fib(10). Then write iterative versions. Compare call counts.', difficulty: 'medium', xp: 25, hint: 'fib(30) makes over a million recursive calls! Each fib(n) calls fib(n-1) AND fib(n-2), causing exponential growth. This is why memoization matters.' },
+                        { id: 'j014', title: 'Varargs method', desc: 'Write sum(int... numbers) that accepts any number of ints. Call it with 0, 1, 3, and 10 arguments. Also write a String join(String sep, String... parts). Varargs is just a hidden array.', difficulty: 'easy', xp: 15, hint: 'int... numbers is literally int[] numbers internally. Varargs must be the LAST parameter. You can call it as sum() or sum(1,2,3,4,5,6) — both valid.' },
+                        { id: 'j015', title: 'Binary search recursive', desc: 'Implement recursive binary search on a sorted int[]. Return the index or -1. Verify it works on arrays of size 1, 2, and where the element is at start, middle, and end.', difficulty: 'hard', xp: 30, hint: 'binarySearch(arr, target, low, high). Base case: if low > high return -1. Mid = low + (high-low)/2 to avoid overflow. Recurse left or right half.' },
+                    ]
+                },
+                {
+                    id: 'jt04', title: 'Arrays & Multidimensional Arrays', desc: 'Single and multi-dimensional arrays, array algorithms, Arrays utility class, and memory layout.',
+                    tasks: [
+                        { id: 'j016', title: 'Array manipulation methods', desc: 'Write: reverse(int[]), removeDuplicates(int[]), flatten(int[][]) → int[], rotate(int[], k). Test each thoroughly. Do not use Collections.', difficulty: 'medium', xp: 25, hint: 'For rotate: use the reverse trick — reverse all, reverse first k, reverse rest. It\'s O(n) time O(1) space and elegant.' },
+                        { id: 'j017', title: '2D array: matrix operations', desc: 'Implement: matrix addition, matrix multiplication for 3×3 matrices. Then transpose a matrix in-place. Print formatted matrices. Understand row-major order.', difficulty: 'hard', xp: 30, hint: 'Matrix multiply: result[i][j] = sum of row i × col j. That\'s a triple nested loop. Transpose: swap arr[i][j] with arr[j][i] for i<j only (to avoid swapping back).' },
+                        { id: 'j018', title: 'Arrays class utility', desc: 'Use Arrays.sort(), Arrays.binarySearch(), Arrays.copyOf(), Arrays.copyOfRange(), Arrays.fill(), Arrays.equals(), Arrays.toString() on various arrays. Understand what each does.', difficulty: 'easy', xp: 15, hint: 'Arrays.sort() uses dual-pivot quicksort for primitives (O(n log n)). Arrays.binarySearch() requires SORTED array and returns negative index if not found.' },
+                        { id: 'j019', title: 'Jagged arrays', desc: 'Create a jagged array (array of arrays of different lengths) representing a Pascal\'s triangle with 7 rows. Each row[i][j] = row[i-1][j-1] + row[i-1][j]. Print it formatted.', difficulty: 'medium', xp: 20, hint: 'int[][] pascal = new int[7][]; pascal[0] = new int[]{1}; Each row has i+1 elements. pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j] for 0 < j < i.' },
+                    ]
+                },
+                {
+                    id: 'jt05', title: 'Object-Oriented Programming', desc: 'Classes, objects, constructors, encapsulation, this keyword, static members — the fundamental Java paradigm.',
+                    tasks: [
+                        { id: 'j020', title: 'BankAccount with full OOP', desc: 'Private fields: owner, balance, transactionHistory(ArrayList). Methods: deposit, withdraw (throw if insufficient), transfer(BankAccount other), getStatement(). Use this keyword. toString().', difficulty: 'medium', xp: 30, hint: 'this.owner disambiguates field from parameter with same name. this() calls another constructor (constructor chaining). Always validate inputs!' },
+                        { id: 'j021', title: 'Static members & factory methods', desc: 'Create a Counter class with a static count tracking all instances ever created. Add a static factory method Counter.create(String name) instead of using new. Understand static vs instance.', difficulty: 'medium', xp: 20, hint: 'static fields belong to the CLASS, not instances. All objects share the same static field. Factory methods control object creation and can validate or reuse objects.' },
+                        { id: 'j022', title: 'Immutable class design', desc: 'Create an immutable Point class (like Java\'s String). Final class, private final fields, no setters, only getters, copy in constructor. Add translate(dx,dy) that returns a NEW Point.', difficulty: 'hard', xp: 30, hint: 'For immutability: final class, final fields, no setters, defensive copies of mutable parameters. Immutable objects are inherently thread-safe!' },
+                        { id: 'j023', title: 'Builder pattern', desc: 'Create Person with many optional fields (name, age, email, phone, address). Implement a Builder inner class with chained setters returning this. Use it: new Person.Builder("Alice").age(25).email("a@b.com").build()', difficulty: 'hard', xp: 35, hint: 'class Person { static class Builder { private String name; Builder name(String n){this.name=n;return this;} Person build(){return new Person(this);} } }' },
+                    ]
+                },
+                {
+                    id: 'jt06', title: 'Inheritance & Polymorphism', desc: 'Extends, super, method overriding, abstract classes, the Liskov Substitution Principle, and runtime dispatch.',
+                    tasks: [
+                        { id: 'j024', title: 'Shape hierarchy', desc: 'Abstract Shape with abstract area(), perimeter(), describe(). Extend: Circle, Rectangle, Triangle, Hexagon. Each overrides all methods. Create Shape[] and call each method — observe runtime dispatch.', difficulty: 'medium', xp: 30, hint: 'Shape s = new Circle(5); s.area(); — Java looks up the ACTUAL type at runtime to find the method. This is dynamic dispatch. The declared type is just for the compiler.' },
+                        { id: 'j025', title: 'Method overriding rules', desc: 'Demonstrate: @Override annotation, covariant return types, calling super.method(), you can\'t override static/final/private methods. Write examples of each rule.', difficulty: 'medium', xp: 20, hint: '@Override is optional but valuable — if you misspell the method name without it, you accidentally create a new method instead of overriding. Always use it.' },
+                        { id: 'j026', title: 'Liskov Substitution in practice', desc: 'Create a file reading hierarchy: DataReader (abstract) → CSVReader, JSONReader (simulated). Write processAll(DataReader[] readers) that calls read() on each. Swap implementations freely.', difficulty: 'hard', xp: 35, hint: 'Liskov: you should be able to use a subclass anywhere its parent is expected without breaking anything. If your subclass breaks the contract, your hierarchy is wrong.' },
+                        { id: 'j027', title: 'final keyword mastery', desc: 'Demonstrate: final variable (constant), final method (can\'t override), final class (can\'t extend). Show why String is final. Create a class that uses all three forms. Explain each use case.', difficulty: 'medium', xp: 20, hint: 'final class = no subclasses (String, Integer). final method = no overriding (security). final variable = constant (must assign once). Very different use cases!' },
+                    ]
+                },
+                {
+                    id: 'jt07', title: 'Interfaces & Abstract Classes', desc: 'Interface default/static methods, functional interfaces, choosing between abstract class and interface, multiple implementation.',
+                    tasks: [
+                        { id: 'j028', title: 'Interface with default methods', desc: 'Create Sortable interface with sort() abstract and defaultSort() default method. Implement in NumberList and StringList differently. Override defaultSort() in one. Call both.', difficulty: 'medium', xp: 25, hint: 'Default methods (Java 8+) let you add methods to interfaces without breaking existing implementations. It\'s how Java added stream() to Collection without breaking everything.' },
+                        { id: 'j029', title: 'Functional interface & lambda', desc: 'Create @FunctionalInterface Transformer<T,R> with R transform(T input). Use it with lambda: Transformer<String,Integer> len = s -> s.length(); Chain two transformers.', difficulty: 'medium', xp: 25, hint: 'A functional interface has exactly ONE abstract method. Lambdas are syntactic sugar for anonymous classes implementing it. (a,b) -> a+b is a lambda.' },
+                        { id: 'j030', title: 'Interface vs abstract class decision', desc: 'Build two versions of a game character system: one using abstract class, one using interfaces. Show when you\'d need multiple interfaces, and when shared state makes abstract class necessary.', difficulty: 'hard', xp: 35, hint: 'Abstract class: shared state (fields), common implementation, "is-a" relationship. Interface: capability contract, multiple "can-do" behaviors, unrelated classes.' },
+                        { id: 'j031', title: 'Comparable & Comparator', desc: 'Make Student implement Comparable<Student> (sort by GPA by default). Then create 3 separate Comparator<Student> implementations: by name, by age, by ID. Use with Collections.sort().', difficulty: 'medium', xp: 25, hint: 'Comparable: natural ordering in the class itself. Comparator: external, flexible ordering. Lambda comparator: Comparator.comparing(Student::getName) is elegant.' },
+                    ]
+                },
+                {
+                    id: 'jt08', title: 'Collections Framework', desc: 'List, Set, Map, Queue, Deque — the full collection hierarchy, when to use which, and how they work internally.',
+                    tasks: [
+                        { id: 'j032', title: 'ArrayList vs LinkedList benchmark', desc: 'Insert 100k elements at the START of ArrayList vs LinkedList. Then iterate 1M times over both. Time each operation. Understand why: O(n) vs O(1) insert, O(1) vs O(n) access.', difficulty: 'medium', xp: 25, hint: 'ArrayList: backed by array. Insert at start shifts all elements O(n). Random access O(1). LinkedList: insert O(1) but travel to position is O(n). Sequential access fine.' },
+                        { id: 'j033', title: 'HashMap internals & word counter', desc: 'Count word frequencies in a paragraph. Use getOrDefault(). Then get all entries, sort by frequency descending using Map.Entry comparator. Print top 5 words.', difficulty: 'medium', xp: 25, hint: 'HashMap: O(1) average get/put. Internally uses array of buckets + linked lists for collisions. TreeMap: O(log n) but sorted. LinkedHashMap: insertion order.' },
+                        { id: 'j034', title: 'HashSet vs TreeSet vs LinkedHashSet', desc: 'Add 20 items (with deliberate duplicates) to all three. Print results. Show: HashSet (no order, no dupes), TreeSet (sorted, no dupes), LinkedHashSet (insertion order, no dupes).', difficulty: 'easy', xp: 15, hint: 'Sets guarantee uniqueness. HashSet uses equals()+hashCode(). If you override equals(), you MUST override hashCode() too, or Sets break in mysterious ways!' },
+                        { id: 'j035', title: 'Queue & Stack with Deque', desc: 'Implement a BFS-style level-order traversal simulation using ArrayDeque as Queue. Also simulate a call stack (undo feature) using ArrayDeque as Stack. Use push/pop/offer/poll correctly.', difficulty: 'hard', xp: 35, hint: 'Use ArrayDeque for both Queue and Stack — it\'s faster than LinkedList for Queue and faster than Stack class for stack. offer/poll for queue, push/pop for stack.' },
+                        { id: 'j036', title: 'Collections utility methods', desc: 'Use: Collections.sort() with lambda, Collections.shuffle(), Collections.reverse(), Collections.frequency(), Collections.disjoint(), Collections.nCopies(), Collections.unmodifiableList(). Understand each.', difficulty: 'medium', xp: 20, hint: 'Collections.unmodifiableList() returns a view that throws UnsupportedOperationException on modification. For a truly independent copy, use new ArrayList<>(original).' },
+                    ]
+                },
+                {
+                    id: 'jt09', title: 'Generics', desc: 'Generic classes, methods, bounded type parameters, wildcards, type erasure — writing reusable, type-safe code.',
+                    tasks: [
+                        { id: 'j037', title: 'Generic Stack<T> implementation', desc: 'Implement Stack<T> using a private Object[] (no ArrayList). Methods: push(T), pop() throws EmptyStackException, peek(), isEmpty(), size(). Handle the unchecked cast carefully.', difficulty: 'medium', xp: 30, hint: '@SuppressWarnings("unchecked") T item = (T) data[--top]; is necessary because of type erasure. At runtime all generics become Object — the cast is checked at the call site.' },
+                        { id: 'j038', title: 'Bounded type parameters', desc: 'Write <T extends Comparable<T>> T max(T a, T b, T c). Then write <T extends Number & Comparable<T>> double sumAndAverage(List<T> list). Use & to require multiple bounds.', difficulty: 'medium', xp: 25, hint: 'T extends A & B — T must implement BOTH bounds. The first bound can be a class or interface, subsequent bounds must be interfaces (like Java multiple interface rule).' },
+                        { id: 'j039', title: 'Wildcards: producer extends, consumer super', desc: 'Write copy(List<? extends Number> src, List<? super Number> dest). Understand PECS: Producer Extends, Consumer Super. Show what you can and cannot do with each.', difficulty: 'hard', xp: 35, hint: 'List<? extends Number>: you can READ Numbers from it (it produces), can\'t write (unsafe). List<? super Number>: you can WRITE Numbers to it (it consumes), reading gives Object.' },
+                        { id: 'j040', title: 'Generic Pair, Triple, Result<T,E>', desc: 'Create Pair<A,B>, Triple<A,B,C> with getters and swap(). Then create Result<T,E> with isSuccess(), getValue(), getError(), map(Function<T,R>). This is monadic programming!', difficulty: 'hard', xp: 40, hint: 'Result<T,E> is like Optional but carries error info. map() transforms the value if success, passes through error otherwise. This pattern is core to functional Java.' },
+                    ]
+                },
+                {
+                    id: 'jt10', title: 'Exception Handling', desc: 'Checked vs unchecked exceptions, custom exceptions, try-with-resources, multi-catch, exception chaining.',
+                    tasks: [
+                        { id: 'j041', title: 'Exception hierarchy exploration', desc: 'Catch ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException, ClassCastException, NumberFormatException. Show each being thrown. Use multi-catch (e1|e2). Examine the stack trace.', difficulty: 'easy', xp: 15, hint: 'All extend RuntimeException (unchecked). Multi-catch: catch(NPE | AIOOB e) — e is effectively final here. getMessage() gives message, printStackTrace() prints full trace.' },
+                        { id: 'j042', title: 'Custom exception hierarchy', desc: 'Create AppException (base), then DatabaseException, ValidationException, NotFoundException extending it. Each has useful constructors. Use exception chaining: new AppException("msg", originalCause).', difficulty: 'medium', xp: 25, hint: 'Exception chaining: throw new AppException("High level message", originalException) — the original exception is the "cause". getCause() retrieves it. Always preserve original causes!' },
+                        { id: 'j043', title: 'Try-with-resources (AutoCloseable)', desc: 'Create a Logger class implementing AutoCloseable that writes to a file and MUST be closed. Use try-with-resources. Then use MULTIPLE resources in one try statement. Verify close() is called.', difficulty: 'medium', xp: 25, hint: 'Multiple resources: try(Resource1 r1 = new...; Resource2 r2 = new...) — closed in REVERSE order of declaration. close() is guaranteed even if constructor throws!' },
+                        { id: 'j044', title: 'Checked vs unchecked design', desc: 'Create a file parsing system. Checked exception (IOException): the caller MUST handle it. Unchecked (IllegalArgumentException): programming error. Write both. Argue when to use which.', difficulty: 'hard', xp: 30, hint: 'Rule of thumb: checked = recoverable condition the caller can reasonably handle (file not found). Unchecked = programming bug (null passed where never allowed). Spring uses mostly unchecked.' },
+                    ]
+                },
+                {
+                    id: 'jt11', title: 'File I/O & NIO', desc: 'Reading and writing files, paths, streams, serialization — the classic and modern (NIO.2) approaches.',
+                    tasks: [
+                        { id: 'j045', title: 'Files utility class (NIO.2)', desc: 'Use Files.readAllLines(), Files.write(), Files.copy(), Files.move(), Files.delete(), Files.exists(), Files.createDirectories(). Use Path.of() instead of File. Write a word count tool.', difficulty: 'medium', xp: 25, hint: 'NIO.2 (Java 7+): Path path = Path.of("file.txt"); Files.readAllLines(path) returns List<String>. Far cleaner than old File/BufferedReader. Always use Paths over File for new code.' },
+                        { id: 'j046', title: 'BufferedReader & BufferedWriter', desc: 'Read a CSV-like text file line by line with BufferedReader. Parse each line, transform it, write to a new file with BufferedWriter. Use try-with-resources for both.', difficulty: 'medium', xp: 20, hint: 'BufferedReader wraps FileReader for efficiency (reads large chunks, not character by character). readLine() returns null at EOF — use while((line=br.readLine())!=null).' },
+                        { id: 'j047', title: 'Object serialization', desc: 'Make a User class Serializable. Write a list of Users to a file with ObjectOutputStream. Read it back with ObjectInputStream. Add a transient field. Explain serialVersionUID.', difficulty: 'hard', xp: 35, hint: 'serialVersionUID: if you change the class and the stored version has different UID, deserialization fails. Always declare it explicitly: private static final long serialVersionUID = 1L;' },
+                    ]
+                },
+                {
+                    id: 'jt12', title: 'Lambda Expressions & Streams', desc: 'Functional programming in Java: lambdas, method references, Stream API — the most transformative Java 8 features.',
+                    tasks: [
+                        { id: 'j048', title: 'Lambda & method reference forms', desc: 'Write the same operation 4 ways: anonymous class, lambda, method reference (instance), method reference (static). Use Runnable, Comparator, Predicate. See how they relate.', difficulty: 'medium', xp: 20, hint: '() -> System.out.println("hi") == System.out::println. ClassName::staticMethod, obj::instanceMethod, ClassName::instanceMethod (first param becomes the object).' },
+                        { id: 'j049', title: 'Stream pipeline', desc: 'Given a List of 20 Employee objects (name, dept, salary): find all in "Engineering" earning >70k, sort by salary desc, take top 3, extract names into a List<String>. One stream chain.', difficulty: 'medium', xp: 30, hint: '.stream().filter(e->e.dept.equals("Engineering")).filter(e->e.salary>70000).sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).limit(3).map(Employee::getName).collect(toList())' },
+                        { id: 'j050', title: 'Collectors deep dive', desc: 'Use Collectors.groupingBy() to group employees by department. Use Collectors.partitioningBy() to split by salary > 60k. Use Collectors.joining() to make a CSV. Use Collectors.summarizingInt().', difficulty: 'hard', xp: 35, hint: 'groupingBy returns Map<Key, List<T>>. Downstream collectors: groupingBy(dept, counting()) gives Map<String,Long> of counts per dept. Very powerful for data aggregation.' },
+                        { id: 'j051', title: 'Optional<T> properly', desc: 'Write a chain of Optional operations: findUser(id) returns Optional<User>. Chain .map(), .filter(), .flatMap(), .orElse(), .orElseThrow(), .ifPresent(). Never use .get() without .isPresent()!', difficulty: 'hard', xp: 30, hint: 'Optional.map() transforms the value if present. flatMap() for when transformation returns another Optional (avoids Optional<Optional<T>>). orElseThrow() is preferred over get().' },
+                        { id: 'j052', title: 'Parallel streams', desc: 'Generate a list of 10 million random numbers. Find the sum using sequential stream vs parallel stream. Time both. When does parallel actually win? Test with small lists too.', difficulty: 'hard', xp: 35, hint: 'Parallel streams use fork/join pool. Overhead means for small lists, sequential is FASTER. Parallel wins when: large data, CPU-intensive (not I/O), no shared mutable state.' },
+                    ]
+                },
+                {
+                    id: 'jt13', title: 'Iterators & Iterable', desc: 'The Iterator pattern, implementing Iterable for custom classes, for-each internals, ListIterator.',
+                    tasks: [
+                        { id: 'j053', title: 'Custom Iterable class', desc: 'Create a Range class (start, end, step) implementing Iterable<Integer>. Implement iterator() returning an Iterator<Integer> with hasNext() and next(). Use it in a for-each loop.', difficulty: 'medium', xp: 30, hint: 'for(int x : range) compiles to: Iterator<Integer> it = range.iterator(); while(it.hasNext()) { int x = it.next(); ... } — for-each is just syntactic sugar for this.' },
+                        { id: 'j054', title: 'ListIterator bidirectional', desc: 'Use ListIterator to traverse a list forwards, then backwards from where you left off. Replace elements while iterating (safe! unlike regular Iterator). Add elements mid-iteration safely.', difficulty: 'medium', xp: 20, hint: 'ListIterator has previous(), hasPrevious(), add(), set() — these are safe because the iterator tracks position. Regular Iterator only has remove(), not add() or set().' },
+                    ]
+                },
+                {
+                    id: 'jt14', title: 'Enums', desc: 'Java enums beyond simple constants: fields, methods, abstract methods, EnumSet, EnumMap.',
+                    tasks: [
+                        { id: 'j055', title: 'Rich enum with fields & methods', desc: 'Create Planet enum with mass and radius fields. Add surfaceGravity() and surfaceWeight(double) methods. Implement toString(). Call it: Planet.MARS.surfaceWeight(75). Enums are full classes!', difficulty: 'medium', xp: 25, hint: 'enum Planet { MARS(6.4e23, 3.4e6); private final double mass, radius; Planet(double m, double r){mass=m;radius=r;} } — constructors, fields, and methods all work.' },
+                        { id: 'j056', title: 'Enum with abstract methods', desc: 'Create Operation enum (PLUS, MINUS, TIMES, DIVIDE) where each constant implements abstract double apply(double x, double y) differently. Use it as a functional dispatch table.', difficulty: 'hard', xp: 35, hint: 'PLUS { double apply(double x, double y){return x+y;} } — each enum constant is an ANONYMOUS SUBCLASS of the enum with its own method body. Elegant strategy pattern!' },
+                        { id: 'j057', title: 'EnumSet & EnumMap', desc: 'Model days of the week. Create EnumSet for WEEKDAYS, WEEKEND. Use EnumSet.range(), complementOf(). Create EnumMap<Day,String> mapping days to tasks. Compare to HashSet/HashMap.', difficulty: 'medium', xp: 20, hint: 'EnumSet uses a bit vector internally — operations are extremely fast O(1). EnumMap uses an array indexed by ordinal. Both are much faster than Hash equivalents for enums.' },
+                    ]
+                },
+                {
+                    id: 'jt15', title: 'Concurrency & Threads', desc: 'Thread lifecycle, synchronization, Runnable, ExecutorService, CompletableFuture, and the pitfalls of concurrent programming.',
+                    tasks: [
+                        { id: 'j058', title: 'Thread creation & lifecycle', desc: 'Create threads 3 ways: extend Thread, implement Runnable, use lambda. Run all three. Print thread names and IDs. Call join() to wait. Demonstrate thread priorities.', difficulty: 'medium', xp: 25, hint: 'Thread t = new Thread(() -> { System.out.println(Thread.currentThread().getName()); }); t.start(); NEVER call run() directly — that executes on the CURRENT thread, not a new one!' },
+                        { id: 'j059', title: 'Race condition & synchronized', desc: 'Create a counter incremented by 1000 threads without synchronization — observe inconsistent results. Add synchronized keyword. Then use AtomicInteger. Compare all three.', difficulty: 'hard', xp: 40, hint: 'i++ is NOT atomic: it reads, increments, and writes — another thread can intervene between steps. synchronized blocks one thread at a time. AtomicInteger uses CAS hardware instruction.' },
+                        { id: 'j060', title: 'ExecutorService & thread pool', desc: 'Submit 20 Callable tasks to a fixed thread pool of 4. Collect Future<Integer> results. Call get() with a timeout. Properly shutdown() the executor. Compare to creating 20 raw threads.', difficulty: 'hard', xp: 35, hint: 'Thread creation is expensive. Thread pools reuse threads. ExecutorService.submit() returns Future. future.get(2, TimeUnit.SECONDS) throws TimeoutException if too slow. Always shutdown()!' },
+                        { id: 'j061', title: 'CompletableFuture chaining', desc: 'Fetch "user data" (simulated with Thread.sleep). Chain: fetchUser(id).thenApply(transform).thenAccept(print).exceptionally(handleError). Combine two futures with thenCombine().', difficulty: 'hard', xp: 40, hint: 'CompletableFuture is async and non-blocking. thenApply() transforms result (like stream map). thenAccept() consumes. exceptionally() handles errors. thenCombine() merges two futures.' },
+                    ]
+                },
+                {
+                    id: 'jt16', title: 'Design Patterns', desc: 'The most useful GoF patterns in Java: Singleton, Factory, Observer, Strategy, Decorator. Learn to recognize and apply them.',
+                    tasks: [
+                        { id: 'j062', title: 'Singleton (thread-safe)', desc: 'Implement Singleton 3 ways: eager initialization, double-checked locking with volatile, and enum-based (best). Show why the naive version fails in multi-threaded code.', difficulty: 'hard', xp: 30, hint: 'Enum singleton: enum Singleton { INSTANCE; void doSomething(){} } — automatically thread-safe, serialization-safe, and immune to reflection attacks. Effective Java recommends this.' },
+                        { id: 'j063', title: 'Factory & Abstract Factory', desc: 'Create AnimalFactory that returns Dog or Cat based on a string. Then AbstractFactory pattern: two factories (DomesticFactory, WildFactory) each producing different Animal/Food combos.', difficulty: 'medium', xp: 30, hint: 'Factory Method: one factory, one product type, string decides subtype. Abstract Factory: family of related products (Animal+Food) that must be used together. Prevents mixing wild animal with domestic food.' },
+                        { id: 'j064', title: 'Observer pattern', desc: 'Implement an event system: EventBus with subscribe(String event, Consumer<Object> handler) and publish(String event, Object data). Multiple subscribers to same event. Decouple components.', difficulty: 'hard', xp: 35, hint: 'Observer = pub/sub. EventBus holds Map<String, List<Consumer>>. publish() calls all subscribers. Java has built-in Observer (deprecated) — implementing your own is instructive.' },
+                        { id: 'j065', title: 'Strategy & Decorator', desc: 'Strategy: SortStrategy interface, implement BubbleSort, QuickSort, MergeSort. Swap at runtime. Decorator: TextProcessor base, then add UpperCaseDecorator, TrimDecorator, PrefixDecorator — chain them.', difficulty: 'hard', xp: 40, hint: 'Strategy: inject the algorithm. Decorator: wrap objects to add behavior. new PrefixDecorator(new UpperCaseDecorator(new TrimDecorator(base))) — each wraps the previous, adding behavior.' },
+                    ]
+                },
+                {
+                    id: 'jt17', title: 'Java Memory Model & Performance', desc: 'Stack vs heap, garbage collection, memory leaks, profiling basics, and writing memory-efficient code.',
+                    tasks: [
+                        { id: 'j066', title: 'Stack vs heap visualization', desc: 'Create a recursive method and observe stack frames. Create objects and understand they live on the heap. Deliberately cause StackOverflowError and OutOfMemoryError. Add -Xss and -Xmx flags.', difficulty: 'hard', xp: 35, hint: 'Primitives and references live on stack. Objects live on heap. Each method call adds a stack frame. StackOverflow = too deep recursion. OOM = heap full. Stack is fast, heap is large.' },
+                        { id: 'j067', title: 'Memory leak patterns', desc: 'Demonstrate common Java memory leaks: static collections growing forever, unclosed resources, listener not removed, inner class holding outer reference. Use WeakReference to fix one.', difficulty: 'hard', xp: 40, hint: 'Static Map<String,Object> cache that grows forever is classic. WeakReference<T>: object is GC-eligible if ONLY weakly referenced. Useful for caches that should release memory under pressure.' },
+                    ]
+                },
+                {
+                    id: 'jt18', title: 'Records, Sealed Classes & Modern Java', desc: 'Java 14–21 features: records, sealed classes, pattern matching instanceof, text blocks, switch patterns.',
+                    tasks: [
+                        { id: 'j068', title: 'Records', desc: 'Replace a POJO with a record: record Point(double x, double y) {}. Add a compact constructor for validation. Add custom methods. Show how records auto-generate equals, hashCode, toString.', difficulty: 'easy', xp: 20, hint: 'Records are immutable data carriers. Compact constructor: record Point(double x, double y){if(x<0) throw...} — parameters already assigned, just validate. equals/hashCode/toString are FREE.' },
+                        { id: 'j069', title: 'Sealed classes & pattern matching', desc: 'Create sealed interface Shape permits Circle, Rectangle, Triangle. Write area(Shape s) using switch pattern matching: switch(s) { case Circle c -> Math.PI*c.radius()*c.radius(); ... }', difficulty: 'medium', xp: 30, hint: 'Sealed classes restrict which classes can implement/extend them. Combined with records and switch expressions, you get algebraic data types — Rust/Haskell style in Java!' },
+                        { id: 'j070', title: 'Text blocks & String improvements', desc: 'Use text blocks for JSON/HTML templates. Use String.formatted(), indent(), stripIndent(), translateEscapes(). Find the difference between """ text """ and concatenated strings.', difficulty: 'easy', xp: 15, hint: 'Text blocks (Java 15+): String json = """ { "name": "Alice" } """ — preserves formatting, handles escape characters, great for multiline strings. Aligned with the closing """.' },
+                    ]
+                },
+            ],
+
+            rust: [
+                {
+                    id: 'rt01', title: 'Rust Basics & Setup', desc: 'Variables, shadowing, mutability, scalar types, compound types, and the fundamentals that make Rust different from day one.',
+                    tasks: [
+                        { id: 'r001', title: 'Immutability vs mut vs shadowing', desc: 'let x=5. Try reassigning (fails!). Add mut. Then use shadowing: let x=x+1; let x="now a string!". Understand: mut changes value but not type. Shadowing creates a new binding and CAN change type.', difficulty: 'easy', xp: 10, hint: 'Shadowing: the old x is gone, new x is born. let x:i32=5; let x=x*2; let x="hello" — three different types of x, all valid! mut x=5; x="hi" fails — type locked.' },
+                        { id: 'r002', title: 'All scalar types', desc: 'Declare u8,u16,u32,u64,u128,i8..i128,f32,f64,bool,char. Find integer max values with ::MAX. Observe that char in Rust is 4 bytes (Unicode scalar value), not 1 byte like C.', difficulty: 'easy', xp: 10, hint: 'u8::MAX is 255. i8::MAX is 127. Rust chars are Unicode: \'😀\' is valid! char is always 4 bytes. Also try 0xFF (hex), 0o77 (octal), 0b1111 (binary), 1_000_000 (underscores).' },
+                        { id: 'r003', title: 'Compound types: tuples & arrays', desc: 'Create tuple (i32, f64, bool). Destructure it and use .0, .1, .2 access. Create [i32; 5] array. Access elements, slice it as &arr[1..3]. Observe stack allocation for both.', difficulty: 'easy', xp: 15, hint: 'let (x,y,z) = my_tuple; — destructuring. let arr = [0;5]; fills with zeros. arr[10] panics at runtime (checked). Slices &arr[1..3] borrow a portion without copying.' },
+                        { id: 'r004', title: 'Functions as expressions', desc: 'Write fn add(a:i32, b:i32)->i32 {a+b} — no return keyword. Write fn classify(n:i32)->String with if/else as expression. Observe: expression (no ;) = return value. statement (;) = returns ().', difficulty: 'easy', xp: 15, hint: 'CRITICAL Rust concept: { let y=5; y } is an expression returning 5. { let y=5; y; } returns () (unit). Missing semicolons cause type mismatch errors — they\'re not optional!' },
+                        { id: 'r005', title: 'Loop as expression & labeled loops', desc: 'Use loop{...break value;} to search for first perfect square >100. Also use \'outer: for i in... { for j in... { if cond { break \'outer; } } } to exit nested loops.', difficulty: 'medium', xp: 20, hint: 'let result = loop { if found { break answer; } n+=1; }; — loop returns the value from break! Label syntax: \'label: loop { break \'label; }. Labels start with single quote.' },
+                    ]
+                },
+                {
+                    id: 'rt02', title: 'Ownership', desc: 'The core innovation of Rust. No GC, no manual free() — the ownership system guarantees memory safety at compile time.',
+                    tasks: [
+                        { id: 'r006', title: 'Move semantics fundamentals', desc: 'Create String s1="hello". Assign s2=s1. Try printing s1 (compile error! moved). Clone it instead. Then do the same with i32 — no error! Understand Copy vs non-Copy types.', difficulty: 'easy', xp: 15, hint: 'Copy types (i32, f64, bool, char, tuples of Copy types): value is bit-copied, original still valid. String is not Copy because it owns heap memory. Move = transfer ownership.' },
+                        { id: 'r007', title: 'Ownership through functions', desc: 'Write fn takes_ownership(s:String) that consumes s. Write fn makes_copy(n:i32). Call both. Show that after takes_ownership, the variable is gone. Return ownership from a function.', difficulty: 'medium', xp: 20, hint: 'fn takes_ownership(s:String) { println!("{}",s); } // s dropped here. After calling it, s is invalid. To get it back: fn takes_and_gives_back(s:String)->String { s } — return it!' },
+                        { id: 'r008', title: 'Ownership in structs', desc: 'Create struct Config { debug:bool, name:String }. When you move name into Config, you can\'t use name anymore. Understand partial moves. Show struct update syntax and how it moves remaining fields.', difficulty: 'medium', xp: 25, hint: 'let c2 = Config { debug:true, ..c1 }; — this MOVES String fields from c1! c1 is then partially moved. If only Copy fields are moved via .., c1 is still usable.' },
+                        { id: 'r009', title: 'The drop function & RAII', desc: 'Create a struct with impl Drop { fn drop(&mut self) { println!("dropping!"); } }. Observe when drop is called (end of scope, when moved). Use std::mem::drop() to drop early.', difficulty: 'medium', xp: 25, hint: 'Drop is Rust\'s RAII: cleanup happens deterministically at end of scope, not "whenever GC feels like it". This is how files, locks, and connections get reliably closed in Rust.' },
+                    ]
+                },
+                {
+                    id: 'rt03', title: 'Borrowing & References', desc: 'Lending values without transferring ownership. The borrow checker — Rust\'s most famous (and fearsome) feature.',
+                    tasks: [
+                        { id: 'r010', title: 'Immutable references', desc: 'Write fn print_len(s:&String). Write fn first_char(s:&str)->char. Call both multiple times with the same owned String. Understand: & = borrow, original owner unchanged.', difficulty: 'easy', xp: 15, hint: '&String and &str are related but different. &str is more flexible (accepts &String, string literals, slices). Prefer &str in function params. & means "I want to look but not own."' },
+                        { id: 'r011', title: 'Mutable references & borrow rules', desc: 'Write fn append_bang(s:&mut String). Call it. Then try creating TWO &mut refs to same variable — observe compile error. Try mixing & and &mut — also fails. Understand WHY.', difficulty: 'medium', xp: 25, hint: 'The rule: AT ONE TIME, either one &mut OR any number of &. Never both. This prevents data races at compile time. No runtime check needed because the compiler guarantees it.' },
+                        { id: 'r012', title: 'Dangling references (compiler prevents)', desc: 'Try writing fn dangle()->& String { let s=String::from("hi"); &s } — compiler rejects it! s is dropped at end of function, reference would dangle. Understand lifetimes are enforcing this.', difficulty: 'medium', xp: 20, hint: 'Rust\'s lifetime system ensures references always point to valid data. The compiler tracks that &s can\'t outlive s. This is what prevents use-after-free bugs — at compile time!' },
+                        { id: 'r013', title: 'String slices &str', desc: 'Write fn first_word(s:&str)->&str returning a slice of the first word. Use byte iteration to find the space. Return &s[0..i]. Test: "hello world", "rust", "   " (leading spaces).', difficulty: 'hard', xp: 30, hint: 's.as_bytes().iter().enumerate().find(|(_,&b)| b==b\' \').map(|(i,_)| &s[0..i]).unwrap_or(s) — idiomatic. The returned &str borrows from the input, tied to its lifetime.' },
+                    ]
+                },
+                {
+                    id: 'rt04', title: 'Structs', desc: 'Custom data types, method syntax, associated functions, struct update syntax, tuple structs, and unit structs.',
+                    tasks: [
+                        { id: 'r014', title: 'Struct basics & methods', desc: 'struct Rectangle{width:f64,height:f64}. Impl: area(&self), perimeter(&self), is_square(&self), scale(self,f:f64)->Rectangle (consuming), grow(&mut self, amount:f64). Understand &self vs self vs &mut self.', difficulty: 'medium', xp: 20, hint: '&self: read-only borrow. &mut self: mutable borrow, struct can be changed. self: consumes the struct (like scale returning a new one). Choose the minimum access you need.' },
+                        { id: 'r015', title: 'Associated functions (constructors)', desc: 'Add Rectangle::new(w:f64,h:f64)->Self and Rectangle::square(size:f64)->Self. These are called with ::, not .. They\'re Rust\'s constructors. No constructor keyword needed.', difficulty: 'easy', xp: 15, hint: 'impl Rectangle { fn new(w:f64,h:f64)->Self { Rectangle{width:w,height:h} } } Called as: Rectangle::new(5.0,3.0). Self is an alias for the type being implemented.' },
+                        { id: 'r016', title: 'Tuple structs & unit structs', desc: 'Create struct Color(u8,u8,u8) and struct Point(f64,f64). Access with .0,.1,.2. Create struct AlwaysEqual; (unit struct, zero size). Show when each is useful.', difficulty: 'easy', xp: 15, hint: 'Tuple structs: named tuples. struct Meters(f64) and struct Kilograms(f64) are DIFFERENT types even though both wrap f64 — prevents accidentally passing weight as distance!' },
+                        { id: 'r017', title: 'Debug & Display traits', desc: 'Derive Debug for a struct: #[derive(Debug)] then print with {:?} and {:#?} (pretty). Implement Display trait for custom formatting. Understand derive vs manual implementation.', difficulty: 'medium', xp: 20, hint: '#[derive(Debug)] auto-generates debug printing. Display is for user-facing output, requires manual impl: impl fmt::Display for T { fn fmt(&self,f:&mut fmt::Formatter)->fmt::Result{write!(f,"...")} }' },
+                    ]
+                },
+                {
+                    id: 'rt05', title: 'Enums & Pattern Matching', desc: 'Rust enums carry data, making them algebraic data types. Combined with match, they\'re one of Rust\'s most powerful features.',
+                    tasks: [
+                        { id: 'r018', title: 'Enum with data', desc: 'enum Message{Quit,Move{x:i32,y:i32},Write(String),ChangeColor(u8,u8,u8)}. Process each variant with match. Access the inner data. This is an algebraic data type!', difficulty: 'medium', xp: 20, hint: 'Each variant is a different "shape" of Message. match msg { Message::Move{x,y} => ..., Message::Write(s) => ..., } — destructuring extracts the data. So powerful!' },
+                        { id: 'r019', title: 'Option<T> exhaustively', desc: 'Write safe_divide(a:f64,b:f64)->Option<f64>. Chain: safe_divide(10.0,2.0).map(|x|x*2.0).filter(|&x|x>5.0).unwrap_or(0.0). Also use if let, while let, and ? operator with Option.', difficulty: 'medium', xp: 25, hint: 'Option replaces null — completely. if let Some(x) = my_opt { use x } is cleaner than match when you only care about the Some case. while let Some(n) = stack.pop() drains a stack.' },
+                        { id: 'r020', title: 'Exhaustive match with guards', desc: 'Match on tuples: match (x,y) { (0,0) => "origin", (x,0) => format!("x-axis at {}",x), (0,y) => ..., (x,y) if x==y => "diagonal", _ => "somewhere" }. Add match guards.', difficulty: 'medium', xp: 25, hint: 'Match guards: case if condition => ... add extra conditions beyond pattern. (x,y) if x>0 && y>0 => "quadrant 1". Guards make patterns much more expressive.' },
+                        { id: 'r021', title: '@ bindings & destructuring', desc: 'In a match, use @ to bind while testing: match age { n @ 13..=19 => println!("teenager {}",n), n @ 20..=65 => ..., _ => ... }. Also destructure structs and tuples in match.', difficulty: 'hard', xp: 30, hint: '@ bindings: n @ 1..=10 matches values 1 to 10 AND binds the value to n. Without @, you could check the range but not capture the actual value. Very useful for ranges!' },
+                    ]
+                },
+                {
+                    id: 'rt06', title: 'Error Handling', desc: 'Result<T,E>, the ? operator, custom error types, error chaining — Rust\'s explicit, composable approach to errors.',
+                    tasks: [
+                        { id: 'r022', title: 'Result<T,E> basics', desc: 'Write parse_positive(s:&str)->Result<u32,String>. Return Ok(n) or Err message. Match the result. Then use .unwrap_or(), .unwrap_or_else(), .map(), .map_err(), .and_then() on Results.', difficulty: 'medium', xp: 25, hint: '.map() transforms Ok value. .map_err() transforms Err value. .and_then() chains operations that also return Result (like flatMap). .unwrap_or(default) extracts or uses default.' },
+                        { id: 'r023', title: 'The ? operator deep dive', desc: 'Write a chain: read_file(path:&str)->Result<String,io::Error>. Then parse_config(text:&str)->Result<Config,ParseError>. Use ? in both. Write main()->Result<(),Box<dyn Error>> using ? all the way up.', difficulty: 'medium', xp: 30, hint: '? = if Ok(val) unwrap and continue; if Err(e) return Err(e.into()). The .into() does type conversion, so ? works across different error types if From is implemented.' },
+                        { id: 'r024', title: 'Custom error enum', desc: 'enum AppError{Io(io::Error),Parse(ParseIntError),Custom(String)}. Impl Display and Error for it. Impl From<io::Error> and From<ParseIntError> to make ? work automatically.', difficulty: 'hard', xp: 40, hint: 'impl From<io::Error> for AppError { fn from(e:io::Error)->AppError { AppError::Io(e) } } — now ? on io::Error automatically wraps it in AppError::Io. This is ? magic!' },
+                        { id: 'r025', title: 'anyhow vs thiserror patterns', desc: 'Understand when to use Box<dyn Error> (quick/simple), when to define your own error enum (libraries/important errors). Write both versions of the same function. Discuss tradeoffs.', difficulty: 'hard', xp: 35, hint: 'Box<dyn Error>: quick and easy, loses type info. Custom enum: more work but callers can match on specific errors. Libraries should use typed errors. Binaries often use Box<dyn Error>.' },
+                    ]
+                },
+                {
+                    id: 'rt07', title: 'Vectors, Strings & HashMaps', desc: 'The three most used collection types in Rust. Deep understanding of their memory models and APIs.',
+                    tasks: [
+                        { id: 'r026', title: 'Vec<T> deep dive', desc: 'Create, push, pop, index, slice, iter, iter_mut, drain, retain, dedup, sort, binary_search. Write fn remove_duplicates_sorted(v:&mut Vec<i32>). Show Vec\'s memory: ptr, len, capacity.', difficulty: 'medium', xp: 25, hint: 'Vec is {ptr, len, capacity} on stack, heap data separately. v.retain(|&x| x%2==0) keeps even numbers in-place. v.dedup() removes CONSECUTIVE duplicates (sort first!).' },
+                        { id: 'r027', title: 'String vs &str mastery', desc: 'Understand: String (owned, heap), &str (borrowed slice). Convert between them: &s (String to &str), s.to_string() (&str to String). Show why functions should accept &str not &String.', difficulty: 'medium', xp: 25, hint: '&String automatically derefs to &str via Deref coercion. So fn f(s:&str) accepts both &String and string literals. Prefer &str in params: more flexible, works with both.' },
+                        { id: 'r028', title: 'HashMap full API', desc: 'Create HashMap<String,Vec<String>> grouping words by first letter. Use entry().or_insert(), entry().or_default(). Iterate, remove, contains_key, get vs get_mut. Build a word frequency counter.', difficulty: 'medium', xp: 25, hint: 'map.entry("key").or_insert_with(Vec::new) — only inserts if missing, returns &mut to value. Get and modify: if let Some(v)=map.get_mut("key") { v.push("new") }' },
+                        { id: 'r029', title: 'Iterators on collections', desc: 'On a Vec: .iter() (borrows), .iter_mut() (mutable borrow), .into_iter() (consumes). Chain: filter, map, flat_map, take, skip, zip, enumerate, fold, sum, product, count, any, all, find.', difficulty: 'hard', xp: 35, hint: 'iter() yields &T. into_iter() yields T (moves). For Vec<i32>, .iter().sum::<i32>() works. .zip() combines two iterators: names.iter().zip(scores.iter()). Very powerful combinator.' },
+                    ]
+                },
+                {
+                    id: 'rt08', title: 'Traits', desc: 'Rust\'s interface system — defining shared behavior, trait objects, blanket implementations, operator overloading.',
+                    tasks: [
+                        { id: 'r030', title: 'Defining and implementing traits', desc: 'trait Animal{fn name(&self)->&str; fn sound(&self)->String; fn describe(&self)->String{format!("{} says {}",self.name(),self.sound())}} Implement for Dog,Cat,Cow. Use default method.', difficulty: 'easy', xp: 15, hint: 'Default methods provide a default implementation that types can override. If sound() has no default, every type MUST implement it. If describe() has a default, types can use or override it.' },
+                        { id: 'r031', title: 'Trait bounds & where clauses', desc: 'fn largest<T:PartialOrd>(list:&[T])->& T. Rewrite with where clause: fn largest<T>(list:&[T])->& T where T:PartialOrd. Write fn print_all<T:Display+Debug>(items:&[T]). Use multiple bounds.', difficulty: 'medium', xp: 25, hint: 'where clauses: fn foo<T>(x:T) where T:Clone+Debug+PartialEq — cleaner for complex bounds. T:A+B means T must implement BOTH A and B. Essential for generic functions.' },
+                        { id: 'r032', title: 'Trait objects: dyn Trait', desc: 'Store Dog, Cat, Cow all in Vec<Box<dyn Animal>>. Call describe() on each. Understand: static dispatch (generics, monomorphized) vs dynamic dispatch (dyn, one copy, vtable lookup).', difficulty: 'medium', xp: 30, hint: 'Box<dyn Animal>: the concrete type is erased, all access goes through a vtable (like C++ virtual). Slower than generics (indirect call) but enables runtime polymorphism and heterogeneous collections.' },
+                        { id: 'r033', title: 'Operator overloading & Display', desc: 'Implement Add for a Vector2D struct. Implement Neg, Sub, Mul<f64>. Implement Display, Debug, PartialEq. Use your Vector2D with + - operators and println!.', difficulty: 'medium', xp: 30, hint: 'use std::ops::{Add,Neg,Sub,Mul}; impl Add for Vector2D { type Output=Vector2D; fn add(self,other:Vector2D)->Vector2D{...} } — operator overloading is just trait implementation.' },
+                        { id: 'r034', title: 'Blanket implementations', desc: 'Implement trait Printable for ALL types that implement Display: impl<T:Display> Printable for T{}. Understand how standard library uses this (e.g., ToString is implemented for all Display types).', difficulty: 'hard', xp: 35, hint: 'Blanket impls: impl<T:Display> Printable for T — any T implementing Display gets Printable for free. This is how Rust standard library provides common functionality widely without repetition.' },
+                    ]
+                },
+                {
+                    id: 'rt09', title: 'Lifetimes', desc: 'Rust\'s compile-time guarantee that references are always valid. The most misunderstood but essential Rust concept.',
+                    tasks: [
+                        { id: 'r035', title: 'Lifetime annotations basics', desc: 'Write fn longest<\'a>(x:&\'a str,y:&\'a str)->&\'a str. Understand: lifetime \'a means "output lives at least as long as both inputs". This is what Rust needs to check validity.', difficulty: 'medium', xp: 25, hint: '\'a doesn\'t change how long things live — it just tells the compiler the relationship. The actual lifetime is determined by the shorter of x and y\'s lifetimes at the call site.' },
+                        { id: 'r036', title: 'Lifetime elision rules', desc: 'Learn the 3 elision rules. Write functions where the compiler can infer lifetimes and where it can\'t. Understand why fn first_word(s:&str)->&str doesn\'t need annotations.', difficulty: 'medium', xp: 25, hint: 'Rule 1: each &param gets own lifetime. Rule 2: if one &self param, its lifetime applies to output. Rule 3: if &self or &mut self, its lifetime applies to output. Covers most cases.' },
+                        { id: 'r037', title: 'Lifetimes in structs', desc: 'Create struct Important<\'a>{excerpt:&\'a str}. Implement methods on it. Understand: the struct can\'t outlive the data it references. \'static lifetime: lives for entire program.', difficulty: 'hard', xp: 35, hint: 'impl<\'a> Important<\'a> { fn announce(&self)->& str { self.excerpt } } — method returns a reference tied to self\'s lifetime. \'static: string literals are \'static (baked into binary).' },
+                    ]
+                },
+                {
+                    id: 'rt10', title: 'Closures & Iterators', desc: 'Zero-cost abstractions. Rust closures capture their environment in 3 ways. Iterators are as fast as for-loops.',
+                    tasks: [
+                        { id: 'r038', title: 'Closure capture modes', desc: 'fn, Fn, FnMut, FnOnce — understand each. Write closures that capture by reference (Fn), by mutable reference (FnMut), and by moving ownership (FnOnce, use move keyword). Call each appropriately.', difficulty: 'medium', xp: 25, hint: 'Fn: immutable capture, callable multiple times. FnMut: mutable capture, callable multiple times. FnOnce: moves captured values, callable ONCE (consumed). The compiler infers the minimum required trait.' },
+                        { id: 'r039', title: 'Iterator adapters chain', desc: '(1..=20).filter(|x|x%3==0).map(|x|x*x).take_while(|&x|x<200).fold(0,|a,x|a+x). Understand lazy evaluation: nothing happens until collect() or a consuming adapter like fold, sum, count.', difficulty: 'medium', xp: 25, hint: 'Iterators in Rust are LAZY — no computation until you consume them. This means a 10-adapter chain on a million items still only iterates once. Zero-cost abstraction!' },
+                        { id: 'r040', title: 'Custom iterator', desc: 'Implement Iterator for a Fibonacci struct. Implement: fn next(&mut self)->Option<u64>. Use it in a for loop, with .take(20), .filter(), .sum(). This is how all of Rust\'s iterators work internally.', difficulty: 'hard', xp: 35, hint: 'impl Iterator for Fib { type Item=u64; fn next(&mut self)->Option<u64> { let next=self.a+self.b; self.a=self.b; self.b=next; Some(self.a) } } — implement next() and get ALL iterator methods free!' },
+                        { id: 'r041', title: 'Iterator performance vs loops', desc: 'Compare: explicit loop vs .iter().filter().map().sum() on 10 million elements. Time both. See that they\'re identical in release mode (zero-cost). Also explore: flat_map, zip, chain, peekable.', difficulty: 'hard', xp: 35, hint: 'In --release mode, the optimizer sees through the iterator abstractions and generates the same machine code as a hand-written loop. That\'s what "zero-cost abstraction" means in practice.' },
+                    ]
+                },
+                {
+                    id: 'rt11', title: 'Smart Pointers', desc: 'Box<T>, Rc<T>, Arc<T>, RefCell<T>, Cell<T> — understanding heap allocation and shared ownership patterns.',
+                    tasks: [
+                        { id: 'r042', title: 'Box<T> heap allocation', desc: 'Use Box to allocate a large struct on the heap. Create a recursive data structure (linked list) that requires Box (otherwise infinite size). Understand Box<T> as a unique heap pointer.', difficulty: 'medium', xp: 25, hint: 'enum List { Cons(i32, Box<List>), Nil } — without Box, Cons(i32, List) would have infinite size! Box makes the recursive step a known-size pointer. Deref coercion lets you use *box or box.method().' },
+                        { id: 'r043', title: 'Rc<T> reference counting', desc: 'Create an Rc<String> shared among multiple owners. Clone it (increments count), check strong_count(). Drop one clone. Understand: Rc is for single-threaded shared ownership. Use Rc::clone() not .clone().', difficulty: 'medium', xp: 25, hint: 'Rc::clone(&rc) increments reference count cheaply (doesn\'t copy data). When last Rc drops, count=0, data freed. Multi-threaded: use Arc<T> (atomic reference counting) instead.' },
+                        { id: 'r044', title: 'RefCell<T> interior mutability', desc: 'Combine Rc<RefCell<Vec<i32>>> to create shared mutable data. Use .borrow() and .borrow_mut() to get references. Observe that borrow rules are checked at RUNTIME with RefCell.', difficulty: 'hard', xp: 35, hint: 'RefCell moves borrow checking from compile time to runtime. borrow() panics if a &mut borrow exists. borrow_mut() panics if any borrow exists. Useful when you KNOW it\'s correct but compiler can\'t verify.' },
+                        { id: 'r045', title: 'Weak references to break cycles', desc: 'Create a parent/child relationship using Rc<RefCell<Node>>. Show that circular Rc causes memory leak (cycle). Fix with Weak<T> for the child->parent reference. Upgrade Weak to Option<Rc<T>>.', difficulty: 'hard', xp: 40, hint: 'Weak::clone() doesn\'t increment strong count. weak.upgrade() returns Option<Rc<T>> — None if the data was dropped. Break the cycle: parent has Rc<Child>, child has Weak<Parent>.' },
+                    ]
+                },
+                {
+                    id: 'rt12', title: 'Concurrency', desc: 'Fearless concurrency: threads, message passing with channels, Mutex, Arc — Rust prevents data races at compile time.',
+                    tasks: [
+                        { id: 'r046', title: 'Threads & move closures', desc: 'Spawn 5 threads using thread::spawn(move ||...). Each computes something with its own copy of data. Join all with .join(). Use move to transfer ownership into the closure.', difficulty: 'medium', xp: 25, hint: 'thread::spawn takes a \'static closure — it must own its data or data must be \'static. move || forces the closure to take ownership. join() returns Result<T, Box<dyn Any>>.' },
+                        { id: 'r047', title: 'Channels: mpsc', desc: 'Create mpsc channel. Producer thread sends 10 messages. Consumer thread receives in a for msg in receiver loop (auto-detects when sender drops). Then try multiple producers.', difficulty: 'medium', xp: 25, hint: 'mpsc = multiple producer, single consumer. tx.clone() creates another sender. for msg in rx iterates until ALL senders are dropped (channel closed). Rx is the single consumer.' },
+                        { id: 'r048', title: 'Mutex<T> shared state', desc: 'Create Arc<Mutex<Vec<i32>>> shared among 10 threads, each pushing its thread ID. Join all. Print final vec. Understand: Arc for shared ownership, Mutex for exclusive access.', difficulty: 'hard', xp: 35, hint: 'Arc<Mutex<T>>: Arc shares ownership across threads, Mutex ensures one thread accesses at a time. let data=arc.lock().unwrap(); — holds the lock until data drops (end of scope = auto-unlock).' },
+                        { id: 'r049', title: 'Deadlock & how to avoid it', desc: 'Deliberately create a deadlock with two Mutexes (lock A then B in thread 1, B then A in thread 2). Observe the hang. Fix by consistent lock ordering. Discuss: Rust prevents DATA RACES but not deadlocks.', difficulty: 'hard', xp: 40, hint: 'Rust\'s ownership prevents data races (two threads writing simultaneously) but NOT deadlocks (circular waiting). Fix: always acquire locks in the same order across all threads. Or use try_lock().' },
+                    ]
+                },
+                {
+                    id: 'rt13', title: 'Traits Advanced', desc: 'Associated types, generic traits, trait objects advanced, impl Trait, default type parameters.',
+                    tasks: [
+                        { id: 'r050', title: 'Associated types vs generics in traits', desc: 'trait Iterator has associated type Item. Compare: trait Container<T> (generic) vs trait Container with type Item (associated type). When is each better? Implement both for the same struct.', difficulty: 'hard', xp: 35, hint: 'Associated types: one impl per type (Vec<i32> has one iterator type). Generic trait parameter: multiple impls possible (Vec<i32> could implement Container<i32> AND Container<&i32>). Iterator uses associated because one item type per iterator.' },
+                        { id: 'r051', title: 'impl Trait in function signatures', desc: 'fn make_adder(x:i32)->impl Fn(i32)->i32 { move |y| x+y } — return a closure as impl Fn. Also: fn print_all(items:impl Iterator<Item=String>). Compare to Box<dyn Trait>.', difficulty: 'hard', xp: 35, hint: 'impl Trait in return: caller gets a concrete type, but implementation is hidden. Monomorphized (fast). Box<dyn Trait>: runtime dispatch, heap allocation, but can return DIFFERENT types from same function.' },
+                    ]
+                },
+                {
+                    id: 'rt14', title: 'Modules & Crates', desc: 'Organizing code with mod, use, pub, super, crate — Rust\'s module system and package management with Cargo.',
+                    tasks: [
+                        { id: 'r052', title: 'Module system', desc: 'Create a multi-module project: main.rs, mod geometry (in geometry.rs), geometry::shapes, geometry::utils. Use pub, pub(crate), super::, crate::. Build a real module hierarchy.', difficulty: 'medium', xp: 25, hint: 'mod geometry; in main.rs looks for geometry.rs or geometry/mod.rs. pub makes items visible to parent. pub(crate): visible anywhere in crate. super:: refers to parent module.' },
+                        { id: 'r053', title: 'Cargo features & dependencies', desc: 'Add serde and serde_json to Cargo.toml. Derive Serialize/Deserialize for a struct. Serialize to JSON string and back. Understand Cargo.lock vs Cargo.toml, version requirements, feature flags.', difficulty: 'medium', xp: 25, hint: 'serde = {version="1",features=["derive"]} in Cargo.toml. #[derive(Serialize,Deserialize)] on struct. serde_json::to_string(&obj) and serde_json::from_str::<T>(json_str) — very common in real Rust.' },
+                        { id: 'r054', title: 'Documentation & doc tests', desc: 'Write /// doc comments on a public function. Add a ```rust example in the doc comment. Run cargo doc --open. Run cargo test which ALSO runs doc tests. Understand why doc tests are awesome.', difficulty: 'medium', xp: 20, hint: 'Doc tests: code in doc comments that gets compiled and run. /// # Examples\n/// ```\n/// let r = my_func(5);\n/// assert_eq!(r, 10);\n/// ``` — cargo test runs this! Docs stay accurate forever.' },
+                    ]
+                },
+                {
+                    id: 'rt15', title: 'Testing', desc: 'Unit tests, integration tests, test organization, mocking patterns, property-based testing concepts.',
+                    tasks: [
+                        { id: 'r055', title: 'Unit tests', desc: 'Add #[cfg(test)] mod tests{} inside a module. Write tests with #[test]. Use assert!, assert_eq!, assert_ne!, should_panic. Test edge cases: empty input, max values, invalid input.', difficulty: 'easy', xp: 15, hint: '#[test] fn it_works() { assert_eq!(2+2, 4); } — as simple as that. #[should_panic(expected="message")] tests that a panic occurs with that message. Run with cargo test.' },
+                        { id: 'r056', title: 'Integration tests', desc: 'Create tests/ directory. Write integration tests that use your library as an external user would. Use common test helpers with tests/common/mod.rs. Understand unit vs integration test placement.', difficulty: 'medium', xp: 25, hint: 'tests/ directory is separate from src/. Each file is a separate test binary. Only public API is accessible. This tests your library as users would use it — not internal implementation.' },
+                        { id: 'r057', title: 'Test organization & helpers', desc: 'Use setup/teardown with before_each equivalents. Share test fixtures. Write parameterized-style tests with a macro or loop. Use cargo test -- --test-thread=1 for serial execution.', difficulty: 'hard', xp: 30, hint: 'Rust has no built-in before_each, but you can use a helper fn that returns a setup object. For parameterized tests: a Vec of (input, expected) pairs + loop calling assert_eq. rstest crate adds real parameterized tests.' },
+                    ]
+                },
+                {
+                    id: 'rt16', title: 'Closures Advanced & Functional Patterns', desc: 'Monad-like patterns, function composition, point-free style, and idiomatic functional Rust.',
+                    tasks: [
+                        { id: 'r058', title: 'Function composition', desc: 'Write compose(f,g) that returns a new closure applying f then g. Create a pipeline of 5 transformations. Use function pointers fn(i32)->i32 and trait objects Box<dyn Fn(i32)->i32>.', difficulty: 'hard', xp: 35, hint: 'fn compose<A,B,C>(f:impl Fn(A)->B, g:impl Fn(B)->C)->impl Fn(A)->C { move |x| g(f(x)) } — higher-order functions. The returned closure captures both f and g.' },
+                        { id: 'r059', title: 'Iterator chaining advanced', desc: 'Use flat_map to flatten a Vec<Vec<i32>>. Use scan for running totals. Use windows(n) and chunks(n). Use unzip() to separate Vec<(A,B)> into (Vec<A>,Vec<B>). Use collect into HashMap.', difficulty: 'hard', xp: 35, hint: 'iter.collect::<HashMap<_,_>>() works on iter of (K,V) pairs. .windows(3) yields overlapping slices [1,2,3],[2,3,4]. .chunks(3) non-overlapping. .scan(init,|state,x| ...) is stateful map.' },
+                    ]
+                },
+                {
+                    id: 'rt17', title: 'Unsafe Rust', desc: 'The unsafe keyword, raw pointers, unsafe functions, FFI basics. Understanding what unsafe allows and why it\'s necessary.',
+                    tasks: [
+                        { id: 'r060', title: 'Unsafe basics & raw pointers', desc: 'Create raw pointers with as *const and as *mut. Dereference them inside unsafe{}. Create a union. Call an unsafe function. Understand: unsafe doesn\'t turn off borrow checker — it allows SPECIFIC additional operations.', difficulty: 'hard', xp: 35, hint: 'unsafe lets you: dereference raw pointers, call unsafe functions, access mutable statics, implement unsafe traits, access union fields. The borrow checker still runs — unsafe just adds these 5 powers.' },
+                        { id: 'r061', title: 'Implementing safe abstraction over unsafe', desc: 'Write a safe split_at_mut(&mut [T], usize)->(& mut [T],&mut [T]) using raw pointers internally. The unsafe is encapsulated — callers use a safe API. This is how stdlib works.', difficulty: 'hard', xp: 40, hint: 'fn split_at_mut<T>(slice:&mut[T], mid:usize)->(&mut[T],&mut[T]) { let ptr=slice.as_mut_ptr(); unsafe{(from_raw_parts_mut(ptr,mid), from_raw_parts_mut(ptr.add(mid),slice.len()-mid))} }' },
+                    ]
+                },
+                {
+                    id: 'rt18', title: 'Async Rust', desc: 'async/await, futures, tokio runtime, async traits, and building concurrent applications without threads.',
+                    tasks: [
+                        { id: 'r062', title: 'async fn & await basics', desc: 'Write async fn fetch_data()->String that simulates async work with tokio::time::sleep. Write async fn main using #[tokio::main]. Understand: async returns a Future that must be awaited.', difficulty: 'medium', xp: 30, hint: 'async fn returns impl Future<Output=T> — it doesn\'t execute until you .await it or pass to runtime. #[tokio::main] sets up the async runtime. Never block inside async (use tokio::time::sleep not std::thread::sleep).' },
+                        { id: 'r063', title: 'Concurrent futures with join!', desc: 'Create 3 async tasks. Run them concurrently with tokio::join!(t1,t2,t3) and measure: faster than sequential. Also try tokio::spawn() for true parallelism. Understand join vs spawn.', difficulty: 'hard', xp: 35, hint: 'join!(a,b,c): concurrently awaits all three in ONE task (interleaved, not parallel). spawn(): runs on thread pool (true parallel). For IO-bound: join is fine. CPU-bound: use spawn or rayon.' },
+                        { id: 'r064', title: 'Async channels & streams', desc: 'Use tokio::sync::mpsc for async message passing. Create an async producer/consumer. Use tokio_stream::StreamExt to process a stream of items asynchronously with .next().await in a loop.', difficulty: 'hard', xp: 40, hint: 'tokio::sync::mpsc::channel(100) creates async channel with buffer 100. tx.send(msg).await in producer. while let Some(msg)=rx.recv().await handles messages. Stream is like async Iterator.' },
+                    ]
+                },
+            ]
+        };
+
+        // STATE
+        function load() { try { return JSON.parse(localStorage.getItem('jrv4') || '{}') } catch { return {} } }
+        function persist() { try { localStorage.setItem('jrv4', JSON.stringify(S)) } catch { } }
+        let S = load();
+        const TODAY = new Date().toISOString().slice(0, 10);
+        if (!S[TODAY]) { S[TODAY] = { java: [], rust: [], notes: '', aha: '', concepts: [] }; persist() }
+
+        // VIEW
+        function sv(name, btn) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+            document.getElementById('view-' + name).classList.add('on');
+            if (btn) btn.classList.add('on');
+            if (name === 'topics') renderTopics();
+            if (name === 'notes') renderNotes();
+            if (name === 'history') renderHistory();
+        }
+
+        // DAY INDEX — rotating task selection
+        function dayIdx() { return Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000) }
+        function getDayTask(topic) { return topic.tasks[dayIdx() % topic.tasks.length] }
+
+        // TODAY
+        function renderLangBlock(lang) {
+            const isJ = lang === 'java';
+            const done = S[TODAY][lang] || [];
+            const topics = CUR[lang];
+            const dayItems = topics.map(t => ({ topic: t, task: getDayTask(t) }));
+            const doneCount = dayItems.filter(di => done.includes(di.task.id)).length;
+            let h = `<div class="lbh">
+    <div class="lic ${isJ ? 'jic' : 'ric'}">${isJ ? 'JAVA' : 'RUST'}</div>
+    <div><div class="lbl">Today's Focus</div><div class="lnm">${topics.length} topics · one task each</div></div>
+    <div class="lfr"><span class="big">${doneCount}</span><span class="sm"> / ${dayItems.length}</span></div>
+  </div>`;
+            dayItems.forEach(({ topic, task }) => {
+                const isDone = done.includes(task.id);
+                h += `<div class="tg">
+      <div class="tgl">
+        <span class="tgn">${isJ ? '☕' : '🦀'}</span>
+        <span class="tgt">${topic.title}</span>
+        <span class="xpc">+${task.xp} XP</span>
+      </div>
+      <div class="tc${isDone ? ' dn' : ''}" id="tc-${task.id}" onclick="toggleTask('${lang}','${task.id}',event)">
+        <div class="cb"><svg class="ck" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#07070f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="tbody">
+          <div class="tt">${task.title}</div>
+          <div class="td">${task.desc}</div>
+          <div class="tm">
+            <span class="pill p${task.difficulty[0]}">${task.difficulty}</span>
+            <span class="pill pt">${topic.title}</span>
+            <button class="hbtn" onclick="tgh('${task.id}',event)">💡 Hint</button>
+          </div>
+          <div class="hbox" id="hb-${task.id}">${task.hint}</div>
+        </div>
+      </div>
+    </div>`;
+            });
+            document.getElementById(isJ ? 'jbl' : 'rbl').innerHTML = h;
+        }
+
+        function toggleTask(lang, id, e) {
+            if (e.target.classList.contains('hbtn')) return;
+            const arr = S[TODAY][lang];
+            const idx = arr.indexOf(id);
+            const was = idx !== -1;
+            if (!was) {
+                arr.push(id);
+                const t = CUR[lang].flatMap(t => t.tasks).find(t => t.id === id);
+                if (t) floatXp(t.xp, e);
+            } else arr.splice(idx, 1);
+            persist();
+            const card = document.getElementById('tc-' + id);
+            if (card) { if (!was) card.classList.add('dn'); else card.classList.remove('dn'); }
+            updateStats(); checkDone();
+        }
+
+        function tgh(id, e) { e.stopPropagation(); document.getElementById('hb-' + id)?.classList.toggle('op') }
+
+        function floatXp(xp, e) {
+            const el = document.createElement('div');
+            el.className = 'xpfl'; el.textContent = '+' + xp + ' XP';
+            el.style.left = (e.clientX - 20) + 'px'; el.style.top = (e.clientY - 10) + 'px';
+            document.body.appendChild(el); setTimeout(() => el.remove(), 900);
+        }
+
+        function checkDone() {
+            const jD = (S[TODAY].java || []).length, rD = (S[TODAY].rust || []).length;
+            const tot = CUR.java.length + CUR.rust.length;
+            document.getElementById('adb').style.display = (jD + rD >= tot) ? 'block' : 'none';
+        }
+
+        function resetToday() {
+            if (!confirm('Reset today\'s tasks?')) return;
+            S[TODAY].java = []; S[TODAY].rust = []; persist(); renderToday();
+        }
+
+        // STATS
+        function calcXP() {
+            const all = [...CUR.java.flatMap(t => t.tasks), ...CUR.rust.flatMap(t => t.tasks)];
+            let xp = 0;
+            Object.values(S).forEach(d => {
+                [...(d.java || []), ...(d.rust || [])].forEach(id => { const t = all.find(x => x.id === id); if (t) xp += t.xp; });
+            });
+            return xp;
+        }
+        function calcStreak() {
+            const keys = Object.keys(S).sort().reverse();
+            const half = Math.max(1, Math.floor((CUR.java.length + CUR.rust.length) / 2));
+            let st = 0;
+            for (let k of keys) { const d = S[k]; if ((d.java || []).length + (d.rust || []).length >= half) st++; else break; }
+            return st;
+        }
+        function updateStats() {
+            const jD = (S[TODAY].java || []).length, rD = (S[TODAY].rust || []).length;
+            document.getElementById('sj').textContent = jD;
+            document.getElementById('sr').textContent = rD;
+            document.getElementById('sjt').textContent = CUR.java.length;
+            document.getElementById('srt').textContent = CUR.rust.length;
+            document.getElementById('sxp').textContent = calcXP();
+            document.getElementById('sst').textContent = calcStreak();
+        }
+
+        // TOPICS
+        function renderTopics() {
+            document.getElementById('topics-main').style.display = '';
+            document.getElementById('topic-detail').style.display = 'none';
+            const allJ = Object.values(S).flatMap(d => d.java || []);
+            const allR = Object.values(S).flatMap(d => d.rust || []);
+            let h = '';
+            CUR.java.forEach(t => {
+                const done = t.tasks.filter(x => allJ.includes(x.id)).length;
+                const pct = Math.round(done / t.tasks.length * 100);
+                const txp = t.tasks.reduce((s, x) => s + x.xp, 0);
+                h += `<div class="tcard jtc" onclick="showTopicDetail('java','${t.id}')">
+      <div><span class="tcbdg jbdg">JAVA</span></div>
+      <div class="tctitle">${t.title}</div>
+      <div class="tcdesc">${t.desc}</div>
+      <div class="tcfoot">
+        <div class="tccnt">${done}/${t.tasks.length} done · ${txp} XP total</div>
+        <div class="tcbar"><div class="tcfill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+            });
+            CUR.rust.forEach(t => {
+                const done = t.tasks.filter(x => allR.includes(x.id)).length;
+                const pct = Math.round(done / t.tasks.length * 100);
+                const txp = t.tasks.reduce((s, x) => s + x.xp, 0);
+                h += `<div class="tcard rtc" onclick="showTopicDetail('rust','${t.id}')">
+      <div><span class="tcbdg rbdg">RUST</span></div>
+      <div class="tctitle">${t.title}</div>
+      <div class="tcdesc">${t.desc}</div>
+      <div class="tcfoot">
+        <div class="tccnt">${done}/${t.tasks.length} done · ${txp} XP total</div>
+        <div class="tcbar"><div class="tcfill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+            });
+            document.getElementById('tgrid').innerHTML = h;
+        }
+
+        function showTopicDetail(lang, topicId) {
+            const topic = CUR[lang].find(t => t.id === topicId);
+            if (!topic) return;
+            const isJ = lang === 'java';
+            const allDone = Object.values(S).flatMap(d => d[lang] || []);
+            const done = topic.tasks.filter(t => allDone.includes(t.id)).length;
+            const pct = Math.round(done / topic.tasks.length * 100);
+            const txp = topic.tasks.reduce((s, t) => s + t.xp, 0);
+            const earnedXp = topic.tasks.filter(t => allDone.includes(t.id)).reduce((s, t) => s + t.xp, 0);
+            let h = `<button class="tdback" onclick="renderTopics()">← Back to Topics</button>
+    <div><span class="tcbdg ${isJ ? 'jbdg' : 'rbdg'}">${lang.toUpperCase()}</span></div>
+    <div class="tdtitle">${topic.title}</div>
+    <div class="tddesc">${topic.desc}</div>
+    <div class="tprog">
+      <svg class="tpring" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="4"/>
+        <circle cx="24" cy="24" r="20" fill="none" stroke="${isJ ? 'var(--java)' : 'var(--rust)'}" stroke-width="4"
+          stroke-dasharray="${2 * Math.PI * 20}" stroke-dashoffset="${2 * Math.PI * 20 * (1 - pct / 100)}"
+          stroke-linecap="round" transform="rotate(-90 24 24)"/>
+        <text x="24" y="28" text-anchor="middle" fill="${isJ ? 'var(--java)' : 'var(--rust)'}" font-family="Bebas Neue,sans-serif" font-size="11">${pct}%</text>
+      </svg>
+      <div class="tpinfo"><div class="tplbl">Progress</div><div class="tpval">${done} / ${topic.tasks.length} tasks</div></div>
+      <div class="tpxp"><div class="xplbl">XP Earned</div><div class="xpval">${earnedXp} / ${txp}</div></div>
+    </div>
+    <div class="all-tasks-list">`;
+            const todayDone = S[TODAY][lang] || [];
+            topic.tasks.forEach(task => {
+                const isDone = allDone.includes(task.id);
+                const isToday = todayDone.includes(task.id);
+                h += `<div class="tc${isDone ? ' dn' : ''} ${isJ ? 'jb' : 'rb'}" style="cursor:pointer" id="tdt-${task.id}" onclick="toggleTaskDirect('${lang}','${task.id}',event)">
+      <div class="cb"><svg class="ck" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#07070f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="tbody">
+        <div class="tt">${task.title}${isToday ? ' <span style="font-size:.6rem;color:var(--done);font-family:DM Mono,monospace;font-weight:400;margin-left:6px">TODAY</span>' : ''}</div>
+        <div class="td">${task.desc}</div>
+        <div class="tm">
+          <span class="pill p${task.difficulty[0]}">${task.difficulty}</span>
+          <span class="xpc" style="font-family:DM Mono,monospace;font-size:.57rem;color:var(--xp);background:var(--xpg);border:1px solid rgba(139,122,255,.16);border-radius:20px;padding:2px 8px">+${task.xp} XP</span>
+          <button class="hbtn" onclick="tgh('td${task.id}',event)">💡 Hint</button>
+        </div>
+        <div class="hbox" id="hb-td${task.id}">${task.hint}</div>
+      </div>
+    </div>`;
+            });
+            h += `</div>`;
+            const detail = document.getElementById('topic-detail');
+            detail.innerHTML = h;
+            detail.style.display = 'block';
+            document.getElementById('topics-main').style.display = 'none';
+        }
+
+        function toggleTaskDirect(lang, id, e) {
+            if (e.target.classList.contains('hbtn')) return;
+            // Add to today's list
+            const arr = S[TODAY][lang];
+            const allDone = Object.values(S).flatMap(d => d[lang] || []);
+            const alreadyDone = allDone.includes(id);
+            if (!alreadyDone) {
+                if (!arr.includes(id)) { arr.push(id); persist(); }
+                const card = document.getElementById('tdt-' + id);
+                if (card) card.classList.add('dn');
+                const t = CUR[lang].flatMap(t => t.tasks).find(t => t.id === id);
+                if (t) floatXp(t.xp, e);
+            } else {
+                // Undo from today only
+                const idx = arr.indexOf(id);
+                if (idx !== -1) { arr.splice(idx, 1); persist(); }
+                const card = document.getElementById('tdt-' + id);
+                if (card) card.classList.remove('dn');
+            }
+            updateStats(); checkDone();
+        }
+
+        // NOTES
+        function renderNotes() {
+            document.getElementById('n1').value = S[TODAY].notes || '';
+            document.getElementById('n2').value = S[TODAY].aha || '';
+            renderConcepts();
+        }
+        function renderConcepts() {
+            const cs = S[TODAY].concepts || [];
+            document.getElementById('clist').innerHTML = cs.map((c, i) => `
+    <div class="ci${c.flagged ? ' fl' : ''}" onclick="toggleFlag(${i})">
+      <span class="cf">${c.flagged ? '⚠️' : '📌'}</span>
+      <input type="text" value="${c.text.replace(/"/g, '&quot;')}" onclick="event.stopPropagation()" onchange="updateC(${i},this.value)" placeholder="Concept to revisit..."/>
+    </div>`).join('');
+        }
+        function addC() {
+            if (!S[TODAY].concepts) S[TODAY].concepts = [];
+            S[TODAY].concepts.push({ text: '', flagged: false }); persist(); renderConcepts();
+            setTimeout(() => { const ins = document.querySelectorAll('#clist input'); if (ins.length) ins[ins.length - 1].focus() }, 50);
+        }
+        function updateC(i, v) { S[TODAY].concepts[i].text = v; persist() }
+        function toggleFlag(i) { S[TODAY].concepts[i].flagged = !S[TODAY].concepts[i].flagged; persist(); renderConcepts() }
+        function saveN() {
+            S[TODAY].notes = document.getElementById('n1').value;
+            S[TODAY].aha = document.getElementById('n2').value;
+            persist();
+            const b = document.querySelector('.btn.pri'); b.textContent = '✓ Saved!';
+            setTimeout(() => b.textContent = 'Save Notes', 1600);
+        }
+
+        // HISTORY
+        function renderHistory() {
+            const days = Object.keys(S).sort().reverse().slice(0, 14);
+            const all = [...CUR.java.flatMap(t => t.tasks), ...CUR.rust.flatMap(t => t.tasks)];
+            const jT = CUR.java.length, rT = CUR.rust.length;
+            if (!days.length) { document.getElementById('hlist').innerHTML = '<div class="empty">No history yet. Complete some tasks today!</div>'; return }
+            document.getElementById('hlist').innerHTML = days.map(day => {
+                const d = S[day];
+                const jD = (d.java || []).length, rD = (d.rust || []).length;
+                const jP = jT ? Math.round(jD / jT * 100) : 0, rP = rT ? Math.round(rD / rT * 100) : 0;
+                let dxp = 0;[...(d.java || []), ...(d.rust || [])].forEach(id => { const t = all.find(x => x.id === id); if (t) dxp += t.xp });
+                const lbl = day === TODAY ? '🟢 Today' : new Date(day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                return `<div class="hrow">
+      <div class="hdate">${lbl}</div>
+      <div class="hbars">
+        <div class="hbw"><div class="hbl">Java ${jD}/${jT}</div><div class="ht"><div class="hfj" style="width:${jP}%"></div></div></div>
+        <div class="hbw"><div class="hbl">Rust ${rD}/${rT}</div><div class="ht"><div class="hfr" style="width:${rP}%"></div></div></div>
+      </div>
+      <div class="hxp">${dxp} XP</div>
+    </div>`;
+            }).join('');
+        }
+
+        // INIT
+        function renderToday() {
+            document.getElementById('dchip').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+            renderLangBlock('java'); renderLangBlock('rust'); updateStats(); checkDone();
+        }
+        renderToday();
+    </script>
+</body>
+
+</html>
