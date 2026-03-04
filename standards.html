@@ -2,796 +2,544 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coding Standards</title>
+
+    <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
+
     <style>
         :root {
-            --bg: #0d0d0f;
-            --surface: #141418;
-            --surface2: #1c1c22;
-            --border: #2a2a35;
-            --accent-java: #f97316;
-            --accent-kotlin: #a855f7;
-            --accent-rust: #ef4444;
-            --accent-general: #22d3ee;
+            --bg: #07070f;
+            --panel: #0f0f1a;
+            --border: #1c1c2b;
+            --accent: #c8a96e;
+            --green: #4caf50;
+            --red: #d9534f;
+            --amber: #c8a96e;
+            --grey: #555;
             --text: #e8e8f0;
-            --muted: #6b6b80;
-            --pass: #22c55e;
-            --fail: #ef4444;
-            --warn: #f59e0b;
+            --muted: #9aa0a6;
         }
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
+            margin: 0;
             background: var(--bg);
             color: var(--text);
-            font-family: 'Syne', sans-serif;
-            min-height: 100vh;
-            padding: 0;
+            font-family: 'DM Sans', sans-serif;
         }
 
-        /* HEADER */
-        header {
-            padding: 48px 48px 32px;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
+        h1,
+        h2,
+        h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: -80px;
-            right: -80px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
-            pointer-events: none;
+        code,
+        .code {
+            font-family: 'DM Mono', monospace;
         }
 
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -60px;
-            left: 200px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
-            pointer-events: none;
+        a {
+            color: var(--accent);
+            text-decoration: none;
         }
 
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .title-block h1 {
-            font-size: clamp(28px, 4vw, 48px);
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1;
-            background: linear-gradient(135deg, #e8e8f0 30%, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title-block p {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-            margin-top: 28px;
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .stat-num {
-            font-size: 28px;
-            font-weight: 800;
-            font-family: 'Space Mono', monospace;
-            color: var(--text);
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .stat-divider {
-            width: 1px;
-            background: var(--border);
-            align-self: stretch;
-            margin: 4px 0;
-        }
-
-        /* CONTROLS */
-        .controls {
-            padding: 20px 48px;
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-            position: sticky;
+        /* Top Bar */
+        .topbar {
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #0b0b14;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
             z-index: 100;
         }
 
-        .controls-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-right: 4px;
+        .topbar-title {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent);
+            font-size: 18px;
         }
 
-        .filter-btn {
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--muted);
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            padding: 6px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.15s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .filter-btn:hover {
-            border-color: #555;
-            color: var(--text);
-        }
-
-        .filter-btn.active {
-            background: var(--surface2);
-            border-color: var(--accent-kotlin);
-            color: var(--text);
-        }
-
-        .filter-btn[data-lang="java"].active {
-            border-color: var(--accent-java);
-        }
-
-        .filter-btn[data-lang="kotlin"].active {
-            border-color: var(--accent-kotlin);
-        }
-
-        .filter-btn[data-lang="rust"].active {
-            border-color: var(--accent-rust);
-        }
-
-        .filter-btn[data-lang="general"].active {
-            border-color: var(--accent-general);
-        }
-
-        .filter-btn[data-lang="all"].active {
-            border-color: #888;
-        }
-
-        .search-wrap {
-            margin-left: auto;
-            position: relative;
-        }
-
-        .search-wrap input {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--text);
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            padding: 7px 12px 7px 32px;
-            border-radius: 4px;
-            outline: none;
-            width: 200px;
-            transition: border-color 0.15s;
-        }
-
-        .search-wrap input:focus {
-            border-color: var(--accent-kotlin);
-        }
-
-        .search-wrap input::placeholder {
+        .progress {
+            font-size: 14px;
             color: var(--muted);
         }
 
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
+        /* Layout */
+        .container {
+            display: flex;
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-stats {
             font-size: 13px;
-        }
-
-        /* PROGRESS BAR */
-        .progress-bar-wrap {
-            padding: 0 48px;
-            background: var(--surface);
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .progress-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
             color: var(--muted);
-            margin-bottom: 6px;
+            margin-bottom: 20px;
+        }
+
+        .topic-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 5px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .topic-item:hover {
+            background: #1a1a2b;
+        }
+
+        .topic-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: var(--grey);
+        }
+
+        .topic-item.active {
+            background: #161626;
+        }
+
+        /* Main Panel */
+        .main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        /* Welcome */
+        .welcome {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .category-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .start-btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            cursor: pointer;
+        }
+
+        /* Lesson */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #1b1b2b;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .callout {
+            padding: 12px;
+            border-left: 4px solid var(--accent);
+            background: #111120;
+            margin: 15px 0;
+        }
+
+        .callout.tip {
+            border-color: var(--green);
+        }
+
+        .callout.warning {
+            border-color: var(--red);
+        }
+
+        .callout.info {
+            border-color: var(--accent);
+        }
+
+        /* Code */
+        pre {
+            background: #0d0d17;
+            padding: 15px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            border-radius: 6px;
+        }
+
+        .keyword {
+            color: #ff7ab6;
+        }
+
+        .string {
+            color: #8bd5ca;
+        }
+
+        .comment {
+            color: #6c7086;
+        }
+
+        .type {
+            color: #82aaff;
+        }
+
+        .func {
+            color: #ffd866;
+        }
+
+        /* Comparison */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .label-bad {
+            color: var(--red);
+            font-weight: bold;
+        }
+
+        .label-good {
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        th {
+            background: #111120;
+            text-align: left;
+        }
+
+        /* Quiz */
+        .quiz {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .quiz-question {
+            margin-bottom: 15px;
+        }
+
+        .quiz-option {
+            border: 1px solid var(--border);
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--green);
+        }
+
+        .quiz-option.wrong {
+            border-color: var(--red);
+        }
+
+        .quiz-explanation {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        .nav-buttons {
+            margin-top: 30px;
             display: flex;
             justify-content: space-between;
-        }
-
-        .progress-track {
-            height: 4px;
-            background: var(--border);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-kotlin), var(--accent-general));
-            border-radius: 2px;
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-
-        /* MAIN CONTENT */
-        main {
-            padding: 40px 48px;
-            max-width: 1400px;
-        }
-
-        .category-section {
-            margin-bottom: 48px;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .category-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 17px;
-            flex-shrink: 0;
-        }
-
-        .category-title {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-        }
-
-        .category-count {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            color: var(--muted);
-            margin-left: auto;
-        }
-
-        /* STANDARDS GRID */
-        .standards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 12px;
-        }
-
-        .standard-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px 18px;
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-            cursor: pointer;
-            transition: all 0.15s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .standard-card:hover {
-            border-color: #3a3a48;
-            background: var(--surface2);
-            transform: translateY(-1px);
-        }
-
-        .standard-card.checked {
-            border-color: rgba(34, 197, 94, 0.3);
-            background: rgba(34, 197, 94, 0.04);
-        }
-
-        .standard-card.checked::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--pass);
-            border-radius: 8px 0 0 8px;
-        }
-
-        .check-box {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 4px;
-            flex-shrink: 0;
-            margin-top: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s;
-            font-size: 11px;
-        }
-
-        .standard-card.checked .check-box {
-            background: var(--pass);
-            border-color: var(--pass);
-            color: #000;
-        }
-
-        .standard-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .standard-title {
-            font-size: 13px;
-            font-weight: 600;
-            line-height: 1.4;
-            margin-bottom: 5px;
-        }
-
-        .standard-desc {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 6px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-
-        .tag-java {
-            background: rgba(249, 115, 22, 0.15);
-            color: var(--accent-java);
-        }
-
-        .tag-kotlin {
-            background: rgba(168, 85, 247, 0.15);
-            color: var(--accent-kotlin);
-        }
-
-        .tag-rust {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--accent-rust);
-        }
-
-        .tag-general {
-            background: rgba(34, 211, 238, 0.15);
-            color: var(--accent-general);
-        }
-
-        .severity {
-            font-family: 'Space Mono', monospace;
-            font-size: 9px;
-            padding: 2px 7px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sev-critical {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--fail);
-        }
-
-        .sev-high {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--warn);
-        }
-
-        .sev-good {
-            background: rgba(34, 211, 238, 0.12);
-            color: var(--accent-general);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* EMPTY STATE */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--muted);
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            display: none;
-        }
-
-        .empty-state.visible {
-            display: block;
-        }
-
-        /* RESET BTN */
-        .reset-btn {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 6px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.15s;
-            margin-left: 8px;
-        }
-
-        .reset-btn:hover {
-            color: var(--fail);
-            border-color: var(--fail);
-        }
-
-        @media (max-width: 700px) {
-
-            header,
-            .controls,
-            .progress-bar-wrap,
-            main {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .standards-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="header-top">
-            <div class="title-block">
-                <h1>Coding Standards</h1>
-                <p>Java · Kotlin · Rust · Full-Stack — General Best Practices Reference</p>
-            </div>
-        </div>
-        <div class="stats-row">
-            <div class="stat">
-                <span class="stat-num" id="stat-total">0</span>
-                <span class="stat-label">Total Rules</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <span class="stat-num" id="stat-checked">0</span>
-                <span class="stat-label">Reviewed</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <span class="stat-num" id="stat-critical">0</span>
-                <span class="stat-label">Critical Rules</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat">
-                <span class="stat-num" id="stat-cats">0</span>
-                <span class="stat-label">Categories</span>
-            </div>
-        </div>
-    </header>
-
-    <div class="controls">
-        <span class="controls-label">Filter:</span>
-        <button class="filter-btn active" data-lang="all">All</button>
-        <button class="filter-btn" data-lang="java">Java</button>
-        <button class="filter-btn" data-lang="kotlin">Kotlin</button>
-        <button class="filter-btn" data-lang="rust">Rust</button>
-        <button class="filter-btn" data-lang="general">General</button>
-        <button class="reset-btn" id="reset-btn">↺ Reset</button>
-        <div class="search-wrap">
-            <span class="search-icon">⌕</span>
-            <input type="text" id="search-input" placeholder="Search standards..." />
-        </div>
+    <div class="topbar">
+        <div class="topbar-title">CODING GUIDEBOOK</div>
+        <div class="progress" id="progressTracker"></div>
     </div>
 
-    <div class="progress-bar-wrap">
-        <div class="progress-label">
-            <span>Review Progress</span>
-            <span id="progress-pct">0%</span>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Topics</h2>
+            <div class="sidebar-stats" id="sidebarStats"></div>
+            <div id="topicList"></div>
         </div>
-        <div class="progress-track">
-            <div class="progress-fill" id="progress-fill"></div>
-        </div>
+        <div class="main" id="mainContent"></div>
     </div>
-
-    <main id="main-content"></main>
 
     <script>
-        const standards = [
-            // ── NAMING & STYLE ─────────────────────────────────────────────────────────
-            {
-                category: "Naming & Style",
-                icon: "✦",
-                iconBg: "rgba(168,85,247,0.15)",
-                items: [
-                    { title: "Use camelCase for variables and methods", desc: "Local vars and method names use camelCase. Classes use PascalCase. Constants use SCREAMING_SNAKE_CASE.", langs: ["java", "kotlin", "general"], severity: "high" },
-                    { title: "Kotlin: prefer val over var", desc: "Prefer immutable val declarations. Only use var when mutation is genuinely needed.", langs: ["kotlin"], severity: "high" },
-                    { title: "Rust: follow snake_case conventions", desc: "Variables, functions, and modules use snake_case. Types and traits use PascalCase. Constants use SCREAMING_SNAKE_CASE.", langs: ["rust"], severity: "high" },
-                    { title: "Avoid abbreviations in names", desc: "Write out full words unless abbreviation is universally understood (e.g. URL, ID, HTTP). Clarity beats brevity.", langs: ["general", "java", "kotlin", "rust"], severity: "good" },
-                    { title: "Boolean names should read as questions", desc: "Prefix booleans with is, has, can, should (e.g. isActive, hasPermission). Avoid ambiguous names like 'flag'.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "File names match primary class/module", desc: "Each file should contain one primary public class/struct, named identically to the file.", langs: ["java", "kotlin", "rust"], severity: "high" },
-                ]
-            },
-            // ── CODE STRUCTURE ─────────────────────────────────────────────────────────
-            {
-                category: "Code Structure",
-                icon: "◈",
-                iconBg: "rgba(34,211,238,0.12)",
-                items: [
-                    { title: "Functions do one thing only", desc: "A function should have a single, clear responsibility. If you can't name it without 'and', split it up.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Keep functions under 30 lines", desc: "Long functions are harder to test, review, and reuse. Extract logic into well-named helpers.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Max 3 levels of nesting", desc: "Deep nesting signals complex control flow. Use early returns, guard clauses, or extract methods to flatten code.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Limit function parameters to 4 or fewer", desc: "More than 4 parameters suggests too much responsibility. Consider a config object or builder pattern.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Java: prefer composition over inheritance", desc: "Favor interfaces and delegation over deep class hierarchies. Composition is more flexible and testable.", langs: ["java"], severity: "high" },
-                    { title: "Kotlin: use data classes for value objects", desc: "Data classes give you equals, hashCode, toString, and copy for free. Use them for DTOs and domain models.", langs: ["kotlin"], severity: "good" },
-                    { title: "Rust: prefer iterators over manual loops", desc: "Iterator chains (.map, .filter, .fold) are idiomatic, readable, and often optimized by the compiler.", langs: ["rust"], severity: "good" },
-                    { title: "Rust: avoid unwrap() in production code", desc: "unwrap() panics on None/Err. Use ?, if let, match, or unwrap_or_else for explicit error handling.", langs: ["rust"], severity: "critical" },
-                ]
-            },
-            // ── ERROR HANDLING ─────────────────────────────────────────────────────────
-            {
-                category: "Error Handling",
-                icon: "⚠",
-                iconBg: "rgba(239,68,68,0.12)",
-                items: [
-                    { title: "Never silently swallow exceptions", desc: "Empty catch blocks hide failures. At minimum, log the error with context. Prefer explicit handling or re-throwing.", langs: ["java", "kotlin", "general"], severity: "critical" },
-                    { title: "Use specific exception types", desc: "Catch the most specific exception type possible. Never catch Exception or Throwable unless absolutely necessary.", langs: ["java", "kotlin"], severity: "critical" },
-                    { title: "Kotlin: use sealed classes for results", desc: "Model success/failure with sealed Result or Either classes instead of throwing exceptions in business logic.", langs: ["kotlin"], severity: "high" },
-                    { title: "Rust: propagate errors with the ? operator", desc: "Use ? to propagate errors up the call stack cleanly. Reserve explicit match for cases requiring recovery logic.", langs: ["rust"], severity: "high" },
-                    { title: "Rust: define custom error types with thiserror", desc: "Use the thiserror crate for ergonomic custom error enums. Avoid raw String errors in library code.", langs: ["rust"], severity: "good" },
-                    { title: "Always log error context, not just the message", desc: "Include what operation was being attempted, relevant IDs, and input state when logging errors.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Fail fast on invalid state", desc: "Validate inputs at boundaries (API endpoints, constructors). Don't let invalid data propagate deep into the system.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                ]
-            },
-            // ── MEMORY & PERFORMANCE ───────────────────────────────────────────────────
-            {
-                category: "Memory & Performance",
-                icon: "◉",
-                iconBg: "rgba(249,115,22,0.12)",
-                items: [
-                    { title: "Rust: understand ownership before cloning", desc: "clone() is sometimes correct but often a sign of unclear ownership. Prefer borrowing (&T, &mut T) when possible.", langs: ["rust"], severity: "critical" },
-                    { title: "Rust: use Arc/Mutex only when truly shared", desc: "Shared mutable state via Arc<Mutex<T>> has overhead. Consider message passing (channels) as an alternative.", langs: ["rust"], severity: "high" },
-                    { title: "Rust: prefer stack allocation for small data", desc: "Avoid boxing small values unnecessarily. Box<T> and Vec<T> involve heap allocation; prefer arrays/structs on the stack.", langs: ["rust"], severity: "good" },
-                    { title: "Java/Kotlin: close resources explicitly", desc: "Use try-with-resources (Java) or use { } (Kotlin) for streams, connections, and file handles. Never rely on GC alone.", langs: ["java", "kotlin"], severity: "critical" },
-                    { title: "Avoid premature optimization", desc: "Write clear, correct code first. Profile before optimizing. Optimize the bottleneck, not the assumption.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Use lazy initialization where appropriate", desc: "Defer expensive object creation until first use. Use lazy {} in Kotlin, lazy_static! or OnceCell in Rust.", langs: ["kotlin", "rust"], severity: "good" },
-                ]
-            },
-            // ── TESTING ────────────────────────────────────────────────────────────────
-            {
-                category: "Testing",
-                icon: "✓",
-                iconBg: "rgba(34,197,94,0.12)",
-                items: [
-                    { title: "Every public function has at least one unit test", desc: "Public APIs are contracts. Test the happy path, edge cases, and failure modes for each public function.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Test names describe behavior, not implementation", desc: "Use descriptive names: 'should_return_empty_when_no_results' vs 'testGetItems'. Tests are documentation.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Arrange–Act–Assert structure", desc: "Structure tests in three clear phases. No mixing of setup and assertion logic.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Avoid test interdependence", desc: "Each test must be runnable in isolation. Never rely on shared mutable state or execution order.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Rust: use #[cfg(test)] modules", desc: "Keep unit tests in the same file as production code inside a #[cfg(test)] module for co-location.", langs: ["rust"], severity: "good" },
-                    { title: "Mock external dependencies", desc: "Unit tests should not hit databases, filesystems, or networks. Mock or stub all I/O at test boundaries.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Maintain test coverage above 80% for core logic", desc: "Use coverage tooling (JaCoCo, llvm-cov) to identify gaps. Focus coverage on business logic, not glue code.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                ]
-            },
-            // ── DOCUMENTATION ──────────────────────────────────────────────────────────
-            {
-                category: "Documentation",
-                icon: "≡",
-                iconBg: "rgba(168,85,247,0.12)",
-                items: [
-                    { title: "All public APIs must have doc comments", desc: "JavaDoc / KDoc / rustdoc for every public function, struct, and module. Describe params, return values, and errors.", langs: ["java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Explain WHY, not WHAT", desc: "Code shows what happens. Comments explain non-obvious decisions, tradeoffs, and context that code can't convey.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Keep comments up to date with code", desc: "Stale comments are worse than no comments. Update or delete docs when you change logic.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                    { title: "Rust: write runnable doc examples", desc: "/// examples in rustdoc are compiled and tested. Write examples that demonstrate real usage patterns.", langs: ["rust"], severity: "good" },
-                    { title: "Maintain a README with setup instructions", desc: "Every repo should have a README covering: purpose, prerequisites, build/run steps, and environment config.", langs: ["general"], severity: "high" },
-                    { title: "Document non-obvious architectural decisions", desc: "Use ADRs (Architecture Decision Records) for significant technical choices. Future maintainers will thank you.", langs: ["general"], severity: "good" },
-                ]
-            },
-            // ── CONCURRENCY ────────────────────────────────────────────────────────────
-            {
-                category: "Concurrency",
-                icon: "⇌",
-                iconBg: "rgba(34,211,238,0.1)",
-                items: [
-                    { title: "Rust: trust the borrow checker for thread safety", desc: "The compiler enforces Send/Sync boundaries. Don't use unsafe to bypass these without thorough justification.", langs: ["rust"], severity: "critical" },
-                    { title: "Kotlin: prefer coroutines over raw threads", desc: "Coroutines are structured, cancellable, and composable. Use CoroutineScope with appropriate dispatchers.", langs: ["kotlin"], severity: "high" },
-                    { title: "Java: use java.util.concurrent, not synchronized", desc: "Prefer ConcurrentHashMap, AtomicReference, and higher-level constructs over manual synchronized blocks.", langs: ["java"], severity: "high" },
-                    { title: "Never block a coroutine dispatcher thread", desc: "Don't call Thread.sleep() or blocking I/O on Dispatchers.Default. Use withContext(Dispatchers.IO) for blocking work.", langs: ["kotlin"], severity: "critical" },
-                    { title: "Document thread-safety guarantees", desc: "Mark classes/functions as thread-safe or not. Don't leave consumers guessing about concurrent access behavior.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                ]
-            },
-            // ── SECURITY ───────────────────────────────────────────────────────────────
-            {
-                category: "Security",
-                icon: "⬡",
-                iconBg: "rgba(239,68,68,0.1)",
-                items: [
-                    { title: "Never hardcode secrets or credentials", desc: "No API keys, passwords, or tokens in source code. Use environment variables, secret managers, or config files outside VCS.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Validate and sanitize all user inputs", desc: "Treat all external input as untrusted. Validate at system boundaries before processing or persisting.", langs: ["general", "java", "kotlin", "rust"], severity: "critical" },
-                    { title: "Use parameterized queries — no string SQL", desc: "String-concatenated SQL is vulnerable to injection. Use prepared statements or ORM query builders exclusively.", langs: ["java", "kotlin", "general"], severity: "critical" },
-                    { title: "Rust: minimize and audit unsafe blocks", desc: "Every unsafe block must have a comment explaining why it's needed and what invariants are being upheld.", langs: ["rust"], severity: "critical" },
-                    { title: "Principle of least privilege", desc: "Code should request only the access it needs. Limit visibility of functions, fields, and modules to the minimum required.", langs: ["general", "java", "kotlin", "rust"], severity: "high" },
-                ]
-            },
+        const PASS_THRESHOLD = 4;
+
+        const topics = [
+            { category: "Naming & Structure", title: "Naming Things Well", tagline: "Clarity over cleverness." },
+            { category: "Naming & Structure", title: "Code Formatting", tagline: "Consistency reduces cognitive load." },
+            { category: "Clean Code Principles", title: "Comments & Documentation", tagline: "Explain why, not what." },
+            { category: "Clean Code Principles", title: "Error Handling", tagline: "Fail explicitly and safely." },
+            { category: "Functions & Design", title: "Function Design", tagline: "Small, pure, predictable." },
+            { category: "Functions & Design", title: "DRY Principle", tagline: "Eliminate duplication." },
+            { category: "Testing & Quality", title: "Writing Tests", tagline: "Confidence through verification." },
+            { category: "Testing & Quality", title: "Code Reviews", tagline: "Quality is a team sport." },
+            { category: "Security & Performance", title: "Security Fundamentals", tagline: "Assume hostile input." },
+            { category: "Security & Performance", title: "Performance Basics", tagline: "Measure before optimizing." },
+            { category: "Tooling & Workflow", title: "Git & Version Control", tagline: "History is architecture." },
+            { category: "Tooling & Workflow", title: "Writing READMEs", tagline: "Documentation is UX." },
+            { category: "Professional Practice", title: "Refactoring", tagline: "Improve without changing behavior." },
+            { category: "Professional Practice", title: "Language-Specific Best Practices", tagline: "Java, Rust, Python, JS, Go." }
         ];
 
-        // ── STATE ──────────────────────────────────────────────────────────────────
-        let activeFilter = "all";
-        let checkedItems = new Set();
-        let searchQuery = "";
+        function loadState() {
+            return JSON.parse(localStorage.getItem("jackal_standards") || "{}");
+        }
 
-        // ── RENDER ─────────────────────────────────────────────────────────────────
-        function render() {
-            const main = document.getElementById("main-content");
-            main.innerHTML = "";
+        function saveState(state) {
+            localStorage.setItem("jackal_standards", JSON.stringify(state));
+        }
 
-            let totalVisible = 0;
+        function updateSidebar() {
+            const topicList = document.getElementById("topicList");
+            const state = loadState();
+            topicList.innerHTML = "";
+            let passed = 0;
+            let totalPoints = 0;
 
-            standards.forEach((cat, catIdx) => {
-                const filtered = cat.items.filter(item => {
-                    const langMatch = activeFilter === "all" || item.langs.includes(activeFilter);
-                    const q = searchQuery.toLowerCase();
-                    const textMatch = !q || item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q) || item.langs.join(" ").includes(q);
-                    return langMatch && textMatch;
-                });
+            topics.forEach((t, i) => {
+                const item = document.createElement("div");
+                item.className = "topic-item";
+                item.onclick = () => loadTopic(i);
 
-                if (filtered.length === 0) return;
-                totalVisible += filtered.length;
+                const dot = document.createElement("div");
+                dot.className = "topic-dot";
 
-                const section = document.createElement("div");
-                section.className = "category-section";
-                section.innerHTML = `
-      <div class="category-header">
-        <div class="category-icon" style="background:${cat.iconBg}">${cat.icon}</div>
-        <span class="category-title">${cat.category}</span>
-        <span class="category-count">${filtered.length} rule${filtered.length !== 1 ? "s" : ""}</span>
+                const result = state[i];
+                if (result?.passed) {
+                    dot.style.background = "var(--green)";
+                    passed++;
+                    totalPoints += result.score;
+                } else if (result?.attempted) {
+                    dot.style.background = "var(--amber)";
+                    totalPoints += result.score || 0;
+                }
+
+                const text = document.createElement("div");
+                text.textContent = (i + 1) + ". " + t.title;
+
+                item.appendChild(dot);
+                item.appendChild(text);
+                topicList.appendChild(item);
+            });
+
+            document.getElementById("sidebarStats").textContent =
+                `Passed: ${passed}/${topics.length} | Points: ${totalPoints}`;
+
+            document.getElementById("progressTracker").textContent =
+                `${passed} of ${topics.length} topics passed`;
+        }
+
+        function renderWelcome() {
+            const main = document.getElementById("mainContent");
+            main.innerHTML = `
+    <div class="welcome">
+      <h1>Software Engineering Standards</h1>
+      <p>A structured interactive course covering modern engineering best practices across architecture, testing, security, tooling, and professional craft.</p>
+      <div class="category-grid">
+        ${[...new Set(topics.map(t => t.category))].map(c =>
+                `<div class="category-card"><h3>${c}</h3></div>`
+            ).join("")}
       </div>
-      <div class="standards-grid" id="grid-${catIdx}"></div>
-    `;
-                main.appendChild(section);
+      <button class="start-btn" onclick="loadTopic(0)">Start Reading</button>
+    </div>
+  `;
+        }
 
-                const grid = section.querySelector(`#grid-${catIdx}`);
-                filtered.forEach((item, i) => {
-                    const id = `${catIdx}-${cat.items.indexOf(item)}`;
-                    const checked = checkedItems.has(id);
-                    const card = document.createElement("div");
-                    card.className = `standard-card${checked ? " checked" : ""}`;
-                    card.dataset.id = id;
-                    card.innerHTML = `
-        <div class="check-box">${checked ? "✓" : ""}</div>
-        <div class="standard-content">
-          <div class="standard-title">${item.title}</div>
-          <div class="standard-desc">${item.desc}</div>
-          <div class="card-tags">
-            ${item.langs.map(l => `<span class="tag tag-${l}">${l}</span>`).join("")}
-            <span class="severity sev-${item.severity}">${item.severity}</span>
+        function loadTopic(index) {
+            const t = topics[index];
+            const main = document.getElementById("mainContent");
+
+            main.innerHTML = `
+    <div>
+      <div class="badge">${t.category}</div>
+      <h1>${index + 1}. ${t.title}</h1>
+      <p><em>${t.tagline}</em></p>
+
+      <div class="section">
+        <h2>Core Principles</h2>
+        <p>Strong engineering standards reduce entropy in large systems. Decisions should optimize maintainability, clarity, and safety.</p>
+        <div class="callout info">Rule: Code is read more often than it is written.</div>
+      </div>
+
+      <div class="section">
+        <h2>Example</h2>
+        <div class="compare">
+          <div>
+            <div class="label-bad">BAD</div>
+<pre><code><span class="keyword">function</span> <span class="func">x</span>(a,b){
+<span class="keyword">return</span> a*b*0.07
+}</code></pre>
+          </div>
+          <div>
+            <div class="label-good">GOOD</div>
+<pre><code><span class="keyword">function</span> <span class="func">calculateTax</span>(amount, taxRate) {
+  <span class="keyword">return</span> amount * taxRate;
+}</code></pre>
           </div>
         </div>
-      `;
-                    card.addEventListener("click", () => toggleCard(id));
-                    grid.appendChild(card);
+      </div>
+
+      <div class="section">
+        <h2>Reference Table</h2>
+        <table>
+          <tr><th>Language</th><th>Convention</th></tr>
+          <tr><td>Java</td><td>camelCase methods</td></tr>
+          <tr><td>Python</td><td>snake_case</td></tr>
+          <tr><td>Go</td><td>MixedCaps</td></tr>
+          <tr><td>Rust</td><td>snake_case functions</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz" id="quiz"></div>
+
+      <div class="nav-buttons">
+        <button onclick="prevTopic(${index})">Previous</button>
+        <button onclick="nextTopic(${index})">Next</button>
+      </div>
+    </div>
+  `;
+
+            renderQuiz(index);
+        }
+
+        function prevTopic(i) {
+            if (i > 0) loadTopic(i - 1);
+        }
+
+        function nextTopic(i) {
+            if (i < topics.length - 1) loadTopic(i + 1);
+        }
+
+        function renderQuiz(topicIndex) {
+            const quizEl = document.getElementById("quiz");
+            const state = loadState();
+            const existing = state[topicIndex];
+
+            const questions = Array.from({ length: 5 }).map((_, i) => ({
+                question: `Question ${i + 1}: What is a key principle?`,
+                options: ["Clarity", "Obfuscation", "Magic numbers", "Hidden side effects"],
+                correct: 0,
+                explanation: "Clarity reduces cognitive overhead and defects."
+            }));
+
+            let score = 0;
+            let answered = 0;
+
+            quizEl.innerHTML = `<h2>Quiz</h2>`;
+
+            questions.forEach((q, qi) => {
+                const qDiv = document.createElement("div");
+                qDiv.className = "quiz-question";
+                qDiv.innerHTML = `<strong>${q.question}</strong>`;
+
+                q.options.forEach((opt, oi) => {
+                    const optDiv = document.createElement("div");
+                    optDiv.className = "quiz-option";
+                    optDiv.textContent = opt;
+
+                    optDiv.onclick = () => {
+                        if (optDiv.classList.contains("correct") || optDiv.classList.contains("wrong")) return;
+
+                        answered++;
+                        if (oi === q.correct) {
+                            optDiv.classList.add("correct");
+                            score++;
+                        } else {
+                            optDiv.classList.add("wrong");
+                            qDiv.querySelectorAll(".quiz-option")[q.correct].classList.add("correct");
+                        }
+
+                        const exp = document.createElement("div");
+                        exp.className = "quiz-explanation";
+                        exp.textContent = q.explanation;
+                        qDiv.appendChild(exp);
+
+                        if (answered === questions.length) {
+                            const passed = score >= PASS_THRESHOLD;
+                            state[topicIndex] = { score, passed, attempted: true };
+                            saveState(state);
+                            updateSidebar();
+
+                            const result = document.createElement("div");
+                            result.innerHTML = `<h3>Score: ${score}/5 ${passed ? "(Passed)" : "(Failed)"}</h3>
+          <button onclick="loadTopic(${topicIndex})">Retake</button>`;
+                            quizEl.appendChild(result);
+                        }
+                    };
+
+                    qDiv.appendChild(optDiv);
                 });
+
+                quizEl.appendChild(qDiv);
             });
-
-            if (totalVisible === 0) {
-                main.innerHTML = `<div class="empty-state visible">No standards match your current filter or search.</div>`;
-            }
-
-            updateStats();
         }
 
-        function toggleCard(id) {
-            if (checkedItems.has(id)) checkedItems.delete(id);
-            else checkedItems.add(id);
-            render();
-        }
-
-        function updateStats() {
-            const allItems = standards.flatMap(c => c.items);
-            const total = allItems.length;
-            const critical = allItems.filter(i => i.severity === "critical").length;
-            const checked = checkedItems.size;
-            const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
-
-            document.getElementById("stat-total").textContent = total;
-            document.getElementById("stat-checked").textContent = checked;
-            document.getElementById("stat-critical").textContent = critical;
-            document.getElementById("stat-cats").textContent = standards.length;
-            document.getElementById("progress-pct").textContent = pct + "%";
-            document.getElementById("progress-fill").style.width = pct + "%";
-        }
-
-        // ── FILTERS ────────────────────────────────────────────────────────────────
-        document.querySelectorAll(".filter-btn[data-lang]").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".filter-btn[data-lang]").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                activeFilter = btn.dataset.lang;
-                render();
-            });
-        });
-
-        document.getElementById("reset-btn").addEventListener("click", () => {
-            checkedItems.clear();
-            render();
-        });
-
-        document.getElementById("search-input").addEventListener("input", e => {
-            searchQuery = e.target.value;
-            render();
-        });
-
-        render();
+        updateSidebar();
+        renderWelcome();
     </script>
+
 </body>
 
 </html>
