@@ -13,12 +13,13 @@
         rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #05070a;
+            --bg-primary: #0a0e17;
+            --bg-secondary: #151b2b;
             --accent: #00d9ff;
-            --accent-glow: rgba(0, 217, 255, 0.4);
+            --accent-glow: rgba(0, 217, 255, 0.3);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
-            --border: rgba(30, 38, 56, 0.5);
+            --border: #1e2638;
         }
 
         * {
@@ -37,34 +38,12 @@
             justify-content: center;
             padding: 2rem;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        .bg-image-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('http://googleusercontent.com/image_generation_content/0') no-repeat center center;
-            background-size: cover;
-            opacity: 0.15;
-            filter: grayscale(0.5) blur(10px);
-            z-index: -2;
-        }
-
-        body::after {
+        /* Original animated grid */
+        body::before {
             content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 20%, var(--bg-primary) 100%);
-            z-index: -1;
-        }
-
-        .grid-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -73,45 +52,83 @@
             background-image:
                 linear-gradient(var(--border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 60px 60px;
-            opacity: 0.2;
-            animation: gridPan 60s linear infinite;
-            z-index: -1;
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
         }
 
-        @keyframes gridPan {
-            from {
-                background-position: 0 0;
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
             }
 
-            to {
-                background-position: 500px 500px;
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Gradient orbs (original) */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #7000ff;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, -30px) scale(1.1);
             }
         }
 
         .container {
             position: relative;
-            z-index: 10;
+            z-index: 1;
             max-width: 800px;
             width: 100%;
-            backdrop-filter: blur(5px);
-            padding: 3rem;
-            border-radius: 24px;
-            background: rgba(10, 14, 23, 0.6);
-            border: 1px solid var(--border);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        /* ===== CUSTOM JACKAL SVG LOGO (split face) ===== */
-        .hero-logo {
-            width: 14rem;
-            height: auto;
+        /* ===== LARGE SPLIT-FACE LOGO ABOVE HEADING ===== */
+        .logo-container {
+            display: flex;
+            justify-content: center;
             margin-bottom: 1.5rem;
+        }
+
+        .jackal-logo {
+            width: 12rem;
+            height: 12rem;
             filter: drop-shadow(0 0 20px var(--accent-glow));
             animation: pulse 4s ease-in-out infinite alternate;
         }
@@ -128,16 +145,16 @@
             }
         }
 
-        .hero-logo .left-part {
+        .left-part {
             fill: url(#gradient);
         }
 
-        .hero-logo .right-part {
+        .right-part {
             fill: url(#binaryPattern);
             animation: flicker 3s infinite;
         }
 
-        .hero-logo .eye {
+        .eye {
             fill: url(#gradient);
             animation: eyeGlow 2s infinite alternate;
         }
@@ -168,111 +185,194 @@
 
         h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: transparent;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 0.8rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.4em;
-            margin-top: 0.5rem;
+            letter-spacing: 0.2em;
+            font-weight: 400;
         }
 
         nav ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         a {
             display: block;
-            padding: 1.5rem 2rem;
-            background: rgba(21, 27, 43, 0.8);
+            padding: 2rem 2.5rem;
+            background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 12px;
             text-decoration: none;
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+            transition: left 0.5s;
+        }
+
+        a:hover::before {
+            left: 100%;
+        }
+
+        a::after {
+            content: '→';
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--accent);
+            font-size: 2rem;
         }
 
         a:hover {
             border-color: var(--accent);
-            background: rgba(0, 217, 255, 0.05);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateX(8px);
         }
 
-        .index {
+        a:hover::after {
+            opacity: 1;
+            right: 2rem;
+        }
+
+        a span.index {
+            position: absolute;
+            left: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.2;
+            transition: all 0.3s;
+        }
+
+        a:hover span.index {
             color: var(--accent);
-            margin-right: 1rem;
-            font-family: 'JetBrains Mono';
-            opacity: 0.6;
+            opacity: 0.5;
+        }
+
+        a span.text {
+            display: inline-block;
+            margin-left: 4rem;
         }
 
         .accent-line {
-            height: 1px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin-top: 3rem;
-            opacity: 0.5;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .jackal-logo {
+                width: 8rem;
+                height: 8rem;
+            }
+
+            a {
+                padding: 1.5rem 1.5rem;
+                font-size: 1.25rem;
+            }
+
+            a span.index {
+                font-size: 2rem;
+                left: 1.5rem;
+            }
+
+            a span.text {
+                margin-left: 3rem;
+            }
+
+            a::after {
+                right: 1.5rem;
+                font-size: 1.5rem;
+            }
+
+            a:hover::after {
+                right: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-image-layer"></div>
-    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
     <div class="container">
         <header>
-            <!-- Inline SVG logo – replaces broken img -->
-            <svg class="hero-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#e8edf4" />
-                        <stop offset="100%" stop-color="#00d9ff" />
-                    </linearGradient>
-                    <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="20" height="20"
-                        patternTransform="scale(2)">
-                        <rect width="20" height="20" fill="none" />
-                        <circle cx="5" cy="5" r="2.5" fill="#00d9ff" />
-                        <circle cx="15" cy="5" r="2.5" fill="#e8edf4" />
-                        <circle cx="5" cy="15" r="2.5" fill="#e8edf4" />
-                        <circle cx="15" cy="15" r="2.5" fill="#00d9ff" />
-                    </pattern>
-                    <clipPath id="rightHalfClip">
-                        <rect x="100" y="0" width="100" height="200" />
-                    </clipPath>
-                    <path id="jackalPath" d="
-                        M70,40
-                        C60,20 40,20 30,40
-                        C20,60 20,90 40,120
-                        C60,150 100,150 130,120
-                        C150,90 150,60 130,40
-                        C120,20 100,20 90,30
-                        L85,40 L75,40 L70,40
-                        Z
-                        M45,45 L55,25 L65,45
-                        M115,45 L125,25 L135,45" />
-                </defs>
-                <use href="#jackalPath" class="left-part" clip-path="inset(0 100 0 0)" />
-                <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
-                <circle cx="70" cy="85" r="8" class="eye" />
-                <circle cx="130" cy="85" r="8" class="eye" />
-                <circle cx="70" cy="85" r="3" fill="#05070a" />
-                <circle cx="130" cy="85" r="3" fill="#05070a" />
-                <ellipse cx="100" cy="120" rx="10" ry="6" fill="url(#gradient)" />
-            </svg>
+            <!-- Large split‑face logo above heading -->
+            <div class="logo-container">
+                <svg class="jackal-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#e8edf4" />
+                            <stop offset="100%" stop-color="#00d9ff" />
+                        </linearGradient>
+                        <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="20" height="20"
+                            patternTransform="scale(2)">
+                            <rect width="20" height="20" fill="none" />
+                            <circle cx="5" cy="5" r="2.5" fill="#00d9ff" />
+                            <circle cx="15" cy="5" r="2.5" fill="#e8edf4" />
+                            <circle cx="5" cy="15" r="2.5" fill="#e8edf4" />
+                            <circle cx="15" cy="15" r="2.5" fill="#00d9ff" />
+                        </pattern>
+                        <clipPath id="rightHalfClip">
+                            <rect x="100" y="0" width="100" height="200" />
+                        </clipPath>
+                        <path id="jackalPath" d="
+                            M70,40
+                            C60,20 40,20 30,40
+                            C20,60 20,90 40,120
+                            C60,150 100,150 130,120
+                            C150,90 150,60 130,40
+                            C120,20 100,20 90,30
+                            L85,40 L75,40 L70,40
+                            Z
+                            M45,45 L55,25 L65,45
+                            M115,45 L125,25 L135,45" />
+                    </defs>
+                    <use href="#jackalPath" class="left-part" clip-path="inset(0 100 0 0)" />
+                    <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
+                    <circle cx="70" cy="85" r="8" class="eye" />
+                    <circle cx="130" cy="85" r="8" class="eye" />
+                    <circle cx="70" cy="85" r="3" fill="#0a0e17" />
+                    <circle cx="130" cy="85" r="3" fill="#0a0e17" />
+                    <ellipse cx="100" cy="120" rx="10" ry="6" fill="url(#gradient)" />
+                </svg>
+            </div>
 
             <h1>Jackal Systems</h1>
             <p class="subtitle">Precision . Security . Standards</p>
@@ -280,9 +380,9 @@
 
         <nav>
             <ul>
-                <li><a href="codeforge.html"><span class="index">01</span>CodeForge</a></li>
-                <li><a href="jackal-sec.html"><span class="index">02</span>Jackal Sec</a></li>
-                <li><a href="standards.html"><span class="index">03</span>Standards</a></li>
+                <li><a href="codeforge.html"><span class="index">01</span><span class="text">CodeForge</span></a></li>
+                <li><a href="jackal-sec.html"><span class="index">02</span><span class="text">Jackal Sec</span></a></li>
+                <li><a href="standards.html"><span class="index">03</span><span class="text">Standards</span></a></li>
             </ul>
         </nav>
 
