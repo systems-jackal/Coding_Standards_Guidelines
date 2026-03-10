@@ -39,17 +39,32 @@
             padding: 2rem;
         }
 
-        /* Simplified Logo Styling */
+        .container {
+            text-align: center;
+        }
+
+        /* Logo Styling */
         .jackal-logo svg {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             filter: drop-shadow(0 0 15px var(--accent-glow));
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                filter: drop-shadow(0 0 10px var(--accent-glow));
+            }
+
+            to {
+                filter: drop-shadow(0 0 25px var(--accent-end));
+            }
         }
 
         .jackal-logo path {
             fill: none;
             stroke: url(#gradient);
-            stroke-width: 2;
+            stroke-width: 2.5;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -59,32 +74,37 @@
             font-size: 3.5rem;
             margin-top: 1rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
 
-        .container {
-            text-align: center;
+            /* Gradient Text Fix */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         nav {
             margin-top: 3rem;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         a {
             display: block;
-            padding: 1.5rem;
+            padding: 1.2rem;
             margin: 1rem 0;
             border: 1px solid var(--border);
             border-radius: 8px;
             color: white;
             text-decoration: none;
             transition: 0.3s;
+            font-weight: 700;
         }
 
         a:hover {
             border-color: var(--accent-end);
             background: var(--bg-secondary);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
         }
     </style>
 </head>
@@ -102,7 +122,7 @@
     <div class="container">
         <div class="jackal-logo">
             <svg viewBox="0 0 100 100">
-                <path d="M50 10 L30 40 L50 30 L70 40 L50 10 M30 40 L50 90 L70 40 M30 40 L50 60 L70 40" />
+                <path d="M50 10 L35 35 L50 25 L65 35 L50 10 M35 35 L50 55 L65 35 M35 35 L50 85 L65 35 M50 55 L50 85" />
             </svg>
         </div>
 
