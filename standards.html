@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding With Jackal</title>
+    <title>Coding Standards & Guidelines · Jackal Systems</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
@@ -35,6 +35,7 @@
         html,
         body {
             height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -74,14 +75,14 @@
         .main {
             flex: 1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             padding: 40px 20px;
             overflow-y: auto;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             animation: fadeIn 0.8s ease-out;
         }
@@ -100,7 +101,7 @@
 
         /* HEADER */
         .header {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             text-align: center;
         }
 
@@ -128,132 +129,205 @@
         }
 
         .header .subtitle {
-            font-size: .88rem;
+            font-size: .95rem;
             color: var(--t2);
             line-height: 1.7;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        /* NAVIGATION CARDS */
-        .nav-grid {
+        /* STANDARDS SECTIONS (card style) */
+        .standards-grid {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 24px;
+            margin-top: 20px;
         }
 
-        .nav-card {
+        .standard-card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0;
-            text-decoration: none;
-            color: var(--t1);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 10px;
+            padding: 28px 28px 32px 28px;
+            transition: border 0.2s, background 0.2s;
             position: relative;
             overflow: hidden;
-            animation: slideIn 0.6s ease-out both;
+            animation: slideUp 0.5s ease-out both;
         }
 
-        .nav-card:nth-child(1) {
+        .standard-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .standard-card:nth-child(2) {
             animation-delay: 0.1s;
         }
 
-        .nav-card:nth-child(2) {
+        .standard-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .standard-card:nth-child(4) {
             animation-delay: 0.2s;
         }
 
-        .nav-card:nth-child(3) {
+        .standard-card:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .standard-card:nth-child(6) {
             animation-delay: 0.3s;
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateY(20px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
-        .nav-card::before {
+        .standard-card::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            bottom: 0;
+            top: 10%;
+            bottom: 10%;
             width: 3px;
             background: var(--accent);
-            opacity: 0;
-            transition: opacity 0.25s;
+            opacity: 0.7;
+            border-radius: 0 3px 3px 0;
         }
 
-        .nav-card:hover {
+        .standard-card:hover {
             border-color: var(--border2);
-            background: rgba(19, 19, 31, 0.8);
-            transform: translateX(6px);
+            background: #161625;
         }
 
-        .nav-card:hover::before {
-            opacity: 1;
-        }
-
-        .nav-num {
-            font-family: 'DM Mono', monospace;
-            font-size: 2.2rem;
-            font-weight: 500;
-            color: var(--t3);
-            width: 90px;
-            text-align: center;
-            flex-shrink: 0;
-            transition: color 0.25s;
-        }
-
-        .nav-card:hover .nav-num {
-            color: var(--accent);
-        }
-
-        .nav-content {
-            flex: 1;
-            padding: 22px 0;
-        }
-
-        .nav-title {
+        .standard-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: .08em;
-            color: var(--t1);
-            margin-bottom: 4px;
-        }
-
-        .nav-desc {
-            font-size: .72rem;
-            color: var(--t2);
-            font-family: 'DM Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-        }
-
-        .nav-arrow {
             font-size: 1.8rem;
-            color: var(--t3);
-            margin-right: 24px;
-            transition: all 0.25s;
-            flex-shrink: 0;
+            letter-spacing: .04em;
+            color: var(--t1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-card:hover .nav-arrow {
+        .standard-title span {
+            font-family: 'DM Mono', monospace;
+            font-size: 1rem;
             color: var(--accent);
-            transform: translateX(4px);
+            background: var(--ab);
+            padding: 4px 10px;
+            border-radius: 30px;
+            letter-spacing: 0;
         }
 
-        /* ACCENT LINE */
+        .standard-content {
+            color: #d0d0e0;
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .standard-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .standard-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .code-block {
+            background: #0c0c18;
+            border: 1px solid var(--border2);
+            border-radius: 8px;
+            padding: 16px 18px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            margin: 18px 0 10px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .code-inline {
+            background: #1a1a2a;
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .badge-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 8px 0;
+        }
+
+        .badge-list li {
+            background: var(--ag);
+            border: 1px solid var(--ab);
+            color: var(--accent);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            padding: 4px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.02em;
+        }
+
+        hr.divider-light {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border2), transparent);
+            margin: 28px 0 10px 0;
+        }
+
+        /* tables for conventions */
+        .std-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .std-table th {
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            color: var(--t2);
+            font-weight: 400;
+            font-size: 0.75rem;
+            padding: 8px 8px 4px 0;
+            border-bottom: 1px solid var(--border2);
+        }
+
+        .std-table td {
+            padding: 10px 8px 10px 0;
+            border-bottom: 1px solid var(--border);
+            color: #cdd2e0;
+        }
+
+        .std-table td:first-child {
+            font-family: 'DM Mono', monospace;
+            color: var(--accent);
+        }
+
+        .std-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* FOOTER */
         .accent-line {
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -261,9 +335,11 @@
             opacity: 0.3;
         }
 
-        /* FOOTER INFO */
         .footer-info {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
             margin-top: 30px;
             padding-bottom: 20px;
         }
@@ -279,7 +355,6 @@
             border: 1px solid var(--border);
             border-radius: 4px;
             padding: 5px 12px;
-            margin: 0 4px;
         }
 
         .footer-stat span {
@@ -304,34 +379,25 @@
                 padding: 24px 16px;
             }
 
-            .header {
-                margin-bottom: 36px;
-            }
-
             .header h1 {
                 font-size: 2.8rem;
             }
 
-            .nav-num {
-                font-size: 1.6rem;
-                width: 60px;
+            .standard-card {
+                padding: 22px 18px;
             }
 
-            .nav-content {
-                padding: 18px 0;
+            .standard-title {
+                font-size: 1.5rem;
             }
 
-            .nav-title {
-                font-size: 1.1rem;
+            .code-block {
+                font-size: 0.75rem;
+                padding: 12px;
             }
 
-            .nav-desc {
-                font-size: .65rem;
-            }
-
-            .nav-arrow {
-                margin-right: 16px;
-                font-size: 1.4rem;
+            .std-table {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -340,58 +406,196 @@
 <body>
     <div class="topbar">
         <div class="brand">
-            DEVELOMENT<span style="color:var(--t3)">-</span>FORGE<span class="path"></span>
+            DEVELOPMENT<span style="color:var(--t3)">-</span>FORGE<span class="path">//jackal/coding-standards</span>
         </div>
     </div>
 
     <div class="main">
         <div class="container">
+            <!-- header with adjusted subtitle -->
             <div class="header">
-                <div class="header-label">// Developer Resources Hub // jackal-sytems</div>
-                <h1>Coding <em>Standards</em></h1>
+                <div class="header-label">// JACKAL SYSTEMS INTERNAL // v2.4.1</div>
+                <h1>Coding <em>Standards</em> & Guidelines</h1>
                 <p class="subtitle">
-                    Comprehensive documentation and security guidelines for professional software development.
-                    Select a resource to begin.
+                    Unified rules for writing clean, secure, and maintainable code.
+                    These conventions apply to all projects under the Jackal namespace.
                 </p>
             </div>
 
-            <div class="nav-grid">
-                <a href="codeforge.html" class="nav-card">
-                    <div class="nav-num">01</div>
-                    <div class="nav-content">
-                        <div class="nav-title">CodeForge</div>
-                        <div class="nav-desc">Development Standards</div>
-                    </div>
-                    <div class="nav-arrow">→</div>
-                </a>
+            <!-- detailed standards sections (replaces nav-grid) -->
+            <div class="standards-grid">
 
-                <a href="jackal-sec.html" class="nav-card">
-                    <div class="nav-num">02</div>
-                    <div class="nav-content">
-                        <div class="nav-title">Jackal Sec</div>
-                        <div class="nav-desc">Security Guidelines</div>
+                <!-- 1. Naming conventions -->
+                <div class="standard-card">
+                    <div class="standard-title">Naming conventions <span>identifiers</span></div>
+                    <div class="standard-content">
+                        <p>Consistent naming improves readability and reduces cognitive load. Follow the table below for
+                            all new code.</p>
+                        <table class="std-table">
+                            <tr>
+                                <th>construct</th>
+                                <th>style</th>
+                                <th>example</th>
+                            </tr>
+                            <tr>
+                                <td>variables / functions</td>
+                                <td>camelCase</td>
+                                <td><code class="code-inline">userName, calculateTotal()</code></td>
+                            </tr>
+                            <tr>
+                                <td>classes / types / interfaces</td>
+                                <td>PascalCase</td>
+                                <td><code class="code-inline">UserProfile, AuthService</code></td>
+                            </tr>
+                            <tr>
+                                <td>constants (immutable)</td>
+                                <td>UPPER_SNAKE</td>
+                                <td><code class="code-inline">MAX_RETRY_COUNT, API_BASE_URL</code></td>
+                            </tr>
+                            <tr>
+                                <td>private / internal</td>
+                                <td>_camelCase (JS/TS)</td>
+                                <td><code class="code-inline">_privateHelper, _cache</code></td>
+                            </tr>
+                            <tr>
+                                <td>booleans</td>
+                                <td>prefix: is, has, should</td>
+                                <td><code class="code-inline">isVisible, hasAccess</code></td>
+                            </tr>
+                        </table>
+                        <p class="code-block" style="margin-top: 20px;">// 👍 good · // 👎 avoid<br>let elapsedTime; //
+                            let d; <br>class AuthGateway; // class auth_gateway; </p>
                     </div>
-                    <div class="nav-arrow">→</div>
-                </a>
+                </div>
 
-                <a href="standards.html" class="nav-card">
-                    <div class="nav-num">03</div>
-                    <div class="nav-content">
-                        <div class="nav-title">Standards</div>
-                        <div class="nav-desc">Best Practices</div>
+                <!-- 2. code formatting & style -->
+                <div class="standard-card">
+                    <div class="standard-title">Formatting & style <span>syntax</span></div>
+                    <div class="standard-content">
+                        <p>Indentation: <strong class="code-inline">2 spaces</strong> (no tabs). Max line length: 100
+                            characters. Braces: K&R style (same line).</p>
+                        <div class="code-block">
+                            // JavaScript / TypeScript example
+                            function fetchData(url: string): Promise<Response> {
+                                if (!url) {
+                                throw new Error('URL required');
+                                }
+                                return fetch(url).then(res => res.json());
+                                }
+
+                                // consistent spacing around operators and after commas
+                        </div>
+                        <ul class="badge-list">
+                            <li>2 spaces</li>
+                            <li>no trailing spaces</li>
+                            <li>EOF newline</li>
+                            <li>no semicolons? — use them (explicit)</li>
+                        </ul>
                     </div>
-                    <div class="nav-arrow">→</div>
-                </a>
+                </div>
+
+                <!-- 3. documentation & comments -->
+                <div class="standard-card">
+                    <div class="standard-title">Documentation <span>comments</span></div>
+                    <div class="standard-content">
+                        <p>All public APIs, functions, and complex logic must be documented using JSDoc (or equivalent).
+                        </p>
+                        <div class="code-block">
+                            /**
+                            * Calculates the total price including tax and discount.
+                            * @param {number} basePrice - original price (must be positive)
+                            * @param {number} taxRate - tax percentage (0–100)
+                            * @param {number} [discount=0] - discount percentage
+                            * @returns {number} final price rounded to two decimals
+                            */
+                            function computePrice(basePrice, taxRate, discount = 0) { ... }</div>
+                        <p>For inline comments, explain <strong>why</strong>, not what (the code shows what).</p>
+                    </div>
+                </div>
+
+                <!-- 4. security guidelines (core) -->
+                <div class="standard-card">
+                    <div class="standard-title">Security best practices <span>🔒 mandatory</span></div>
+                    <div class="standard-content">
+                        <p>All Jackal code must adhere to these non‑negotiable rules:</p>
+                        <ul style="margin-left: 20px; list-style: square; color: #bbb;">
+                            <li>Validate and sanitize all external input (forms, headers, params).</li>
+                            <li>Use parameterized queries / ORM to prevent SQL injection.</li>
+                            <li>Never hardcode secrets – use environment variables / vault.</li>
+                            <li>Apply the principle of least privilege.</li>
+                            <li>Set secure HTTP headers (CSP, HSTS, etc.).</li>
+                        </ul>
+                        <div class="code-block">
+                            // ✅ safe: parameterized query (node-postgres)
+                            const result = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
+
+                            // ❌ dangerous: raw string interpolation
+                            // const result = await db.query(`SELECT * FROM users WHERE id = ${userId}`);</div>
+                    </div>
+                </div>
+
+                <!-- 5. error handling & logging -->
+                <div class="standard-card">
+                    <div class="standard-title">Error handling & logging <span>resilience</span></div>
+                    <div class="standard-content">
+                        <p>Never swallow exceptions. Use structured logging with levels (debug, info, warn, error).</p>
+                        <div class="code-block">
+                            try {
+                            await riskyOperation();
+                            } catch (err) {
+                            logger.error({ err, userId, operation: 'riskyOp' }, 'Operation failed');
+                            // rethrow or throw domain-specific error
+                            throw new AppError('Unable to complete request', 500);
+                            }</div>
+                        <p>Logs must include correlation IDs for distributed tracing.</p>
+                        <ul class="badge-list">
+                            <li>no console.log in production</li>
+                            <li>machine‑readable format</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. version control & commits -->
+                <div class="standard-card">
+                    <div class="standard-title">Git & commits <span>history</span></div>
+                    <div class="standard-content">
+                        <p>Conventional commits enforced. Structure: <span class="code-inline">type(scope):
+                                description</span></p>
+                        <div class="code-block">
+                            feat(auth): add refresh token rotation
+                            fix(api): handle 429 rate limit gracefully
+                            docs(readme): update setup instructions
+                            refactor(core): split monolith into services</div>
+                        <p>Branch naming: <span class="code-inline">feature/</span>, <span
+                                class="code-inline">fix/</span>, <span class="code-inline">chore/</span> — e.g. <code
+                                class="code-inline">feature/jwt-refresh</code></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- additional note / quick reference -->
+            <div
+                style="margin-top: 40px; background: var(--ag); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0;">
+                <p
+                    style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 6px;">
+                    // code analysis · tooling</p>
+                <p style="font-size: 0.95rem;">All standards are automatically enforced via <span
+                        class="code-inline">ESLint</span> + <span class="code-inline">Prettier</span> and reviewed
+                    during pull requests.
+                    See the <span style="color: var(--blue);">.cursorrules</span> file for IDE integration.</p>
             </div>
 
             <div class="accent-line"></div>
 
+            <!-- footer meta (updated) -->
             <div class="footer-info">
-                <div class="footer-stat">Resources: <span>3</span></div>
-                <div class="footer-stat">Status: <span>Active</span></div>
+                <div class="footer-stat">sections: <span>6</span></div>
+                <div class="footer-stat">effective: <span>2025-03-10</span></div>
+                <div class="footer-stat">version: <span>2.1.0</span></div>
             </div>
-        </div>
-    </div>
+
+        </div> <!-- end container -->
+    </div> <!-- end main -->
 </body>
 
 </html>
