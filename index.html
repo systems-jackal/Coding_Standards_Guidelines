@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jackal Systems · Coding Standards</title>
+    <title>Jackal Systems · Cyber Circuit</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
@@ -17,7 +17,6 @@
             --accent-end: #00f0ff;
             --glow: rgba(0, 240, 255, 0.25);
             --text-primary: #e8edf4;
-            --text-secondary: #8b94a8;
             --border: #1e2638;
         }
 
@@ -38,7 +37,7 @@
             text-align: center;
         }
 
-        .jackal-logo svg {
+        .logo svg {
             width: 300px;
             height: 300px;
             filter: drop-shadow(0 0 20px var(--glow));
@@ -55,7 +54,10 @@
             }
         }
 
-        .jackal-logo path {
+        path,
+        rect,
+        line,
+        circle {
             fill: none;
             stroke: url(#gradient);
             stroke-width: 1.5;
@@ -82,7 +84,7 @@
             }
         }
 
-        .eye-scan {
+        .scan-line {
             stroke: url(#gradient);
             stroke-width: 2;
             animation: scan 2s linear infinite;
@@ -139,6 +141,7 @@
 </head>
 
 <body>
+
     <svg width="0" height="0">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -149,7 +152,7 @@
     </svg>
 
     <div class="container">
-        <div class="jackal-logo">
+        <div class="logo">
             <svg viewBox="0 0 150 150">
                 <!-- HUD Rings -->
                 <circle cx="75" cy="75" r="65" stroke="url(#gradient)" stroke-width="1.2" fill="none"
@@ -157,27 +160,23 @@
                 <circle cx="75" cy="75" r="50" stroke="url(#gradient)" stroke-width="1" fill="none"
                     stroke-dasharray="3 3" />
 
-                <!-- Symmetric Low-Poly Jackal Face -->
-                <!-- Ears -->
-                <path d="M45 30 L60 10 L75 30" />
-                <path d="M105 30 L90 10 L75 30" />
-                <!-- Face Outline -->
-                <path d="M45 30 L55 60 L60 75 L65 60 L75 30" />
-                <path d="M75 30 L85 60 L90 75 L95 60 L105 30" />
-                <!-- Snout / Jaw -->
-                <path d="M60 60 L75 85 L90 60" />
-                <path d="M70 70 L75 85 L80 70" />
-                <!-- Eyes -->
-                <circle cx="65" cy="50" r="3" />
-                <circle cx="85" cy="50" r="3" />
-                <line class="eye-scan" x1="63" y1="50" x2="87" y2="50" />
-                <!-- Circuit Lines -->
-                <path d="M65 50 L45 55" />
-                <circle class="node" cx="43" cy="55" r="2" />
-                <path d="M85 50 L105 55" />
-                <circle class="node" cx="107" cy="55" r="2" />
-                <path d="M75 65 L75 95" />
-                <circle class="node" cx="75" cy="97" r="2" />
+                <!-- Central CPU -->
+                <rect x="60" y="60" width="30" height="30" stroke="url(#gradient)" stroke-width="2" rx="2" ry="2" />
+                <line class="scan-line" x1="60" y1="75" x2="90" y2="75" />
+
+                <!-- Circuit Connections -->
+                <line x1="60" y1="60" x2="40" y2="50" />
+                <circle class="node" cx="40" cy="50" r="2" />
+                <line x1="90" y1="60" x2="110" y2="50" />
+                <circle class="node" cx="110" cy="50" r="2" />
+                <line x1="60" y1="90" x2="40" y2="100" />
+                <circle class="node" cx="40" cy="100" r="2" />
+                <line x1="90" y1="90" x2="110" y2="100" />
+                <circle class="node" cx="110" cy="100" r="2" />
+                <line x1="75" y1="60" x2="75" y2="40" />
+                <circle class="node" cx="75" cy="40" r="2" />
+                <line x1="75" y1="90" x2="75" y2="110" />
+                <circle class="node" cx="75" cy="110" r="2" />
             </svg>
         </div>
 
