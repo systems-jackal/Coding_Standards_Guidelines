@@ -17,7 +17,6 @@
             --bg-secondary: #151b2b;
             --accent: #00d9ff;
             --accent-glow: rgba(0, 217, 255, 0.3);
-            --gold: #d97706;
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
@@ -50,9 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
             background-size: 50px 50px;
             opacity: 0.2;
             animation: gridMove 20s linear infinite;
@@ -69,45 +66,6 @@
             }
         }
 
-        /* Gradient orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: 0;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent);
-            top: -100px;
-            right: -100px;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: #7000ff;
-            bottom: -50px;
-            left: -50px;
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-        }
-
         .container {
             position: relative;
             z-index: 1;
@@ -118,22 +76,9 @@
         header {
             text-align: center;
             margin-bottom: 4rem;
-            animation: fadeInDown 0.8s ease-out;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== LOGO CONTAINER ===== */
+        /* ===== TRIBAL VECTOR LOGO ===== */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -141,252 +86,126 @@
         }
 
         .jackal-logo {
-            width: 18rem;
-            height: 18rem;
-            filter: drop-shadow(0 0 20px var(--accent-glow));
+            width: 16rem;
+            height: 16rem;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
         }
 
-        /* Glitch animation for the digital side */
-        .cyber-side {
-            animation: glitch 5s infinite;
+        /* Tech-side flicker */
+        .tech-path {
+            fill: var(--accent);
+            animation: techPulse 4s infinite alternate;
         }
 
-        @keyframes glitch {
+        @keyframes techPulse {
+            0% {
+                opacity: 0.8;
+                filter: brightness(1);
+            }
 
-            0%,
-            95%,
             100% {
-                transform: translate(0);
                 opacity: 1;
-            }
-
-            96% {
-                transform: translate(2px, -1px);
-                opacity: 0.8;
-            }
-
-            97% {
-                transform: translate(-2px, 1px);
-                opacity: 0.9;
-            }
-
-            98% {
-                transform: translate(1px, -2px);
-                opacity: 0.8;
+                filter: brightness(1.3) drop-shadow(0 0 5px var(--accent));
             }
         }
 
-        .eye-pulse {
-            animation: eyePulse 2s infinite alternate;
-        }
-
-        @keyframes eyePulse {
-            from {
-                opacity: 0.5;
-                filter: drop-shadow(0 0 2px var(--accent));
-            }
-
-            to {
-                opacity: 1;
-                filter: drop-shadow(0 0 12px var(--accent));
-            }
-        }
-
-        /* ===== HEADING & GRADIENT FIX ===== */
         h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-
-            /* Standard property + Vendor prefix for compatibility */
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             background-clip: text;
-
             -webkit-text-fill-color: transparent;
             color: transparent;
-
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-weight: 400;
+            letter-spacing: 0.3em;
         }
 
-        /* ===== NAVIGATION ===== */
-        nav {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        ul {
+        nav ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
+            margin-top: 3rem;
         }
 
         a {
             display: block;
-            padding: 2rem 2.5rem;
+            padding: 1.8rem 2.5rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 12px;
             text-decoration: none;
             color: var(--text-primary);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             position: relative;
-            overflow: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
-            transition: left 0.5s;
-        }
-
-        a:hover::before {
-            left: 100%;
         }
 
         a:hover {
             border-color: var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateX(8px);
+            transform: translateX(10px);
         }
 
         a span.index {
             opacity: 0.2;
-            margin-right: 1.5rem;
-            font-size: 2.5rem;
-            transition: color 0.3s;
+            margin-right: 1.2rem;
+            color: var(--text-secondary);
         }
 
         a:hover span.index {
             color: var(--accent);
-            opacity: 0.6;
+            opacity: 1;
         }
 
         .accent-line {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), var(--accent), var(--border), transparent);
             margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-
-            .jackal-logo {
-                width: 14rem;
-                height: 14rem;
-            }
-
-            a {
-                padding: 1.5rem;
-                font-size: 1.2rem;
-            }
         }
     </style>
 </head>
 
 <body>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
     <div class="container">
         <header>
             <div class="logo-container">
                 <svg class="jackal-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="gradOrganic" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#fbbf24" />
-                            <stop offset="100%" stop-color="#d97706" />
-                        </linearGradient>
+                    <path d="M100,55 L70,5 C60,15 45,35 45,70 C45,85 55,95 65,100 L50,130 C60,140 80,165 100,185 
+                             L100,165 C90,150 85,135 85,115 C85,105 90,95 100,90 Z" fill="#e8edf4" />
 
-                        <linearGradient id="gradTech" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#00d9ff" />
-                            <stop offset="100%" stop-color="#0066ff" />
-                        </linearGradient>
+                    <path class="tech-path" d="M100,55 L130,5 C140,15 155,35 155,70 C155,85 145,95 135,100 L150,130 C140,140 120,165 100,185 
+                             L100,165 C110,150 115,135 115,115 C115,105 110,95 100,90 Z" />
 
-                        <pattern id="binaryGrid" width="12" height="12" patternUnits="userSpaceOnUse">
-                            <circle cx="2" cy="2" r="0.8" fill="rgba(0, 217, 255, 0.4)" />
-                            <rect x="6" y="6" width="1" height="1" fill="rgba(255, 255, 255, 0.2)" />
-                        </pattern>
+                    <path d="M75,85 Q85,82 92,92 L85,95 Z" fill="#0a0e17" />
+                    <path d="M125,85 Q115,82 108,92 L115,95 Z" fill="#0a0e17" />
 
-                        <clipPath id="leftSide">
-                            <rect x="0" y="0" width="100" height="200" />
-                        </clipPath>
-                        <clipPath id="rightSide">
-                            <rect x="100" y="0" width="100" height="200" />
-                        </clipPath>
-                    </defs>
-
-                    <g clip-path="url(#leftSide)">
-                        <path d="M100,50 L35,5 L70,80 Z" fill="url(#gradOrganic)" />
-                        <path d="M100,180 L55,100 L70,80 L100,50 Z" fill="#92400e" />
-                        <path d="M100,180 L75,145 L55,100 Z" fill="#78350f" />
-                        <path d="M78,95 L90,98 L86,106 Z" fill="#fff" opacity="0.9" />
-                    </g>
-
-                    <g clip-path="url(#rightSide)" class="cyber-side">
-                        <path d="M100,50 L165,5 L130,80 Z" fill="url(#gradTech)" />
-                        <path d="M100,180 L145,100 L130,80 L100,50 Z" fill="#0c4a6e" />
-                        <path d="M100,50 L165,5 L145,100 L100,180 Z" fill="url(#binaryGrid)" />
-                        <path d="M122,95 L110,98 L114,106 Z" fill="#00d9ff" class="eye-pulse" />
-                    </g>
-
-                    <path d="M96,180 L104,180 L100,186 Z" fill="#030712" />
-
-                    <line x1="100" y1="50" x2="100" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+                    <path d="M70,30 Q80,45 85,65" fill="none" stroke="#0a0e17" stroke-width="3"
+                        stroke-linecap="round" />
+                    <path d="M130,30 Q120,45 115,65" fill="none" stroke="#0a0e17" stroke-width="3"
+                        stroke-linecap="round" />
                 </svg>
             </div>
 
             <h1>Jackal Systems</h1>
-            <p class="subtitle">Precision. Security. Standards.</p>
+            <p class="subtitle">Precision . Security . Standards</p>
         </header>
 
         <nav>
             <ul>
-                <li>
-                    <a href="codeforge.html">
-                        <span class="index">01</span>CodeForge
-                    </a>
-                </li>
-                <li>
-                    <a href="jackal-sec.html">
-                        <span class="index">02</span>Jackal Sec
-                    </a>
-                </li>
-                <li>
-                    <a href="standards.html">
-                        <span class="index">03</span>Standards
-                    </a>
-                </li>
+                <li><a href="codeforge.html"><span class="index">01</span>CodeForge</a></li>
+                <li><a href="jackal-sec.html"><span class="index">02</span>Jackal Sec</a></li>
+                <li><a href="standards.html"><span class="index">03</span>Standards</a></li>
             </ul>
         </nav>
 
