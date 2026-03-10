@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jackal Systems · Coding Standards</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
@@ -39,307 +37,59 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            position: relative;
-            overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.3;
-            animation: gridMove 20s linear infinite;
-            z-index: 0;
+        /* Simplified Logo Styling */
+        .jackal-logo svg {
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
         }
 
-        @keyframes gridMove {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(50px);
-            }
-        }
-
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: 0;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-start);
-            top: -100px;
-            right: -100px;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-end);
-            bottom: -50px;
-            left: -50px;
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            width: 100%;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .jackal-hud svg {
-            width: 320px;
-            height: 320px;
-            filter: drop-shadow(0 0 35px var(--accent-glow));
-            animation: aura 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes aura {
-            from {
-                filter: drop-shadow(0 0 15px var(--accent-glow));
-            }
-
-            to {
-                filter: drop-shadow(0 0 50px var(--accent-end));
-            }
-        }
-
-        .jackal-hud path,
-        .jackal-hud circle,
-        .jackal-hud line {
-            stroke: url(#gradient);
+        .jackal-logo path {
             fill: none;
-            stroke-width: 1.5;
+            stroke: url(#gradient);
+            stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
-        .eye-scan {
-            stroke: url(#gradient);
-            stroke-width: 2;
-            animation: scan 2s linear infinite;
-        }
-
-        @keyframes scan {
-            0% {
-                transform: translateY(-3px);
-            }
-
-            50% {
-                transform: translateY(3px);
-            }
-
-            100% {
-                transform: translateY(-3px);
-            }
-        }
-
-        .node {
-            fill: url(#gradient);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.5);
-            }
-        }
-
         h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
+            font-size: 3.5rem;
+            margin-top: 1rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-end));
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
         }
 
-        .subtitle {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-weight: 400;
+        .container {
+            text-align: center;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        nav {
+            margin-top: 3rem;
         }
 
         a {
             display: block;
-            padding: 2rem 2.5rem;
-            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin: 1rem 0;
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
+            color: white;
             text-decoration: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
-            transition: left 0.5s;
-        }
-
-        a:hover::before {
-            left: 100%;
-        }
-
-        a::after {
-            content: '→';
-            position: absolute;
-            right: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--accent-end);
-            font-size: 2rem;
+            transition: 0.3s;
         }
 
         a:hover {
             border-color: var(--accent-end);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateX(8px);
-        }
-
-        a:hover::after {
-            opacity: 1;
-            right: 2rem;
-        }
-
-        a span.index {
-            position: absolute;
-            left: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            opacity: 0.2;
-            transition: all 0.3s;
-        }
-
-        a:hover span.index {
-            color: var(--accent-end);
-            opacity: 0.5;
-        }
-
-        a span.text {
-            display: inline-block;
-            margin-left: 4rem;
-        }
-
-        .accent-line {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-end), transparent);
-            margin-top: 4rem;
-        }
-
-        @media (max-width:768px) {
-            body {
-                padding: 1rem;
-            }
-
-            .jackal-hud svg {
-                width: 220px;
-                height: 220px;
-            }
-
-            a {
-                padding: 1.5rem 1.5rem;
-                font-size: 1.25rem;
-            }
-
-            a span.index {
-                font-size: 2rem;
-                left: 1.5rem;
-            }
-
-            a span.text {
-                margin-left: 3rem;
-            }
-
-            a::after {
-                right: 1.5rem;
-                font-size: 1.5rem;
-            }
-
-            a:hover::after {
-                right: 1rem;
-            }
+            background: var(--bg-secondary);
         }
     </style>
 </head>
 
 <body>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
-    <!-- Gradient definition -->
     <svg width="0" height="0">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -350,47 +100,19 @@
     </svg>
 
     <div class="container">
-        <header>
-            <!-- Jackal HUD Wireframe Logo -->
-            <div class="logo-container jackal-hud">
-                <svg viewBox="0 0 150 150">
-                    <!-- Concentric HUD Rings -->
-                    <circle cx="75" cy="75" r="65" stroke="url(#gradient)" stroke-width="1.5" fill="none"
-                        stroke-dasharray="5 5" />
-                    <circle cx="75" cy="75" r="50" stroke="url(#gradient)" stroke-width="1" fill="none"
-                        stroke-dasharray="3 4" />
-                    <!-- Symmetric low-poly jackal face -->
-                    <path d="M45 30 L60 10 L75 30" />
-                    <path d="M105 30 L90 10 L75 30" />
-                    <path d="M45 30 L55 60 L60 75 L65 60 L75 30" />
-                    <path d="M75 30 L85 60 L90 75 L95 60 L105 30" />
-                    <path d="M60 60 L75 80 L90 60" />
-                    <path d="M70 65 L75 80 L80 65" />
-                    <circle cx="65" cy="50" r="3" />
-                    <circle cx="85" cy="50" r="3" />
-                    <line class="eye-scan" x1="63" y1="50" x2="87" y2="50" />
-                    <path d="M65 50 L45 55" />
-                    <circle class="node" cx="43" cy="55" r="2" />
-                    <path d="M85 50 L105 55" />
-                    <circle class="node" cx="107" cy="55" r="2" />
-                    <path d="M75 65 L75 95" />
-                    <circle class="node" cx="75" cy="97" r="2" />
-                </svg>
-            </div>
+        <div class="jackal-logo">
+            <svg viewBox="0 0 100 100">
+                <path d="M50 10 L30 40 L50 30 L70 40 L50 10 M30 40 L50 90 L70 40 M30 40 L50 60 L70 40" />
+            </svg>
+        </div>
 
-            <h1>Jackal Systems</h1>
-            <p class="subtitle">Precision · Security · Standards</p>
-        </header>
+        <h1>Jackal Systems</h1>
 
         <nav>
-            <ul>
-                <li><a href="codeforge.html"><span class="index">01</span><span class="text">CodeForge</span></a></li>
-                <li><a href="jackal-sec.html"><span class="index">02</span><span class="text">Jackal Sec</span></a></li>
-                <li><a href="standards.html"><span class="index">03</span><span class="text">Standards</span></a></li>
-            </ul>
+            <a href="codeforge.html">CodeForge</a>
+            <a href="jackal-sec.html">Jackal Sec</a>
+            <a href="standards.html">Standards</a>
         </nav>
-
-        <div class="accent-line"></div>
     </div>
 </body>
 
