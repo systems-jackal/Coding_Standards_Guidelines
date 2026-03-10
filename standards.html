@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Standards & Guidelines · Jackal Systems</title>
+    <title>coding standards · jackal systems</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg: #07070f;
             --panel: #0a0a14;
@@ -26,12 +32,6 @@
             --t3: #30304a;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         html,
         body {
             height: 100%;
@@ -46,7 +46,7 @@
             flex-direction: column;
         }
 
-        /* TOP BAR */
+        /* top bar */
         .topbar {
             height: 52px;
             background: var(--panel);
@@ -71,7 +71,7 @@
             margin-left: 6px;
         }
 
-        /* MAIN CONTENT */
+        /* main */
         .main {
             flex: 1;
             display: flex;
@@ -82,7 +82,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
             animation: fadeIn 0.8s ease-out;
         }
@@ -99,7 +99,6 @@
             }
         }
 
-        /* HEADER */
         .header {
             margin-bottom: 40px;
             text-align: center;
@@ -136,19 +135,45 @@
             margin: 0 auto;
         }
 
-        /* STANDARDS SECTIONS (card style) */
+        /* table of contents (optional) */
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 20px;
+            margin: 30px 0 20px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            background: var(--panel);
+            padding: 15px 20px;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+        }
+
+        .toc a {
+            color: var(--t2);
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        /* standards cards */
         .standards-grid {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            margin-top: 20px;
+            gap: 28px;
+            margin: 30px 0;
         }
 
         .standard-card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 28px 28px 32px 28px;
+            border-radius: 14px;
+            padding: 30px 32px;
             transition: border 0.2s, background 0.2s;
             position: relative;
             overflow: hidden;
@@ -156,27 +181,43 @@
         }
 
         .standard-card:nth-child(1) {
-            animation-delay: 0.05s;
+            animation-delay: 0.02s;
         }
 
         .standard-card:nth-child(2) {
-            animation-delay: 0.1s;
+            animation-delay: 0.04s;
         }
 
         .standard-card:nth-child(3) {
-            animation-delay: 0.15s;
+            animation-delay: 0.06s;
         }
 
         .standard-card:nth-child(4) {
-            animation-delay: 0.2s;
+            animation-delay: 0.08s;
         }
 
         .standard-card:nth-child(5) {
-            animation-delay: 0.25s;
+            animation-delay: 0.10s;
         }
 
         .standard-card:nth-child(6) {
-            animation-delay: 0.3s;
+            animation-delay: 0.12s;
+        }
+
+        .standard-card:nth-child(7) {
+            animation-delay: 0.14s;
+        }
+
+        .standard-card:nth-child(8) {
+            animation-delay: 0.16s;
+        }
+
+        .standard-card:nth-child(9) {
+            animation-delay: 0.18s;
+        }
+
+        .standard-card:nth-child(10) {
+            animation-delay: 0.20s;
         }
 
         @keyframes slideUp {
@@ -195,12 +236,12 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 10%;
-            bottom: 10%;
-            width: 3px;
+            top: 12px;
+            bottom: 12px;
+            width: 4px;
             background: var(--accent);
-            opacity: 0.7;
-            border-radius: 0 3px 3px 0;
+            opacity: 0.6;
+            border-radius: 0 4px 4px 0;
         }
 
         .standard-card:hover {
@@ -210,28 +251,37 @@
 
         .standard-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: .04em;
+            font-size: 2rem;
+            letter-spacing: .02em;
             color: var(--t1);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
         .standard-title span {
             font-family: 'DM Mono', monospace;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--accent);
             background: var(--ab);
-            padding: 4px 10px;
+            padding: 4px 14px;
             border-radius: 30px;
             letter-spacing: 0;
         }
 
+        .standard-sub {
+            font-family: 'DM Mono', monospace;
+            color: var(--t2);
+            font-size: 0.8rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
         .standard-content {
-            color: #d0d0e0;
-            font-size: 0.98rem;
+            color: #d5d5ea;
+            font-size: 1rem;
             line-height: 1.7;
         }
 
@@ -239,22 +289,19 @@
             margin-bottom: 1.2rem;
         }
 
-        .standard-content p:last-child {
-            margin-bottom: 0;
-        }
-
         .code-block {
             background: #0c0c18;
             border: 1px solid var(--border2);
-            border-radius: 8px;
-            padding: 16px 18px;
+            border-radius: 10px;
+            padding: 18px 20px;
             font-family: 'DM Mono', monospace;
             font-size: 0.85rem;
-            color: #c9d1d9;
-            margin: 18px 0 10px 0;
+            color: #cfd7e6;
+            margin: 22px 0 16px;
             overflow-x: auto;
             white-space: pre-wrap;
             word-break: break-word;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
         }
 
         .code-inline {
@@ -262,8 +309,8 @@
             color: var(--accent);
             font-family: 'DM Mono', monospace;
             font-size: 0.85rem;
-            padding: 2px 8px;
-            border-radius: 6px;
+            padding: 2px 10px;
+            border-radius: 20px;
             border: 1px solid var(--border);
             white-space: nowrap;
         }
@@ -273,7 +320,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin: 20px 0 8px 0;
+            margin: 20px 0 10px;
         }
 
         .badge-list li {
@@ -282,24 +329,16 @@
             color: var(--accent);
             font-family: 'DM Mono', monospace;
             font-size: 0.7rem;
-            padding: 4px 14px;
+            padding: 5px 16px;
             border-radius: 30px;
             letter-spacing: 0.02em;
         }
 
-        hr.divider-light {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border2), transparent);
-            margin: 28px 0 10px 0;
-        }
-
-        /* tables for conventions */
         .std-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0 10px 0;
-            font-size: 0.9rem;
+            margin: 24px 0 18px;
+            font-size: 0.95rem;
         }
 
         .std-table th {
@@ -308,14 +347,14 @@
             color: var(--t2);
             font-weight: 400;
             font-size: 0.75rem;
-            padding: 8px 8px 4px 0;
+            padding: 10px 8px 4px 0;
             border-bottom: 1px solid var(--border2);
         }
 
         .std-table td {
-            padding: 10px 8px 10px 0;
+            padding: 12px 8px 12px 0;
             border-bottom: 1px solid var(--border);
-            color: #cdd2e0;
+            color: #d0d5e8;
         }
 
         .std-table td:first-child {
@@ -327,11 +366,24 @@
             border-bottom: none;
         }
 
-        /* FOOTER */
-        .accent-line {
+        .note-box {
+            background: var(--ag);
+            border-left: 5px solid var(--accent);
+            padding: 20px 26px;
+            border-radius: 0 14px 14px 0;
+            margin: 30px 0 10px;
+        }
+
+        .note-box p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        hr.divider {
+            border: none;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin-top: 60px;
+            margin: 40px 0 20px;
             opacity: 0.3;
         }
 
@@ -339,40 +391,31 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 30px;
-            padding-bottom: 20px;
+            gap: 20px;
+            margin-top: 40px;
+            padding-bottom: 30px;
         }
 
         .footer-stat {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-family: 'DM Mono', monospace;
-            font-size: .6rem;
+            font-size: .65rem;
             color: var(--t3);
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 5px 12px;
+            border-radius: 6px;
+            padding: 6px 16px;
         }
 
         .footer-stat span {
             color: var(--green);
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             .topbar {
                 padding: 0 16px;
-            }
-
-            .brand {
-                font-size: .75rem;
-            }
-
-            .brand .path {
-                display: none;
             }
 
             .main {
@@ -380,24 +423,20 @@
             }
 
             .header h1 {
-                font-size: 2.8rem;
+                font-size: 2.6rem;
             }
 
             .standard-card {
-                padding: 22px 18px;
+                padding: 22px 20px;
             }
 
             .standard-title {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }
 
-            .code-block {
-                font-size: 0.75rem;
-                padding: 12px;
-            }
-
-            .std-table {
-                font-size: 0.8rem;
+            .toc {
+                border-radius: 20px;
+                padding: 12px 16px;
             }
         }
     </style>
@@ -406,194 +445,347 @@
 <body>
     <div class="topbar">
         <div class="brand">
-            DEVELOPMENT<span style="color:var(--t3)">-</span>FORGE<span class="path">//jackal/coding-standards</span>
+            JACKAL<span style="color:var(--t3)">::</span>SYSTEMS<span class="path">/coding-standards</span>
         </div>
     </div>
 
     <div class="main">
         <div class="container">
-            <!-- header with adjusted subtitle -->
+            <!-- header -->
             <div class="header">
-                <div class="header-label">// JACKAL SYSTEMS INTERNAL // v2.4.1</div>
-                <h1>Coding <em>Standards</em> & Guidelines</h1>
+                <div class="header-label">// the definitive guide · v3.0</div>
+                <h1>Coding <em>Standards</em> & deep guidelines</h1>
                 <p class="subtitle">
-                    Unified rules for writing clean, secure, and maintainable code.
-                    These conventions apply to all projects under the Jackal namespace.
+                    A living document for everyone — from first-year students to principal engineers.
+                    Clear, consistent, and secure code starts here.
                 </p>
             </div>
 
-            <!-- detailed standards sections (replaces nav-grid) -->
+            <!-- quick table of contents (links to sections) -->
+            <div class="toc">
+                <a href="#intro">intro</a> <span style="color:var(--t3);">//</span>
+                <a href="#naming">naming</a> <span style="color:var(--t3);">//</span>
+                <a href="#format">formatting</a> <span style="color:var(--t3);">//</span>
+                <a href="#comments">comments</a> <span style="color:var(--t3);">//</span>
+                <a href="#functions">functions</a> <span style="color:var(--t3);">//</span>
+                <a href="#errors">errors</a> <span style="color:var(--t3);">//</span>
+                <a href="#security">security</a> <span style="color:var(--t3);">//</span>
+                <a href="#testing">testing</a> <span style="color:var(--t3);">//</span>
+                <a href="#git">git</a> <span style="color:var(--t3);">//</span>
+                <a href="#tools">tools</a>
+            </div>
+
+            <!-- main standards grid (detailed) -->
             <div class="standards-grid">
 
-                <!-- 1. Naming conventions -->
-                <div class="standard-card">
-                    <div class="standard-title">Naming conventions <span>identifiers</span></div>
+                <!-- 1. introduction – why standards -->
+                <section id="intro" class="standard-card">
+                    <div class="standard-title">why standards matter <span>philosophy</span></div>
                     <div class="standard-content">
-                        <p>Consistent naming improves readability and reduces cognitive load. Follow the table below for
-                            all new code.</p>
+                        <p>Code is read far more often than it is written. Consistent style reduces mental overhead,
+                            prevents bugs, and makes onboarding smoother. Standards are not about restricting creativity
+                            — they automate decisions so you can focus on solving real problems.</p>
+                        <p><strong class="code-inline">For beginners</strong> – they teach you proven patterns. <strong
+                                class="code-inline">For experts</strong> – they keep the codebase predictable across
+                            teams.</p>
+                        <div class="note-box">
+                            <p>“Programs must be written for people to read, and only incidentally for machines to
+                                execute.” – Harold Abelson</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. naming conventions (detailed) -->
+                <section id="naming" class="standard-card">
+                    <div class="standard-title">naming conventions <span>identifiers</span></div>
+                    <div class="standard-sub">camelCase · PascalCase · UPPER_CASE · prefixes</div>
+                    <div class="standard-content">
+                        <p>Names reveal intent. A reader should understand the role of a variable, function, or class
+                            without digging into implementation.</p>
                         <table class="std-table">
                             <tr>
-                                <th>construct</th>
+                                <th>entity</th>
                                 <th>style</th>
-                                <th>example</th>
+                                <th>examples</th>
+                                <th>beginner tip</th>
                             </tr>
                             <tr>
-                                <td>variables / functions</td>
+                                <td>local variables</td>
                                 <td>camelCase</td>
-                                <td><code class="code-inline">userName, calculateTotal()</code></td>
+                                <td><code>userName, totalAmount, isActive</code></td>
+                                <td>start with lowercase, no underscores</td>
                             </tr>
                             <tr>
-                                <td>classes / types / interfaces</td>
+                                <td>functions / methods</td>
+                                <td>camelCase (verb)</td>
+                                <td><code>fetchData(), isValid(), calculateTotal()</code></td>
+                                <td>action names</td>
+                            </tr>
+                            <tr>
+                                <td>classes / interfaces</td>
                                 <td>PascalCase</td>
-                                <td><code class="code-inline">UserProfile, AuthService</code></td>
+                                <td><code>UserService, HttpRequest, Circle</code></td>
+                                <td>nouns, capital first letter</td>
                             </tr>
                             <tr>
                                 <td>constants (immutable)</td>
                                 <td>UPPER_SNAKE</td>
-                                <td><code class="code-inline">MAX_RETRY_COUNT, API_BASE_URL</code></td>
+                                <td><code>MAX_RETRIES, API_KEY, DEFAULT_TIMEOUT</code></td>
+                                <td>all caps, underscore between words</td>
                             </tr>
                             <tr>
-                                <td>private / internal</td>
-                                <td>_camelCase (JS/TS)</td>
-                                <td><code class="code-inline">_privateHelper, _cache</code></td>
+                                <td>private / internal (JS/TS)</td>
+                                <td>_camelCase</td>
+                                <td><code>_privateVar, _calculateHash()</code></td>
+                                <td>underscore signals “do not use outside”</td>
                             </tr>
                             <tr>
                                 <td>booleans</td>
-                                <td>prefix: is, has, should</td>
-                                <td><code class="code-inline">isVisible, hasAccess</code></td>
+                                <td>prefix: is, has, can, should</td>
+                                <td><code>isReady, hasPermission, canWrite</code></td>
+                                <td>reads like a question</td>
+                            </tr>
+                            <tr>
+                                <td>enums / constants objects</td>
+                                <td>PascalCase or UPPER_SNAKE</td>
+                                <td><code>Color.RED, HttpStatus.NOT_FOUND</code></td>
+                                <td>be consistent across project</td>
                             </tr>
                         </table>
-                        <p class="code-block" style="margin-top: 20px;">// 👍 good · // 👎 avoid<br>let elapsedTime; //
-                            let d; <br>class AuthGateway; // class auth_gateway; </p>
-                    </div>
-                </div>
-
-                <!-- 2. code formatting & style -->
-                <div class="standard-card">
-                    <div class="standard-title">Formatting & style <span>syntax</span></div>
-                    <div class="standard-content">
-                        <p>Indentation: <strong class="code-inline">2 spaces</strong> (no tabs). Max line length: 100
-                            characters. Braces: K&R style (same line).</p>
                         <div class="code-block">
-                            // JavaScript / TypeScript example
-                            function fetchData(url: string): Promise<Response> {
-                                if (!url) {
-                                throw new Error('URL required');
-                                }
-                                return fetch(url).then(res => res.json());
-                                }
+                            // 👍 clear intent
+                            let elapsedTimeInMs = 150;
+                            const MAX_FILE_SIZE = 1048576;
+                            class CustomerRepository { ... }
 
-                                // consistent spacing around operators and after commas
+                            // 👶 avoid: let x1, d, tmp; // what do they mean?
                         </div>
-                        <ul class="badge-list">
-                            <li>2 spaces</li>
-                            <li>no trailing spaces</li>
-                            <li>EOF newline</li>
-                            <li>no semicolons? — use them (explicit)</li>
-                        </ul>
                     </div>
-                </div>
+                </section>
 
-                <!-- 3. documentation & comments -->
-                <div class="standard-card">
-                    <div class="standard-title">Documentation <span>comments</span></div>
+                <!-- 3. formatting & indentation (with examples) -->
+                <section id="format" class="standard-card">
+                    <div class="standard-title">formatting & layout <span>visual structure</span></div>
                     <div class="standard-content">
-                        <p>All public APIs, functions, and complex logic must be documented using JSDoc (or equivalent).
-                        </p>
+                        <p>Consistent spacing and braces make code scannable. The following rules are enforced by
+                            automated formatters (Prettier, Black, gofmt).</p>
+                        <ul style="margin-left: 20px; list-style: disc; color:#ccc;">
+                            <li>indentation: 2 spaces (no tabs) – unless language standard says otherwise (Python: 4
+                                spaces).</li>
+                            <li>maximum line length: 100 characters (break after operators).</li>
+                            <li>braces: K&R style (opening brace on same line).</li>
+                            <li>one blank line between functions, two between classes.</li>
+                        </ul>
+                        <div class="code-block">
+                            // ✅ good
+                            function calculateDiscount(price, rate) {
+                            if (price <= 0) { return 0; } return price * rate; } // ❌ avoid function
+                                calculateDiscount(price, rate) { if(price<=0){return 0;} return price*rate; } </div>
+                        </div>
+                </section>
+
+                <!-- 4. comments & documentation -->
+                <section id="comments" class="standard-card">
+                    <div class="standard-title">comments & documentation <span>why, not what</span></div>
+                    <div class="standard-content">
+                        <p>Explain <strong>why</strong> something is done, not what the code does (the code itself shows
+                            what). For public APIs, always include JSDoc / docstrings.</p>
                         <div class="code-block">
                             /**
-                            * Calculates the total price including tax and discount.
-                            * @param {number} basePrice - original price (must be positive)
-                            * @param {number} taxRate - tax percentage (0–100)
-                            * @param {number} [discount=0] - discount percentage
-                            * @returns {number} final price rounded to two decimals
+                            * Calculates the total price after tax and discount.
+                            * @param {number} basePrice - original price (>=0)
+                            * @param {number} taxPercent - 0–100
+                            * @param {number} [discountPercent=0] - 0–100
+                            * @returns {number} final price rounded to 2 decimals
                             */
-                            function computePrice(basePrice, taxRate, discount = 0) { ... }</div>
-                        <p>For inline comments, explain <strong>why</strong>, not what (the code shows what).</p>
-                    </div>
-                </div>
-
-                <!-- 4. security guidelines (core) -->
-                <div class="standard-card">
-                    <div class="standard-title">Security best practices <span>🔒 mandatory</span></div>
-                    <div class="standard-content">
-                        <p>All Jackal code must adhere to these non‑negotiable rules:</p>
-                        <ul style="margin-left: 20px; list-style: square; color: #bbb;">
-                            <li>Validate and sanitize all external input (forms, headers, params).</li>
-                            <li>Use parameterized queries / ORM to prevent SQL injection.</li>
-                            <li>Never hardcode secrets – use environment variables / vault.</li>
-                            <li>Apply the principle of least privilege.</li>
-                            <li>Set secure HTTP headers (CSP, HSTS, etc.).</li>
-                        </ul>
-                        <div class="code-block">
-                            // ✅ safe: parameterized query (node-postgres)
-                            const result = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
-
-                            // ❌ dangerous: raw string interpolation
-                            // const result = await db.query(`SELECT * FROM users WHERE id = ${userId}`);</div>
-                    </div>
-                </div>
-
-                <!-- 5. error handling & logging -->
-                <div class="standard-card">
-                    <div class="standard-title">Error handling & logging <span>resilience</span></div>
-                    <div class="standard-content">
-                        <p>Never swallow exceptions. Use structured logging with levels (debug, info, warn, error).</p>
-                        <div class="code-block">
-                            try {
-                            await riskyOperation();
-                            } catch (err) {
-                            logger.error({ err, userId, operation: 'riskyOp' }, 'Operation failed');
-                            // rethrow or throw domain-specific error
-                            throw new AppError('Unable to complete request', 500);
-                            }</div>
-                        <p>Logs must include correlation IDs for distributed tracing.</p>
+                            function computeTotal(basePrice, taxPercent, discountPercent = 0) {
+                            // tax is applied before discount (company policy)
+                            const afterTax = basePrice * (1 + taxPercent / 100);
+                            const discountMultiplier = (100 - discountPercent) / 100;
+                            return Math.round(afterTax * discountMultiplier * 100) / 100;
+                            }
+                        </div>
+                        <p>Inline comments are rare – only when the code is unavoidably complex.</p>
                         <ul class="badge-list">
-                            <li>no console.log in production</li>
-                            <li>machine‑readable format</li>
+                            <li>no commented-out code</li>
+                            <li>update comments when code changes</li>
                         </ul>
                     </div>
-                </div>
+                </section>
 
-                <!-- 6. version control & commits -->
-                <div class="standard-card">
-                    <div class="standard-title">Git & commits <span>history</span></div>
+                <!-- 5. functions & methods (single responsibility) -->
+                <section id="functions" class="standard-card">
+                    <div class="standard-title">functions & methods <span>size & responsibility</span></div>
                     <div class="standard-content">
-                        <p>Conventional commits enforced. Structure: <span class="code-inline">type(scope):
-                                description</span></p>
+                        <p>A function should do one thing and do it well. If it exceeds 20–30 lines, consider splitting.
+                            Keep parameters minimal (0–2 ideally, use object for >3).</p>
                         <div class="code-block">
-                            feat(auth): add refresh token rotation
-                            fix(api): handle 429 rate limit gracefully
-                            docs(readme): update setup instructions
-                            refactor(core): split monolith into services</div>
-                        <p>Branch naming: <span class="code-inline">feature/</span>, <span
-                                class="code-inline">fix/</span>, <span class="code-inline">chore/</span> — e.g. <code
-                                class="code-inline">feature/jwt-refresh</code></p>
+                            // 👍 focused
+                            function getActiveUsers(users) {
+                            return users.filter(u => u.active);
+                            }
+
+                            // 👎 too many responsibilities
+                            function processUserAndSendEmailAndLog(user) { ... }
+
+                            // use default parameters and destructuring
+                            function createUser({ name, email, role = 'guest' }) { ... }
+                        </div>
                     </div>
-                </div>
+                </section>
+
+                <!-- 6. error handling patterns -->
+                <section id="errors" class="standard-card">
+                    <div class="standard-title">error handling <span>robustness</span></div>
+                    <div class="standard-content">
+                        <p>Never ignore errors. Use try/catch, return error objects, or promises properly. Prefer early
+                            returns to avoid deep nesting.</p>
+                        <div class="code-block">
+                            // ✅ safe
+                            async function fetchUser(id) {
+                            if (!id) throw new Error('user id required');
+                            try {
+                            const response = await api.get(`/users/${id}`);
+                            return response.data;
+                            } catch (err) {
+                            logger.error({ err, id }, 'failed to fetch user');
+                            throw new AppError('user service unavailable', 503);
+                            }
+                            }
+
+                            // ❌ silent fail
+                            function risky() {
+                            try { mightThrow(); } catch (e) {} // empty – never do this
+                            }
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. security essentials (beginner friendly) -->
+                <section id="security" class="standard-card">
+                    <div class="standard-title">security guidelines <span>🔒 non‑negotiable</span></div>
+                    <div class="standard-content">
+                        <p>Even simple apps must follow these:</p>
+                        <ul style="margin-left:20px; list-style: square;">
+                            <li><strong>validate all input</strong> – never trust user data (sanitize, whitelist).</li>
+                            <li><strong>use parameterized queries</strong> – prevent SQL injection.</li>
+                            <li><strong>secrets out of code</strong> – environment variables or vaults.</li>
+                            <li><strong>keep dependencies updated</strong> – run <code
+                                    class="code-inline">npm audit</code> / <code
+                                    class="code-inline">safety check</code>.</li>
+                            <li><strong>secure headers</strong> – CSP, X-Frame-Options, etc.</li>
+                        </ul>
+                        <div class="code-block">
+                            // ✅ parameterized (safe)
+                            db.query('SELECT * FROM products WHERE id = $1', [productId]);
+
+                            // ❌ injection‑prone
+                            db.query(`SELECT * FROM products WHERE id = ${productId}`);
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. testing principles -->
+                <section id="testing" class="standard-card">
+                    <div class="standard-title">testing standards <span>reliability</span></div>
+                    <div class="standard-content">
+                        <p>Write tests alongside code. Follow the arrange‑act‑assert pattern. Aim for good coverage, but
+                            focus on critical paths.</p>
+                        <div class="code-block">
+                            // example (jest)
+                            describe('calculateTotal', () => {
+                            it('applies tax and discount correctly', () => {
+                            // arrange
+                            const price = 100;
+                            // act
+                            const result = calculateTotal(price, 20, 10);
+                            // assert
+                            expect(result).toBe(108); // 100*1.2 =120, minus10% =108
+                            });
+                            });
+                        </div>
+                        <ul class="badge-list">
+                            <li>unit tests</li>
+                            <li>integration tests</li>
+                            <li>test edge cases</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 9. version control & commits -->
+                <section id="git" class="standard-card">
+                    <div class="standard-title">git & commit hygiene <span>history clarity</span></div>
+                    <div class="standard-content">
+                        <p>Write meaningful commit messages. Use conventional commits for automation and readability.
+                        </p>
+                        <div class="code-block">
+                            feat(api): add rate limiting
+                            fix(auth): handle expired tokens correctly
+                            docs(readme): update setup instructions
+                            refactor(core): split payment service
+                            test(utils): add edge cases for formatter
+                        </div>
+                        <p>Branch naming: <code class="code-inline">feature/</code>, <code
+                                class="code-inline">bugfix/</code>, <code class="code-inline">chore/</code>, e.g.
+                            <code>feature/user-profile-cache</code>.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 10. tooling & automation -->
+                <section id="tools" class="standard-card">
+                    <div class="standard-title">automation & tooling <span>enforce standards</span></div>
+                    <div class="standard-content">
+                        <p>Let tools do the boring work. Use linters, formatters, and pre‑commit hooks.</p>
+                        <table class="std-table">
+                            <tr>
+                                <th>language</th>
+                                <th>linter</th>
+                                <th>formatter</th>
+                            </tr>
+                            <tr>
+                                <td>JavaScript/TS</td>
+                                <td>ESLint</td>
+                                <td>Prettier</td>
+                            </tr>
+                            <tr>
+                                <td>Python</td>
+                                <td>flake8 / pylint</td>
+                                <td>black</td>
+                            </tr>
+                            <tr>
+                                <td>Go</td>
+                                <td>golint</td>
+                                <td>gofmt</td>
+                            </tr>
+                            <tr>
+                                <td>Java</td>
+                                <td>Checkstyle</td>
+                                <td>prettier / google-java-format</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top:20px;">Integrate these into CI – the pipeline should fail if standards are
+                            violated.</p>
+                    </div>
+                </section>
             </div>
 
-            <!-- additional note / quick reference -->
-            <div
-                style="margin-top: 40px; background: var(--ag); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0;">
-                <p
-                    style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 6px;">
-                    // code analysis · tooling</p>
-                <p style="font-size: 0.95rem;">All standards are automatically enforced via <span
-                        class="code-inline">ESLint</span> + <span class="code-inline">Prettier</span> and reviewed
-                    during pull requests.
-                    See the <span style="color: var(--blue);">.cursorrules</span> file for IDE integration.</p>
+            <!-- extra beginner recap -->
+            <div class="note-box" style="margin-top:20px;">
+                <p style="font-family:'DM Mono'; font-size:0.9rem; margin-bottom:5px;">📘 first time here?</p>
+                <p>Start with naming, formatting, and comments. Then adopt security and testing. Use the tools to
+                    automate most of it. Every expert was once a beginner — consistency comes with practice.</p>
             </div>
 
-            <div class="accent-line"></div>
+            <hr class="divider">
 
-            <!-- footer meta (updated) -->
+            <!-- footer with metadata -->
             <div class="footer-info">
-                <div class="footer-stat">sections: <span>6</span></div>
-                <div class="footer-stat">effective: <span>2025-03-10</span></div>
-                <div class="footer-stat">version: <span>2.1.0</span></div>
+                <div class="footer-stat">sections: <span>10</span></div>
+                <div class="footer-stat">updated: <span>2026-03-10</span></div>
+                <div class="footer-stat">license: <span>internal use</span></div>
+                <div class="footer-stat">version: <span>3.0</span></div>
             </div>
-
         </div> <!-- end container -->
     </div> <!-- end main -->
 </body>
