@@ -4,13 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Jackal Systems · Coding Standards</title>
+
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
         rel="stylesheet">
+
     <style>
         :root {
             --bg-primary: #0a0e17;
@@ -117,7 +122,6 @@
             margin-bottom: 4rem;
         }
 
-        /* ===== LARGE SIMPLE LOGO ABOVE HEADING ===== */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -146,7 +150,7 @@
         .jackal-logo-large path {
             fill: none;
             stroke: url(#gradient);
-            stroke-width: 6;
+            stroke-width: 5;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -155,11 +159,19 @@
             fill: url(#gradient);
         }
 
+        .jackal-logo-large text {
+            fill: url(#gradient);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
         h1 {
             font-family: 'Syne', sans-serif;
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, var(--text-primary)0%, var(--accent)100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -263,7 +275,8 @@
             margin-top: 4rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
+
             body {
                 padding: 1rem;
             }
@@ -295,16 +308,17 @@
             a:hover::after {
                 right: 1rem;
             }
+
         }
     </style>
 </head>
 
 <body>
+
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <!-- SVG gradient definition -->
-    <svg width="0" height="0" style="position: absolute;">
+    <svg width="0" height="0" style="position:absolute;">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#e8edf4" />
@@ -314,32 +328,68 @@
     </svg>
 
     <div class="container">
+
         <header>
-            <!-- Large simple jackal logo above heading -->
+
             <div class="logo-container">
-                <svg class="jackal-logo-large" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
-                    <circle cx="40" cy="38" r="4" fill="url(#gradient)" />
-                    <circle cx="60" cy="38" r="4" fill="url(#gradient)" />
-                    <circle cx="50" cy="48" r="3" fill="url(#gradient)" />
+
+                <svg class="jackal-logo-large" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+
+                    <!-- Jackal side -->
+                    <path d="M20 35 L35 10 L48 30 L48 60 Q40 70 28 60 Z" />
+
+                    <!-- eye -->
+                    <circle cx="42" cy="42" r="3" />
+
+                    <!-- divider -->
+                    <line x1="60" y1="15" x2="60" y2="70" stroke="url(#gradient)" stroke-width="4" />
+
+                    <!-- binary side -->
+                    <text x="70" y="30">101</text>
+                    <text x="70" y="42">010</text>
+                    <text x="70" y="54">110</text>
+                    <text x="70" y="66">011</text>
+
                 </svg>
+
             </div>
 
             <h1>Jackal Systems</h1>
             <p class="subtitle">Precision . Security . Standards</p>
+
         </header>
 
         <nav>
             <ul>
-                <li><a href="codeforge.html"><span class="index">01</span><span class="text">CodeForge</span></a></li>
-                <li><a href="jackal-sec.html"><span class="index">02</span><span class="text">Jackal Sec</span></a></li>
-                <li><a href="standards.html"><span class="index">03</span><span class="text">Standards</span></a></li>
+
+                <li>
+                    <a href="codeforge.html">
+                        <span class="index">01</span>
+                        <span class="text">CodeForge</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="jackal-sec.html">
+                        <span class="index">02</span>
+                        <span class="text">Jackal Sec</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="standards.html">
+                        <span class="index">03</span>
+                        <span class="text">Standards</span>
+                    </a>
+                </li>
+
             </ul>
         </nav>
 
         <div class="accent-line"></div>
+
     </div>
+
 </body>
 
 </html>
