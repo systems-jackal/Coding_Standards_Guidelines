@@ -4,16 +4,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JACKAL</title>
+    <title>Coding Standards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #151b2b;
+            --accent: #00d9ff;
+            --accent-glow: rgba(0, 217, 255, 0.3);
+            --text-primary: #e8edf4;
+            --text-secondary: #8b94a8;
+            --border: #1e2638;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Gradient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #7000ff;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Header section */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 400;
+        }
+
+        /* Navigation cards */
+        nav {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        li {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        li:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        li:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        li:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        a {
+            display: block;
+            padding: 2rem 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+            transition: left 0.5s;
+        }
+
+        a:hover::before {
+            left: 100%;
+        }
+
+        a::after {
+            content: '→';
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        a:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateX(8px);
+        }
+
+        a:hover::after {
+            opacity: 1;
+            right: 2rem;
+        }
+
+        /* Index number */
+        a span.index {
+            position: absolute;
+            left: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.2;
+            transition: all 0.3s;
+        }
+
+        a:hover span.index {
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        a span.text {
+            display: inline-block;
+            margin-left: 4rem;
+        }
+
+        /* Footer accent line */
+        .accent-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin-top: 4rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            a {
+                padding: 1.5rem 1.5rem;
+                font-size: 1.25rem;
+            }
+
+            a span.index {
+                font-size: 2rem;
+                left: 1.5rem;
+            }
+
+            a span.text {
+                margin-left: 3rem;
+            }
+
+            a::after {
+                right: 1.5rem;
+                font-size: 1.5rem;
+            }
+
+            a:hover::after {
+                right: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Coding Standards</h1>
-    <ul>
-        <li><a href="codeforge.html">CodeForge</a></li>
-        <li><a href="jackal-sec.html">Jackal Sec</a></li>
-        <li><a href="standards.html">Standards</a></li>
-    </ul>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="title-wrapper">
+                <h1>Coding Standards</h1>
+                <p class="subtitle">Developer Resources</p>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="codeforge.html">
+                        <span class="index">01</span>
+                        <span class="text">CodeForge</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="jackal-sec.html">
+                        <span class="index">02</span>
+                        <span class="text">Jackal Sec</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="standards.html">
+                        <span class="index">03</span>
+                        <span class="text">Standards</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="accent-line"></div>
+    </div>
 </body>
 
 </html>
