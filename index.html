@@ -16,7 +16,7 @@
             --bg-primary: #0a0e17;
             --bg-secondary: #151b2b;
             --accent: #00d9ff;
-            --accent-glow: rgba(0, 217, 255, 0.3);
+            --accent-glow: rgba(0, 217, 255, 0.4);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
@@ -68,7 +68,6 @@
             }
         }
 
-        /* Gradient orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -84,7 +83,6 @@
             background: var(--accent);
             top: -100px;
             right: -100px;
-            animation-delay: 0s;
         }
 
         .orb-2 {
@@ -133,7 +131,7 @@
             }
         }
 
-        /* ===== LARGE, REALISTIC JACKAL LOGO ABOVE HEADING ===== */
+        /* ===== LOGO STYLING ===== */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -141,53 +139,26 @@
         }
 
         .jackal-logo {
-            width: 12rem;
-            /* very large */
-            height: 12rem;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
+            width: 16rem;
+            /* Increased size for detail */
+            height: auto;
+            border-radius: 50%;
+            /* Helps blend the image if it has edges */
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+            animation: logoPulse 4s ease-in-out infinite;
         }
 
-        /* Left side (gradient) */
-        .jackal-logo .left-part {
-            fill: url(#gradient);
-            stroke: none;
-        }
+        @keyframes logoPulse {
 
-        /* Right side (binary pattern) */
-        .jackal-logo .right-part {
-            fill: url(#binaryPattern);
-            stroke: none;
-            animation: flicker 3s infinite;
-        }
-
-        /* Eyes get a subtle glow to look alive */
-        .jackal-logo .eye {
-            fill: url(#gradient);
-            animation: eyeGlow 2s infinite alternate;
-        }
-
-        @keyframes eyeGlow {
-            from {
-                filter: drop-shadow(0 0 2px var(--accent));
-            }
-
-            to {
-                filter: drop-shadow(0 0 8px var(--accent));
-            }
-        }
-
-        /* Flicker animation for the binary side */
-        @keyframes flicker {
-            0% {
-                opacity: 1;
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px var(--accent-glow));
+                transform: scale(1);
             }
 
             50% {
-                opacity: 0.7;
-            }
-
-            100% {
-                opacity: 1;
+                filter: drop-shadow(0 0 35px var(--accent));
+                transform: scale(1.02);
             }
         }
 
@@ -234,22 +205,6 @@
             gap: 1.5rem;
         }
 
-        li {
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        li:nth-child(1) {
-            animation-delay: 0.3s;
-        }
-
-        li:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-
-        li:nth-child(3) {
-            animation-delay: 0.5s;
-        }
-
         a {
             display: block;
             padding: 2rem 2.5rem;
@@ -280,27 +235,10 @@
             left: 100%;
         }
 
-        a::after {
-            content: '→';
-            position: absolute;
-            right: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--accent);
-            font-size: 2rem;
-        }
-
         a:hover {
             border-color: var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
             transform: translateX(8px);
-        }
-
-        a:hover::after {
-            opacity: 1;
-            right: 2rem;
         }
 
         a span.index {
@@ -329,55 +267,6 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             margin-top: 4rem;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .jackal-logo {
-                width: 8rem;
-                height: 8rem;
-            }
-
-            a {
-                padding: 1.5rem 1.5rem;
-                font-size: 1.25rem;
-            }
-
-            a span.index {
-                font-size: 2rem;
-                left: 1.5rem;
-            }
-
-            a span.text {
-                margin-left: 3rem;
-            }
-
-            a::after {
-                right: 1.5rem;
-                font-size: 1.5rem;
-            }
-
-            a:hover::after {
-                right: 1rem;
-            }
         }
     </style>
 </head>
@@ -388,68 +277,9 @@
 
     <div class="container">
         <header>
-            <!-- Logo now above the heading, very large, with realistic jackal face -->
             <div class="logo-container">
-                <svg class="jackal-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <!-- Gradient for left side -->
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#e8edf4" />
-                            <stop offset="100%" stop-color="#00d9ff" />
-                        </linearGradient>
-
-                        <!-- Binary dot pattern (grid of cyan/white circles) - denser for larger viewBox -->
-                        <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="20" height="20"
-                            patternTransform="scale(2)">
-                            <rect width="20" height="20" fill="none" />
-                            <circle cx="5" cy="5" r="2" fill="#00d9ff" />
-                            <circle cx="15" cy="5" r="2" fill="#e8edf4" />
-                            <circle cx="5" cy="15" r="2" fill="#e8edf4" />
-                            <circle cx="15" cy="15" r="2" fill="#00d9ff" />
-                            <!-- additional dots to fill -->
-                            <circle cx="10" cy="10" r="2" fill="#00d9ff" />
-                        </pattern>
-
-                        <!-- Clip path for the right half (x >= 100) -->
-                        <clipPath id="rightHalfClip">
-                            <rect x="100" y="0" width="100" height="200" />
-                        </clipPath>
-
-                        <!-- The full jackal path – redesigned to look like a realistic jackal head -->
-                        <path id="jackalPath" d="
-                            M70,40 
-                            C60,20 40,20 30,40 
-                            C20,60 20,100 40,130 
-                            C60,160 100,160 130,130 
-                            C150,100 150,60 130,40 
-                            C120,20 100,20 90,30 
-                            L85,40 L75,40 L70,40
-                            Z
-                            M50,50 Q60,45 70,50
-                            M110,50 Q120,45 130,50
-                            " />
-                    </defs>
-
-                    <!-- Draw the head outline twice: once for left half, once for right half -->
-                    <use href="#jackalPath" class="left-part" clip-path="inset(0 100 0 0)" />
-                    <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
-
-                    <!-- Inner ear details (to make it more realistic) – placed on both halves but clipped automatically -->
-                    <path d="M45,45 L55,25 L65,45" fill="url(#gradient)" opacity="0.6" clip-path="inset(0 100 0 0)" />
-                    <path d="M115,45 L125,25 L135,45" fill="url(#gradient)" opacity="0.6"
-                        clip-path="url(#rightHalfClip)" />
-
-                    <!-- Eyes – with animation to look alive -->
-                    <circle cx="70" cy="85" r="8" class="eye" />
-                    <circle cx="130" cy="85" r="8" class="eye" />
-
-                    <!-- Pupils (dark) -->
-                    <circle cx="70" cy="85" r="3" fill="#0a0e17" />
-                    <circle cx="130" cy="85" r="3" fill="#0a0e17" />
-
-                    <!-- Nose -->
-                    <ellipse cx="100" cy="120" rx="10" ry="6" fill="url(#gradient)" />
-                </svg>
+                <img src="http://googleusercontent.com/image_generation_content/0" alt="Jackal Systems"
+                    class="jackal-logo">
             </div>
 
             <h1>Jackal Systems</h1>
