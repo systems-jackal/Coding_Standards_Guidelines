@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jackal Systems · Coding Standards</title>
-    <!-- Favicon (temporary wolf emoji – replace with custom .ico) -->
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +115,6 @@
             width: 100%;
         }
 
-        /* Header section */
         header {
             text-align: center;
             margin-bottom: 4rem;
@@ -142,19 +140,42 @@
             gap: 1rem;
         }
 
-        /* Jackal Logo SVG */
+        /* ===== TECHNICAL JACKAL LOGO ===== */
         .jackal-logo {
             width: 3.5rem;
             height: 3.5rem;
             filter: drop-shadow(0 0 10px var(--accent-glow));
         }
 
-        .jackal-logo path {
-            fill: none;
-            stroke: url(#gradient);
-            stroke-width: 6;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        /* Left side (gradient) and right side (binary dots) are both inside the same SVG */
+        .jackal-logo path.left-part {
+            fill: url(#gradient);
+            stroke: none;
+        }
+
+        /* The right part uses a pattern of circles (binary bits) */
+        .jackal-logo .right-part {
+            fill: url(#binaryPattern);
+            stroke: none;
+        }
+
+        /* Glitch animation for the binary dots (subtle flicker) */
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .jackal-logo .right-part {
+            animation: flicker 3s infinite;
         }
 
         h1 {
@@ -167,7 +188,6 @@
             background-clip: text;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
-            position: relative;
         }
 
         .subtitle {
@@ -178,7 +198,6 @@
             font-weight: 400;
         }
 
-        /* Navigation cards */
         nav {
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
@@ -271,7 +290,6 @@
             right: 2rem;
         }
 
-        /* Index number */
         a span.index {
             position: absolute;
             left: 2.5rem;
@@ -294,7 +312,6 @@
             margin-left: 4rem;
         }
 
-        /* Footer accent line */
         .accent-line {
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -312,7 +329,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
@@ -360,23 +376,49 @@
     <div class="container">
         <header>
             <div class="title-wrapper">
-                <!-- Jackal SVG Logo (simple, stylized head) -->
+                <!-- TECHNICAL JACKAL LOGO: left half = face (gradient), right half = binary dots -->
                 <svg class="jackal-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
+                        <!-- Gradient for left side -->
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#e8edf4" />
                             <stop offset="100%" stop-color="#00d9ff" />
                         </linearGradient>
+
+                        <!-- Pattern for binary dots (grid of circles) -->
+                        <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="10" height="10"
+                            patternTransform="scale(2)">
+                            <!-- Background transparent, dots will be drawn -->
+                            <rect width="10" height="10" fill="none" />
+                            <!-- Draw circles in a 5x5 grid, alternating colors -->
+                            <circle cx="2.5" cy="2.5" r="1.5" fill="#00d9ff" />
+                            <circle cx="7.5" cy="2.5" r="1.5" fill="#e8edf4" />
+                            <circle cx="2.5" cy="7.5" r="1.5" fill="#e8edf4" />
+                            <circle cx="7.5" cy="7.5" r="1.5" fill="#00d9ff" />
+                        </pattern>
+
+                        <!-- Clip path for the right half (everything to the right of x=50) -->
+                        <clipPath id="rightHalfClip">
+                            <rect x="50" y="0" width="50" height="100" />
+                        </clipPath>
+
+                        <!-- The full jackal path (used for both halves) -->
+                        <path id="jackalPath"
+                            d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
                     </defs>
-                    <!-- Jackal head outline: ears, snout, and sharp eyes -->
-                    <path
-                        d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
-                    <!-- Eyes -->
+
+                    <!-- Left half: draw the path with gradient, clipped to left half (x<50) -->
+                    <use href="#jackalPath" class="left-part" clip-path="inset(0 50% 0 0)" />
+
+                    <!-- Right half: draw the path with binary pattern, clipped to right half (x>=50) -->
+                    <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
+
+                    <!-- Eyes and nose are drawn separately on top, using gradient (appear on both halves but that's fine) -->
                     <circle cx="40" cy="38" r="4" fill="url(#gradient)" />
                     <circle cx="60" cy="38" r="4" fill="url(#gradient)" />
-                    <!-- Nose -->
                     <circle cx="50" cy="48" r="3" fill="url(#gradient)" />
                 </svg>
+
                 <h1>Jackal Systems</h1>
             </div>
             <p class="subtitle">Coding Standards</p>
