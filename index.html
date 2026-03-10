@@ -12,70 +12,102 @@
 
     <style>
         :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #151b2b;
+            --bg: #0a0e17;
             --accent-start: #9b00ff;
             --accent-end: #00f0ff;
-            --accent-glow: rgba(0, 240, 255, 0.3);
+            --glow: rgba(0, 240, 255, 0.25);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
         }
 
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
             font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-primary);
+            background: var(--bg);
             color: var(--text-primary);
-            min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 2rem;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
         }
 
         .container {
             text-align: center;
         }
 
-        /* Logo Styling */
         .jackal-logo svg {
-            width: 220px;
-            height: 220px;
-            filter: drop-shadow(0 0 15px var(--accent-glow));
-            animation: pulse 4s ease-in-out infinite alternate;
+            width: 300px;
+            height: 300px;
+            filter: drop-shadow(0 0 20px var(--glow));
+            animation: aura 4s ease-in-out infinite alternate;
         }
 
-        @keyframes pulse {
+        @keyframes aura {
             from {
-                filter: drop-shadow(0 0 10px var(--accent-glow));
+                filter: drop-shadow(0 0 15px var(--glow));
             }
 
             to {
-                filter: drop-shadow(0 0 25px var(--accent-end));
+                filter: drop-shadow(0 0 40px var(--accent-end));
             }
         }
 
         .jackal-logo path {
             fill: none;
             stroke: url(#gradient);
-            stroke-width: 2.5;
+            stroke-width: 1.5;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
+        .node {
+            fill: url(#gradient);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .eye-scan {
+            stroke: url(#gradient);
+            stroke-width: 2;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(-3px);
+            }
+
+            50% {
+                transform: translateY(3px);
+            }
+
+            100% {
+                transform: translateY(-3px);
+            }
+        }
+
         h1 {
             font-family: 'Syne', sans-serif;
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
             margin-top: 1rem;
             background: linear-gradient(135deg, var(--text-primary), var(--accent-end));
-
-            /* Gradient Text Fix */
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -83,28 +115,25 @@
 
         nav {
             margin-top: 3rem;
-            width: 100%;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         a {
             display: block;
             padding: 1.2rem;
-            margin: 1rem 0;
+            margin: 1rem auto;
+            width: 250px;
             border: 1px solid var(--border);
-            border-radius: 8px;
-            color: white;
+            border-radius: 10px;
             text-decoration: none;
-            transition: 0.3s;
             font-weight: 700;
+            color: var(--text-primary);
+            transition: 0.3s;
         }
 
         a:hover {
             border-color: var(--accent-end);
-            background: var(--bg-secondary);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 20px var(--glow);
+            background: rgba(30, 30, 50, 0.5);
         }
     </style>
 </head>
@@ -121,8 +150,34 @@
 
     <div class="container">
         <div class="jackal-logo">
-            <svg viewBox="0 0 100 100">
-                <path d="M50 10 L35 35 L50 25 L65 35 L50 10 M35 35 L50 55 L65 35 M35 35 L50 85 L65 35 M50 55 L50 85" />
+            <svg viewBox="0 0 150 150">
+                <!-- HUD Rings -->
+                <circle cx="75" cy="75" r="65" stroke="url(#gradient)" stroke-width="1.2" fill="none"
+                    stroke-dasharray="4 4" />
+                <circle cx="75" cy="75" r="50" stroke="url(#gradient)" stroke-width="1" fill="none"
+                    stroke-dasharray="3 3" />
+
+                <!-- Symmetric Low-Poly Jackal Face -->
+                <!-- Ears -->
+                <path d="M45 30 L60 10 L75 30" />
+                <path d="M105 30 L90 10 L75 30" />
+                <!-- Face Outline -->
+                <path d="M45 30 L55 60 L60 75 L65 60 L75 30" />
+                <path d="M75 30 L85 60 L90 75 L95 60 L105 30" />
+                <!-- Snout / Jaw -->
+                <path d="M60 60 L75 85 L90 60" />
+                <path d="M70 70 L75 85 L80 70" />
+                <!-- Eyes -->
+                <circle cx="65" cy="50" r="3" />
+                <circle cx="85" cy="50" r="3" />
+                <line class="eye-scan" x1="63" y1="50" x2="87" y2="50" />
+                <!-- Circuit Lines -->
+                <path d="M65 50 L45 55" />
+                <circle class="node" cx="43" cy="55" r="2" />
+                <path d="M85 50 L105 55" />
+                <circle class="node" cx="107" cy="55" r="2" />
+                <path d="M75 65 L75 95" />
+                <circle class="node" cx="75" cy="97" r="2" />
             </svg>
         </div>
 
