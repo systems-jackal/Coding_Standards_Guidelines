@@ -17,6 +17,7 @@
             --bg-secondary: #151b2b;
             --accent: #00d9ff;
             --accent-glow: rgba(0, 217, 255, 0.3);
+            --gold: #d97706;
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
@@ -53,7 +54,7 @@
                 linear-gradient(var(--border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.3;
+            opacity: 0.2;
             animation: gridMove 20s linear infinite;
             z-index: 0;
         }
@@ -84,7 +85,6 @@
             background: var(--accent);
             top: -100px;
             right: -100px;
-            animation-delay: 0s;
         }
 
         .orb-2 {
@@ -133,71 +133,79 @@
             }
         }
 
-        /* ===== LARGE, HIGH-FIDELITY JACKAL LOGO ABOVE HEADING ===== */
+        /* ===== LOGO CONTAINER ===== */
         .logo-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .jackal-logo {
-            width: 20rem;
-            /* Larger to fit the complex SVG */
-            height: 20rem;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
+            width: 18rem;
+            height: 18rem;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
         }
 
-        /* Left side (gradient fur texture) */
-        .jackal-logo .left-part {
-            fill: url(#furGradient);
-            stroke: none;
+        /* Glitch animation for the digital side */
+        .cyber-side {
+            animation: glitch 5s infinite;
         }
 
-        /* Right side (detailed binary pattern) */
-        .jackal-logo .right-part {
-            fill: url(#cyberDataPattern);
-            stroke: none;
-            animation: flicker 3s infinite;
+        @keyframes glitch {
+
+            0%,
+            95%,
+            100% {
+                transform: translate(0);
+                opacity: 1;
+            }
+
+            96% {
+                transform: translate(2px, -1px);
+                opacity: 0.8;
+            }
+
+            97% {
+                transform: translate(-2px, 1px);
+                opacity: 0.9;
+            }
+
+            98% {
+                transform: translate(1px, -2px);
+                opacity: 0.8;
+            }
         }
 
-        /* Eyes get a detailed glow */
-        .jackal-logo .eye {
-            fill: url(#eyeRadialGradient);
-            animation: eyeGlow 2s infinite alternate;
+        .eye-pulse {
+            animation: eyePulse 2s infinite alternate;
         }
 
-        @keyframes eyeGlow {
+        @keyframes eyePulse {
             from {
+                opacity: 0.5;
                 filter: drop-shadow(0 0 2px var(--accent));
             }
 
             to {
-                filter: drop-shadow(0 0 8px var(--accent));
+                opacity: 1;
+                filter: drop-shadow(0 0 12px var(--accent));
             }
         }
 
-        @keyframes flicker {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
+        /* ===== HEADING & GRADIENT FIX ===== */
         h1 {
             font-family: 'Syne', sans-serif;
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+
+            /* Standard property + Vendor prefix for compatibility */
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
@@ -210,6 +218,7 @@
             font-weight: 400;
         }
 
+        /* ===== NAVIGATION ===== */
         nav {
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
@@ -263,49 +272,22 @@
             left: 100%;
         }
 
-        a::after {
-            content: '→';
-            position: absolute;
-            right: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--accent);
-            font-size: 2rem;
-        }
-
         a:hover {
             border-color: var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
             transform: translateX(8px);
         }
 
-        a:hover::after {
-            opacity: 1;
-            right: 2rem;
-        }
-
         a span.index {
-            position: absolute;
-            left: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--text-secondary);
             opacity: 0.2;
-            transition: all 0.3s;
+            margin-right: 1.5rem;
+            font-size: 2.5rem;
+            transition: color 0.3s;
         }
 
         a:hover span.index {
             color: var(--accent);
-            opacity: 0.5;
-        }
-
-        a span.text {
-            display: inline-block;
-            margin-left: 4rem;
+            opacity: 0.6;
         }
 
         .accent-line {
@@ -316,7 +298,7 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .jackal-logo {
@@ -325,26 +307,8 @@
             }
 
             a {
-                padding: 1.5rem 1.5rem;
-                font-size: 1.25rem;
-            }
-
-            a span.index {
-                font-size: 2rem;
-                left: 1.5rem;
-            }
-
-            a span.text {
-                margin-left: 3rem;
-            }
-
-            a::after {
-                right: 1.5rem;
-                font-size: 1.5rem;
-            }
-
-            a:hover::after {
-                right: 1rem;
+                padding: 1.5rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -359,85 +323,68 @@
             <div class="logo-container">
                 <svg class="jackal-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="furGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#e8edf4" />
-                            <stop offset="50%" stop-color="#70edf4" />
-                            <stop offset="100%" stop-color="#00d9ff" />
+                        <linearGradient id="gradOrganic" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fbbf24" />
+                            <stop offset="100%" stop-color="#d97706" />
                         </linearGradient>
-                        <radialGradient id="eyeRadialGradient" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#fff" stop-opacity="0.8" />
-                            <stop offset="100%" stop-color="#00d9ff" stop-opacity="0.2" />
-                        </radialGradient>
 
-                        <pattern id="cyberDataPattern" patternUnits="userSpaceOnUse" width="10" height="10"
-                            patternTransform="scale(2)">
-                            <rect width="10" height="10" fill="none" />
-                            <circle cx="2" cy="2" r="0.5" fill="#00d9ff" />
-                            <circle cx="8" cy="2" r="0.5" fill="#e8edf4" />
-                            <circle cx="2" cy="8" r="0.5" fill="#e8edf4" />
-                            <circle cx="8" cy="8" r="0.5" fill="#00d9ff" />
-                            <rect x="4" y="4" width="2" height="2" fill="#00d9ff" fill-opacity="0.4" />
+                        <linearGradient id="gradTech" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00d9ff" />
+                            <stop offset="100%" stop-color="#0066ff" />
+                        </linearGradient>
+
+                        <pattern id="binaryGrid" width="12" height="12" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="0.8" fill="rgba(0, 217, 255, 0.4)" />
+                            <rect x="6" y="6" width="1" height="1" fill="rgba(255, 255, 255, 0.2)" />
                         </pattern>
 
-                        <clipPath id="rightHalfClip">
+                        <clipPath id="leftSide">
+                            <rect x="0" y="0" width="100" height="200" />
+                        </clipPath>
+                        <clipPath id="rightSide">
                             <rect x="100" y="0" width="100" height="200" />
                         </clipPath>
                     </defs>
 
-                    <path d="M100,50 L95,5 L110,35 L120,40 L130,35 L145,5 L140,50 L125,70 L115,80 L100,85 Z"
-                        fill="url(#furGradient)" opacity="0.6" clip-path="inset(0 100 0 0)" />
-                    <path d="M100,50 L105,5 L90,35 L80,40 L70,35 L55,5 L60,50 L75,70 L85,80 L100,85 Z"
-                        fill="url(#cyberDataPattern)" opacity="0.6" clip-path="url(#rightHalfClip)" />
+                    <g clip-path="url(#leftSide)">
+                        <path d="M100,50 L35,5 L70,80 Z" fill="url(#gradOrganic)" />
+                        <path d="M100,180 L55,100 L70,80 L100,50 Z" fill="#92400e" />
+                        <path d="M100,180 L75,145 L55,100 Z" fill="#78350f" />
+                        <path d="M78,95 L90,98 L86,106 Z" fill="#fff" opacity="0.9" />
+                    </g>
 
-                    <path d="M100,50 L95,5 L110,35 L120,40 L130,35 L145,5 L140,50 L125,70 L115,80 L100,85"
-                        stroke="url(#furGradient)" stroke-width="0.5" fill="none" opacity="0.3"
-                        clip-path="inset(0 100 0 0)" />
+                    <g clip-path="url(#rightSide)" class="cyber-side">
+                        <path d="M100,50 L165,5 L130,80 Z" fill="url(#gradTech)" />
+                        <path d="M100,180 L145,100 L130,80 L100,50 Z" fill="#0c4a6e" />
+                        <path d="M100,50 L165,5 L145,100 L100,180 Z" fill="url(#binaryGrid)" />
+                        <path d="M122,95 L110,98 L114,106 Z" fill="#00d9ff" class="eye-pulse" />
+                    </g>
 
-                    <path d="M100,50 L105,5 L90,35 L80,40 L70,35 L55,5 L60,50 L75,70 L85,80 L100,85"
-                        stroke="url(#cyberDataPattern)" stroke-width="0.5" fill="none" opacity="0.3"
-                        clip-path="url(#rightHalfClip)" />
+                    <path d="M96,180 L104,180 L100,186 Z" fill="#030712" />
 
-                    <path d="M45,45 L55,25 L65,45" fill="url(#furGradient)" opacity="0.6"
-                        clip-path="inset(0 100 0 0)" />
-                    <path d="M115,45 L125,25 L135,45" fill="url(#cyberDataPattern)" opacity="0.6"
-                        clip-path="url(#rightHalfClip)" />
-
-                    <path d="M60,85 C55,85 55,95 60,95 S65,85 60,85 Z" class="eye" />
-                    <path d="M140,85 C145,85 145,95 140,95 S135,85 140,85 Z" class="eye" />
-
-                    <circle cx="70" cy="85" r="8" fill="none" stroke="#fff" stroke-opacity="0.2" />
-                    <circle cx="70" cy="85" r="3" fill="#0a0e17" />
-                    <circle cx="130" cy="85" r="8" fill="none" stroke="#fff" stroke-opacity="0.2" />
-                    <circle cx="130" cy="85" r="3" fill="#0a0e17" />
-
-                    <path
-                        d="M100,120 C95,120 95,130 100,130 S105,120 100,120 M100,120 C98,122 98,128 100,128 S102,122 100,122 Z"
-                        fill="url(#furGradient)" />
+                    <line x1="100" y1="50" x2="100" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
                 </svg>
             </div>
 
             <h1>Jackal Systems</h1>
-            <p class="subtitle">Coding Standards</p>
+            <p class="subtitle">Precision. Security. Standards.</p>
         </header>
 
         <nav>
             <ul>
                 <li>
                     <a href="codeforge.html">
-                        <span class="index">01</span>
-                        <span class="text">CodeForge</span>
+                        <span class="index">01</span>CodeForge
                     </a>
                 </li>
                 <li>
                     <a href="jackal-sec.html">
-                        <span class="index">02</span>
-                        <span class="text">Jackal Sec</span>
+                        <span class="index">02</span>Jackal Sec
                     </a>
                 </li>
                 <li>
                     <a href="standards.html">
-                        <span class="index">03</span>
-                        <span class="text">Standards</span>
+                        <span class="index">03</span>Standards
                     </a>
                 </li>
             </ul>
