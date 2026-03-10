@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
         rel="stylesheet">
-
     <style>
         :root {
             --bg-primary: #0a0e17;
@@ -109,7 +108,7 @@
         .container {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
         }
 
@@ -125,25 +124,25 @@
         }
 
         .jackal-logo {
-            width: 14rem;
-            height: 14rem;
-            filter: drop-shadow(0 0 25px var(--accent-glow));
+            width: 18rem;
+            height: 18rem;
+            filter: drop-shadow(0 0 30px var(--accent-glow));
             animation: aura 4s ease-in-out infinite alternate;
         }
 
         @keyframes aura {
             from {
-                filter: drop-shadow(0 0 12px var(--accent-glow));
+                filter: drop-shadow(0 0 15px var(--accent-glow));
             }
 
             to {
-                filter: drop-shadow(0 0 45px var(--accent));
+                filter: drop-shadow(0 0 60px var(--accent));
             }
         }
 
         .jackal-logo path {
             stroke: url(#gradient);
-            stroke-width: 2;
+            stroke-width: 1.5;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
@@ -181,13 +180,13 @@
 
             0%,
             100% {
-                opacity: 0.4;
+                opacity: 0.3;
                 transform: scale(1);
             }
 
             50% {
                 opacity: 1;
-                transform: scale(1.5);
+                transform: scale(1.6);
             }
         }
 
@@ -264,33 +263,32 @@
     </svg>
 
     <div class="container">
-
         <header>
             <div class="logo-container">
 
-                <svg class="jackal-logo" viewBox="0 0 120 120">
-
-                    <!-- symmetric polygonal wireframe jackal -->
-                    <!-- ears -->
-                    <path d="M30 45 L45 15 L60 45" />
-                    <path d="M90 45 L75 15 L60 45" />
-                    <!-- face outer lines -->
-                    <path d="M30 45 L45 85 L60 100 L75 85 L90 45" />
-                    <path d="M45 85 L60 90 L75 85" />
-                    <!-- snout lines -->
-                    <path d="M50 65 L60 80 L70 65" />
-                    <path d="M55 70 L60 80 L65 70" />
+                <svg class="jackal-logo" viewBox="0 0 150 150">
+                    <!-- Polygonal symmetric jackal face -->
+                    <!-- outer face triangles -->
+                    <path d="M30 40 L50 10 L70 40 L60 70 L90 120 L60 115 L30 120 L40 70 Z" />
+                    <path d="M70 40 L90 10 L110 40 L100 70 L120 120 L90 115 L60 120 L70 70 Z" />
+                    <!-- snout polygon -->
+                    <path d="M60 70 L75 85 L90 70 L75 75 Z" />
                     <!-- eyes -->
-                    <circle cx="50" cy="60" r="3" />
-                    <circle cx="70" cy="60" r="3" />
-                    <line class="eye-scan" x1="46" y1="60" x2="74" y2="60" />
-                    <!-- connected circuit nodes -->
-                    <path d="M70 60 L100 60" />
-                    <circle class="node" cx="104" cy="60" r="2" />
-                    <path d="M50 60 L20 60" />
-                    <circle class="node" cx="16" cy="60" r="2" />
-                    <path d="M60 65 L60 90" />
-                    <circle class="node" cx="60" cy="94" r="2" />
+                    <circle cx="65" cy="55" r="3" />
+                    <circle cx="95" cy="55" r="3" />
+                    <line class="eye-scan" x1="63" y1="55" x2="97" y2="55" />
+                    <!-- polygonal inner details -->
+                    <path d="M65 55 L75 65 L85 55" />
+                    <path d="M75 65 L75 75" />
+                    <path d="M55 75 L95 75" />
+                    <path d="M60 90 L90 90" />
+                    <!-- circuit lines -->
+                    <path d="M65 55 L40 60" />
+                    <circle class="node" cx="38" cy="60" r="2" />
+                    <path d="M95 55 L120 60" />
+                    <circle class="node" cx="122" cy="60" r="2" />
+                    <path d="M75 75 L75 100" />
+                    <circle class="node" cx="75" cy="102" r="2" />
                 </svg>
 
             </div>
