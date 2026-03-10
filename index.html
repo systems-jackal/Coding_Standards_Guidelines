@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Jackal Systems · Coding Standards</title>
-
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
         rel="stylesheet">
 
@@ -129,8 +125,8 @@
         }
 
         .jackal-logo {
-            width: 12rem;
-            height: 12rem;
+            width: 14rem;
+            height: 14rem;
             filter: drop-shadow(0 0 25px var(--accent-glow));
             animation: aura 4s ease-in-out infinite alternate;
         }
@@ -147,7 +143,7 @@
 
         .jackal-logo path {
             stroke: url(#gradient);
-            stroke-width: 3;
+            stroke-width: 2;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
@@ -270,44 +266,37 @@
     <div class="container">
 
         <header>
-
             <div class="logo-container">
 
                 <svg class="jackal-logo" viewBox="0 0 120 120">
 
-                    <!-- symmetric geometric ears -->
-                    <path d="M30 45 L45 10 L60 45" />
-                    <path d="M90 45 L75 10 L60 45" />
-
-                    <!-- symmetric face outline -->
+                    <!-- symmetric polygonal wireframe jackal -->
+                    <!-- ears -->
+                    <path d="M30 45 L45 15 L60 45" />
+                    <path d="M90 45 L75 15 L60 45" />
+                    <!-- face outer lines -->
                     <path d="M30 45 L45 85 L60 100 L75 85 L90 45" />
-
-                    <!-- nose line -->
-                    <path d="M50 75 L60 85 L70 75" />
-
+                    <path d="M45 85 L60 90 L75 85" />
+                    <!-- snout lines -->
+                    <path d="M50 65 L60 80 L70 65" />
+                    <path d="M55 70 L60 80 L65 70" />
                     <!-- eyes -->
                     <circle cx="50" cy="60" r="3" />
                     <circle cx="70" cy="60" r="3" />
-
-                    <!-- scanning eye line -->
                     <line class="eye-scan" x1="46" y1="60" x2="74" y2="60" />
-
-                    <!-- circuit nodes -->
+                    <!-- connected circuit nodes -->
                     <path d="M70 60 L100 60" />
                     <circle class="node" cx="104" cy="60" r="2" />
                     <path d="M50 60 L20 60" />
                     <circle class="node" cx="16" cy="60" r="2" />
-
                     <path d="M60 65 L60 90" />
                     <circle class="node" cx="60" cy="94" r="2" />
-
                 </svg>
 
             </div>
 
             <h1>Jackal Systems</h1>
             <p class="subtitle">Precision · Security · Standards</p>
-
         </header>
 
         <nav>
@@ -319,7 +308,6 @@
         </nav>
 
         <div class="accent-line"></div>
-
     </div>
 
 </body>
