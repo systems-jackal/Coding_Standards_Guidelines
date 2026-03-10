@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,8 +46,6 @@
             overflow-x: hidden;
         }
 
-        /* animated grid */
-
         body::before {
             content: '';
             position: fixed;
@@ -74,8 +71,6 @@
                 transform: translateY(50px);
             }
         }
-
-        /* floating glow */
 
         .orb {
             position: fixed;
@@ -127,8 +122,6 @@
             margin-bottom: 4rem;
         }
 
-        /* LOGO */
-
         .logo-container {
             display: flex;
             justify-content: center;
@@ -154,7 +147,7 @@
 
         .jackal-logo path {
             stroke: url(#gradient);
-            stroke-width: 4;
+            stroke-width: 3;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
@@ -164,8 +157,6 @@
             fill: url(#gradient);
         }
 
-        /* robotic scanning eye */
-
         .eye-scan {
             stroke: url(#gradient);
             stroke-width: 2;
@@ -174,19 +165,17 @@
 
         @keyframes scan {
             0% {
-                transform: translateY(-4px);
+                transform: translateY(-3px);
             }
 
             50% {
-                transform: translateY(4px);
+                transform: translateY(3px);
             }
 
             100% {
-                transform: translateY(-4px);
+                transform: translateY(-3px);
             }
         }
-
-        /* circuit pulse */
 
         .node {
             animation: pulse 2s infinite;
@@ -206,8 +195,6 @@
             }
         }
 
-        /* title */
-
         h1 {
             font-family: 'Syne', sans-serif;
             font-size: clamp(2.5rem, 8vw, 4.5rem);
@@ -225,8 +212,6 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
         }
-
-        /* nav */
 
         nav ul {
             list-style: none;
@@ -288,33 +273,33 @@
 
             <div class="logo-container">
 
-                <!-- ROBOTIC JACKAL FACE -->
+                <svg class="jackal-logo" viewBox="0 0 120 120">
 
-                <svg class="jackal-logo" viewBox="0 0 120 110">
+                    <!-- symmetric geometric ears -->
+                    <path d="M30 45 L45 10 L60 45" />
+                    <path d="M90 45 L75 10 L60 45" />
 
-                    <!-- ears -->
-                    <path d="M30 45 L45 10 L55 45" />
-                    <path d="M90 45 L75 10 L65 45" />
+                    <!-- symmetric face outline -->
+                    <path d="M30 45 L45 85 L60 100 L75 85 L90 45" />
 
-                    <!-- face outline -->
-                    <path d="M30 45 L40 85 L60 100 L80 85 L90 45" />
-
-                    <!-- nose structure -->
-                    <path d="M55 70 L60 75 L65 70" />
+                    <!-- nose line -->
+                    <path d="M50 75 L60 85 L70 75" />
 
                     <!-- eyes -->
                     <circle cx="50" cy="60" r="3" />
                     <circle cx="70" cy="60" r="3" />
 
-                    <!-- scanning bar -->
-                    <line class="eye-scan" x1="44" y1="60" x2="76" y2="60" />
+                    <!-- scanning eye line -->
+                    <line class="eye-scan" x1="46" y1="60" x2="74" y2="60" />
 
-                    <!-- circuits -->
+                    <!-- circuit nodes -->
                     <path d="M70 60 L100 60" />
                     <circle class="node" cx="104" cy="60" r="2" />
-
                     <path d="M50 60 L20 60" />
                     <circle class="node" cx="16" cy="60" r="2" />
+
+                    <path d="M60 65 L60 90" />
+                    <circle class="node" cx="60" cy="94" r="2" />
 
                 </svg>
 
@@ -327,13 +312,9 @@
 
         <nav>
             <ul>
-
                 <li><a href="codeforge.html"><span class="index">01</span>CodeForge</a></li>
-
                 <li><a href="jackal-sec.html"><span class="index">02</span>Jackal Sec</a></li>
-
                 <li><a href="standards.html"><span class="index">03</span>Standards</a></li>
-
             </ul>
         </nav>
 
@@ -344,4 +325,3 @@
 </body>
 
 </html>
-```
