@@ -3,107 +3,220 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Jackal Systems</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackal Systems · Coding Standards</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --bg: #050505;
-            --text: #ffffff;
+            --bg-primary: #05070a;
+            /* Darker for deeper immersion */
             --accent: #00d9ff;
+            --accent-glow: rgba(0, 217, 255, 0.4);
+            --text-primary: #e8edf4;
+            --text-secondary: #8b94a8;
+            --border: rgba(30, 38, 56, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
             font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .container {
-            text-align: left;
-            width: 400px;
-            animation: fadeIn 1s ease-out;
+        /* ===== FULL BACKGROUND IMAGE LAYER ===== */
+        .bg-image-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('http://googleusercontent.com/image_generation_content/0') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
+            /* Subltle presence */
+            filter: grayscale(0.5) blur(10px);
+            /* Softened so it doesn't distract */
+            z-index: -2;
         }
 
-        @keyframes fadeIn {
+        /* Vignette overlay to focus the center */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--bg-primary) 100%);
+            z-index: -1;
+        }
+
+        /* Animated Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.2;
+            animation: gridPan 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridPan {
             from {
-                opacity: 0;
+                background-position: 0 0;
             }
 
             to {
-                opacity: 1;
+                background-position: 500px 500px;
             }
         }
 
-        .logo {
-            width: 80px;
-            margin-bottom: 2rem;
-            filter: invert(1);
-            /* Ensures the black vector icon stands out on dark mode */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            /* Frost effect for the UI */
+            padding: 3rem;
+            border-radius: 24px;
+            background: rgba(10, 14, 23, 0.6);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            color: var(--accent);
-            font-size: 0.75rem;
-            letter-spacing: 0.3em;
+        header {
+            text-align: center;
             margin-bottom: 3rem;
         }
 
-        nav {
+        .hero-logo {
+            width: 14rem;
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px var(--accent-glow));
+            }
+
+            to {
+                transform: scale(1.03);
+                filter: drop-shadow(0 0 30px var(--accent));
+            }
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-top: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
+        a {
+            display: block;
+            padding: 1.5rem 2rem;
+            background: rgba(21, 27, 43, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-item:hover {
+        a:hover {
+            border-color: var(--accent);
+            background: rgba(0, 217, 255, 0.05);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .index {
             color: var(--accent);
-            transform: translateX(10px);
+            margin-right: 1rem;
+            font-family: 'JetBrains Mono';
+            opacity: 0.6;
         }
 
-        .num {
-            font-size: 0.7rem;
-            margin-right: 1.5rem;
-            opacity: 0.4;
-        }
-
-        .label {
-            font-size: 1.1rem;
-            font-weight: 300;
+        .accent-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin-top: 3rem;
+            opacity: 0.5;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/8788060986073928433_0" alt="Jackal Icon"
-            class="logo">
+    <div class="bg-image-layer"></div>
+    <div class="grid-overlay"></div>
 
-        <h1>Jackal Systems</h1>
-        <div class="tagline">PRECISION . SECURITY . STANDARDS</div>
+    <div class="container">
+        <header>
+            <img src="http://googleusercontent.com/image_generation_content/0" alt="Logo" class="hero-logo">
+            <h1>Jackal Systems</h1>
+            <p class="subtitle">Precision . Security . Standards</p>
+        </header>
 
         <nav>
-            <div class="nav-item"><span class="num">01</span><span class="label">CodeForge</span></div>
-            <div class="nav-item"><span class="num">02</span><span class="label">Jackal Sec</span></div>
-            <div class="nav-item"><span class="num">03</span><span class="label">Standards</span></div>
+            <ul>
+                <li><a href="codeforge.html"><span class="index">01</span>CodeForge</a></li>
+                <li><a href="jackal-sec.html"><span class="index">02</span>Jackal Sec</a></li>
+                <li><a href="standards.html"><span class="index">03</span>Standards</a></li>
+            </ul>
         </nav>
+
+        <div class="accent-line"></div>
     </div>
 </body>
 
