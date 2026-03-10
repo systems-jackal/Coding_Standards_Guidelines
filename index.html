@@ -133,33 +133,34 @@
             }
         }
 
-        .title-wrapper {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
+        /* ===== LARGE TECHNICAL LOGO ABOVE HEADING ===== */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
-        /* ===== TECHNICAL JACKAL LOGO ===== */
         .jackal-logo {
-            width: 3.5rem;
-            height: 3.5rem;
-            filter: drop-shadow(0 0 10px var(--accent-glow));
+            width: 8rem;
+            /* big size */
+            height: 8rem;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
         }
 
-        /* Left side (gradient) and right side (binary dots) are both inside the same SVG */
-        .jackal-logo path.left-part {
+        /* Left side (gradient) */
+        .jackal-logo .left-part {
             fill: url(#gradient);
             stroke: none;
         }
 
-        /* The right part uses a pattern of circles (binary bits) */
+        /* Right side (binary pattern) */
         .jackal-logo .right-part {
             fill: url(#binaryPattern);
             stroke: none;
+            animation: flicker 3s infinite;
         }
 
-        /* Glitch animation for the binary dots (subtle flicker) */
+        /* Flicker animation for the binary side */
         @keyframes flicker {
             0% {
                 opacity: 1;
@@ -172,10 +173,6 @@
             100% {
                 opacity: 1;
             }
-        }
-
-        .jackal-logo .right-part {
-            animation: flicker 3s infinite;
         }
 
         h1 {
@@ -339,10 +336,11 @@
             }
 
             .jackal-logo {
-                width: 2.5rem;
-                height: 2.5rem;
+                width: 6rem;
+                height: 6rem;
             }
 
+            /* still big on mobile */
             a {
                 padding: 1.5rem 1.5rem;
                 font-size: 1.25rem;
@@ -375,8 +373,8 @@
 
     <div class="container">
         <header>
-            <div class="title-wrapper">
-                <!-- TECHNICAL JACKAL LOGO: left half = face (gradient), right half = binary dots -->
+            <!-- Logo now above the heading, larger and with split effect -->
+            <div class="logo-container">
                 <svg class="jackal-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <!-- Gradient for left side -->
@@ -385,19 +383,17 @@
                             <stop offset="100%" stop-color="#00d9ff" />
                         </linearGradient>
 
-                        <!-- Pattern for binary dots (grid of circles) -->
+                        <!-- Binary dot pattern (grid of cyan/white circles) -->
                         <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="10" height="10"
                             patternTransform="scale(2)">
-                            <!-- Background transparent, dots will be drawn -->
                             <rect width="10" height="10" fill="none" />
-                            <!-- Draw circles in a 5x5 grid, alternating colors -->
                             <circle cx="2.5" cy="2.5" r="1.5" fill="#00d9ff" />
                             <circle cx="7.5" cy="2.5" r="1.5" fill="#e8edf4" />
                             <circle cx="2.5" cy="7.5" r="1.5" fill="#e8edf4" />
                             <circle cx="7.5" cy="7.5" r="1.5" fill="#00d9ff" />
                         </pattern>
 
-                        <!-- Clip path for the right half (everything to the right of x=50) -->
+                        <!-- Clip path for the right half (x >= 50) -->
                         <clipPath id="rightHalfClip">
                             <rect x="50" y="0" width="50" height="100" />
                         </clipPath>
@@ -407,20 +403,20 @@
                             d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
                     </defs>
 
-                    <!-- Left half: draw the path with gradient, clipped to left half (x<50) -->
+                    <!-- Left half: gradient, clipped to left side (x < 50) -->
                     <use href="#jackalPath" class="left-part" clip-path="inset(0 50% 0 0)" />
 
-                    <!-- Right half: draw the path with binary pattern, clipped to right half (x>=50) -->
+                    <!-- Right half: binary pattern, clipped to right side -->
                     <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
 
-                    <!-- Eyes and nose are drawn separately on top, using gradient (appear on both halves but that's fine) -->
+                    <!-- Eyes and nose (drawn on top) -->
                     <circle cx="40" cy="38" r="4" fill="url(#gradient)" />
                     <circle cx="60" cy="38" r="4" fill="url(#gradient)" />
                     <circle cx="50" cy="48" r="3" fill="url(#gradient)" />
                 </svg>
-
-                <h1>Jackal Systems</h1>
             </div>
+
+            <h1>Jackal Systems</h1>
             <p class="subtitle">Coding Standards</p>
         </header>
 
