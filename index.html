@@ -133,18 +133,18 @@
             }
         }
 
-        /* ===== LARGE TECHNICAL LOGO ABOVE HEADING ===== */
+        /* ===== LARGE, REALISTIC JACKAL LOGO ABOVE HEADING ===== */
         .logo-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .jackal-logo {
-            width: 8rem;
-            /* big size */
-            height: 8rem;
-            filter: drop-shadow(0 0 20px var(--accent-glow));
+            width: 12rem;
+            /* very large */
+            height: 12rem;
+            filter: drop-shadow(0 0 30px var(--accent-glow));
         }
 
         /* Left side (gradient) */
@@ -158,6 +158,22 @@
             fill: url(#binaryPattern);
             stroke: none;
             animation: flicker 3s infinite;
+        }
+
+        /* Eyes get a subtle glow to look alive */
+        .jackal-logo .eye {
+            fill: url(#gradient);
+            animation: eyeGlow 2s infinite alternate;
+        }
+
+        @keyframes eyeGlow {
+            from {
+                filter: drop-shadow(0 0 2px var(--accent));
+            }
+
+            to {
+                filter: drop-shadow(0 0 8px var(--accent));
+            }
         }
 
         /* Flicker animation for the binary side */
@@ -336,11 +352,10 @@
             }
 
             .jackal-logo {
-                width: 6rem;
-                height: 6rem;
+                width: 8rem;
+                height: 8rem;
             }
 
-            /* still big on mobile */
             a {
                 padding: 1.5rem 1.5rem;
                 font-size: 1.25rem;
@@ -373,9 +388,9 @@
 
     <div class="container">
         <header>
-            <!-- Logo now above the heading, larger and with split effect -->
+            <!-- Logo now above the heading, very large, with realistic jackal face -->
             <div class="logo-container">
-                <svg class="jackal-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <svg class="jackal-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <!-- Gradient for left side -->
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -383,36 +398,57 @@
                             <stop offset="100%" stop-color="#00d9ff" />
                         </linearGradient>
 
-                        <!-- Binary dot pattern (grid of cyan/white circles) -->
-                        <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="10" height="10"
+                        <!-- Binary dot pattern (grid of cyan/white circles) - denser for larger viewBox -->
+                        <pattern id="binaryPattern" patternUnits="userSpaceOnUse" width="20" height="20"
                             patternTransform="scale(2)">
-                            <rect width="10" height="10" fill="none" />
-                            <circle cx="2.5" cy="2.5" r="1.5" fill="#00d9ff" />
-                            <circle cx="7.5" cy="2.5" r="1.5" fill="#e8edf4" />
-                            <circle cx="2.5" cy="7.5" r="1.5" fill="#e8edf4" />
-                            <circle cx="7.5" cy="7.5" r="1.5" fill="#00d9ff" />
+                            <rect width="20" height="20" fill="none" />
+                            <circle cx="5" cy="5" r="2" fill="#00d9ff" />
+                            <circle cx="15" cy="5" r="2" fill="#e8edf4" />
+                            <circle cx="5" cy="15" r="2" fill="#e8edf4" />
+                            <circle cx="15" cy="15" r="2" fill="#00d9ff" />
+                            <!-- additional dots to fill -->
+                            <circle cx="10" cy="10" r="2" fill="#00d9ff" />
                         </pattern>
 
-                        <!-- Clip path for the right half (x >= 50) -->
+                        <!-- Clip path for the right half (x >= 100) -->
                         <clipPath id="rightHalfClip">
-                            <rect x="50" y="0" width="50" height="100" />
+                            <rect x="100" y="0" width="100" height="200" />
                         </clipPath>
 
-                        <!-- The full jackal path (used for both halves) -->
-                        <path id="jackalPath"
-                            d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
+                        <!-- The full jackal path – redesigned to look like a realistic jackal head -->
+                        <path id="jackalPath" d="
+                            M70,40 
+                            C60,20 40,20 30,40 
+                            C20,60 20,100 40,130 
+                            C60,160 100,160 130,130 
+                            C150,100 150,60 130,40 
+                            C120,20 100,20 90,30 
+                            L85,40 L75,40 L70,40
+                            Z
+                            M50,50 Q60,45 70,50
+                            M110,50 Q120,45 130,50
+                            " />
                     </defs>
 
-                    <!-- Left half: gradient, clipped to left side (x < 50) -->
-                    <use href="#jackalPath" class="left-part" clip-path="inset(0 50% 0 0)" />
-
-                    <!-- Right half: binary pattern, clipped to right side -->
+                    <!-- Draw the head outline twice: once for left half, once for right half -->
+                    <use href="#jackalPath" class="left-part" clip-path="inset(0 100 0 0)" />
                     <use href="#jackalPath" class="right-part" clip-path="url(#rightHalfClip)" />
 
-                    <!-- Eyes and nose (drawn on top) -->
-                    <circle cx="40" cy="38" r="4" fill="url(#gradient)" />
-                    <circle cx="60" cy="38" r="4" fill="url(#gradient)" />
-                    <circle cx="50" cy="48" r="3" fill="url(#gradient)" />
+                    <!-- Inner ear details (to make it more realistic) – placed on both halves but clipped automatically -->
+                    <path d="M45,45 L55,25 L65,45" fill="url(#gradient)" opacity="0.6" clip-path="inset(0 100 0 0)" />
+                    <path d="M115,45 L125,25 L135,45" fill="url(#gradient)" opacity="0.6"
+                        clip-path="url(#rightHalfClip)" />
+
+                    <!-- Eyes – with animation to look alive -->
+                    <circle cx="70" cy="85" r="8" class="eye" />
+                    <circle cx="130" cy="85" r="8" class="eye" />
+
+                    <!-- Pupils (dark) -->
+                    <circle cx="70" cy="85" r="3" fill="#0a0e17" />
+                    <circle cx="130" cy="85" r="3" fill="#0a0e17" />
+
+                    <!-- Nose -->
+                    <ellipse cx="100" cy="120" rx="10" ry="6" fill="url(#gradient)" />
                 </svg>
             </div>
 
