@@ -3,306 +3,1033 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coding Standards</title>
-
-    <!-- Google Fonts -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>jackal@vintage — Coding Standards</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
-
     <style>
         :root {
             --bg: #07070f;
             --panel: #0f0f1a;
+            --card: #13131f;
             --border: #1c1c2b;
+            --border2: #252538;
             --accent: #c8a96e;
-            --green: #4caf50;
-            --red: #d9534f;
-            --amber: #c8a96e;
-            --grey: #555;
-            --text: #e8e8f0;
-            --muted: #9aa0a6;
+            --ag: rgba(200, 169, 110, .10);
+            --ab: rgba(200, 169, 110, .22);
+            --green: #2ed88a;
+            --gg: rgba(46, 216, 138, .09);
+            --gb: rgba(46, 216, 138, .22);
+            --red: #e8614a;
+            --rg: rgba(232, 97, 74, .09);
+            --rb: rgba(232, 97, 74, .22);
+            --blue: #6ab0ff;
+            --purple: #a78bff;
+            --t1: #e8e8f0;
+            --t2: #7878a0;
+            --t3: #30304a;
         }
 
         * {
-            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden
         }
 
         body {
-            margin: 0;
             background: var(--bg);
-            color: var(--text);
+            color: var(--t1);
             font-family: 'DM Sans', sans-serif;
+            display: flex;
+            flex-direction: column
         }
 
-        h1,
-        h2,
-        h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 1px;
-            margin: 0 0 10px 0;
-        }
-
-        code,
-        .code {
-            font-family: 'DM Mono', monospace;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        /* Top Bar */
+        /* TOP BAR */
         .topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: #0b0b14;
+            height: 52px;
+            background: #0a0a14;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            justify-content: space-between;
             padding: 0 20px;
-            z-index: 100;
+            gap: 16px;
+            flex-shrink: 0;
+            z-index: 100
         }
 
-        .topbar-title {
+        .brand {
             font-family: 'DM Mono', monospace;
             color: var(--accent);
-            font-size: 18px;
+            font-size: .85rem;
+            letter-spacing: .06em
         }
 
-        .progress {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        /* Layout */
-        .container {
-            display: flex;
-            margin-top: 60px;
-            height: calc(100vh - 60px);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background: var(--panel);
-            border-right: 1px solid var(--border);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .sidebar h2 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .sidebar-stats {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 20px;
-        }
-
-        .topic-item {
+        .topbar-right {
+            margin-left: auto;
             display: flex;
             align-items: center;
-            padding: 8px 5px;
-            cursor: pointer;
+            gap: 12px
+        }
+
+        .prog-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .prog-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .55rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .1em
+        }
+
+        .prog-bar {
+            width: 140px;
+            height: 5px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--green));
+            border-radius: 3px;
+            transition: width .5s ease;
+            width: 0%
+        }
+
+        .prog-pct {
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            color: var(--accent);
+            min-width: 30px
+        }
+
+        .stat-pill {
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            color: var(--t2);
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 4px;
+            padding: 3px 10px
         }
 
-        .topic-item:hover {
-            background: #1a1a2b;
+        .stat-pill span {
+            color: var(--green)
         }
 
-        .topic-dot {
-            width: 10px;
-            height: 10px;
+        /* LAYOUT */
+        .layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 265px;
+            flex-shrink: 0;
+            background: #0a0a14;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden
+        }
+
+        .sb-head {
+            padding: 14px 14px 10px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0
+        }
+
+        .sb-stats {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px
+        }
+
+        .sb-stat {
+            flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 6px 8px;
+            text-align: center
+        }
+
+        .sb-stat .sn {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            line-height: 1
+        }
+
+        .sb-stat .sl {
+            font-family: 'DM Mono', monospace;
+            font-size: .46rem;
+            color: var(--t3);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-top: 2px
+        }
+
+        .sb-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent
+        }
+
+        .sb-scroll::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .sb-scroll::-webkit-scrollbar-thumb {
+            background: var(--border)
+        }
+
+        .cat-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .51rem;
+            text-transform: uppercase;
+            letter-spacing: .13em;
+            color: var(--t3);
+            padding: 10px 8px 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .cat-lbl::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border)
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .15s;
+            border: 1px solid transparent;
+            margin-bottom: 2px
+        }
+
+        .nav-item:hover {
+            background: var(--card);
+            border-color: var(--border)
+        }
+
+        .nav-item.active {
+            background: var(--card);
+            border-color: var(--border);
+            border-left: 2px solid var(--accent)
+        }
+
+        .nav-num {
+            font-family: 'DM Mono', monospace;
+            font-size: .57rem;
+            color: var(--t3);
+            width: 18px;
+            text-align: right;
+            flex-shrink: 0
+        }
+
+        .nav-item.active .nav-num {
+            color: var(--accent)
+        }
+
+        .nav-txt {
+            font-size: .72rem;
+            font-weight: 500;
+            color: var(--t2);
+            flex: 1;
+            line-height: 1.3
+        }
+
+        .nav-item.active .nav-txt {
+            color: var(--t1)
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            margin-right: 8px;
-            background: var(--grey);
+            flex-shrink: 0;
+            background: var(--t3);
+            transition: background .3s
         }
 
-        .topic-item.active {
-            background: #161626;
+        .nd-pass {
+            background: var(--green)
         }
 
-        /* Main Panel */
+        .nd-try {
+            background: var(--accent)
+        }
+
+        .nd-fail {
+            background: var(--red)
+        }
+
+        /* MAIN */
         .main {
             flex: 1;
-            padding: 40px;
             overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent
         }
 
-        /* Welcome */
+        .main::-webkit-scrollbar {
+            width: 4px
+        }
+
+        .main::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px
+        }
+
+        .page {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 36px 32px 70px
+        }
+
+        .page.show {
+            display: block
+        }
+
+        /* WELCOME */
         .welcome {
-            max-width: 900px;
-            margin: auto;
+            padding: 44px 32px;
+            max-width: 720px;
+            margin: 0 auto
         }
 
-        .category-grid {
+        .w-ey {
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            color: var(--accent);
+            margin-bottom: 14px
+        }
+
+        .welcome h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.6rem;
+            letter-spacing: .04em;
+            line-height: .92;
+            margin-bottom: 18px
+        }
+
+        .welcome h1 em {
+            color: var(--accent);
+            font-style: normal
+        }
+
+        .welcome p {
+            font-size: .86rem;
+            color: var(--t2);
+            line-height: 1.85;
+            margin-bottom: 24px;
+            max-width: 580px
+        }
+
+        .w-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 26px
         }
 
-        .category-card {
-            background: var(--panel);
+        .w-card {
+            background: var(--card);
             border: 1px solid var(--border);
+            border-radius: 9px;
             padding: 15px;
-            border-radius: 8px;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .w-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            opacity: .25;
+            transition: opacity .2s
+        }
+
+        .w-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-2px)
+        }
+
+        .w-card:hover::before {
+            opacity: .8
+        }
+
+        .w-card .wc-icon {
+            font-size: 1.3rem;
+            margin-bottom: 8px
+        }
+
+        .w-card .wc-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .85rem;
+            letter-spacing: .1em;
+            color: var(--accent);
+            margin-bottom: 3px
+        }
+
+        .w-card .wc-ct {
+            font-size: .67rem;
+            color: var(--t3);
+            line-height: 1.5
         }
 
         .start-btn {
-            margin-top: 30px;
-            padding: 10px 20px;
-            border: 1px solid var(--accent);
             background: transparent;
+            border: 1px solid var(--accent);
             color: var(--accent);
-            cursor: pointer;
-        }
-
-        /* Lesson */
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            background: #1b1b2b;
-            border: 1px solid var(--border);
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
-        .section {
-            margin-top: 25px;
-        }
-
-        .callout {
-            padding: 12px;
-            border-left: 4px solid var(--accent);
-            background: #111120;
-            margin: 15px 0;
-        }
-
-        .callout.tip {
-            border-color: var(--green);
-        }
-
-        .callout.warning {
-            border-color: var(--red);
-        }
-
-        .callout.info {
-            border-color: var(--accent);
-        }
-
-        /* Code */
-        pre {
-            background: #0d0d17;
-            padding: 15px;
-            border: 1px solid var(--border);
-            overflow-x: auto;
+            font-family: 'DM Mono', monospace;
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: 10px 22px;
             border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s;
+            margin-bottom: 28px
         }
 
-        .keyword {
-            color: #ff7ab6;
+        .start-btn:hover {
+            background: var(--ag)
         }
 
-        .string {
-            color: #8bd5ca;
+        /* TOPIC HEADER */
+        .t-hdr {
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            position: relative
         }
 
-        .comment {
-            color: #6c7086;
+        .t-hdr::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--accent)
         }
 
-        .type {
-            color: #82aaff;
+        .t-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap
         }
 
-        .func {
-            color: #ffd866;
+        .t-cat {
+            font-family: 'DM Mono', monospace;
+            font-size: .52rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: 3px 9px;
+            border-radius: 3px;
+            background: var(--ag);
+            color: var(--accent);
+            border: 1px solid var(--ab)
         }
 
-        /* Comparison */
+        .t-num {
+            font-family: 'DM Mono', monospace;
+            font-size: .52rem;
+            color: var(--t3)
+        }
+
+        .t-hdr h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.6rem;
+            letter-spacing: .04em;
+            line-height: .95;
+            margin-bottom: 10px
+        }
+
+        .t-hdr .tagline {
+            font-size: .84rem;
+            color: var(--t2);
+            line-height: 1.8
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 26px
+        }
+
+        .section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: .08em;
+            color: var(--t1);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .section h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border)
+        }
+
+        .section p {
+            font-size: .82rem;
+            color: var(--t2);
+            line-height: 1.85;
+            margin-bottom: 10px
+        }
+
+        .section p strong {
+            color: var(--t1)
+        }
+
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px
+        }
+
+        .section ul li {
+            font-size: .8rem;
+            color: var(--t2);
+            line-height: 1.7;
+            padding-left: 16px;
+            position: relative
+        }
+
+        .section ul li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent)
+        }
+
+        .section ul li strong {
+            color: var(--t1)
+        }
+
+        /* CODE */
+        pre {
+            background: #060610;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 14px 16px;
+            font-family: 'DM Mono', monospace;
+            font-size: .71rem;
+            line-height: 1.85;
+            color: #c8c8e8;
+            overflow-x: auto;
+            margin: 12px 0;
+            white-space: pre
+        }
+
+        .kw {
+            color: #a78bff
+        }
+
+        .st {
+            color: var(--green)
+        }
+
+        .cm {
+            color: #2a2a48;
+            font-style: italic
+        }
+
+        .fn {
+            color: var(--blue)
+        }
+
+        .ty {
+            color: #ffb347
+        }
+
+        .num {
+            color: var(--accent)
+        }
+
+        .bd {
+            color: var(--red)
+        }
+
+        .gd {
+            color: var(--green)
+        }
+
+        /* COMPARE */
         .compare {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 10px;
+            gap: 10px;
+            margin: 12px 0
         }
 
-        .label-bad {
+        .cmp-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .54rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: 5px 10px;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .cmp-lbl.bad {
+            background: var(--rg);
             color: var(--red);
-            font-weight: bold;
+            border: 1px solid var(--rb);
+            border-bottom: none
         }
 
-        .label-good {
+        .cmp-lbl.good {
+            background: var(--gg);
             color: var(--green);
-            font-weight: bold;
+            border: 1px solid var(--gb);
+            border-bottom: none
         }
 
-        /* Table */
-        table {
+        .cmp-block .cmp-lbl.bad+pre {
+            border: 1px solid var(--rb);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            margin: 0
+        }
+
+        .cmp-block .cmp-lbl.good+pre {
+            border: 1px solid var(--gb);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            margin: 0
+        }
+
+        /* CALLOUT */
+        .callout {
+            border-radius: 7px;
+            padding: 11px 15px;
+            margin: 12px 0;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start
+        }
+
+        .callout.rule {
+            background: var(--ag);
+            border: 1px solid var(--ab);
+            border-left: 3px solid var(--accent)
+        }
+
+        .callout.tip {
+            background: var(--gg);
+            border: 1px solid var(--gb);
+            border-left: 3px solid var(--green)
+        }
+
+        .callout.warn {
+            background: var(--rg);
+            border: 1px solid var(--rb);
+            border-left: 3px solid var(--red)
+        }
+
+        .callout.info {
+            background: rgba(106, 176, 255, .07);
+            border: 1px solid rgba(106, 176, 255, .2);
+            border-left: 3px solid var(--blue)
+        }
+
+        .ci {
+            font-size: .9rem;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .ct {
+            font-size: .79rem;
+            color: var(--t2);
+            line-height: 1.75
+        }
+
+        .ct strong {
+            color: var(--t1)
+        }
+
+        /* TABLE */
+        .tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin: 12px 0;
+            font-size: .77rem
         }
 
-        th,
-        td {
-            border: 1px solid var(--border);
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        th {
-            background: #111120;
+        .tbl th {
+            font-family: 'DM Mono', monospace;
+            font-size: .55rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--t3);
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
             text-align: left;
+            background: var(--card)
         }
 
-        /* Quiz */
+        .tbl td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--t2);
+            vertical-align: top;
+            line-height: 1.5
+        }
+
+        .tbl tr:hover td {
+            background: var(--card)
+        }
+
+        .tbl td strong {
+            color: var(--t1)
+        }
+
+        /* QUIZ */
         .quiz {
-            margin-top: 40px;
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
-        }
-
-        .quiz-question {
-            margin-bottom: 15px;
-        }
-
-        .quiz-option {
+            background: var(--card);
             border: 1px solid var(--border);
-            padding: 8px;
-            margin: 5px 0;
-            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 36px;
+            position: relative
         }
 
-        .quiz-option.correct {
-            border-color: var(--green);
+        .quiz::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent)
         }
 
-        .quiz-option.wrong {
-            border-color: var(--red);
-        }
-
-        .quiz-explanation {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: 5px;
-        }
-
-        .nav-buttons {
-            margin-top: 30px;
+        .quiz-hdr {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            gap: 12px
+        }
+
+        .quiz-hdr .qi {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: var(--ag);
+            border: 1px solid var(--ab);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            flex-shrink: 0
+        }
+
+        .quiz-hdr h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: .95rem;
+            letter-spacing: .08em
+        }
+
+        .quiz-hdr .qs {
+            font-family: 'DM Mono', monospace;
+            font-size: .55rem;
+            color: var(--t3);
+            margin-top: 2px
+        }
+
+        .quiz-hdr .qsc {
+            margin-left: auto;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            color: var(--accent)
+        }
+
+        .quiz-body {
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .q-n {
+            font-family: 'DM Mono', monospace;
+            font-size: .55rem;
+            color: var(--t3);
+            margin-bottom: 4px;
+            letter-spacing: .06em
+        }
+
+        .q-code {
+            background: #060610;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 13px;
+            font-family: 'DM Mono', monospace;
+            font-size: .69rem;
+            line-height: 1.75;
+            color: #c8c8e8;
+            margin-bottom: 10px;
+            white-space: pre
+        }
+
+        .q-text {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--t1);
+            margin-bottom: 11px;
+            line-height: 1.5
+        }
+
+        .q-opts {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .q-opt {
+            background: #0d0d1a;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 9px 13px;
+            cursor: pointer;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: .79rem;
+            color: var(--t2)
+        }
+
+        .q-opt:hover {
+            border-color: var(--border2);
+            color: var(--t1)
+        }
+
+        .q-opt.ok {
+            border-color: var(--green);
+            background: var(--gg);
+            color: var(--green)
+        }
+
+        .q-opt.ng {
+            border-color: var(--red);
+            background: var(--rg);
+            color: var(--red)
+        }
+
+        .q-opt.rev {
+            border-color: var(--green);
+            background: var(--gg);
+            color: var(--green)
+        }
+
+        .ql {
+            width: 21px;
+            height: 21px;
+            border-radius: 4px;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Mono', monospace;
+            font-size: .58rem;
+            font-weight: 500;
+            flex-shrink: 0;
+            transition: all .15s
+        }
+
+        .q-opt.ok .ql,
+        .q-opt.rev .ql {
+            background: var(--green);
+            color: #07070f
+        }
+
+        .q-opt.ng .ql {
+            background: var(--red);
+            color: #fff
+        }
+
+        .q-exp {
+            display: none;
+            background: rgba(167, 139, 255, .07);
+            border: 1px solid rgba(167, 139, 255, .18);
+            border-radius: 6px;
+            padding: 9px 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: .67rem;
+            color: #c0b0ff;
+            line-height: 1.65;
+            margin-top: 8px
+        }
+
+        .q-exp.show {
+            display: block
+        }
+
+        .quiz-foot {
+            padding: 13px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .qbtn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--t2);
+            font-family: 'DM Mono', monospace;
+            font-size: .6rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 7px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .qbtn:hover {
+            border-color: var(--accent);
+            color: var(--accent)
+        }
+
+        .qres {
+            display: none;
+            margin-left: auto;
+            font-family: 'DM Mono', monospace;
+            font-size: .68rem
+        }
+
+        .qres.show {
+            display: block
+        }
+
+        .qres.pass {
+            color: var(--green)
+        }
+
+        .qres.fail {
+            color: var(--red)
+        }
+
+        /* PREV NEXT */
+        .tnav {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border)
+        }
+
+        .tnav-btn {
+            flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 11px 14px;
+            cursor: pointer;
+            transition: all .2s;
+            text-align: left
+        }
+
+        .tnav-btn:hover {
+            border-color: var(--border2)
+        }
+
+        .tnav-btn.nxt {
+            text-align: right
+        }
+
+        .tnav-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: .51rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--t3);
+            margin-bottom: 3px
+        }
+
+        .tnav-title {
+            font-size: .77rem;
+            font-weight: 600;
+            color: var(--t2)
+        }
+
+        .tnav-btn:hover .tnav-title {
+            color: var(--t1)
+        }
+
+        @media(max-width:700px) {
+            .sidebar {
+                width: 220px
+            }
+
+            .page {
+                padding: 24px 16px 50px
+            }
+
+            .compare {
+                grid-template-columns: 1fr
+            }
+
+            .w-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:500px) {
+            .sidebar {
+                display: none
+            }
         }
     </style>
 </head>
@@ -310,236 +1037,994 @@
 <body>
 
     <div class="topbar">
-        <div class="topbar-title">CODING GUIDEBOOK</div>
-        <div class="progress" id="progressTracker"></div>
+        <div class="brand">jackal<span style="color:var(--t3)">@</span>vintage<span
+                style="font-size:.6rem;color:var(--t2);margin-left:6px">:~/standards</span></div>
+        <div class="topbar-right">
+            <div class="prog-bar-wrap">
+                <span class="prog-lbl">Progress</span>
+                <div class="prog-bar">
+                    <div class="prog-fill" id="prog-fill"></div>
+                </div>
+                <span class="prog-pct" id="prog-pct">0%</span>
+            </div>
+            <div class="stat-pill">Passed: <span id="tp-passed">0</span>/<span id="tp-total">14</span></div>
+            <div class="stat-pill">XP: <span id="tp-xp">0</span></div>
+        </div>
     </div>
 
-    <div class="container">
+    <div class="layout">
         <div class="sidebar">
-            <h2>Topics</h2>
-            <div class="sidebar-stats" id="sidebarStats"></div>
-            <div id="topicList"></div>
+            <div class="sb-head">
+                <div
+                    style="font-family:'DM Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:8px">
+                    Your Progress</div>
+                <div class="sb-stats">
+                    <div class="sb-stat">
+                        <div class="sn" id="st-p">0</div>
+                        <div class="sl">Passed</div>
+                    </div>
+                    <div class="sb-stat">
+                        <div class="sn" id="st-t">14</div>
+                        <div class="sl">Topics</div>
+                    </div>
+                    <div class="sb-stat">
+                        <div class="sn" id="st-x">0</div>
+                        <div class="sl">XP</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sb-scroll" id="sb-nav"></div>
         </div>
-        <div class="main" id="mainContent"></div>
+
+        <div class="main" id="main">
+            <div class="page show" id="page-welcome">
+                <div class="welcome">
+                    <div class="w-ey">// Software Engineering Standards</div>
+                    <h1>Write Code<br>That <em>Lasts</em></h1>
+                    <p>Universal coding standards and best practices that apply across every language — Java, Rust,
+                        Python, JavaScript, Go, and beyond. Each topic has real lesson content with code examples, then
+                        a quiz to lock the knowledge in.</p>
+                    <button class="start-btn" onclick="goTo(0)">Start Reading →</button>
+                    <div class="w-grid" id="cat-grid"></div>
+                </div>
+            </div>
+            <div id="topic-pages"></div>
+        </div>
     </div>
 
     <script>
-        const PASS_THRESHOLD = 4;
-
-        const topics = [
-            { category: "Naming & Structure", title: "Naming Things Well", tagline: "Clarity over cleverness." },
-            { category: "Naming & Structure", title: "Code Formatting", tagline: "Consistency reduces cognitive load." },
-            { category: "Clean Code Principles", title: "Comments & Documentation", tagline: "Explain why, not what." },
-            { category: "Clean Code Principles", title: "Error Handling", tagline: "Fail explicitly and safely." },
-            { category: "Functions & Design", title: "Function Design", tagline: "Small, pure, predictable." },
-            { category: "Functions & Design", title: "DRY Principle", tagline: "Eliminate duplication." },
-            { category: "Testing & Quality", title: "Writing Tests", tagline: "Confidence through verification." },
-            { category: "Testing & Quality", title: "Code Reviews", tagline: "Quality is a team sport." },
-            { category: "Security & Performance", title: "Security Fundamentals", tagline: "Assume hostile input." },
-            { category: "Security & Performance", title: "Performance Basics", tagline: "Measure before optimizing." },
-            { category: "Tooling & Workflow", title: "Git & Version Control", tagline: "History is architecture." },
-            { category: "Tooling & Workflow", title: "Writing READMEs", tagline: "Documentation is UX." },
-            { category: "Professional Practice", title: "Refactoring", tagline: "Improve without changing behavior." },
-            { category: "Professional Practice", title: "Language-Specific Best Practices", tagline: "Java, Rust, Python, JS, Go." }
+        // ══════════════════════════════════════
+        // COMPLETE CURRICULUM DATA
+        // ══════════════════════════════════════
+        const CATS = [
+            { name: 'Naming & Structure', icon: '🏷' },
+            { name: 'Clean Code Principles', icon: '✨' },
+            { name: 'Functions & Design', icon: '⚙️' },
+            { name: 'Testing & Quality', icon: '🧪' },
+            { name: 'Security & Performance', icon: '🔐' },
+            { name: 'Tooling & Workflow', icon: '🔧' },
+            { name: 'Professional Practice', icon: '🎓' },
         ];
 
-        function loadState() {
-            return JSON.parse(localStorage.getItem("jackal_standards") || "{}");
+        const TOPICS = [
+            // ── 0 ─────────────────────────────────
+            {
+                cat: 0, title: 'Naming Things Well', tagline: 'The single most impactful thing you can do for code quality. Names are read far more often than they are written.',
+                sections: [
+                    { h: 'Why Names Matter', body: `Code is read by humans far more than it is executed by machines. A variable named <strong>d</strong> tells the next developer nothing. A variable named <strong>daysSinceLastLogin</strong> tells them everything. The goal of naming is to communicate intent so clearly that comments become unnecessary.` },
+                    {
+                        h: 'Variable & Constant Naming', compare: true,
+                        bad: `// ❌ What is d? What is s? What is r?
+int d = 7;
+String s = "active";
+double r = 0.08;
+
+if (s.equals("active") && d > 5) {
+    total = total * (1 + r);
+}`,
+                        good: `// ✅ Self-documenting — no comment needed
+int daysSinceLastLogin = 7;
+String accountStatus   = "active";
+double annualInterestRate = 0.08;
+
+if (accountStatus.equals("active")
+    && daysSinceLastLogin > 5) {
+    total = total * (1 + annualInterestRate);
+}`},
+                    {
+                        h: 'Rules to Follow', list: [
+                            '<strong>Booleans:</strong> prefix with is, has, can, should — isLoggedIn, hasPermission, canEdit',
+                            '<strong>Collections:</strong> use plural nouns — users, errorMessages, activeConnections',
+                            '<strong>Constants:</strong> ALL_CAPS_SNAKE_CASE — MAX_RETRY_COUNT, DEFAULT_TIMEOUT_MS',
+                            '<strong>Functions:</strong> use verb phrases — calculateTax(), fetchUserData(), sendEmail()',
+                            '<strong>Avoid encodings:</strong> userString, accountInt — the type system already knows',
+                        ]
+                    },
+                    {
+                        h: 'Conventions by Language', table: [
+                            ['Language', 'Variables', 'Functions', 'Classes', 'Constants'],
+                            ['Java', 'camelCase', 'camelCase()', 'PascalCase', 'ALL_CAPS'],
+                            ['Rust', 'snake_case', 'snake_case()', 'PascalCase', 'ALL_CAPS'],
+                            ['Python', 'snake_case', 'snake_case()', 'PascalCase', 'ALL_CAPS'],
+                            ['JavaScript', 'camelCase', 'camelCase()', 'PascalCase', 'ALL_CAPS'],
+                            ['Go', 'camelCase', 'camelCase()', 'PascalCase', 'PascalCase'],
+                        ]
+                    },
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>The Golden Rule:</strong> A name should answer — what does this hold and why does it exist? If you need a comment to explain a name, the name is wrong.' },
+                ],
+                quiz: [
+                    { q: 'Which variable name best follows naming best practices?', opts: ['d', 'daysSince', 'dsl', 'daysSinceLastLogin'], ans: 3, exp: 'daysSinceLastLogin is fully explicit — no guessing required. d and dsl are cryptic. daysSince is vague. Names should reveal purpose without a comment.' },
+                    { q: 'What prefix should boolean variables typically use?', opts: ['get, set', 'num, count', 'is, has, can', 'do, make'], ans: 2, exp: 'Boolean prefixes like isActive, hasPermission, canDelete make it immediately clear the variable holds a true/false value.' },
+                    { q: 'A function named process() is an example of:', opts: ['Good concise naming', 'A vague name that hides intent', 'Correct verb naming', 'An appropriate generic name'], ans: 1, exp: 'process() is too vague — process what? How? processPayment(), processUserRegistration() are better. Names should make purpose unmistakable.' },
+                    { q: 'Constants should be written in which style?', opts: ['camelCase', 'PascalCase', 'ALL_CAPS_SNAKE_CASE', 'lowercase'], ans: 2, exp: 'ALL_CAPS_SNAKE_CASE (like MAX_CONNECTIONS, DEFAULT_TIMEOUT) is the universal constant convention across Java, Python, JavaScript, C, and most other languages.' },
+                    { q: 'When should you need a comment to explain a variable name?', opts: ['Always — comments are good', 'For complex variables', 'Never — if you need a comment, the name is wrong', 'Only for public APIs'], ans: 2, exp: 'If a name requires a comment to explain it, the name itself is insufficient. Rename it to make the comment redundant. The best code reads like plain English.' },
+                ]
+            },
+
+            // ── 1 ─────────────────────────────────
+            {
+                cat: 0, title: 'Code Formatting', tagline: 'Consistent formatting is not cosmetic — it directly affects how quickly you and others can read and reason about code.',
+                sections: [
+                    {
+                        h: 'Indentation & Spacing', compare: true,
+                        bad: `// ❌ Inconsistent — cognitively exhausting
+function login(user){
+if(user.active){
+doLogin(user)
+ if(user.isAdmin)
+  grantAdminAccess(user)
+}}`,
+                        good: `// ✅ Consistent 4-space indent — instantly scannable
+function login(user) {
+    if (user.active) {
+        doLogin(user);
+        if (user.isAdmin) {
+            grantAdminAccess(user);
         }
+    }
+}`},
+                    { h: 'Line Length', body: `Keep lines under <strong>80–120 characters</strong>. Long lines force horizontal scrolling. Break long expressions at logical boundaries — method chains, operator positions, or argument lists.` },
+                    {
+                        h: 'Use a Formatter — Always', table: [
+                            ['Language', 'Formatter', 'Command'],
+                            ['Java', 'google-java-format / spotless', './gradlew spotlessApply'],
+                            ['Rust', 'rustfmt', 'cargo fmt'],
+                            ['Python', 'black', 'black .'],
+                            ['JavaScript/TS', 'Prettier', 'npx prettier --write .'],
+                            ['Go', 'gofmt', 'gofmt -w .'],
+                            ['C/C++', 'clang-format', 'clang-format -i *.cpp'],
+                        ]
+                    },
+                ],
+                callouts: [
+                    { kind: 'tip', icon: '✅', text: '<strong>Pick one style and enforce it everywhere with a formatter.</strong> Do not debate tabs vs spaces manually — configure the formatter and never think about it again.' },
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Deep nesting warning (3+ levels):</strong> If code is indented more than 3 levels deep, the function likely does too many things. Use early returns and extracted helper functions to reduce nesting.' },
+                ],
+                quiz: [
+                    { q: 'What is the standard recommended max line length in most style guides?', opts: ['40–60 chars', '80–120 chars', '200+ chars', 'No limit'], ans: 1, exp: '80–120 characters is the standard. 80 is traditional (two files side by side). 120 is a common modern compromise. Beyond this, lines become hard to read and compare.' },
+                    { q: 'What does the Single Responsibility Principle say about functions?', opts: ['Functions should be as long as needed', 'Functions should do one thing well', 'Functions should always call other functions', 'Functions should never exceed 10 lines'], ans: 1, exp: 'One function, one job. If you describe it with "and" (validates AND saves AND emails), split it up. Focused functions are easier to test, name, read, and reuse.' },
+                    { q: 'Which is the correct formatter for Rust?', opts: ['rustlint', 'cargo check', 'rustfmt via cargo fmt', 'clippy'], ans: 2, exp: 'cargo fmt runs rustfmt, the official Rust formatter. clippy is a linter (catches logic issues), not a formatter. Both are useful but serve different purposes.' },
+                    { q: 'Why is deep nesting (4+ levels) a code smell?', opts: ['It uses more memory', 'It signals a function doing too many things', 'It causes compilation errors', 'It only affects performance'], ans: 1, exp: 'Deep nesting makes code hard to follow. Use guard clauses (early returns), extracted helper functions, or inversion of conditions to flatten nesting and improve readability.' },
+                    { q: 'Why use automated formatters instead of formatting manually?', opts: ['Formatters are faster to type', 'They eliminate style debates and ensure consistency automatically', 'Manual formatting is more accurate', 'Formatters only work in one language'], ans: 1, exp: 'Automated formatters remove subjective debates from code reviews. Everyone\'s code looks the same. More time for real engineering discussions instead of brace-placement arguments.' },
+                ]
+            },
 
-        function saveState(state) {
-            localStorage.setItem("jackal_standards", JSON.stringify(state));
-        }
+            // ── 2 ─────────────────────────────────
+            {
+                cat: 1, title: 'Comments & Documentation', tagline: 'Comments that explain WHY are gold. Comments that restate WHAT the code does are noise.',
+                sections: [
+                    {
+                        h: 'The Purpose of Comments', compare: true,
+                        bad: `# ❌ Restates what the code obviously does
+# Loop through users
+for user in users:
+    # Check if user is active
+    if user.is_active:
+        # Send email to user
+        send_email(user)`,
+                        good: `# ✅ Explains WHY — code already shows WHAT
+# Only email active users — inactive accounts opted out
+# per privacy policy update 2024-03 (ticket #4821)
+for user in users:
+    if user.is_active:
+        send_email(user)`},
+                    {
+                        h: 'When to Comment', list: [
+                            '<strong>Complex algorithms:</strong> explain the approach and why it was chosen',
+                            '<strong>Non-obvious decisions:</strong> "Using 16 here because of X protocol limitation"',
+                            '<strong>Warnings:</strong> "This method is NOT thread-safe"',
+                            '<strong>TODO / FIXME:</strong> always include a ticket number — // TODO(#4821): refactor when new auth is live',
+                            '<strong>Public APIs:</strong> every public function deserves a docstring',
+                        ]
+                    },
+                    {
+                        h: 'Documentation Strings', body: `Public APIs should have documentation comments. These generate documentation automatically and appear in IDE tooltips for every user of your code.`, code: `/**
+ * Calculates compound interest over the given period.
+ *
+ * @param principal  the starting amount (must be > 0)
+ * @param rate       annual rate as decimal (e.g. 0.05 for 5%)
+ * @param years      number of years (must be >= 1)
+ * @return           the final amount after compound interest
+ * @throws IllegalArgumentException if principal <= 0
+ */
+public double compoundInterest(
+    double principal, double rate, int years) { ... }`},
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>Comment the why, not the what.</strong> If someone asks "what does this do?" — the code should answer. If they ask "why does it do that?" — the comment should answer.' },
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Outdated comments are worse than no comments.</strong> They actively mislead. When you change code, update or delete its comments. A lie in a comment can waste hours of debugging.' },
+                ],
+                quiz: [
+                    { q: 'What should comments primarily explain?', opts: ['What the code does (restate the logic)', 'Why the code does it (intent, context, trade-offs)', 'Who wrote the code', 'When the code was written'], ans: 1, exp: 'Code shows WHAT. Comments explain WHY. Restating code in English adds noise. Explaining business logic, constraints, or non-obvious decisions adds real value.' },
+                    { q: 'Which comment is most valuable?', opts: ['// i++ increments i', '// Loop through array', '// Using exponential backoff here — linear retry caused thundering herd in prod (incident #2891)', '// This is a function'], ans: 2, exp: 'The best comment explains a non-obvious decision and gives context — why exponential backoff, where to find more info. The others just restate the obvious.' },
+                    { q: 'What is a docstring / documentation comment for?', opts: ['Internal implementation details', 'Documenting public APIs — params, returns, exceptions, and purpose', 'Disabling linting warnings', 'Marking deprecated code'], ans: 1, exp: 'Docstrings document public APIs. They generate docs automatically and appear in IDE tooltips to help callers use functions correctly without reading the source.' },
+                    { q: 'An outdated comment that no longer matches the code is:', opts: ['Harmless — it\'s just old', 'Better than no comment', 'Worse than no comment — it actively misleads', 'OK if it was correct when written'], ans: 2, exp: 'An outdated comment is a lie. It actively misleads developers into misunderstanding the code. Always update or delete comments when you change logic.' },
+                    { q: 'What should TODO comments always include?', opts: ['Only "TODO"', 'Only a description', 'A description and a ticket/issue number', 'The developer\'s name and date only'], ans: 2, exp: '// TODO(#4821): refactor this when new auth system is live. Without a ticket number, TODOs often rot forever. The ticket gives context and traceability.' },
+                ]
+            },
 
-        function updateSidebar() {
-            const topicList = document.getElementById("topicList");
-            const state = loadState();
-            topicList.innerHTML = "";
-            let passed = 0;
-            let totalPoints = 0;
+            // ── 3 ─────────────────────────────────
+            {
+                cat: 1, title: 'Error Handling', tagline: 'Errors are not exceptions — they are part of normal program flow. Handle them explicitly, early, and with context.',
+                sections: [
+                    {
+                        h: 'Fail Fast — Fail Loudly', compare: true,
+                        bad: `// ❌ Silent failure — swallowing exceptions
+try {
+    saveUserToDatabase(user);
+} catch (Exception e) {
+    // do nothing
+}
+// User thinks save worked. Data is lost. No trace.`,
+                        good: `// ✅ Explicit failure with full context
+try {
+    saveUserToDatabase(user);
+} catch (DatabaseException e) {
+    logger.error("Failed to save user id={}: {}",
+        user.getId(), e.getMessage(), e);
+    throw new UserSaveException(
+        "Could not persist user " + user.getId(), e);
+}`},
+                    {
+                        h: 'Guard Clauses — Validate Inputs Early', code: `# Validate at the entry point — guard clauses
+# This keeps main logic unindented and readable
+def create_account(email: str, age: int) -> Account:
+    if not email or "@" not in email:
+        raise ValueError(f"Invalid email: {email!r}")
+    if age < 18:
+        raise ValueError(f"Must be 18+, got {age}")
+    if age > 150:
+        raise ValueError(f"Unrealistic age: {age}")
 
-            topics.forEach((t, i) => {
-                const item = document.createElement("div");
-                item.className = "topic-item";
-                item.onclick = () => loadTopic(i);
+    # Main logic — only runs when inputs are valid
+    return Account(email=email, age=age)`},
+                    {
+                        h: 'Preserve Error Context', list: [
+                            '<strong>Java:</strong> throw new AppException("msg", originalException) — preserves the full cause chain',
+                            '<strong>Rust:</strong> use ? operator or .map_err() — error types chain via From trait',
+                            '<strong>Python:</strong> raise NewException("msg") from original_exception',
+                            '<strong>JavaScript:</strong> include err.message in new Error() and log the original separately',
+                        ]
+                    },
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>Never return null for missing data.</strong> Return an empty collection, Optional/Option, or a Result type. Null propagates silently until it explodes somewhere unexpected.' },
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Empty catch blocks are catastrophic.</strong> They swallow errors silently. The program continues as if nothing happened, but the operation failed. Always at minimum log the exception.' },
+                ],
+                quiz: [
+                    { q: 'What does "fail fast" mean?', opts: ['Crash the program on any error', 'Detect and report errors as close to their source as possible', 'Use faster error handling routines', 'Skip validation to run faster'], ans: 1, exp: 'Fail fast means don\'t let errors propagate silently. Detect them at the source, report them loudly with context. Silent failures become mysterious bugs that are very hard to trace.' },
+                    { q: 'What is wrong with an empty catch block?', opts: ['Nothing — it is valid', 'It suppresses the error silently, making the bug nearly impossible to debug', 'It uses more memory', 'It slows down the program'], ans: 1, exp: 'Empty catch blocks swallow errors completely. The program continues as if nothing happened, but the operation failed. The bug surfaces later with no trail back to the real cause.' },
+                    { q: 'Guard clauses validate inputs at the start of a function. What is the main benefit?', opts: ['Faster execution', 'Keeps main logic unindented and readable, and catches bad data at the boundary', 'Uses less memory', 'Avoids needing functions'], ans: 1, exp: 'Guard clauses return or throw early when inputs are invalid. The main logic stays at the same indentation level and invalid data never reaches core logic.' },
+                    { q: 'Why should you never return null from a function expecting a collection?', opts: ['null is not a valid value', 'Null propagates silently — callers must check for it or get a crash', 'Collections cannot hold null', 'It wastes memory'], ans: 1, exp: 'null forces every caller to check before using the result. One missed null check = crash. Return an empty list instead — the caller can check isEmpty() safely without crashing.' },
+                    { q: 'When rethrowing an exception, what must you preserve?', opts: ['The original message only', 'The line number', 'The original exception as the cause, maintaining the full stack trace', 'The exception type only'], ans: 2, exp: 'Always pass the original exception as the cause: new AppException("msg", originalEx). This preserves the full stack trace so you can see exactly where the original error occurred.' },
+                ]
+            },
 
-                const dot = document.createElement("div");
-                dot.className = "topic-dot";
+            // ── 4 ─────────────────────────────────
+            {
+                cat: 2, title: 'Function Design', tagline: 'Small, focused, predictable functions are the atoms of good software.',
+                sections: [
+                    {
+                        h: 'One Function, One Job', compare: true,
+                        bad: `// ❌ Does 5 things — untestable, unnameable
+function submitOrder(order) {
+    if (!order.items.length) throw new Error("Empty");
+    let total = order.items.reduce((s,i) => s+i.price, 0);
+    if (order.coupon === "SAVE10") total *= 0.9;
+    db.orders.save({...order, total});
+    emailService.send(order.email, "Order: $"+total);
+}`,
+                        good: `// ✅ Each function does exactly one thing
+function submitOrder(order) {
+    validateOrder(order);
+    const total = calculateTotal(order);
+    saveOrder(order, total);
+    sendConfirmationEmail(order, total);
+}
+// Each sub-function is independently testable`},
+                    {
+                        h: 'Parameters — Fewer is Better', compare: true,
+                        bad: `// ❌ 7 parameters — which order? Easy to get wrong
+createUser("Alice","alice@x.com",25,"Nairobi",true,false,"admin");`,
+                        good: `// ✅ Group into a descriptive object
+createUser({
+    name: "Alice", email: "alice@x.com",
+    age: 25,       city: "Nairobi",
+    active: true,  role: "admin"
+});`},
+                    {
+                        h: 'Pure Functions', compare: true,
+                        bad: `// ❌ Impure — depends on external state
+let discount = 0.1;
+function getPrice(base) {
+    return base - (base * discount); // hidden global dependency
+}`,
+                        good: `// ✅ Pure — only depends on inputs, fully predictable
+function getPrice(base, discountRate) {
+    return base - (base * discountRate);
+}
+// Same input = same output. Always. Easy to test.`},
+                ],
+                callouts: [
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Flag arguments are a smell.</strong> A boolean parameter like createUser(data, true) is confusing — what does true mean? Split into two functions: createActiveUser(data) and createInactiveUser(data).' },
+                ],
+                quiz: [
+                    { q: 'What does the Single Responsibility Principle mean for functions?', opts: ['Functions should be a single line', 'A function should have one job and do it well', 'Functions should have a single parameter', 'Functions should only be called once'], ans: 1, exp: 'One function, one job. When a function does multiple things it becomes hard to name, hard to test, and impossible to reuse independently.' },
+                    { q: 'What is a flag argument?', opts: ['A parameter that marks an error', 'A boolean parameter that switches function behaviour — a code smell', 'A parameter with a default value', 'A string argument for filtering'], ans: 1, exp: 'Boolean flag parameters like process(data, true) are confusing. Split it into two well-named functions instead. Each path becomes clear and independently testable.' },
+                    { q: 'A pure function is one that:', opts: ['Uses no variables', 'Returns the same output for the same input with no side effects', 'Has no parameters', 'Runs in constant time'], ans: 1, exp: 'Pure functions are deterministic and isolated. Same input → same output, always. No hidden dependencies, no mutations. They are trivial to test and safe to run in parallel.' },
+                    { q: 'What is the ideal number of function parameters?', opts: ['0–2, with 3 acceptable and 4+ a red flag', 'Exactly 3', 'As many as needed', 'Between 5 and 10'], ans: 0, exp: '0–2 is ideal. Each additional parameter increases cognitive load and the chance of calling the function with arguments in the wrong order. Group related params into an object when you need more.' },
+                    { q: 'What is the main benefit of breaking a big function into smaller ones?', opts: ['Uses less memory', 'Each piece is independently named, testable, and reusable', 'Compiles faster', 'Reduces the number of files'], ans: 1, exp: 'Small, focused functions can be tested in isolation, given clear names, and reused in other contexts. The calling code becomes a readable sequence of named steps.' },
+                ]
+            },
 
-                const result = state[i];
-                if (result?.passed) {
-                    dot.style.background = "var(--green)";
-                    passed++;
-                    totalPoints += result.score;
-                } else if (result?.attempted) {
-                    dot.style.background = "var(--amber)";
-                    totalPoints += result.score || 0;
+            // ── 5 ─────────────────────────────────
+            {
+                cat: 2, title: "DRY — Don't Repeat Yourself", tagline: 'Every piece of knowledge should have a single, authoritative representation in a system.',
+                sections: [
+                    { h: 'What DRY Really Means', body: `DRY is about duplicated <strong>knowledge</strong>, not just duplicated characters. If you change the business rule "user must be 18+" in one place but forget to change the same rule copied into three other places, you have a silent bug. DRY prevents that.` },
+                    {
+                        h: 'Spotting Duplication', compare: true,
+                        bad: `// ❌ Same validation logic in 3 controllers
+// LoginController:
+if (email.length < 5 || !email.includes("@")) error();
+// RegisterController:
+if (email.length < 5 || !email.includes("@")) error();
+// UpdateProfileController:
+if (email.length < 5 || !email.includes("@")) error();
+// Change the rule → must update 3 places (and miss one)`,
+                        good: `// ✅ Single source of truth
+function isValidEmail(email) {
+    return email.length >= 5 && email.includes("@");
+}
+// Used in all 3 places — change it once, fixed everywhere`},
+                    { h: 'Magic Numbers — Another Form of Duplication', body: `The number 86400 scattered through a codebase means nothing. The constant <strong>SECONDS_PER_DAY = 86400</strong> is self-documenting and changeable in one place.` },
+                    { h: 'The Rule of Three', body: `Don't abstract prematurely. Write it once. Note it the second time. Extract it the <strong>third</strong> time you write the same thing. This prevents both under-abstraction and premature over-abstraction.` },
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>DRY rule:</strong> If you find yourself writing the same logic a second time, stop. Extract it. When that logic needs to change, it changes in exactly one place.' },
+                    { kind: 'info', icon: '💡', text: '<strong>Wrong DRY:</strong> Code that looks identical but represents genuinely different concepts should NOT be merged. If two functions will diverge as requirements grow, keep them separate. Forced abstraction creates coupling.' },
+                ],
+                quiz: [
+                    { q: 'DRY stands for:', opts: ['Do Reuse Yourself', 'Don\'t Repeat Yourself', 'Define Reusable Yet', 'Dynamic Reuse Yield'], ans: 1, exp: 'DRY = Don\'t Repeat Yourself. Every piece of knowledge should have a single, authoritative representation. Duplicated knowledge means bugs when the rule changes in one place but not others.' },
+                    { q: 'A magic number is:', opts: ['A number used in encryption', 'A literal number in code with no explanation of its meaning', 'A randomly generated number', 'A number that causes errors'], ans: 1, exp: 'Magic numbers like if (age > 18) or delay(86400) have hidden meaning. Replace them with named constants: MIN_ADULT_AGE = 18, SECONDS_PER_DAY = 86400.' },
+                    { q: 'The Rule of Three says to abstract code when:', opts: ['You write it the first time', 'You write it the second time', 'You write it the third time', 'You write it more than 10 times'], ans: 2, exp: 'Write it once. Note it twice. Extract it the third time. This prevents both under-abstraction (copy-paste everywhere) and premature over-abstraction.' },
+                    { q: 'When should two identical-looking code blocks NOT be merged?', opts: ['Never — identical code should always merge', 'When they represent different concepts that will evolve independently over time', 'When they are in different files', 'When they use different variable names'], ans: 1, exp: 'DRY is about knowledge, not text. If two functions look the same today but represent different business concepts that will evolve differently, keep them separate. Forced abstraction creates tight coupling.' },
+                    { q: 'What is the main risk of duplicated business logic?', opts: ['It uses more memory', 'Changing the logic requires finding and updating every copy — miss one and you have a bug', 'It runs slower', 'It makes code longer'], ans: 1, exp: 'Duplicated logic must be updated in every location when the rule changes. Missing even one creates a silent inconsistency — a bug that is hard to trace because other copies still "work".' },
+                ]
+            },
+
+            // ── 6 ─────────────────────────────────
+            {
+                cat: 3, title: 'Writing Tests', tagline: 'Tests are not extra work — they are proof that your code does what you think it does.',
+                sections: [
+                    { h: 'Why Tests Matter', body: `Tests give you <strong>confidence to change code</strong>. Without tests, every refactor is a gamble. With tests, you can move fast because any mistake immediately shows as a failing test. Tests are also living documentation — they show exactly how code is meant to be used.` },
+                    {
+                        h: 'Arrange-Act-Assert (AAA)', code: `def test_calculate_discount_for_premium_user():
+    # Arrange — set up the scenario
+    user = User(tier="premium")
+    cart = Cart(items=[Item(price=100), Item(price=50)])
+
+    # Act — call the code being tested
+    final_price = calculate_discount(user, cart)
+
+    # Assert — verify the outcome
+    assert final_price == 135.0  # 10% off for premium`},
+                    {
+                        h: 'What to Test', list: [
+                            '<strong>Happy path:</strong> the normal, expected input and output',
+                            '<strong>Edge cases:</strong> empty input, zero, maximum values, boundary values',
+                            '<strong>Error cases:</strong> what happens with invalid input — does it fail correctly?',
+                            '<strong>Regression tests:</strong> for every bug you fix, write a test that would have caught it',
+                        ]
+                    },
+                    {
+                        h: 'Test Names Are Documentation', compare: true,
+                        bad: `# ❌ Name tells you nothing when it fails
+def test_discount():
+def test1():
+def testUser():`,
+                        good: `# ✅ Name describes scenario and expected outcome
+def test_premium_user_receives_10_percent_discount():
+def test_empty_cart_raises_validation_error():
+def test_expired_coupon_returns_zero_discount():`},
+                ],
+                callouts: [
+                    { kind: 'tip', icon: '✅', text: '<strong>One assertion per test</strong> is ideal. If a test has 10 assertions and the 3rd fails, you never see the results of 4–10. Separate assertions mean clearer failure messages.' },
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Testing anti-patterns:</strong> Testing implementation details instead of behaviour. Tests that only pass when you write them. Tests with no assertion. Tests that test the framework instead of your code.' },
+                ],
+                quiz: [
+                    { q: 'What are the three phases of the AAA testing pattern?', opts: ['Add, Apply, Assert', 'Arrange, Act, Assert', 'Assume, Assign, Assert', 'Allocate, Activate, Assess'], ans: 1, exp: 'AAA: Arrange (set up data and state), Act (call the function being tested), Assert (verify the result). This structure makes tests easy to read and debug.' },
+                    { q: 'Why is having tests critical when refactoring code?', opts: ['Tests make refactoring slower', 'Tests give confidence that refactored code still works — any regression shows as a failing test', 'Tests are not relevant to refactoring', 'Tests prevent the need for refactoring'], ans: 1, exp: 'Without tests, refactoring is dangerous. With tests, you change code and run tests immediately. Any mistake appears instantly. Tests are the safety net.' },
+                    { q: 'What should you do every time you fix a bug?', opts: ['Document it in comments only', 'Write a regression test that would have caught the bug', 'Delete the related test', 'Increase test timeouts'], ans: 1, exp: 'A regression test prevents the bug from coming back. If you fixed it without a test, it could be reintroduced later with no warning. The test documents the bug and guards against its return.' },
+                    { q: 'Why is test_expired_coupon_returns_zero_discount() better than test_coupon()?', opts: ['It is shorter', 'It describes the exact scenario and expected outcome — when it fails you know exactly what broke', 'It avoids special characters', 'It tests more things'], ans: 1, exp: 'Descriptive test names are living documentation. When a test fails, the name tells you exactly what scenario broke and what the expected behaviour was. test_coupon() tells you nothing.' },
+                    { q: 'What is a testing anti-pattern?', opts: ['Testing edge cases', 'Testing only the happy path and skipping error cases', 'Using AAA structure', 'Having many small tests'], ans: 1, exp: 'Testing only the happy path gives false confidence. Real bugs often hide in edge cases — empty input, null values, boundary conditions. A suite with only happy path tests misses most real bugs.' },
+                ]
+            },
+
+            // ── 7 ─────────────────────────────────
+            {
+                cat: 3, title: 'Code Reviews', tagline: 'The best way to share knowledge, catch bugs before production, and raise the whole team\'s quality.',
+                sections: [
+                    { h: 'What Code Reviews Are For', body: `Code reviews are not about catching errors the compiler missed. They are about <strong>knowledge sharing</strong>, <strong>design feedback</strong>, <strong>catching logical bugs</strong>, and <strong>maintaining team standards</strong>. A reviewed codebase is a codebase that many eyes understand.` },
+                    {
+                        h: 'What to Look For as a Reviewer', list: [
+                            '<strong>Does it work?</strong> Read the logic, not just the style',
+                            '<strong>Is it clear?</strong> Would someone unfamiliar understand this in 6 months?',
+                            '<strong>Is it tested?</strong> Are edge cases and error paths covered?',
+                            '<strong>Does it follow team standards?</strong> Naming, formatting, error handling',
+                            '<strong>Is there a simpler way?</strong> Over-engineering is as dangerous as under-engineering',
+                            '<strong>Security:</strong> any inputs go directly into SQL? Any secrets committed?',
+                        ]
+                    },
+                    {
+                        h: 'Writing Code That Reviews Well', list: [
+                            'Keep PRs small — under 400 lines is ideal. Large PRs get rubber-stamped.',
+                            'Write a clear PR description: what changed, why it changed, and how to test',
+                            'Self-review before requesting review — read your diff as a stranger would',
+                            'Respond to every comment, even to say you have noted it',
+                            'Do not merge with unresolved blocking comments',
+                        ]
+                    },
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>Review the code, not the person.</strong> "This function could be clearer" not "you wrote this badly." Technical feedback should be constructive and specific.' },
+                    { kind: 'tip', icon: '✅', text: '<strong>The 10-minute rule:</strong> If reviewing a change takes more than 10 minutes to understand what it is doing, it should be split into smaller, more focused PRs.' },
+                ],
+                quiz: [
+                    { q: 'What is the primary purpose of code reviews?', opts: ['Catching syntax errors', 'Knowledge sharing, design feedback, catching logic bugs, and maintaining standards', 'Slowing down development', 'Replacing testing'], ans: 1, exp: 'Code reviews spread knowledge, catch logical errors before production, improve design, and ensure standards. They are about shared ownership and quality, not gatekeeping.' },
+                    { q: 'What is the ideal PR size for effective review?', opts: ['As large as possible', 'Under 400 lines', 'Exactly 1000 lines', 'Size does not matter'], ans: 1, exp: 'Small PRs (under ~400 lines) get thorough review. Large PRs get rubber-stamped because reviewers cannot hold the whole change in their head. Break large features into reviewable increments.' },
+                    { q: 'Which is the correct way to phrase a code review comment?', opts: ['"You always write messy code"', '"This does not make sense"', '"This function could be split into smaller pieces to make intent clearer"', '"Wrong"'], ans: 2, exp: 'Review the code, not the person. Be specific and constructive: explain what, why, and suggest an alternative. Vague or personal comments do not help and damage team culture.' },
+                    { q: 'What should a PR description include?', opts: ['Just the ticket number', 'What changed, why it was needed, and how to test it', 'Only the list of files changed', 'The developer\'s hours spent'], ans: 1, exp: 'A good PR description explains: WHAT changed, WHY (the problem being solved), and HOW TO TEST it. This helps reviewers understand intent and verify the change works.' },
+                    { q: 'What should you do before requesting a code review?', opts: ['Wait for the reviewer to ask for context', 'Self-review your own diff as if you didn\'t write it', 'Submit immediately after writing', 'Ask a colleague to write the PR description'], ans: 1, exp: 'Self-review catches obvious issues before wasting a reviewer\'s time. Read your diff top to bottom as a stranger would. You will often spot naming issues, missed edge cases, or unnecessary complexity.' },
+                ]
+            },
+
+            // ── 8 ─────────────────────────────────
+            {
+                cat: 4, title: 'Security Fundamentals', tagline: 'Security is not a feature you add at the end — it is a discipline you practice from the first line.',
+                sections: [
+                    {
+                        h: 'Never Trust Input', compare: true,
+                        bad: `// ❌ SQL injection — attacker enters: ' OR '1'='1
+String q = "SELECT * FROM users WHERE email='"
+           + email + "'";
+// Attacker logs in as anyone, dumps the entire DB`,
+                        good: `// ✅ Parameterised query — input is data, never code
+String q = "SELECT * FROM users WHERE email=?";
+PreparedStatement stmt = conn.prepareStatement(q);
+stmt.setString(1, email);
+// No matter what attacker types — it is a literal string`},
+                    {
+                        h: 'Secrets & Credentials', compare: true,
+                        bad: `// ❌ Never do this
+const API_KEY = "sk-live-abc123xyz987...";
+const DB_PASS = "supersecret123";`,
+                        good: `// ✅ Load from environment — actual values in .env (git-ignored)
+const API_KEY = process.env.OPENAI_API_KEY;
+const DB_PASS = process.env.DB_PASSWORD;`},
+                    { h: 'Principle of Least Privilege', body: `Every component, user, and service should have <strong>only the permissions it needs</strong> and nothing more. A read-only reporting service should not have write access to the database. Limit the blast radius of any potential compromise.` },
+                ],
+                callouts: [
+                    { kind: 'warn', icon: '⚠️', text: '<strong>SQL Injection is still the most common web vulnerability.</strong> Never build SQL strings by concatenating user input. Always use parameterised queries / prepared statements.' },
+                    { kind: 'rule', icon: '📏', text: '<strong>OWASP Top 10</strong> is the standard reference for web security vulnerabilities. Every developer should know it: SQL injection, broken authentication, XSS, IDOR, SSRF, and others.' },
+                ],
+                quiz: [
+                    { q: 'What is SQL injection?', opts: ['A way to speed up SQL queries', 'Inserting malicious SQL through user input to manipulate database queries', 'A type of database optimisation', 'An SQL syntax error'], ans: 1, exp: 'SQL injection happens when user input is embedded directly into a SQL string. An attacker types SQL fragments as input, changing the query meaning. Parameterised queries prevent this completely.' },
+                    { q: 'How should database credentials be stored in an application?', opts: ['Hardcoded in source code', 'In a comment in the config file', 'In environment variables or a secrets manager — never in source code', 'In the README'], ans: 2, exp: 'Secrets in source code are exposed to everyone who can see the repo — now and in the future via git history. Use environment variables or a secrets manager.' },
+                    { q: 'What is the Principle of Least Privilege?', opts: ['Users should have the least login time', 'Components should have only the minimum permissions needed for their job', 'Security features should be minimal', 'Passwords should be as short as possible'], ans: 1, exp: 'Least privilege limits blast radius. If a component has only read permissions, an attacker who compromises it cannot write or delete. Grant access only when proven necessary.' },
+                    { q: 'What should you do if a secret is accidentally committed to a git repo?', opts: ['Delete the commit and hope no one saw', 'Make the repo private', 'Rotate/revoke the secret immediately — assume it is already compromised', 'Add it to .gitignore'], ans: 2, exp: 'Git history is permanent. Assume the secret is compromised — revoke and rotate it immediately, then clean the git history. Removing the commit does not remove it from everyone who cloned it.' },
+                    { q: 'Which prevents SQL injection?', opts: ['Longer passwords', 'Input length validation only', 'Parameterised queries / prepared statements', 'Escaping commas in user input'], ans: 2, exp: 'Parameterised queries separate SQL code from data. The database never interprets user input as SQL — it is always bound as a value. This completely prevents SQL injection regardless of what the user enters.' },
+                ]
+            },
+
+            // ── 9 ─────────────────────────────────
+            {
+                cat: 4, title: 'Performance Basics', tagline: 'Measure before you optimise. Premature optimisation is the root of a lot of evil.',
+                sections: [
+                    { h: 'Measure First', body: `"My code is slow" is not actionable. "This database query takes 4 seconds and is called 300 times per page load" is actionable. <strong>Profile first</strong>, then optimise the actual bottleneck — not what you think the bottleneck is.` },
+                    {
+                        h: 'Common Performance Mistakes', list: [
+                            '<strong>N+1 queries:</strong> loading a list then querying the DB once per item. Use JOIN or batch loading instead.',
+                            '<strong>Unnecessary loops:</strong> O(n²) when O(n) is possible — often from nested loops over the same data',
+                            '<strong>Missing indexes:</strong> database queries on unindexed columns are full table scans',
+                            '<strong>Blocking I/O on the main thread:</strong> network calls, file reads — use async / non-blocking I/O',
+                        ]
+                    },
+                    {
+                        h: 'Big-O Complexity — The Cheat Sheet', table: [
+                            ['Complexity', 'Example', '1,000 items → ops'],
+                            ['O(1)', 'HashMap lookup, array index', '1'],
+                            ['O(log n)', 'Binary search', '~10'],
+                            ['O(n)', 'Single loop', '1,000'],
+                            ['O(n log n)', 'Merge sort', '~10,000'],
+                            ['O(n²)', 'Nested loops over same data', '1,000,000'],
+                            ['O(2ⁿ)', 'Brute force combinations', 'Astronomical'],
+                        ]
+                    },
+                    {
+                        h: 'N+1 Query Anti-Pattern', compare: true,
+                        bad: `# ❌ N+1: 1 + N database round trips
+orders = db.query("SELECT * FROM orders")
+for order in orders:
+    items = db.query(
+        "SELECT * FROM items WHERE order_id=?",
+        order.id)  # one extra query PER order!`,
+                        good: `# ✅ JOIN: 1 database round trip total
+orders = db.query("""
+    SELECT o.*, i.* FROM orders o
+    JOIN items i ON i.order_id = o.id
+""")`},
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>Knuth\'s Rule:</strong> "Premature optimisation is the root of all evil." Write correct, clear code first. Profile when you have a real performance problem. Optimise only what the profiler identifies as the bottleneck.' },
+                ],
+                quiz: [
+                    { q: 'What should you do before optimising code for performance?', opts: ['Rewrite it in a faster language', 'Profile it to identify the actual bottleneck', 'Add more hardware', 'Reduce the feature count'], ans: 1, exp: 'Profile first. Intuitions about where code is slow are often wrong. The profiler shows exactly where time is spent. Optimising the wrong place wastes effort and adds complexity for no gain.' },
+                    { q: 'What is an N+1 query problem?', opts: ['A SQL syntax error', 'Loading a list then making one extra DB query per item — N+1 total queries instead of 1', 'Querying N tables at once', 'Using N joins in one query'], ans: 1, exp: 'N+1: fetch 100 orders (1 query) then fetch items for each order (100 queries) = 101 total queries. Fix with a JOIN or batch load — 1 query total.' },
+                    { q: 'A HashMap lookup is O(1). What does that mean?', opts: ['It takes 1 second', 'It takes the same time regardless of how many items are in the map', 'It requires 1 comparison', 'It only works with 1 item'], ans: 1, exp: 'O(1) = constant time. Whether the HashMap has 10 or 10 million items, lookup takes the same amount of time. This is why HashMap is preferred over List for frequent lookups.' },
+                    { q: 'Two nested loops that both iterate over the same n items have what complexity?', opts: ['O(n)', 'O(n log n)', 'O(n²)', 'O(2n)'], ans: 2, exp: 'Two nested loops over n items = n × n = O(n²). For n=1000 that is 1,000,000 operations. Reorganise the data (HashMap, Set) to avoid the inner loop.' },
+                    { q: 'What is premature optimisation?', opts: ['Optimising production code in advance', 'Making code complex for performance without profiling — before knowing it is actually slow', 'Writing tests before the feature', 'Optimising database queries'], ans: 1, exp: 'Premature optimisation sacrifices clarity for performance gains that may not matter. Write clear, correct code first. Only optimise when a profiler shows a real bottleneck.' },
+                ]
+            },
+
+            // ── 10 ────────────────────────────────
+            {
+                cat: 5, title: 'Git & Version Control', tagline: 'Git is not just a backup tool — it is a communication tool. Your commit history tells the story of your codebase.',
+                sections: [
+                    {
+                        h: 'Commit Messages', compare: true,
+                        bad: `# ❌ Useless commit messages
+git commit -m "fix"
+git commit -m "wip"
+git commit -m "stuff"
+git commit -m "asdfgh"`,
+                        good: `# ✅ Meaningful, searchable commit messages
+git commit -m "fix: prevent duplicate email registration (closes #142)"
+git commit -m "feat: add coupon validation with expiry check"
+git commit -m "refactor: extract payment calc into PaymentService"
+git commit -m "test: add edge cases for empty cart checkout"`},
+                    {
+                        h: 'Conventional Commits Format', code: `type(scope): short description (under 72 chars)
+
+Optional body explaining WHY — not what.
+The what is in the diff. The why is what saves
+you at 2am six months from now.
+
+# Common types:
+feat:     new feature
+fix:      bug fix
+refactor: code restructure (no behaviour change)
+test:     adding or fixing tests
+docs:     documentation only
+chore:    build, CI, dependency updates`},
+                    {
+                        h: 'Branching Strategy', list: [
+                            '<strong>main/master:</strong> always deployable, protected — never push directly',
+                            '<strong>feature/user-auth:</strong> one branch per feature or bug fix',
+                            '<strong>Merge via PR:</strong> always, even if you are the only developer',
+                            '<strong>Delete merged branches:</strong> keep the repo clean',
+                            '<strong>Rebase for clean history</strong> on feature branches before merging',
+                        ]
+                    },
+                ],
+                callouts: [
+                    { kind: 'warn', icon: '⚠️', text: '<strong>Never force push to main. Never commit secrets. Never commit node_modules, build output, or IDE config files.</strong> Set up .gitignore on day one before the first commit.' },
+                ],
+                quiz: [
+                    { q: 'What should each git commit represent?', opts: ['All your work at end of day', 'One logical change with a clear, descriptive message', 'Everything changed since last release', 'Multiple features combined'], ans: 1, exp: 'One commit = one logical change. This makes history readable, makes it easy to revert specific changes, and makes git blame useful for understanding why code exists.' },
+                    { q: 'In Conventional Commits, what does "fix:" indicate?', opts: ['A new feature', 'A bug fix', 'A refactoring change', 'A documentation update'], ans: 1, exp: '"fix:" marks a commit that corrects a bug. "feat:" adds a feature. "refactor:" restructures code. These prefixes make the git log scannable and can automate changelog generation.' },
+                    { q: 'What is the main branch used for?', opts: ['Experimental features', 'Work in progress', 'Always-deployable, production-ready code', 'Developer personal branches'], ans: 2, exp: 'main should always be in a deployable state. All features go through branches and PRs before merging. Never push directly to main — it should be protected.' },
+                    { q: 'A commit message "fix" is problematic because:', opts: ['It is too short to commit', 'It tells you nothing — what was fixed, why, which ticket?', 'fix is not a valid prefix', 'Commit messages must be over 50 characters'], ans: 1, exp: '"fix" gives zero information. Six months later: what did it fix? why? which file? A good message like "fix: prevent negative balance on withdrawal (closes #441)" gives full context.' },
+                    { q: 'What files should always be in .gitignore?', opts: ['README.md and documentation', 'Only large binary files', '.env files with secrets, node_modules, build output, IDE-specific config', 'Only image files'], ans: 2, exp: '.env files contain secrets. node_modules are auto-generated. Build output is reproducible. IDE config is personal preference. Committing any of these pollutes the repo and can expose credentials.' },
+                ]
+            },
+
+            // ── 11 ────────────────────────────────
+            {
+                cat: 5, title: 'Writing READMEs', tagline: 'If it is not documented, it does not exist. A great README is the front door to your project.',
+                sections: [
+                    {
+                        h: 'What a README Must Have', list: [
+                            '<strong>What it is:</strong> one or two sentences explaining what the project does',
+                            '<strong>Why it exists:</strong> what problem does it solve?',
+                            '<strong>How to install:</strong> exact steps, no assumptions — someone with a fresh machine should follow these',
+                            '<strong>How to run:</strong> the exact commands to start it',
+                            '<strong>How to test:</strong> how to verify it works',
+                            '<strong>Environment variables:</strong> what variables are needed and what they expect',
+                        ]
+                    },
+                    {
+                        h: 'README Structure Template', code: `# Project Name
+
+Short description — what it does in one sentence.
+
+## Installation
+\`\`\`bash
+git clone https://github.com/user/project
+cd project
+npm install
+\`\`\`
+
+## Usage
+\`\`\`bash
+npm start   # starts dev server at http://localhost:3000
+\`\`\`
+
+## Running Tests
+\`\`\`bash
+npm test
+\`\`\`
+
+## Environment Variables
+| Variable     | Description           | Required |
+|--------------|-----------------------|----------|
+| DATABASE_URL | PostgreSQL connection  | Yes      |
+| API_KEY      | Third-party API key   | Yes      |
+
+## Contributing
+See CONTRIBUTING.md for branch strategy and PR guidelines.`},
+                    { h: 'Inline Documentation', body: `For complex modules, document at three levels: the module (what is this whole file for?), the function (what does it take, what does it return, what can go wrong?), and non-obvious logic (why is this done this particular way?).` },
+                ],
+                callouts: [
+                    { kind: 'tip', icon: '✅', text: '<strong>Documentation as a design test:</strong> If you struggle to document what a function does, that is a signal the function may be doing too much. Documentation is a forcing function for good design.' },
+                ],
+                quiz: [
+                    { q: 'What is the minimum a project README should contain?', opts: ['Just the project name', 'What it does, how to install it, how to run it, and how to test it', 'Only a list of contributors', 'A full architectural diagram'], ans: 1, exp: 'At minimum: what it is, how to install, how to run, how to test. Someone with a fresh machine should follow your README and have the project running without asking anyone.' },
+                    { q: 'Why should environment variables be documented in the README?', opts: ['To show off configuration options', 'So developers know what variables to create and what values they expect — without this, the project will not start', 'Environment variables are optional', 'They do not need documentation'], ans: 1, exp: 'Missing or wrong environment variables are one of the most common onboarding failures. A table listing each variable, its purpose, and whether it is required removes this friction completely.' },
+                    { q: 'What does struggling to document a function signal?', opts: ['Documentation is not needed', 'The function is too complex or doing too many things — a design problem', 'Documentation tools are lacking', 'The function is perfect'], ans: 1, exp: 'If you cannot explain what a function does in a sentence, it probably does too many things. Documentation is a design tool — if writing it is hard, the code structure likely needs improvement.' },
+                    { q: 'Installation instructions should assume the reader:', opts: ['Is an expert in the stack', 'Has a fresh machine and no prior context about this project', 'Has read the source code', 'Works at the same company'], ans: 1, exp: 'Write for someone who just cloned the repo for the first time on a new machine. Spell out every command. Do not assume they have Node, Python, or any specific tool installed.' },
+                    { q: 'Why document environment variables with examples?', opts: ['To fill space in the README', 'So developers know the expected format and can set them correctly without guessing', 'Environment variables are self-explanatory', 'Only production variables need documentation'], ans: 1, exp: 'DATABASE_URL without an example could be postgres://localhost/db or postgresql://user:pass@host:5432/dbname. An example removes all ambiguity and gets developers running faster.' },
+                ]
+            },
+
+            // ── 12 ────────────────────────────────
+            {
+                cat: 6, title: 'Refactoring', tagline: 'Refactoring is the art of improving code structure without changing what it does.',
+                sections: [
+                    { h: 'What Refactoring Is and Is Not', body: `Refactoring means changing the internal structure of code to make it easier to understand and modify, <strong>without changing its observable behaviour</strong>. It is NOT adding features. It is NOT fixing bugs. Those are separate activities that should be separate commits.` },
+                    {
+                        h: 'Common Refactoring Techniques', list: [
+                            '<strong>Extract Function:</strong> take a block of code and put it in a named function — the most common refactoring',
+                            '<strong>Rename:</strong> rename anything that could be named more clearly',
+                            '<strong>Remove Dead Code:</strong> delete code that is never called — it is noise',
+                            '<strong>Replace Magic Number:</strong> 86400 → SECONDS_PER_DAY',
+                            '<strong>Simplify Conditionals:</strong> complex if/else into named methods or guard clauses',
+                            '<strong>Move Function:</strong> put code in the class or module where it logically belongs',
+                        ]
+                    },
+                    { h: 'The Boy Scout Rule', body: `Leave the code a little better than you found it. Every time you touch a file — for a bug fix, a feature, anything — spend a few minutes improving the readability of the nearby code. A rename here, an extracted function there. These small improvements accumulate.` },
+                ],
+                callouts: [
+                    { kind: 'rule', icon: '📏', text: '<strong>The Refactoring Rule:</strong> Never refactor and fix a bug in the same commit. If tests pass after refactoring, the refactoring was safe. Mixing them makes failures ambiguous.' },
+                    { kind: 'tip', icon: '✅', text: '<strong>Refactor only with tests.</strong> Without tests, you cannot be confident refactoring did not break something. If there are no tests for the code you are refactoring — write tests first, then refactor.' },
+                ],
+                quiz: [
+                    { q: 'What is refactoring?', opts: ['Adding new features to existing code', 'Changing internal code structure without changing observable behaviour', 'Fixing bugs in existing code', 'Rewriting code in a new language'], ans: 1, exp: 'Refactoring strictly means improving structure without changing behaviour. No new features, no bug fixes — just making existing code clearer, simpler, or more organised. Tests verify behaviour is preserved.' },
+                    { q: 'Why should you never refactor and fix a bug in the same commit?', opts: ['It takes too long', 'If something breaks, you cannot tell whether refactoring or the bug fix caused it', 'Refactoring always introduces bugs', 'Bug fixes invalidate refactoring'], ans: 1, exp: 'Separating them gives clarity. If you refactor and tests pass, the refactoring was safe. If you then fix a bug and tests pass, the fix was safe. Mixing them makes failures ambiguous and hard to diagnose.' },
+                    { q: 'What is the Boy Scout Rule in programming?', opts: ['Never work alone', 'Always leave the code a little better than you found it', 'Commit all your work at end of day', 'Review every PR before merging'], ans: 1, exp: 'The Boy Scout Rule: always leave the campsite (code) cleaner than you found it. Small improvements — a rename, an extracted function — accumulate over time and prevent codebases from degrading.' },
+                    { q: 'What should you do before refactoring code with no tests?', opts: ['Refactor without tests — it is faster', 'Skip the refactoring entirely', 'Write tests first, then refactor', 'Rewrite the whole module'], ans: 2, exp: 'Without tests, you cannot verify refactoring did not break anything. Write characterisation tests that document existing behaviour, then refactor with confidence.' },
+                    { q: 'Which is a valid refactoring technique?', opts: ['Adding error handling', 'Implementing a new feature', 'Extracting a block of code into a named function', 'Optimising an algorithm'], ans: 2, exp: 'Extract Function is a core refactoring — you move an inline code block into a named function, improving readability without changing behaviour. The others change or add behaviour.' },
+                ]
+            },
+
+            // ── 13 ────────────────────────────────
+            {
+                cat: 6, title: 'Language-Specific Best Practices', tagline: 'Universal principles applied to specific languages — the idioms that make code feel native.',
+                sections: [
+                    {
+                        h: 'Java — Write Idiomatic Java', list: [
+                            '<strong>Use Optional</strong> instead of returning null — forces callers to handle absence',
+                            '<strong>Prefer interface types:</strong> List over ArrayList, Map over HashMap in signatures',
+                            '<strong>Use final</strong> on fields that should not change — communicates immutability intent',
+                            '<strong>Try-with-resources</strong> for anything that implements AutoCloseable',
+                            '<strong>Override equals() AND hashCode() together</strong> — never one without the other',
+                            '<strong>Use records</strong> (Java 16+) for simple immutable data classes — replaces 30 lines of boilerplate',
+                        ]
+                    },
+                    {
+                        h: 'Rust — Write Idiomatic Rust', list: [
+                            '<strong>Use ? instead of .unwrap()</strong> for error propagation — unwrap() panics, ? propagates gracefully',
+                            '<strong>Prefer &str over &String</strong> in function parameters — more flexible, accepts both',
+                            '<strong>Use cargo clippy</strong> — catches hundreds of common mistakes and non-idiomatic patterns',
+                            '<strong>Prefer iterators over index loops</strong> — clearer intent, often compiled to the same speed',
+                            '<strong>Return Result, not panic!</strong> in library code — let the caller decide how to handle errors',
+                        ]
+                    },
+                    {
+                        h: 'Python — Write Idiomatic Python', list: [
+                            '<strong>Use list comprehensions</strong> over explicit loops for transforming data',
+                            '<strong>Use type hints:</strong> def greet(name: str) -> str — improves readability and tooling',
+                            '<strong>Use dataclasses or Pydantic</strong> for data structures instead of raw dicts',
+                            '<strong>Context managers (with)</strong> for files and resources — never manual close()',
+                            '<strong>Follow PEP 8</strong> — use black to enforce it automatically',
+                        ]
+                    },
+                    {
+                        h: 'JavaScript / TypeScript', list: [
+                            '<strong>Use TypeScript</strong> — catch type errors at compile time, not at runtime in production',
+                            '<strong>Prefer const over let</strong> — declare immutability intent, use let only when reassignment is needed',
+                            '<strong>async/await over raw Promises</strong> — linear code is easier to read than .then() chains',
+                            '<strong>Optional chaining (?.) and nullish coalescing (??)</strong> instead of verbose null checks',
+                            '<strong>Use ESLint + Prettier</strong> — lint for quality, format for consistency',
+                        ]
+                    },
+                ],
+                callouts: [],
+                quiz: [
+                    { q: 'In Java, why use Optional instead of returning null?', opts: ['Optional is faster', 'It forces callers to handle the case where a value may be absent — preventing NullPointerException', 'Optional uses less memory', 'Null is not allowed in Java'], ans: 1, exp: 'Optional<T> makes the possibility of absence explicit in the type signature. Callers must call .orElse(), .map(), or .isPresent() — they cannot accidentally dereference null.' },
+                    { q: 'In Rust, why use ? instead of .unwrap()?', opts: ['? is faster', 'unwrap() is deprecated', '.unwrap() panics on error — ? propagates the error to the caller gracefully', 'They are identical'], ans: 2, exp: '.unwrap() crashes the program with a panic if the value is Err or None. ? propagates the error up to the caller who can decide how to handle it. In library code, always let the caller decide.' },
+                    { q: 'In Python, what is the preferred way to open and read a file?', opts: ['file = open("f.txt"); data = file.read(); file.close()', 'with open("f.txt") as f: data = f.read()', 'import file; file.read("f.txt")', 'readFile("f.txt")'], ans: 1, exp: 'The with statement (context manager) automatically closes the file when the block ends — even if an exception occurs. Manual open/close is error-prone if an exception fires before close().' },
+                    { q: 'In JavaScript/TypeScript, why prefer const over let?', opts: ['const is faster', 'const communicates that this binding will not be reassigned — making code easier to reason about', 'let is deprecated', 'const uses less memory'], ans: 1, exp: 'const signals immutability intent. When you see const, you know the binding will not change. Use let only when reassignment is genuinely needed. This reduces cognitive load when reading code.' },
+                    { q: 'Which practice is idiomatic across nearly all languages?', opts: ['Return null for missing values', 'Write functions longer than 100 lines for efficiency', 'Use the language\'s official formatter and linter', 'Avoid error handling to keep code short'], ans: 2, exp: 'Every major language has official or widely-adopted formatters and linters. Using them ensures consistent style, catches bugs early, and removes style debates from code reviews. Universal good practice.' },
+                ]
+            },
+        ];
+
+        // ══════════════════════════════════════
+        // STATE MANAGEMENT
+        // ══════════════════════════════════════
+        function loadST() { try { return JSON.parse(localStorage.getItem('csg_v2') || '{}') } catch { return {} } }
+        function saveST(s) { try { localStorage.setItem('csg_v2', JSON.stringify(s)) } catch { } }
+        let ST = loadST();
+        let quizSt = {}; // in-memory quiz state per session
+
+        // ══════════════════════════════════════
+        // BUILD UI
+        // ══════════════════════════════════════
+        let curIdx = -1;
+
+        function buildSidebar() {
+            const nav = document.getElementById('sb-nav');
+            let passed = 0, xp = 0;
+            let html = '';
+            let lastCat = -1;
+
+            TOPICS.forEach((t, i) => {
+                if (t.cat !== lastCat) {
+                    const c = CATS[t.cat];
+                    html += `<div class="cat-lbl">${c.icon} ${c.name}</div>`;
+                    lastCat = t.cat;
                 }
+                const r = ST[i];
+                let dotCls = '';
+                if (r?.pass) { dotCls = 'nd-pass'; passed++; xp += r.score * 10; }
+                else if (r?.tried) { dotCls = r.pass === false ? 'nd-fail' : 'nd-try'; }
+                html += `<div class="nav-item${i === curIdx ? ' active' : ''}" onclick="goTo(${i})">
+      <span class="nav-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="nav-txt">${t.title}</span>
+      <span class="nav-dot ${dotCls}"></span>
+    </div>`;
+            });
+            nav.innerHTML = html;
 
-                const text = document.createElement("div");
-                text.textContent = (i + 1) + ". " + t.title;
+            const total = TOPICS.length;
+            document.getElementById('st-p').textContent = passed;
+            document.getElementById('st-t').textContent = total;
+            document.getElementById('st-x').textContent = xp;
+            document.getElementById('tp-passed').textContent = passed;
+            document.getElementById('tp-total').textContent = total;
+            document.getElementById('tp-xp').textContent = xp;
+            const pct = Math.round(passed / total * 100);
+            document.getElementById('prog-fill').style.width = pct + '%';
+            document.getElementById('prog-pct').textContent = pct + '%';
+        }
 
-                item.appendChild(dot);
-                item.appendChild(text);
-                topicList.appendChild(item);
+        function buildCatGrid() {
+            const grid = document.getElementById('cat-grid');
+            grid.innerHTML = CATS.map((c, ci) => {
+                const count = TOPICS.filter(t => t.cat === ci).length;
+                const firstIdx = TOPICS.findIndex(t => t.cat === ci);
+                return `<div class="w-card" onclick="goTo(${firstIdx})">
+      <div class="wc-icon">${c.icon}</div>
+      <div class="wc-title">${c.name}</div>
+      <div class="wc-ct">${count} topic${count > 1 ? 's' : ''}</div>
+    </div>`;
+            }).join('');
+        }
+
+        function buildPages() {
+            const container = document.getElementById('topic-pages');
+            container.innerHTML = '';
+            TOPICS.forEach((t, i) => {
+                const div = document.createElement('div');
+                div.className = 'page';
+                div.id = 'page-' + i;
+                div.innerHTML = buildTopicHTML(t, i);
+                container.appendChild(div);
+            });
+        }
+
+        function buildTopicHTML(t, i) {
+            let h = `<div class="t-hdr">
+    <div class="t-meta">
+      <span class="t-cat">${CATS[t.cat].icon} ${CATS[t.cat].name}</span>
+      <span class="t-num">Topic ${i + 1} of ${TOPICS.length}</span>
+    </div>
+    <h1>${t.title}</h1>
+    <div class="tagline">${t.tagline}</div>
+  </div>`;
+
+            t.sections.forEach(s => {
+                h += `<div class="section"><h2>${s.h}</h2>`;
+                if (s.body) h += `<p>${s.body}</p>`;
+                if (s.code) h += `<pre>${escHTML(s.code)}</pre>`;
+                if (s.list) h += `<ul>${s.list.map(li => `<li>${li}</li>`).join('')}</ul>`;
+                if (s.compare) h += buildCompare(s.bad, s.good);
+                if (s.table) h += buildTable(s.table);
+                h += '</div>';
             });
 
-            document.getElementById("sidebarStats").textContent =
-                `Passed: ${passed}/${topics.length} | Points: ${totalPoints}`;
+            (t.callouts || []).forEach(c => {
+                h += `<div class="callout ${c.kind}"><span class="ci">${c.icon}</span><div class="ct">${c.text}</div></div>`;
+            });
 
-            document.getElementById("progressTracker").textContent =
-                `${passed} of ${topics.length} topics passed`;
+            h += buildQuizHTML(t, i);
+
+            // Prev / Next
+            h += `<div class="tnav">`;
+            if (i > 0) h += `<button class="tnav-btn" onclick="goTo(${i - 1})"><div class="tnav-lbl">← Previous</div><div class="tnav-title">${TOPICS[i - 1].title}</div></button>`;
+            else h += `<div></div>`;
+            if (i < TOPICS.length - 1) h += `<button class="tnav-btn nxt" onclick="goTo(${i + 1})"><div class="tnav-lbl">Next →</div><div class="tnav-title">${TOPICS[i + 1].title}</div></button>`;
+            h += `</div>`;
+            return h;
         }
 
-        function renderWelcome() {
-            const main = document.getElementById("mainContent");
-            main.innerHTML = `
-    <div class="welcome">
-      <h1>Software Engineering Standards</h1>
-      <p>A structured interactive course covering modern engineering best practices across architecture, testing, security, tooling, and professional craft.</p>
-      <div class="category-grid">
-        ${[...new Set(topics.map(t => t.category))].map(c =>
-                `<div class="category-card"><h3>${c}</h3></div>`
-            ).join("")}
-      </div>
-      <button class="start-btn" onclick="loadTopic(0)">Start Reading</button>
-    </div>
-  `;
+        function buildCompare(bad, good) {
+            return `<div class="compare">
+    <div class="cmp-block"><div class="cmp-lbl bad">✗ Bad</div><pre>${escHTML(bad)}</pre></div>
+    <div class="cmp-block"><div class="cmp-lbl good">✓ Good</div><pre>${escHTML(good)}</pre></div>
+  </div>`;
         }
 
-        function loadTopic(index) {
-            const t = topics[index];
-            const main = document.getElementById("mainContent");
-
-            main.innerHTML = `
-    <div>
-      <div class="badge">${t.category}</div>
-      <h1>${index + 1}. ${t.title}</h1>
-      <p><em>${t.tagline}</em></p>
-
-      <div class="section">
-        <h2>Core Principles</h2>
-        <p>Strong engineering standards reduce entropy in large systems. Decisions should optimize maintainability, clarity, and safety.</p>
-        <div class="callout info">Rule: Code is read more often than it is written.</div>
-      </div>
-
-      <div class="section">
-        <h2>Example</h2>
-        <div class="compare">
-          <div>
-            <div class="label-bad">BAD</div>
-<pre><code><span class="keyword">function</span> <span class="func">x</span>(a,b){
-<span class="keyword">return</span> a*b*0.07
-}</code></pre>
-          </div>
-          <div>
-            <div class="label-good">GOOD</div>
-<pre><code><span class="keyword">function</span> <span class="func">calculateTax</span>(amount, taxRate) {
-  <span class="keyword">return</span> amount * taxRate;
-}</code></pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Reference Table</h2>
-        <table>
-          <tr><th>Language</th><th>Convention</th></tr>
-          <tr><td>Java</td><td>camelCase methods</td></tr>
-          <tr><td>Python</td><td>snake_case</td></tr>
-          <tr><td>Go</td><td>MixedCaps</td></tr>
-          <tr><td>Rust</td><td>snake_case functions</td></tr>
-        </table>
-      </div>
-
-      <div class="quiz" id="quiz"></div>
-
-      <div class="nav-buttons">
-        <button onclick="prevTopic(${index})">Previous</button>
-        <button onclick="nextTopic(${index})">Next</button>
-      </div>
-    </div>
-  `;
-
-            renderQuiz(index);
+        function buildTable(rows) {
+            let h = '<table class="tbl"><thead><tr>';
+            rows[0].forEach(c => h += `<th>${c}</th>`);
+            h += '</tr></thead><tbody>';
+            rows.slice(1).forEach(row => {
+                h += '<tr>';
+                row.forEach(c => h += `<td>${c}</td>`);
+                h += '</tr>';
+            });
+            return h + '</tbody></table>';
         }
 
-        function prevTopic(i) {
-            if (i > 0) loadTopic(i - 1);
-        }
+        function buildQuizHTML(t, i) {
+            const qid = 'q' + i;
+            let h = `<div class="quiz" id="quiz-${qid}">
+  <div class="quiz-hdr">
+    <div class="qi">📝</div>
+    <div><h3>Topic Quiz</h3><div class="qs">${t.quiz.length} questions · check your understanding</div></div>
+    <div class="qsc" id="qsc-${qid}"></div>
+  </div>
+  <div class="quiz-body">`;
 
-        function nextTopic(i) {
-            if (i < topics.length - 1) loadTopic(i + 1);
-        }
-
-        function renderQuiz(topicIndex) {
-            const quizEl = document.getElementById("quiz");
-            const state = loadState();
-            const existing = state[topicIndex];
-
-            const questions = Array.from({ length: 5 }).map((_, i) => ({
-                question: `Question ${i + 1}: What is a key principle?`,
-                options: ["Clarity", "Obfuscation", "Magic numbers", "Hidden side effects"],
-                correct: 0,
-                explanation: "Clarity reduces cognitive overhead and defects."
-            }));
-
-            let score = 0;
-            let answered = 0;
-
-            quizEl.innerHTML = `<h2>Quiz</h2>`;
-
-            questions.forEach((q, qi) => {
-                const qDiv = document.createElement("div");
-                qDiv.className = "quiz-question";
-                qDiv.innerHTML = `<strong>${q.question}</strong>`;
-
-                q.options.forEach((opt, oi) => {
-                    const optDiv = document.createElement("div");
-                    optDiv.className = "quiz-option";
-                    optDiv.textContent = opt;
-
-                    optDiv.onclick = () => {
-                        if (optDiv.classList.contains("correct") || optDiv.classList.contains("wrong")) return;
-
-                        answered++;
-                        if (oi === q.correct) {
-                            optDiv.classList.add("correct");
-                            score++;
-                        } else {
-                            optDiv.classList.add("wrong");
-                            qDiv.querySelectorAll(".quiz-option")[q.correct].classList.add("correct");
-                        }
-
-                        const exp = document.createElement("div");
-                        exp.className = "quiz-explanation";
-                        exp.textContent = q.explanation;
-                        qDiv.appendChild(exp);
-
-                        if (answered === questions.length) {
-                            const passed = score >= PASS_THRESHOLD;
-                            state[topicIndex] = { score, passed, attempted: true };
-                            saveState(state);
-                            updateSidebar();
-
-                            const result = document.createElement("div");
-                            result.innerHTML = `<h3>Score: ${score}/5 ${passed ? "(Passed)" : "(Failed)"}</h3>
-          <button onclick="loadTopic(${topicIndex})">Retake</button>`;
-                            quizEl.appendChild(result);
-                        }
-                    };
-
-                    qDiv.appendChild(optDiv);
+            t.quiz.forEach((q, qi) => {
+                h += `<div id="qi-${qid}-${qi}">
+      <div class="q-n">Q${qi + 1} of ${t.quiz.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-opts">`;
+                q.opts.forEach((opt, oi) => {
+                    h += `<div class="q-opt" id="qo-${qid}-${qi}-${oi}"
+        onclick="answerQ('${qid}',${qi},${oi},${q.ans},${t.quiz.length},${i})">
+        <span class="ql">${String.fromCharCode(65 + oi)}</span>${opt}
+      </div>`;
                 });
-
-                quizEl.appendChild(qDiv);
+                h += `</div><div class="q-exp" id="qe-${qid}-${qi}">${q.exp}</div></div>`;
             });
+
+            h += `</div>
+  <div class="quiz-foot">
+    <button class="qbtn" onclick="resetQuiz('${qid}',${t.quiz.length},${i})">↺ Retake</button>
+    <div class="qres" id="qr-${qid}"></div>
+  </div>
+</div>`;
+            return h;
         }
 
-        updateSidebar();
-        renderWelcome();
-    </script>
+        function escHTML(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
 
+        // ══════════════════════════════════════
+        // QUIZ LOGIC
+        // ══════════════════════════════════════
+        function answerQ(qid, qi, oi, correct, total, topicIdx) {
+            const key = qid + '_' + qi;
+            if (quizSt[key]) return; // already answered
+            quizSt[key] = true;
+
+            const isOk = oi === correct;
+            document.getElementById(`qo-${qid}-${qi}-${oi}`).classList.add(isOk ? 'ok' : 'ng');
+            if (!isOk) document.getElementById(`qo-${qid}-${qi}-${correct}`).classList.add('rev');
+
+            const exp = document.getElementById(`qe-${qid}-${qi}`);
+            exp.classList.add('show');
+
+            // Track score
+            if (!quizSt[qid]) quizSt[qid] = { score: 0, answered: 0 };
+            quizSt[qid].answered++;
+            if (isOk) quizSt[qid].score++;
+
+            if (quizSt[qid].answered === total) {
+                const s = quizSt[qid].score;
+                const pct = Math.round(s / total * 100);
+                const pass = pct >= 80;
+                document.getElementById(`qsc-${qid}`).textContent = s + '/' + total;
+                const res = document.getElementById(`qr-${qid}`);
+                res.textContent = pass ? `✅ ${s}/${total} — Passed!` : `❌ ${s}/${total} — Review and retake`;
+                res.className = 'qres show ' + (pass ? 'pass' : 'fail');
+
+                // Save to localStorage
+                ST[topicIdx] = { score: s, total, pass, tried: true };
+                saveST(ST);
+                buildSidebar();
+            }
+        }
+
+        function resetQuiz(qid, total, topicIdx) {
+            for (let qi = 0; qi < total; qi++) {
+                delete quizSt[qid + '_' + qi];
+                const qiEl = document.getElementById(`qi-${qid}-${qi}`);
+                if (qiEl) qiEl.querySelectorAll('.q-opt').forEach(o => { o.className = 'q-opt' });
+                const exp = document.getElementById(`qe-${qid}-${qi}`);
+                if (exp) exp.classList.remove('show');
+            }
+            delete quizSt[qid];
+            const sc = document.getElementById(`qsc-${qid}`);
+            if (sc) sc.textContent = '';
+            const res = document.getElementById(`qr-${qid}`);
+            if (res) { res.textContent = ''; res.className = 'qres'; }
+        }
+
+        // ══════════════════════════════════════
+        // NAVIGATION
+        // ══════════════════════════════════════
+        function goTo(idx) {
+            // Hide welcome
+            document.getElementById('page-welcome').classList.remove('show');
+            // Hide all topic pages
+            document.querySelectorAll('[id^="page-"]').forEach(p => {
+                if (p.id !== 'page-welcome') p.classList.remove('show');
+            });
+            // Show target page
+            const page = document.getElementById('page-' + idx);
+            if (page) {
+                page.classList.add('show');
+                document.getElementById('main').scrollTop = 0;
+            }
+            curIdx = idx;
+            buildSidebar(); // refresh active state
+        }
+
+        // ══════════════════════════════════════
+        // INIT
+        // ══════════════════════════════════════
+        buildCatGrid();
+        buildPages();
+        buildSidebar();
+    </script>
 </body>
 
 </html>
