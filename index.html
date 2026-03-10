@@ -11,12 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
         rel="stylesheet">
+
     <style>
         :root {
             --bg-primary: #0a0e17;
             --bg-secondary: #151b2b;
-            --accent: #00d9ff;
-            --accent-glow: rgba(0, 217, 255, 0.45);
+            --accent-start: #9b00ff;
+            --accent-end: #00f0ff;
+            --accent-glow: rgba(0, 240, 255, 0.3);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
@@ -71,7 +73,7 @@
             position: fixed;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.18;
+            opacity: 0.15;
             z-index: 0;
             animation: float 8s ease-in-out infinite;
         }
@@ -79,7 +81,7 @@
         .orb-1 {
             width: 400px;
             height: 400px;
-            background: var(--accent);
+            background: var(--accent-start);
             top: -100px;
             right: -100px;
         }
@@ -87,7 +89,7 @@
         .orb-2 {
             width: 300px;
             height: 300px;
-            background: #7000ff;
+            background: var(--accent-end);
             bottom: -50px;
             left: -50px;
             animation-delay: 2s;
@@ -123,10 +125,10 @@
             margin-bottom: 1.5rem;
         }
 
-        .jackal-logo {
-            width: 18rem;
-            height: 18rem;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
+        .jackal-hud svg {
+            width: 320px;
+            height: 320px;
+            filter: drop-shadow(0 0 35px var(--accent-glow));
             animation: aura 4s ease-in-out infinite alternate;
         }
 
@@ -136,20 +138,18 @@
             }
 
             to {
-                filter: drop-shadow(0 0 60px var(--accent));
+                filter: drop-shadow(0 0 50px var(--accent-end));
             }
         }
 
-        .jackal-logo path {
+        .jackal-hud path,
+        .jackal-hud circle,
+        .jackal-hud line {
             stroke: url(#gradient);
-            stroke-width: 1.5;
             fill: none;
+            stroke-width: 1.5;
             stroke-linecap: round;
             stroke-linejoin: round;
-        }
-
-        .jackal-logo circle {
-            fill: url(#gradient);
         }
 
         .eye-scan {
@@ -173,6 +173,7 @@
         }
 
         .node {
+            fill: url(#gradient);
             animation: pulse 2s infinite;
         }
 
@@ -186,7 +187,7 @@
 
             50% {
                 opacity: 1;
-                transform: scale(1.6);
+                transform: scale(1.5);
             }
         }
 
@@ -194,18 +195,20 @@
             font-family: 'Syne', sans-serif;
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-end));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
-            letter-spacing: 0.2em;
             text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 400;
         }
 
         nav ul {
@@ -225,72 +228,154 @@
             color: var(--text-primary);
             font-size: 1.5rem;
             font-weight: 700;
-            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+            transition: left 0.5s;
+        }
+
+        a:hover::before {
+            left: 100%;
+        }
+
+        a::after {
+            content: '→';
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--accent-end);
+            font-size: 2rem;
         }
 
         a:hover {
-            border-color: var(--accent);
+            border-color: var(--accent-end);
             box-shadow: 0 0 30px var(--accent-glow);
             transform: translateX(8px);
         }
 
+        a:hover::after {
+            opacity: 1;
+            right: 2rem;
+        }
+
         a span.index {
-            opacity: 0.2;
+            position: absolute;
+            left: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 3rem;
-            margin-right: 1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.2;
+            transition: all 0.3s;
+        }
+
+        a:hover span.index {
+            color: var(--accent-end);
+            opacity: 0.5;
+        }
+
+        a span.text {
+            display: inline-block;
+            margin-left: 4rem;
         }
 
         .accent-line {
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-end), transparent);
             margin-top: 4rem;
+        }
+
+        @media (max-width:768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .jackal-hud svg {
+                width: 220px;
+                height: 220px;
+            }
+
+            a {
+                padding: 1.5rem 1.5rem;
+                font-size: 1.25rem;
+            }
+
+            a span.index {
+                font-size: 2rem;
+                left: 1.5rem;
+            }
+
+            a span.text {
+                margin-left: 3rem;
+            }
+
+            a::after {
+                right: 1.5rem;
+                font-size: 1.5rem;
+            }
+
+            a:hover::after {
+                right: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
+    <!-- Gradient definition -->
     <svg width="0" height="0">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#e8edf4" />
-                <stop offset="100%" stop-color="#00d9ff" />
+                <stop offset="0%" stop-color="#9b00ff" />
+                <stop offset="100%" stop-color="#00f0ff" />
             </linearGradient>
         </defs>
     </svg>
 
     <div class="container">
         <header>
-            <div class="logo-container">
-
-                <svg class="jackal-logo" viewBox="0 0 150 150">
-                    <!-- Polygonal symmetric jackal face -->
-                    <!-- outer face triangles -->
-                    <path d="M30 40 L50 10 L70 40 L60 70 L90 120 L60 115 L30 120 L40 70 Z" />
-                    <path d="M70 40 L90 10 L110 40 L100 70 L120 120 L90 115 L60 120 L70 70 Z" />
-                    <!-- snout polygon -->
-                    <path d="M60 70 L75 85 L90 70 L75 75 Z" />
-                    <!-- eyes -->
-                    <circle cx="65" cy="55" r="3" />
-                    <circle cx="95" cy="55" r="3" />
-                    <line class="eye-scan" x1="63" y1="55" x2="97" y2="55" />
-                    <!-- polygonal inner details -->
-                    <path d="M65 55 L75 65 L85 55" />
-                    <path d="M75 65 L75 75" />
-                    <path d="M55 75 L95 75" />
-                    <path d="M60 90 L90 90" />
-                    <!-- circuit lines -->
-                    <path d="M65 55 L40 60" />
-                    <circle class="node" cx="38" cy="60" r="2" />
-                    <path d="M95 55 L120 60" />
-                    <circle class="node" cx="122" cy="60" r="2" />
-                    <path d="M75 75 L75 100" />
-                    <circle class="node" cx="75" cy="102" r="2" />
+            <!-- Jackal HUD Wireframe Logo -->
+            <div class="logo-container jackal-hud">
+                <svg viewBox="0 0 150 150">
+                    <!-- Concentric HUD Rings -->
+                    <circle cx="75" cy="75" r="65" stroke="url(#gradient)" stroke-width="1.5" fill="none"
+                        stroke-dasharray="5 5" />
+                    <circle cx="75" cy="75" r="50" stroke="url(#gradient)" stroke-width="1" fill="none"
+                        stroke-dasharray="3 4" />
+                    <!-- Symmetric low-poly jackal face -->
+                    <path d="M45 30 L60 10 L75 30" />
+                    <path d="M105 30 L90 10 L75 30" />
+                    <path d="M45 30 L55 60 L60 75 L65 60 L75 30" />
+                    <path d="M75 30 L85 60 L90 75 L95 60 L105 30" />
+                    <path d="M60 60 L75 80 L90 60" />
+                    <path d="M70 65 L75 80 L80 65" />
+                    <circle cx="65" cy="50" r="3" />
+                    <circle cx="85" cy="50" r="3" />
+                    <line class="eye-scan" x1="63" y1="50" x2="87" y2="50" />
+                    <path d="M65 50 L45 55" />
+                    <circle class="node" cx="43" cy="55" r="2" />
+                    <path d="M85 50 L105 55" />
+                    <circle class="node" cx="107" cy="55" r="2" />
+                    <path d="M75 65 L75 95" />
+                    <circle class="node" cx="75" cy="97" r="2" />
                 </svg>
-
             </div>
 
             <h1>Jackal Systems</h1>
@@ -299,15 +384,14 @@
 
         <nav>
             <ul>
-                <li><a href="codeforge.html"><span class="index">01</span>CodeForge</a></li>
-                <li><a href="jackal-sec.html"><span class="index">02</span>Jackal Sec</a></li>
-                <li><a href="standards.html"><span class="index">03</span>Standards</a></li>
+                <li><a href="codeforge.html"><span class="index">01</span><span class="text">CodeForge</span></a></li>
+                <li><a href="jackal-sec.html"><span class="index">02</span><span class="text">Jackal Sec</span></a></li>
+                <li><a href="standards.html"><span class="index">03</span><span class="text">Standards</span></a></li>
             </ul>
         </nav>
 
         <div class="accent-line"></div>
     </div>
-
 </body>
 
 </html>
