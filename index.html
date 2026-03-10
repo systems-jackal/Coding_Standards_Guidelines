@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +22,7 @@
             --bg-primary: #0a0e17;
             --bg-secondary: #151b2b;
             --accent: #00d9ff;
-            --accent-glow: rgba(0, 217, 255, 0.3);
+            --accent-glow: rgba(0, 217, 255, 0.35);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --border: #1e2638;
@@ -45,6 +46,8 @@
             position: relative;
             overflow-x: hidden;
         }
+
+        /* animated grid */
 
         body::before {
             content: '';
@@ -71,6 +74,8 @@
                 transform: translateY(50px);
             }
         }
+
+        /* glowing background orbs */
 
         .orb {
             position: fixed;
@@ -110,6 +115,8 @@
             }
         }
 
+        /* container */
+
         .container {
             position: relative;
             z-index: 1;
@@ -122,6 +129,8 @@
             margin-bottom: 4rem;
         }
 
+        /* logo */
+
         .logo-container {
             display: flex;
             justify-content: center;
@@ -132,25 +141,25 @@
             width: 12rem;
             height: 12rem;
             filter: drop-shadow(0 0 20px var(--accent-glow));
-            animation: pulse 4s ease-in-out infinite alternate;
+            animation: aiGlow 5s ease-in-out infinite alternate;
         }
 
-        @keyframes pulse {
+        /* breathing glow */
+
+        @keyframes aiGlow {
             from {
-                transform: scale(1);
-                filter: drop-shadow(0 0 15px var(--accent-glow));
+                filter: drop-shadow(0 0 12px var(--accent-glow));
             }
 
             to {
-                transform: scale(1.04);
-                filter: drop-shadow(0 0 35px var(--accent));
+                filter: drop-shadow(0 0 40px var(--accent));
             }
         }
 
         .jackal-logo-large path {
             fill: none;
             stroke: url(#gradient);
-            stroke-width: 5;
+            stroke-width: 4;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -158,6 +167,51 @@
         .jackal-logo-large circle {
             fill: url(#gradient);
         }
+
+        /* circuit node pulse */
+
+        .node {
+            animation: pulseNode 2s infinite;
+        }
+
+        @keyframes pulseNode {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        /* scanning eye */
+
+        .scan-line {
+            stroke: url(#gradient);
+            stroke-width: 2;
+            opacity: 0.8;
+            animation: scanEye 2.5s linear infinite;
+        }
+
+        @keyframes scanEye {
+            0% {
+                transform: translateY(-6px);
+            }
+
+            50% {
+                transform: translateY(6px);
+            }
+
+            100% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* title */
 
         h1 {
             font-family: 'Syne', sans-serif;
@@ -176,8 +230,9 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            font-weight: 400;
         }
+
+        /* navigation */
 
         nav ul {
             list-style: none;
@@ -198,34 +253,7 @@
             font-weight: 700;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
-            transition: left 0.5s;
-        }
-
-        a:hover::before {
-            left: 100%;
-        }
-
-        a::after {
-            content: '→';
-            position: absolute;
-            right: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--accent);
-            font-size: 2rem;
+            transition: all .3s;
         }
 
         a:hover {
@@ -234,30 +262,17 @@
             transform: translateX(8px);
         }
 
-        a:hover::after {
-            opacity: 1;
-            right: 2rem;
-        }
-
         a span.index {
             position: absolute;
             left: 2.5rem;
             top: 50%;
             transform: translateY(-50%);
             font-size: 3rem;
-            font-weight: 700;
             color: var(--text-secondary);
             opacity: 0.2;
-            transition: all 0.3s;
-        }
-
-        a:hover span.index {
-            color: var(--accent);
-            opacity: 0.5;
         }
 
         a span.text {
-            display: inline-block;
             margin-left: 4rem;
         }
 
@@ -274,7 +289,9 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <svg width="0" height="0" style="position:absolute;">
+    <!-- gradient -->
+
+    <svg width="0" height="0">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#e8edf4" />
@@ -289,28 +306,36 @@
 
             <div class="logo-container">
 
-                <!-- CYBER JACKAL LOGO -->
+                <!-- GEOMETRIC JACKAL -->
 
-                <svg class="jackal-logo-large" viewBox="0 0 120 100">
+                <svg class="jackal-logo-large" viewBox="0 0 120 110">
+
+                    <!-- ears -->
+                    <path d="M25 45 L40 10 L50 45" />
+                    <path d="M95 45 L80 10 L70 45" />
 
                     <!-- head outline -->
-                    <path d="M20 40 L35 15 L50 35 L70 35 L85 15 L100 40 L90 70 Q60 90 30 70 Z" />
+                    <path d="M25 45 L35 85 L60 100 L85 85 L95 45" />
 
-                    <!-- center divide -->
-                    <path d="M60 30 L60 75" />
+                    <!-- face center line -->
+                    <path d="M60 45 L60 100" />
 
-                    <!-- eye -->
-                    <circle cx="48" cy="50" r="3" />
+                    <!-- eyes -->
+                    <circle cx="48" cy="60" r="3" />
+                    <circle cx="72" cy="60" r="3" />
+
+                    <!-- scanning line across eye -->
+                    <line class="scan-line" x1="42" y1="60" x2="78" y2="60" />
 
                     <!-- circuit traces -->
-                    <path d="M70 45 L88 45" />
-                    <circle cx="92" cy="45" r="2" />
+                    <path d="M72 60 L100 60" />
+                    <circle class="node" cx="105" cy="60" r="2" />
 
-                    <path d="M70 55 L85 60" />
-                    <circle cx="88" cy="62" r="2" />
+                    <path d="M72 68 L92 80" />
+                    <circle class="node" cx="96" cy="84" r="2" />
 
-                    <path d="M70 35 L85 30" />
-                    <circle cx="88" cy="28" r="2" />
+                    <path d="M72 52 L92 40" />
+                    <circle class="node" cx="96" cy="36" r="2" />
 
                 </svg>
 
@@ -355,3 +380,4 @@
 </body>
 
 </html>
+```
