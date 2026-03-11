@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jackal Systems · CPU Network</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Jackal Systems · Minimal</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&display=swap"
         rel="stylesheet">
     <style>
@@ -15,85 +13,58 @@
             --accent-start: #9b00ff;
             --accent-end: #00f0ff;
             --glow: rgba(0, 240, 255, 0.3);
-            --text-primary: #e8edf4;
-            --border: #1e2638;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'JetBrains Mono', monospace;
             background: var(--bg);
-            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            flex-direction: column;
+            font-family: 'Syne', sans-serif;
         }
 
         .container {
             text-align: center;
         }
 
-        /* ===== JACKAL LOGO (ORIGINAL) ===== */
         .logo svg {
             width: 380px;
             height: 380px;
-            filter: drop-shadow(0 0 35px var(--glow));
-            animation: pulse 4s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px var(--glow));
         }
 
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                filter: drop-shadow(0 0 20px var(--glow));
-            }
-
-            to {
-                transform: scale(1.03);
-                filter: drop-shadow(0 0 40px rgba(155, 0, 255, 0.4));
-            }
-        }
-
-        .jackal-path {
+        .jackal-outline {
             fill: none;
             stroke: url(#gradient);
-            stroke-width: 6;
+            stroke-width: 1;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
-        .jackal-eye,
-        .jackal-nose {
-            fill: url(#gradient);
-        }
-
         h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
+            font-size: 2.8rem;
             margin-top: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-end));
+            background: linear-gradient(135deg, #e8edf4, var(--accent-end));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         nav {
-            margin-top: 3rem;
+            margin-top: 2.5rem;
         }
 
         a {
-            display: block;
-            padding: 1.2rem;
-            margin: 1rem auto;
-            width: 250px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
+            display: inline-block;
+            margin: 0.5rem 1rem;
+            padding: 0.8rem 2rem;
+            border: 1px solid #1e2638;
+            border-radius: 40px;
             text-decoration: none;
+            color: #e8edf4;
             font-weight: 700;
-            color: var(--text-primary);
             transition: 0.3s;
         }
 
@@ -106,7 +77,6 @@
 </head>
 
 <body>
-
     <svg width="0" height="0">
         <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -115,26 +85,15 @@
             </linearGradient>
         </defs>
     </svg>
-
     <div class="container">
         <div class="logo">
-            <!-- Original Jackal Logo -->
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path class="jackal-path"
-                    d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
-                <circle class="jackal-eye" cx="40" cy="38" r="4" />
-                <circle class="jackal-eye" cx="60" cy="38" r="4" />
-                <circle class="jackal-nose" cx="50" cy="48" r="3" />
+            <svg viewBox="0 0 100 100">
+                <path class="jackal-outline"
+                    d="M25,35 L15,15 L30,25 Q50,15 70,25 L85,15 L75,35 Q70,55 50,60 Q30,55 25,35 Z" />
             </svg>
         </div>
-
         <h1>Jackal Systems</h1>
-
-        <nav>
-            <a href="codeforge.html">CodeForge</a>
-            <a href="jackal-sec.html">Jackal Sec</a>
-            <a href="standards.html">Standards</a>
-        </nav>
+        <nav><a href="#">CodeForge</a><a href="#">Jackal Sec</a><a href="#">Standards</a></nav>
     </div>
 </body>
 
