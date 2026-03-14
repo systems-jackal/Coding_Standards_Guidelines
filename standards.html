@@ -292,6 +292,18 @@
             animation-delay: 0.20s;
         }
 
+        .standard-card:nth-child(21) {
+            animation-delay: 0.21s;
+        }
+
+        .standard-card:nth-child(22) {
+            animation-delay: 0.22s;
+        }
+
+        .standard-card:nth-child(23) {
+            animation-delay: 0.23s;
+        }
+
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -613,54 +625,86 @@
                     </div>
                 </section>
 
-                <!-- 2 naming – expanded with 7 principles -->
+                <!-- 2 naming – 7 principles with realistic code examples -->
                 <section id="naming" class="standard-card">
                     <div class="standard-title">naming is a superpower <span>7 principles</span></div>
                     <div class="standard-content">
                         <p>Names should reveal intent, be pronounceable, searchable, and avoid mental mapping. Here are
-                            the seven habits of highly effective naming:</p>
-                        <table class="std-table">
-                            <tr>
-                                <th>principle</th>
-                                <th>good example</th>
-                                <th>bad example</th>
-                            </tr>
-                            <tr>
-                                <td>1. Meaningful names</td>
-                                <td><code>userCount, isVerified</code></td>
-                                <td><code>uc, flag1</code></td>
-                            </tr>
-                            <tr>
-                                <td>2. Avoid disinformation</td>
-                                <td><code>accountsList</code> (if it's a list)</td>
-                                <td><code>accountList</code> (if it's a single account)</td>
-                            </tr>
-                            <tr>
-                                <td>3. Meaningful distinction</td>
-                                <td><code>sourceCode, objectCode</code></td>
-                                <td><code>data1, data2</code></td>
-                            </tr>
-                            <tr>
-                                <td>4. Pronounceable names</td>
-                                <td><code>creationTimestamp</code></td>
-                                <td><code>creTs</code></td>
-                            </tr>
-                            <tr>
-                                <td>5. Searchable names</td>
-                                <td><code>MAX_RETRY_COUNT</code></td>
-                                <td><code>5</code> (magic number)</td>
-                            </tr>
-                            <tr>
-                                <td>6. Avoid encoding (Hungarian)</td>
-                                <td><code>firstName</code></td>
-                                <td><code>strFirstName</code></td>
-                            </tr>
-                            <tr>
-                                <td>7. Avoid mental mapping</td>
-                                <td><code>i</code> for loop (acceptable), but not <code>k</code> for user</td>
-                                <td><code>u</code> for user, <code>a</code> for account</td>
-                            </tr>
-                        </table>
+                            the seven habits of highly effective naming, illustrated with real code.</p>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Meaningful names</h3>
+                        <div class="code-block">
+                            // ❌ What does 'd' mean?
+                            int d; // elapsed time in days
+
+                            // ✅ Clear intent
+                            int elapsedTimeInDays;
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Avoid disinformation</h3>
+                        <div class="code-block">
+                            // ❌ The name says "List" but it's actually a Set – misleading
+                            Set&lt;Account&gt; accountList = new HashSet&lt;&gt;();
+
+                            // ✅ Be precise
+                            Set&lt;Account&gt; accounts;
+                            // or if it really is a list
+                            List&lt;Account&gt; accounts;
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. Meaningful distinction</h3>
+                        <div class="code-block">
+                            // ❌ a1 and a2 – no distinction
+                            void copyChars(char a1[], char a2[]);
+
+                            // ✅ Names explain the role
+                            void copyChars(char source[], char destination[]);
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Pronounceable names</h3>
+                        <div class="code-block">
+                            // ❌ "why why why emm dee string" – impossible to discuss
+                            const yyyymmdstr = moment().format("YYYY/MM/DD");
+
+                            // ✅ A real word you can say in a meeting
+                            const currentDate = moment().format("YYYY/MM/DD");
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Searchable names</h3>
+                        <div class="code-block">
+                            // ❌ Magic number – grep for 86400000? Good luck
+                            setTimeout(blastOff, 86400000);
+
+                            // ✅ Named constant – easy to find and change
+                            const MILLISECONDS_PER_DAY = 60 * 60 * 24 * 1000; // 86400000
+                            setTimeout(blastOff, MILLISECONDS_PER_DAY);
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Avoid encoding (Hungarian
+                            notation)</h3>
+                        <div class="code-block">
+                            // ❌ Hungarian – type in the name (redundant with modern IDEs)
+                            string strName;
+                            int iCounter;
+
+                            // ✅ Clean – the name alone is enough
+                            string name;
+                            int counter;
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Avoid mental mapping</h3>
+                        <div class="code-block">
+                            // ❌ 'e' – reader must remember that e is an Entry
+                            for (Entry e : entries) {
+                            process(e);
+                            }
+
+                            // ✅ Clear – no need to mentally translate
+                            for (Entry entry : entries) {
+                            process(entry);
+                            }
+                        </div>
+
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “We inherited a codebase with hungarianNotation,
                             snake_case, and camelCase mixed. The team spent two weeks just renaming before we could
@@ -695,45 +739,110 @@
                     </div>
                 </section>
 
-                <!-- 4 comments & documentation – expanded with 10 points -->
+                <!-- 4 comments & documentation – 10 points with realistic examples -->
                 <section id="docs" class="standard-card">
                     <div class="standard-title">comments & docs <span>10 ways to stay honest</span></div>
                     <div class="standard-content">
                         <p>Code tells you <em>how</em>; comments tell you <em>why</em>. But comments lie – keep them
                             accurate and meaningful.</p>
-                        <ul style="margin-bottom: 1.5rem; list-style-type: none; padding-left: 0;">
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>1. Comments lie</strong> – outdated comments
-                                are worse than none. Keep them close to the code.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>2. Explaining context and intent</strong> –
-                                business rules, reasons for non‑obvious choices.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>3. Warnings and TODOs</strong> – but track
-                                TODOs in your issue tracker, don't let them rot.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>4. Professional standards</strong> –
-                                JSDoc/JavaDoc for public APIs, not for every internal function.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>5. Redundancy & noise</strong> – avoid comments
-                                that just repeat the code.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>6. Misleading and confusion</strong> – be
-                                precise; wrong comments cause bugs.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>7. Version Control</strong> – don't comment out
-                                code; delete it. Git remembers.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>8. Visual clutter & formatting</strong> – use
-                                comments to separate sections sparingly.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>9. Poor communication style</strong> – write in
-                                clear sentences, not cryptic notes.</li>
-                            <li style="margin-bottom: 0.5rem;">✅ <strong>10. Refactoring principle</strong> – if you
-                                need a comment to explain what a block does, consider extracting it into a well‑named
-                                function.</li>
-                        </ul>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Comments lie – keep them truthful
+                        </h3>
                         <div class="code-block">
-                            // ✅ explains why
-                            // using double‑write until the new service is fully migrated
+                            // ❌ This comment is now wrong – we changed the logic
+                            // Returns the user's full name (deprecated: use getName())
+                            public String getFullName() { return firstName; }
+
+                            // ✅ Remove or update the comment when the code changes
+                            public String getFullName() { return firstName; } // now returns only first name – update
+                            caller!
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Explaining context and intent</h3>
+                        <div class="code-block">
+                            // ✅ Why we do this, not how
+                            // Use double‑write until the new payment service is fully migrated
                             await writeToLegacy(data);
                             await writeToNewService(data).catch(log);
-
-                            // ❌ redundant
-                            // increment i by 1
-                            i++;
                         </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. Warnings and TODOs – but track
+                            them</h3>
+                        <div class="code-block">
+                            // TODO: replace with OAuth2 when the migration is complete
+                            // This is a temporary basic auth fallback
+                            if (authScheme == "basic") { /* ... */ }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Professional standards (JSDoc /
+                            JavaDoc)</h3>
+                        <div class="code-block">
+                            /**
+                            * Calculates the total price including tax.
+                            * @param {number} basePrice - price before tax
+                            * @param {string} countryCode - ISO country code for tax rules
+                            * @returns {number} final price with tax applied
+                            */
+                            function calculateTotal(basePrice, countryCode) { ... }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Redundancy & noise – don't repeat
+                            the code</h3>
+                        <div class="code-block">
+                            // ❌ Useless – the code is self‑explanatory
+                            // increments i by 1
+                            i++;
+
+                            // ✅ No comment needed here – clean code speaks
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Misleading and confusion</h3>
+                        <div class="code-block">
+                            // ❌ "Fixes issue #42" – but it actually introduces a new bug
+                            // Be precise: "Fixes NPE when user is null"
+                            if (user != null) { process(user); }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Version Control – don't comment
+                            out code</h3>
+                        <div class="code-block">
+                            // ❌ Dead code that confuses everyone
+                            // if (oldFlag) { doSomething(); }
+
+                            // ✅ Just delete it – Git remembers
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">8. Visual clutter & formatting</h3>
+                        <div class="code-block">
+                            // ❌ Excessive banners waste space
+                            // *****************************
+                            // SECTION: INITIALIZATION
+                            // *****************************
+
+                            // ✅ Use a simple, consistent style
+                            // ===== initialization =====
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">9. Poor communication style</h3>
+                        <div class="code-block">
+                            // ❌ Cryptic, unprofessional
+                            // chk usr auth b4 proceed
+
+                            // ✅ Clear and professional
+                            // verify that the user is authenticated before proceeding
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">10. Refactoring principle – let the
+                            code speak</h3>
+                        <div class="code-block">
+                            // ❌ Comment explains a complex block – better to extract it
+                            // check if user is over 18 and has a valid license
+                            if (user.age >= 18 &amp;&amp; license.isValid() &amp;&amp; !license.isExpired()) { ... }
+
+                            // ✅ Extracted method – no comment needed
+                            if (userCanDrive(user, license)) { ... }
+                        </div>
+
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “We found a comment ‘TODO: fix later’ from 2018.
                             It was still there, hiding a critical bug. Now we treat TODOs as technical debt and track
@@ -742,41 +851,161 @@
                     </div>
                 </section>
 
-                <!-- 5 functions: expanded with 10 rules -->
+                <!-- 5 functions: 10 commandments with realistic examples -->
                 <section id="functions" class="standard-card">
                     <div class="standard-title">functions <span>10 commandments</span></div>
                     <div class="standard-content">
                         <p>Short, focused, and honest functions are the heart of clean code.</p>
-                        <ol style="margin-bottom: 1.5rem; padding-left: 1.2rem; color:#d0d5e8;">
-                            <li><strong>Short</strong> – rarely more than 20 lines.</li>
-                            <li><strong>Do One Thing</strong> – and do it well.</li>
-                            <li><strong>One Level of Abstraction</strong> – don't mix high‑level logic with tiny
-                                details.</li>
-                            <li><strong>Switch statements</strong> – bury them in low‑level classes (Factory or
-                                Polymorphism).</li>
-                            <li><strong>Function arguments</strong> – ideal: 0, then 1, then 2. Avoid 3+.</li>
-                            <li><strong>Side effects</strong> – avoid them; if you must, name it clearly (e.g.,
-                                <code>saveAndLog</code>).
-                            </li>
-                            <li><strong>Command Query Separation</strong> – a function should either do something
-                                (command) or answer something (query), not both.</li>
-                            <li><strong>Avoid error codes</strong> – use exceptions instead of nested checks.</li>
-                            <li><strong>Don't repeat yourself (DRY)</strong> – duplicate logic is a magnet for bugs.
-                            </li>
-                            <li><strong>The writing process</strong> – start long and messy, then break it down: small
-                                functions, one thing, one level of abstraction.</li>
-                        </ol>
-                        <div class="code-block">
-                            // 👍 one thing, no side effects
-                            function getActiveUsers(users) { return users.filter(u => u.active); }
 
-                            // 👎 too many things, side effect, multiple levels
-                            function processUserAndEmailAndLog(user) {
-                            updateDB(user); // low level
-                            sendEmail(user); // different concern
-                            console.log('done'); // side effect
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Short – rarely more than 20 lines
+                        </h3>
+                        <div class="code-block">
+                            // ❌ 100‑line monster – impossible to understand at a glance
+                            void processOrder(Order order) { ... 100 lines ... }
+
+                            // ✅ Small, focused – each does one thing
+                            void validateOrder(Order order) { ... }
+                            void calculateTotal(Order order) { ... }
+                            void saveOrder(Order order) { ... }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Do One Thing</h3>
+                        <div class="code-block">
+                            // ❌ Does three things: validate, update, and email
+                            function handleUser(user) {
+                            if (!user.isValid) return;
+                            database.update(user);
+                            emailService.sendWelcome(user);
+                            }
+
+                            // ✅ Separate functions
+                            function validateAndUpdate(user) {
+                            if (!user.isValid) return;
+                            database.update(user);
+                            }
+                            function sendWelcomeEmail(user) { ... }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. One Level of Abstraction</h3>
+                        <div class="code-block">
+                            // ❌ Mixed high‑level and low‑level details
+                            function renderPage() {
+                            let html = "";
+                            html += "&lt;html&gt;"; // low‑level
+                            html += getHeader(); // high‑level
+                            for (let i = 0; i &lt; items.length; i++) { // low‑level loop
+                            html += "&lt;li&gt;" + items[i] + "&lt;/li&gt;";
+                            }
+                            return html;
+                            }
+
+                            // ✅ All at the same level
+                            function renderPage() {
+                            return createHtmlDocument(getHeader(), renderItems(items));
                             }
                         </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Switch statements – bury them</h3>
+                        <div class="code-block">
+                            // ❌ Switch scattered everywhere
+                            function calculatePay(employee) {
+                            switch (employee.type) {
+                            case "COMMISSIONED": return commission(employee);
+                            case "HOURLY": return hourly(employee);
+                            // ...
+                            }
+                            }
+
+                            // ✅ Use polymorphism or factory
+                            class Employee { abstract pay(); }
+                            class CommissionedEmployee extends Employee { pay() { ... } }
+                            class HourlyEmployee extends Employee { pay() { ... } }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Function arguments – ideal: 0,
+                            then 1, then 2</h3>
+                        <div class="code-block">
+                            // ❌ Too many arguments – hard to remember order
+                            void createUser(String name, int age, String email, String phone, boolean isAdmin) { ... }
+
+                            // ✅ Use a parameter object or builder
+                            void createUser(UserData data) { ... }
+                            UserData data = new UserData("Alice", 30, "alice@ex.com", ...);
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Side effects – avoid them</h3>
+                        <div class="code-block">
+                            // ❌ Unexpected side effect – modifies global cache
+                            function getUser(id) {
+                            if (!cache.has(id)) {
+                            cache.set(id, database.fetch(id)); // side effect
+                            }
+                            return cache.get(id);
+                            }
+
+                            // ✅ Name it clearly, or separate
+                            function getOrFetchUser(id) { ... }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Command Query Separation</h3>
+                        <div class="code-block">
+                            // ❌ Both modifies and returns – confusing
+                            User updateAndReturnUser(User user) { ... }
+
+                            // ✅ Separate
+                            void updateUser(User user);
+                            User getUser(int id);
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">8. Avoid error codes – use exceptions
+                        </h3>
+                        <div class="code-block">
+                            // ❌ Nested checks for error codes
+                            int result = deleteItem(id);
+                            if (result == -1) { /* handle not found */ }
+                            else if (result == -2) { /* handle permission denied */ }
+
+                            // ✅ Exceptions separate normal flow from error handling
+                            try {
+                            deleteItem(id);
+                            } catch (ItemNotFoundException e) {
+                            // handle
+                            } catch (PermissionDeniedException e) {
+                            // handle
+                            }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">9. Don't repeat yourself (DRY)</h3>
+                        <div class="code-block">
+                            // ❌ Same validation logic in multiple places
+                            if (order.items.length == 0) { throw new Error("Empty order"); }
+                            // ... later ...
+                            if (cart.items.length == 0) { throw new Error("Empty cart"); }
+
+                            // ✅ One function
+                            function validateNonEmpty(collection, name) {
+                            if (collection.length == 0) throw new Error(name + " cannot be empty");
+                            }
+                        </div>
+
+                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">10. The writing process – small, one
+                            thing, one level</h3>
+                        <div class="code-block">
+                            // Start with a long, messy function
+                            function processPayment(payment) {
+                            // 50 lines of validation, discount calculation, tax, db update, email...
+                            }
+
+                            // Then refactor step by step into small functions at the same abstraction level
+                            function processPayment(payment) {
+                            validatePayment(payment);
+                            applyDiscounts(payment);
+                            calculateTax(payment);
+                            savePayment(payment);
+                            sendReceipt(payment);
+                            }
+                        </div>
+
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “A 500‑line function handled authentication,
                             logging, and database updates. Changing one part broke others. After refactoring into 10
