@@ -613,31 +613,52 @@
                     </div>
                 </section>
 
-                <!-- 2 naming -->
+                <!-- 2 naming – expanded with 7 principles -->
                 <section id="naming" class="standard-card">
-                    <div class="standard-title">naming is a superpower <span>intention</span></div>
+                    <div class="standard-title">naming is a superpower <span>7 principles</span></div>
                     <div class="standard-content">
-                        <p>Names should reveal intent, not implementation. Good naming turns code into prose.</p>
+                        <p>Names should reveal intent, be pronounceable, searchable, and avoid mental mapping. Here are
+                            the seven habits of highly effective naming:</p>
                         <table class="std-table">
                             <tr>
-                                <th>style</th>
+                                <th>principle</th>
                                 <th>good example</th>
                                 <th>bad example</th>
                             </tr>
                             <tr>
-                                <td>variable</td>
+                                <td>1. Meaningful names</td>
                                 <td><code>userCount, isVerified</code></td>
                                 <td><code>uc, flag1</code></td>
                             </tr>
                             <tr>
-                                <td>function</td>
-                                <td><code>sendEmailNotification()</code></td>
-                                <td><code>process()</code></td>
+                                <td>2. Avoid disinformation</td>
+                                <td><code>accountsList</code> (if it's a list)</td>
+                                <td><code>accountList</code> (if it's a single account)</td>
                             </tr>
                             <tr>
-                                <td>class</td>
-                                <td><code>CustomerRepository</code></td>
-                                <td><code>DataHandler</code></td>
+                                <td>3. Meaningful distinction</td>
+                                <td><code>sourceCode, objectCode</code></td>
+                                <td><code>data1, data2</code></td>
+                            </tr>
+                            <tr>
+                                <td>4. Pronounceable names</td>
+                                <td><code>creationTimestamp</code></td>
+                                <td><code>creTs</code></td>
+                            </tr>
+                            <tr>
+                                <td>5. Searchable names</td>
+                                <td><code>MAX_RETRY_COUNT</code></td>
+                                <td><code>5</code> (magic number)</td>
+                            </tr>
+                            <tr>
+                                <td>6. Avoid encoding (Hungarian)</td>
+                                <td><code>firstName</code></td>
+                                <td><code>strFirstName</code></td>
+                            </tr>
+                            <tr>
+                                <td>7. Avoid mental mapping</td>
+                                <td><code>i</code> for loop (acceptable), but not <code>k</code> for user</td>
+                                <td><code>u</code> for user, <code>a</code> for account</td>
                             </tr>
                         </table>
                         <div class="complication-box">
@@ -674,12 +695,35 @@
                     </div>
                 </section>
 
-                <!-- 4 comments & documentation -->
+                <!-- 4 comments & documentation – expanded with 10 points -->
                 <section id="docs" class="standard-card">
-                    <div class="standard-title">comments & docs <span>why, not what</span></div>
+                    <div class="standard-title">comments & docs <span>10 ways to stay honest</span></div>
                     <div class="standard-content">
-                        <p>Code tells you <em>how</em>; comments tell you <em>why</em>. Document edge cases, business
-                            rules, and tricky workarounds.</p>
+                        <p>Code tells you <em>how</em>; comments tell you <em>why</em>. But comments lie – keep them
+                            accurate and meaningful.</p>
+                        <ul style="margin-bottom: 1.5rem; list-style-type: none; padding-left: 0;">
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>1. Comments lie</strong> – outdated comments
+                                are worse than none. Keep them close to the code.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>2. Explaining context and intent</strong> –
+                                business rules, reasons for non‑obvious choices.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>3. Warnings and TODOs</strong> – but track
+                                TODOs in your issue tracker, don't let them rot.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>4. Professional standards</strong> –
+                                JSDoc/JavaDoc for public APIs, not for every internal function.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>5. Redundancy & noise</strong> – avoid comments
+                                that just repeat the code.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>6. Misleading and confusion</strong> – be
+                                precise; wrong comments cause bugs.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>7. Version Control</strong> – don't comment out
+                                code; delete it. Git remembers.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>8. Visual clutter & formatting</strong> – use
+                                comments to separate sections sparingly.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>9. Poor communication style</strong> – write in
+                                clear sentences, not cryptic notes.</li>
+                            <li style="margin-bottom: 0.5rem;">✅ <strong>10. Refactoring principle</strong> – if you
+                                need a comment to explain what a block does, consider extracting it into a well‑named
+                                function.</li>
+                        </ul>
                         <div class="code-block">
                             // ✅ explains why
                             // using double‑write until the new service is fully migrated
@@ -698,19 +742,40 @@
                     </div>
                 </section>
 
-                <!-- 5 functions: size, purity, complexity -->
+                <!-- 5 functions: expanded with 10 rules -->
                 <section id="functions" class="standard-card">
-                    <div class="standard-title">functions <span>single responsibility</span></div>
+                    <div class="standard-title">functions <span>10 commandments</span></div>
                     <div class="standard-content">
-                        <p>Short, focused functions are testable and understandable. If a function does more than one
-                            thing, split it.</p>
+                        <p>Short, focused, and honest functions are the heart of clean code.</p>
+                        <ol style="margin-bottom: 1.5rem; padding-left: 1.2rem; color:#d0d5e8;">
+                            <li><strong>Short</strong> – rarely more than 20 lines.</li>
+                            <li><strong>Do One Thing</strong> – and do it well.</li>
+                            <li><strong>One Level of Abstraction</strong> – don't mix high‑level logic with tiny
+                                details.</li>
+                            <li><strong>Switch statements</strong> – bury them in low‑level classes (Factory or
+                                Polymorphism).</li>
+                            <li><strong>Function arguments</strong> – ideal: 0, then 1, then 2. Avoid 3+.</li>
+                            <li><strong>Side effects</strong> – avoid them; if you must, name it clearly (e.g.,
+                                <code>saveAndLog</code>).
+                            </li>
+                            <li><strong>Command Query Separation</strong> – a function should either do something
+                                (command) or answer something (query), not both.</li>
+                            <li><strong>Avoid error codes</strong> – use exceptions instead of nested checks.</li>
+                            <li><strong>Don't repeat yourself (DRY)</strong> – duplicate logic is a magnet for bugs.
+                            </li>
+                            <li><strong>The writing process</strong> – start long and messy, then break it down: small
+                                functions, one thing, one level of abstraction.</li>
+                        </ol>
                         <div class="code-block">
-                            // 👍 one thing
+                            // 👍 one thing, no side effects
                             function getActiveUsers(users) { return users.filter(u => u.active); }
-                            function sendWelcomeEmail(user) { ... }
 
-                            // 👎 three things
-                            function processUserAndEmailAndLog(user) { ... }
+                            // 👎 too many things, side effect, multiple levels
+                            function processUserAndEmailAndLog(user) {
+                            updateDB(user); // low level
+                            sendEmail(user); // different concern
+                            console.log('done'); // side effect
+                            }
                         </div>
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “A 500‑line function handled authentication,
