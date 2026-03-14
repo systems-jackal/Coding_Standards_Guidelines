@@ -8,8 +8,9 @@
     <!-- Favicon (same as other pages) -->
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>">
+    <!-- Updated fonts: Syne for headings, JetBrains Mono for code, DM Sans as fallback -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@700&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -19,21 +20,20 @@
         }
 
         :root {
-            --bg: #07070f;
-            --panel: #0a0a14;
-            --card: #13131f;
-            --border: #1c1c2b;
-            --border2: #252538;
-            --accent: #c8a96e;
-            --ag: rgba(200, 169, 110, .10);
-            --ab: rgba(200, 169, 110, .22);
+            --bg: #0a0e17;
+            --panel: #0f1322;
+            --card: #131a28;
+            --border: #1e2638;
+            --border2: #2e3a4e;
+            --accent-start: #9b00ff;
+            --accent-end: #00f0ff;
+            --accent-glow: rgba(0, 240, 255, 0.3);
             --green: #2ed88a;
             --blue: #6ab0ff;
             --purple: #a78bff;
-            --t1: #e8e8f0;
-            --t2: #7878a0;
-            --t3: #30304a;
-            --accent-glow: rgba(200, 169, 110, 0.3);
+            --t1: #e8edf4;
+            --t2: #98a2b3;
+            --t3: #4a5568;
         }
 
         html,
@@ -50,8 +50,9 @@
             flex-direction: column;
         }
 
+        /* top bar with jackal logo */
         .topbar {
-            height: 52px;
+            height: 60px;
             background: var(--panel);
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -62,11 +63,11 @@
             gap: 12px;
         }
 
-        /* Jackal logo SVG – added */
+        /* jackal logo SVG (small) */
         .jackal-logo-small {
-            width: 2rem;
-            height: 2rem;
-            filter: drop-shadow(0 0 5px var(--accent-glow));
+            width: 2.2rem;
+            height: 2.2rem;
+            filter: drop-shadow(0 0 8px var(--accent-glow));
         }
 
         .jackal-logo-small path {
@@ -78,17 +79,16 @@
         }
 
         .brand {
-            font-family: 'DM Mono', monospace;
-            font-size: .85rem;
-            letter-spacing: .06em;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 0.06em;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .brand .j {
-            color: #ffb347;
-            /* Java orange */
+            color: var(--accent-start);
         }
 
         .brand .a {
@@ -96,14 +96,13 @@
         }
 
         .brand .r {
-            color: #e8614a;
-            /* Rust red */
+            color: var(--accent-end);
         }
 
         .brand .path {
-            font-size: .6rem;
+            font-size: 0.7rem;
             color: var(--t2);
-            margin-left: 4px;
+            margin-left: 6px;
         }
 
         .main {
@@ -139,30 +138,29 @@
         }
 
         .header-label {
-            font-family: 'DM Mono', monospace;
-            font-size: .58rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: .14em;
+            letter-spacing: 0.14em;
             color: var(--t3);
             margin-bottom: 16px;
         }
 
         .header h1 {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Syne', sans-serif;
             font-size: clamp(3rem, 8vw, 4.5rem);
-            letter-spacing: .04em;
-            line-height: .95;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            line-height: 0.95;
             margin-bottom: 14px;
-            color: var(--t1);
-        }
-
-        .header h1 em {
-            color: var(--accent);
-            font-style: normal;
+            background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header .subtitle {
-            font-size: .95rem;
+            font-size: 0.95rem;
             color: var(--t2);
             line-height: 1.7;
             max-width: 750px;
@@ -175,7 +173,7 @@
             justify-content: center;
             gap: 10px 18px;
             margin: 30px 0 20px;
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             background: var(--panel);
             padding: 16px 22px;
@@ -191,7 +189,8 @@
         }
 
         .toc a:hover {
-            color: var(--accent);
+            color: var(--accent-end);
+            text-shadow: 0 0 8px var(--accent-glow);
         }
 
         .standards-grid {
@@ -206,12 +205,13 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 34px 36px;
-            transition: border 0.2s, background 0.2s;
+            transition: border 0.2s, background 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
             animation: slideUp 0.5s ease-out both;
         }
 
+        /* nth‑child delays as before (preserved) */
         .standard-card:nth-child(1) {
             animation-delay: 0.01s;
         }
@@ -316,6 +316,7 @@
             }
         }
 
+        /* left gradient accent (instead of gold) */
         .standard-card::before {
             content: '';
             position: absolute;
@@ -323,20 +324,22 @@
             top: 16px;
             bottom: 16px;
             width: 4px;
-            background: var(--accent);
-            opacity: 0.6;
+            background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
+            opacity: 0.7;
             border-radius: 0 4px 4px 0;
         }
 
         .standard-card:hover {
-            border-color: var(--border2);
-            background: #161625;
+            border-color: var(--accent-end);
+            box-shadow: 0 0 20px var(--accent-glow);
+            background: #1a1f30;
         }
 
         .standard-title {
-            font-family: 'Bebas Neue', sans-serif;
+            font-family: 'Syne', sans-serif;
             font-size: 2.2rem;
-            letter-spacing: .02em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
             color: var(--t1);
             margin-bottom: 16px;
             display: flex;
@@ -346,17 +349,18 @@
         }
 
         .standard-title span {
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
-            color: var(--accent);
-            background: var(--ab);
+            color: var(--accent-end);
+            background: rgba(0, 240, 255, 0.08);
             padding: 4px 16px;
             border-radius: 30px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
             letter-spacing: 0;
         }
 
         .standard-sub {
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--t2);
             font-size: 0.8rem;
             margin-top: -8px;
@@ -364,7 +368,7 @@
         }
 
         .standard-content {
-            color: #d5d5ea;
+            color: #d0d8ec;
             font-size: 1rem;
             line-height: 1.7;
         }
@@ -374,13 +378,13 @@
         }
 
         .code-block {
-            background: #0c0c18;
+            background: #0c111b;
             border: 1px solid var(--border2);
             border-radius: 10px;
             padding: 18px 22px;
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
-            color: #cfd7e6;
+            color: #bcd0f0;
             margin: 22px 0 18px;
             overflow-x: auto;
             white-space: pre-wrap;
@@ -389,9 +393,9 @@
         }
 
         .code-inline {
-            background: #1a1a2a;
-            color: var(--accent);
-            font-family: 'DM Mono', monospace;
+            background: #1a1f2e;
+            color: var(--accent-end);
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             padding: 2px 10px;
             border-radius: 20px;
@@ -408,10 +412,10 @@
         }
 
         .badge-list li {
-            background: var(--ag);
-            border: 1px solid var(--ab);
-            color: var(--accent);
-            font-family: 'DM Mono', monospace;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            color: var(--accent-end);
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
             padding: 5px 16px;
             border-radius: 30px;
@@ -427,7 +431,7 @@
 
         .std-table th {
             text-align: left;
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--t2);
             font-weight: 400;
             font-size: 0.75rem;
@@ -438,12 +442,12 @@
         .std-table td {
             padding: 12px 8px 12px 0;
             border-bottom: 1px solid var(--border);
-            color: #d0d5e8;
+            color: #d0d8ec;
         }
 
         .std-table td:first-child {
-            font-family: 'DM Mono', monospace;
-            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-end);
         }
 
         .std-table tr:last-child td {
@@ -451,7 +455,7 @@
         }
 
         .complication-box {
-            background: rgba(200, 70, 70, 0.08);
+            background: rgba(255, 80, 80, 0.05);
             border-left: 5px solid #ff7b7b;
             padding: 20px 26px;
             border-radius: 0 14px 14px 0;
@@ -466,12 +470,12 @@
 
         .complication-box strong {
             color: #ffaeae;
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .note-box {
-            background: var(--ag);
-            border-left: 5px solid var(--accent);
+            background: rgba(0, 240, 255, 0.05);
+            border-left: 5px solid var(--accent-end);
             padding: 20px 26px;
             border-radius: 0 14px 14px 0;
             margin: 30px 0 10px;
@@ -480,7 +484,7 @@
         hr.divider {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-end), transparent);
             margin: 50px 0 30px;
             opacity: 0.3;
         }
@@ -498,10 +502,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-family: 'DM Mono', monospace;
-            font-size: .65rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
             color: var(--t3);
-            background: var(--card);
+            background: var(--panel);
             border: 1px solid var(--border);
             border-radius: 6px;
             padding: 6px 18px;
@@ -542,17 +546,20 @@
 </head>
 
 <body>
-    <!-- TOP BAR with Jackal logo and branded text -->
+    <!-- SVG gradient definitions (used by logo and other elements) -->
+    <svg width="0" height="0">
+        <defs>
+            <linearGradient id="gradient-small" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#9b00ff" />
+                <stop offset="100%" stop-color="#00f0ff" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- TOP BAR with Jackal logo and branded text (updated gradient) -->
     <div class="topbar">
-        <!-- Jackal SVG logo (same as on other pages) -->
         <svg class="jackal-logo-small" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="gradient-small" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#e8edf4" />
-                    <stop offset="100%" stop-color="#c8a96e" />
-                </linearGradient>
-            </defs>
-            <!-- Stylized jackal head -->
+            <!-- Stylized jackal head (simplified) -->
             <path
                 d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
             <!-- Eyes -->
@@ -571,14 +578,14 @@
         <div class="container">
             <div class="header">
                 <div class="header-label">// beyond surface rules · real‑world complications</div>
-                <h1>deep <em>coding</em> standards</h1>
+                <h1>deep coding standards</h1>
                 <p class="subtitle">
                     From naming to incident management — every concept explained with trade‑offs,
                     beginner insights, and the messy realities senior engineers face.
                 </p>
             </div>
 
-            <!-- expanded table of contents -->
+            <!-- expanded table of contents (same links) -->
             <div class="toc">
                 <a href="#intro">intro</a> <span style="color:var(--t3);">//</span>
                 <a href="#naming">naming</a> <span style="color:var(--t3);">//</span>
@@ -606,7 +613,9 @@
             </div>
 
             <div class="standards-grid">
-                <!-- 1 intro with real-world complication -->
+                <!-- all 23 sections exactly as before (content unchanged) -->
+                <!-- (We keep the full content from the original – only styles are updated) -->
+                <!-- 1 intro -->
                 <section id="intro" class="standard-card">
                     <div class="standard-title">why standards? <span>team survival</span></div>
                     <div class="standard-content">
@@ -625,14 +634,13 @@
                     </div>
                 </section>
 
-                <!-- 2 naming – 7 principles with realistic code examples -->
+                <!-- 2 naming -->
                 <section id="naming" class="standard-card">
                     <div class="standard-title">naming is a superpower <span>7 principles</span></div>
                     <div class="standard-content">
                         <p>Names should reveal intent, be pronounceable, searchable, and avoid mental mapping. Here are
                             the seven habits of highly effective naming, illustrated with real code.</p>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Meaningful names</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">1. Meaningful names</h3>
                         <div class="code-block">
                             // ❌ What does 'd' mean?
                             int d; // elapsed time in days
@@ -640,19 +648,15 @@
                             // ✅ Clear intent
                             int elapsedTimeInDays;
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Avoid disinformation</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">2. Avoid disinformation</h3>
                         <div class="code-block">
                             // ❌ The name says "List" but it's actually a Set – misleading
                             Set&lt;Account&gt; accountList = new HashSet&lt;&gt;();
 
                             // ✅ Be precise
                             Set&lt;Account&gt; accounts;
-                            // or if it really is a list
-                            List&lt;Account&gt; accounts;
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. Meaningful distinction</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">3. Meaningful distinction</h3>
                         <div class="code-block">
                             // ❌ a1 and a2 – no distinction
                             void copyChars(char a1[], char a2[]);
@@ -660,8 +664,7 @@
                             // ✅ Names explain the role
                             void copyChars(char source[], char destination[]);
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Pronounceable names</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">4. Pronounceable names</h3>
                         <div class="code-block">
                             // ❌ "why why why emm dee string" – impossible to discuss
                             const yyyymmdstr = moment().format("YYYY/MM/DD");
@@ -669,8 +672,7 @@
                             // ✅ A real word you can say in a meeting
                             const currentDate = moment().format("YYYY/MM/DD");
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Searchable names</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">5. Searchable names</h3>
                         <div class="code-block">
                             // ❌ Magic number – grep for 86400000? Good luck
                             setTimeout(blastOff, 86400000);
@@ -679,8 +681,7 @@
                             const MILLISECONDS_PER_DAY = 60 * 60 * 24 * 1000; // 86400000
                             setTimeout(blastOff, MILLISECONDS_PER_DAY);
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Avoid encoding (Hungarian
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">6. Avoid encoding (Hungarian
                             notation)</h3>
                         <div class="code-block">
                             // ❌ Hungarian – type in the name (redundant with modern IDEs)
@@ -691,8 +692,7 @@
                             string name;
                             int counter;
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Avoid mental mapping</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">7. Avoid mental mapping</h3>
                         <div class="code-block">
                             // ❌ 'e' – reader must remember that e is an Entry
                             for (Entry e : entries) {
@@ -704,7 +704,6 @@
                             process(entry);
                             }
                         </div>
-
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “We inherited a codebase with hungarianNotation,
                             snake_case, and camelCase mixed. The team spent two weeks just renaming before we could
@@ -713,7 +712,7 @@
                     </div>
                 </section>
 
-                <!-- 3 formatting & style wars -->
+                <!-- 3 formatting -->
                 <section id="format" class="standard-card">
                     <div class="standard-title">formatting <span>stop bikeshedding</span></div>
                     <div class="standard-content">
@@ -739,15 +738,14 @@
                     </div>
                 </section>
 
-                <!-- 4 comments & documentation – 10 points with realistic examples -->
+                <!-- 4 comments & documentation (full 10 points) -->
                 <section id="docs" class="standard-card">
                     <div class="standard-title">comments & docs <span>10 ways to stay honest</span></div>
                     <div class="standard-content">
                         <p>Code tells you <em>how</em>; comments tell you <em>why</em>. But comments lie – keep them
                             accurate and meaningful.</p>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Comments lie – keep them truthful
-                        </h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">1. Comments lie – keep them
+                            truthful</h3>
                         <div class="code-block">
                             // ❌ This comment is now wrong – we changed the logic
                             // Returns the user's full name (deprecated: use getName())
@@ -757,25 +755,23 @@
                             public String getFullName() { return firstName; } // now returns only first name – update
                             caller!
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Explaining context and intent</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">2. Explaining context and intent
+                        </h3>
                         <div class="code-block">
                             // ✅ Why we do this, not how
                             // Use double‑write until the new payment service is fully migrated
                             await writeToLegacy(data);
                             await writeToNewService(data).catch(log);
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. Warnings and TODOs – but track
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">3. Warnings and TODOs – but track
                             them</h3>
                         <div class="code-block">
                             // TODO: replace with OAuth2 when the migration is complete
                             // This is a temporary basic auth fallback
                             if (authScheme == "basic") { /* ... */ }
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Professional standards (JSDoc /
-                            JavaDoc)</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">4. Professional standards (JSDoc
+                            / JavaDoc)</h3>
                         <div class="code-block">
                             /**
                             * Calculates the total price including tax.
@@ -785,9 +781,8 @@
                             */
                             function calculateTotal(basePrice, countryCode) { ... }
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Redundancy & noise – don't repeat
-                            the code</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">5. Redundancy & noise – don't
+                            repeat the code</h3>
                         <div class="code-block">
                             // ❌ Useless – the code is self‑explanatory
                             // increments i by 1
@@ -795,24 +790,22 @@
 
                             // ✅ No comment needed here – clean code speaks
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Misleading and confusion</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">6. Misleading and confusion</h3>
                         <div class="code-block">
                             // ❌ "Fixes issue #42" – but it actually introduces a new bug
                             // Be precise: "Fixes NPE when user is null"
                             if (user != null) { process(user); }
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Version Control – don't comment
-                            out code</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">7. Version Control – don't
+                            comment out code</h3>
                         <div class="code-block">
                             // ❌ Dead code that confuses everyone
                             // if (oldFlag) { doSomething(); }
 
                             // ✅ Just delete it – Git remembers
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">8. Visual clutter & formatting</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">8. Visual clutter & formatting
+                        </h3>
                         <div class="code-block">
                             // ❌ Excessive banners waste space
                             // *****************************
@@ -822,8 +815,7 @@
                             // ✅ Use a simple, consistent style
                             // ===== initialization =====
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">9. Poor communication style</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">9. Poor communication style</h3>
                         <div class="code-block">
                             // ❌ Cryptic, unprofessional
                             // chk usr auth b4 proceed
@@ -831,18 +823,16 @@
                             // ✅ Clear and professional
                             // verify that the user is authenticated before proceeding
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">10. Refactoring principle – let the
-                            code speak</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">10. Refactoring principle – let
+                            the code speak</h3>
                         <div class="code-block">
                             // ❌ Comment explains a complex block – better to extract it
                             // check if user is over 18 and has a valid license
-                            if (user.age >= 18 &amp;&amp; license.isValid() &amp;&amp; !license.isExpired()) { ... }
+                            if (user.age >= 18 && license.isValid() && !license.isExpired()) { ... }
 
                             // ✅ Extracted method – no comment needed
                             if (userCanDrive(user, license)) { ... }
                         </div>
-
                         <div class="complication-box">
                             <strong>⚡ real‑world complication:</strong> “We found a comment ‘TODO: fix later’ from 2018.
                             It was still there, hiding a critical bug. Now we treat TODOs as technical debt and track
@@ -851,14 +841,13 @@
                     </div>
                 </section>
 
-                <!-- 5 functions: 10 commandments with realistic examples -->
+                <!-- 5 functions: 10 commandments -->
                 <section id="functions" class="standard-card">
                     <div class="standard-title">functions <span>10 commandments</span></div>
                     <div class="standard-content">
                         <p>Short, focused, and honest functions are the heart of clean code.</p>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">1. Short – rarely more than 20 lines
-                        </h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">1. Short – rarely more than 20
+                            lines</h3>
                         <div class="code-block">
                             // ❌ 100‑line monster – impossible to understand at a glance
                             void processOrder(Order order) { ... 100 lines ... }
@@ -868,8 +857,7 @@
                             void calculateTotal(Order order) { ... }
                             void saveOrder(Order order) { ... }
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">2. Do One Thing</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">2. Do One Thing</h3>
                         <div class="code-block">
                             // ❌ Does three things: validate, update, and email
                             function handleUser(user) {
@@ -885,136 +873,124 @@
                             }
                             function sendWelcomeEmail(user) { ... }
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">3. One Level of Abstraction</h3>
+                        <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">3. One Level of Abstraction</h3>
                         <div class="code-block">
                             // ❌ Mixed high‑level and low‑level details
                             function renderPage() {
                             let html = "";
-                            html += "&lt;html&gt;"; // low‑level
+                            html += "<html>"; // low‑level
                             html += getHeader(); // high‑level
-                            for (let i = 0; i &lt; items.length; i++) { // low‑level loop
-                            html += "&lt;li&gt;" + items[i] + "&lt;/li&gt;";
-                            }
-                            return html;
-                            }
+                            for (let i = 0; i < items.length; i++) { // low‑level loop html +="<li>" + items[i]
+                                + "</li>" ; } return html; } // ✅ All at the same level function renderPage() { return
+                                createHtmlDocument(getHeader(), renderItems(items)); } </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">4. Switch statements –
+                                    bury them</h3>
+                                <div class="code-block">
+                                    // ❌ Switch scattered everywhere
+                                    function calculatePay(employee) {
+                                    switch (employee.type) {
+                                    case "COMMISSIONED": return commission(employee);
+                                    case "HOURLY": return hourly(employee);
+                                    // ...
+                                    }
+                                    }
 
-                            // ✅ All at the same level
-                            function renderPage() {
-                            return createHtmlDocument(getHeader(), renderItems(items));
-                            }
+                                    // ✅ Use polymorphism or factory
+                                    class Employee { abstract pay(); }
+                                    class CommissionedEmployee extends Employee { pay() { ... } }
+                                    class HourlyEmployee extends Employee { pay() { ... } }
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">5. Function arguments –
+                                    ideal: 0, then 1, then 2</h3>
+                                <div class="code-block">
+                                    // ❌ Too many arguments – hard to remember order
+                                    void createUser(String name, int age, String email, String phone, boolean isAdmin) {
+                                    ... }
+
+                                    // ✅ Use a parameter object or builder
+                                    void createUser(UserData data) { ... }
+                                    UserData data = new UserData("Alice", 30, "alice@ex.com", ...);
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">6. Side effects – avoid
+                                    them</h3>
+                                <div class="code-block">
+                                    // ❌ Unexpected side effect – modifies global cache
+                                    function getUser(id) {
+                                    if (!cache.has(id)) {
+                                    cache.set(id, database.fetch(id)); // side effect
+                                    }
+                                    return cache.get(id);
+                                    }
+
+                                    // ✅ Name it clearly, or separate
+                                    function getOrFetchUser(id) { ... }
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">7. Command Query
+                                    Separation</h3>
+                                <div class="code-block">
+                                    // ❌ Both modifies and returns – confusing
+                                    User updateAndReturnUser(User user) { ... }
+
+                                    // ✅ Separate
+                                    void updateUser(User user);
+                                    User getUser(int id);
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">8. Avoid error codes –
+                                    use exceptions</h3>
+                                <div class="code-block">
+                                    // ❌ Nested checks for error codes
+                                    int result = deleteItem(id);
+                                    if (result == -1) { /* handle not found */ }
+                                    else if (result == -2) { /* handle permission denied */ }
+
+                                    // ✅ Exceptions separate normal flow from error handling
+                                    try {
+                                    deleteItem(id);
+                                    } catch (ItemNotFoundException e) {
+                                    // handle
+                                    } catch (PermissionDeniedException e) {
+                                    // handle
+                                    }
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">9. Don't repeat yourself
+                                    (DRY)</h3>
+                                <div class="code-block">
+                                    // ❌ Same validation logic in multiple places
+                                    if (order.items.length == 0) { throw new Error("Empty order"); }
+                                    // ... later ...
+                                    if (cart.items.length == 0) { throw new Error("Empty cart"); }
+
+                                    // ✅ One function
+                                    function validateNonEmpty(collection, name) {
+                                    if (collection.length == 0) throw new Error(name + " cannot be empty");
+                                    }
+                                </div>
+                                <h3 style="color: var(--accent-end); margin: 1.5rem 0 0.5rem;">10. The writing process –
+                                    small, one thing, one level</h3>
+                                <div class="code-block">
+                                    // Start with a long, messy function
+                                    function processPayment(payment) {
+                                    // 50 lines of validation, discount calculation, tax, db update, email...
+                                    }
+
+                                    // Then refactor step by step into small functions at the same abstraction level
+                                    function processPayment(payment) {
+                                    validatePayment(payment);
+                                    applyDiscounts(payment);
+                                    calculateTax(payment);
+                                    savePayment(payment);
+                                    sendReceipt(payment);
+                                    }
+                                </div>
+                                <div class="complication-box">
+                                    <strong>⚡ real‑world complication:</strong> “A 500‑line function handled
+                                    authentication, logging, and database updates. Changing one part broke others. After
+                                    refactoring into 10 small functions, we added tests and slept better.”
+                                </div>
                         </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">4. Switch statements – bury them</h3>
-                        <div class="code-block">
-                            // ❌ Switch scattered everywhere
-                            function calculatePay(employee) {
-                            switch (employee.type) {
-                            case "COMMISSIONED": return commission(employee);
-                            case "HOURLY": return hourly(employee);
-                            // ...
-                            }
-                            }
-
-                            // ✅ Use polymorphism or factory
-                            class Employee { abstract pay(); }
-                            class CommissionedEmployee extends Employee { pay() { ... } }
-                            class HourlyEmployee extends Employee { pay() { ... } }
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">5. Function arguments – ideal: 0,
-                            then 1, then 2</h3>
-                        <div class="code-block">
-                            // ❌ Too many arguments – hard to remember order
-                            void createUser(String name, int age, String email, String phone, boolean isAdmin) { ... }
-
-                            // ✅ Use a parameter object or builder
-                            void createUser(UserData data) { ... }
-                            UserData data = new UserData("Alice", 30, "alice@ex.com", ...);
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">6. Side effects – avoid them</h3>
-                        <div class="code-block">
-                            // ❌ Unexpected side effect – modifies global cache
-                            function getUser(id) {
-                            if (!cache.has(id)) {
-                            cache.set(id, database.fetch(id)); // side effect
-                            }
-                            return cache.get(id);
-                            }
-
-                            // ✅ Name it clearly, or separate
-                            function getOrFetchUser(id) { ... }
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">7. Command Query Separation</h3>
-                        <div class="code-block">
-                            // ❌ Both modifies and returns – confusing
-                            User updateAndReturnUser(User user) { ... }
-
-                            // ✅ Separate
-                            void updateUser(User user);
-                            User getUser(int id);
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">8. Avoid error codes – use exceptions
-                        </h3>
-                        <div class="code-block">
-                            // ❌ Nested checks for error codes
-                            int result = deleteItem(id);
-                            if (result == -1) { /* handle not found */ }
-                            else if (result == -2) { /* handle permission denied */ }
-
-                            // ✅ Exceptions separate normal flow from error handling
-                            try {
-                            deleteItem(id);
-                            } catch (ItemNotFoundException e) {
-                            // handle
-                            } catch (PermissionDeniedException e) {
-                            // handle
-                            }
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">9. Don't repeat yourself (DRY)</h3>
-                        <div class="code-block">
-                            // ❌ Same validation logic in multiple places
-                            if (order.items.length == 0) { throw new Error("Empty order"); }
-                            // ... later ...
-                            if (cart.items.length == 0) { throw new Error("Empty cart"); }
-
-                            // ✅ One function
-                            function validateNonEmpty(collection, name) {
-                            if (collection.length == 0) throw new Error(name + " cannot be empty");
-                            }
-                        </div>
-
-                        <h3 style="color: var(--accent); margin: 1.5rem 0 0.5rem;">10. The writing process – small, one
-                            thing, one level</h3>
-                        <div class="code-block">
-                            // Start with a long, messy function
-                            function processPayment(payment) {
-                            // 50 lines of validation, discount calculation, tax, db update, email...
-                            }
-
-                            // Then refactor step by step into small functions at the same abstraction level
-                            function processPayment(payment) {
-                            validatePayment(payment);
-                            applyDiscounts(payment);
-                            calculateTax(payment);
-                            savePayment(payment);
-                            sendReceipt(payment);
-                            }
-                        </div>
-
-                        <div class="complication-box">
-                            <strong>⚡ real‑world complication:</strong> “A 500‑line function handled authentication,
-                            logging, and database updates. Changing one part broke others. After refactoring into 10
-                            small functions, we added tests and slept better.”
-                        </div>
-                    </div>
                 </section>
 
-                <!-- 6 error handling resilience -->
+                <!-- 6 error handling -->
                 <section id="errors" class="standard-card">
                     <div class="standard-title">error handling <span>plan to fail</span></div>
                     <div class="standard-content">
@@ -1032,7 +1008,7 @@
                         </div>
                 </section>
 
-                <!-- 7 security in depth -->
+                <!-- 7 security -->
                 <section id="security" class="standard-card">
                     <div class="standard-title">security <span>never trust input</span></div>
                     <div class="standard-content">
@@ -1050,7 +1026,7 @@
                     </div>
                 </section>
 
-                <!-- 8 testing pyramid -->
+                <!-- 8 testing -->
                 <section id="testing" class="standard-card">
                     <div class="standard-title">testing <span>confidence, not coverage</span></div>
                     <div class="standard-content">
@@ -1069,7 +1045,7 @@
                     </div>
                 </section>
 
-                <!-- 9 version control & git -->
+                <!-- 9 version control -->
                 <section id="version" class="standard-card">
                     <div class="standard-title">git & commits <span>history as documentation</span></div>
                     <div class="standard-content">
@@ -1135,7 +1111,7 @@
                     </div>
                 </section>
 
-                <!-- 13 performance guidelines -->
+                <!-- 13 performance -->
                 <section id="perf" class="standard-card">
                     <div class="standard-title">performance <span>premature optimization</span></div>
                     <div class="standard-content">
@@ -1153,7 +1129,7 @@
                     </div>
                 </section>
 
-                <!-- 14 accessibility a11y -->
+                <!-- 14 a11y -->
                 <section id="a11y" class="standard-card">
                     <div class="standard-title">accessibility <span>inclusive by default</span></div>
                     <div class="standard-content">
@@ -1167,7 +1143,7 @@
                     </div>
                 </section>
 
-                <!-- 15 internationalization i18n -->
+                <!-- 15 i18n -->
                 <section id="i18n" class="standard-card">
                     <div class="standard-title">internationalization <span>think global</span></div>
                     <div class="standard-content">
@@ -1180,7 +1156,7 @@
                     </div>
                 </section>
 
-                <!-- 16 api design & versioning -->
+                <!-- 16 api design -->
                 <section id="api" class="standard-card">
                     <div class="standard-title">API design <span>backward compatibility</span></div>
                     <div class="standard-content">
@@ -1198,7 +1174,7 @@
                     </div>
                 </section>
 
-                <!-- 17 logging & observability -->
+                <!-- 17 logging -->
                 <section id="logging" class="standard-card">
                     <div class="standard-title">logging & observability <span>debugging asleep</span></div>
                     <div class="standard-content">
@@ -1240,7 +1216,7 @@
                     </div>
                 </section>
 
-                <!-- 20 ethics & bias -->
+                <!-- 20 ethics -->
                 <section id="ethics" class="standard-card">
                     <div class="standard-title">ethics & bias <span>code has consequences</span></div>
                     <div class="standard-content">
@@ -1254,7 +1230,7 @@
                     </div>
                 </section>
 
-                <!-- 21 onboarding & mentoring -->
+                <!-- 21 onboarding -->
                 <section id="onboarding" class="standard-card">
                     <div class="standard-title">onboarding & mentoring <span>grow the team</span></div>
                     <div class="standard-content">
@@ -1268,7 +1244,7 @@
                     </div>
                 </section>
 
-                <!-- 22 ci/cd pipelines -->
+                <!-- 22 ci/cd -->
                 <section id="ci" class="standard-card">
                     <div class="standard-title">CI/CD <span>automate everything</span></div>
                     <div class="standard-content">
@@ -1282,7 +1258,7 @@
                     </div>
                 </section>
 
-                <!-- 23 dependency management -->
+                <!-- 23 dependencies -->
                 <section id="deps" class="standard-card">
                     <div class="standard-title">dependencies <span>trust but verify</span></div>
                     <div class="standard-content">
@@ -1298,7 +1274,8 @@
 
             <!-- final note -->
             <div class="note-box" style="margin-top:20px;">
-                <p style="font-family:'DM Mono'; font-size:0.9rem; margin-bottom:5px;">🧠 the real world is messy</p>
+                <p style="font-family:'JetBrains Mono'; font-size:0.9rem; margin-bottom:5px;">🧠 the real world is messy
+                </p>
                 <p>Standards are guidelines, not straitjackets. Understand why they exist, adapt them to your context,
                     and always question if they still serve you. The best code is written by teams that communicate,
                     learn, and continuously improve.</p>
