@@ -19,8 +19,11 @@
             --bg-tertiary: #1e2638;
             --bg-elevated: #252f45;
             --bg-hover: #2d3a55;
-            --accent: #00d9ff;
-            --accent-glow: rgba(0, 217, 255, 0.3);
+            --accent-start: #9b00ff;
+            /* purple for gradient */
+            --accent-end: #00f0ff;
+            /* cyan for gradient */
+            --accent-glow: rgba(0, 240, 255, 0.3);
             --text-primary: #e8edf4;
             --text-secondary: #8b94a8;
             --text-muted: #5f6b7f;
@@ -93,7 +96,7 @@
         .orb-1 {
             width: 400px;
             height: 400px;
-            background: var(--accent);
+            background: var(--accent-end);
             top: -100px;
             right: -100px;
             animation-delay: 0s;
@@ -128,10 +131,12 @@
             z-index: 1;
         }
 
+        /* ----- TOPBAR – UPDATED WITH FINAL STANDARDS LOGO ----- */
         .topbar {
             background: rgba(10, 14, 23, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent-end);
+            /* use cyan accent */
             padding: 0.75rem 2rem;
             display: flex;
             align-items: center;
@@ -148,6 +153,7 @@
             gap: 1.5rem;
         }
 
+        /* Detailed jackal logo – adapted from final standards page */
         .jackal-logo {
             width: 2.5rem;
             height: 2.5rem;
@@ -156,17 +162,21 @@
 
         .jackal-logo path {
             fill: none;
-            stroke: url(#gradient);
-            stroke-width: 1;
+            stroke: url(#gradient-small);
+            stroke-width: 6;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+
+        .jackal-logo circle {
+            fill: url(#gradient-small);
         }
 
         .brand-text {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.4rem;
             letter-spacing: 0.1em;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-end) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -242,9 +252,10 @@
         }
 
         .progress-pill span {
-            color: var(--accent);
+            color: var(--accent-end);
         }
 
+        /* ----- rest of layout unchanged ----- */
         .layout {
             display: flex;
             flex: 1;
@@ -661,7 +672,7 @@
             margin-left: auto;
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.4rem;
-            color: var(--accent);
+            color: var(--accent-end);
         }
 
         .quiz-body {
@@ -712,8 +723,8 @@
         }
 
         .q-opt.selected {
-            border-color: var(--accent);
-            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--accent-end);
+            background: rgba(0, 240, 255, 0.1);
             color: var(--text-primary);
         }
 
@@ -751,7 +762,7 @@
         }
 
         .q-opt.selected .q-letter {
-            background: var(--accent);
+            background: var(--accent-end);
             color: #0a0e17;
         }
 
@@ -820,17 +831,17 @@
         }
 
         .quiz-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: var(--accent-end);
+            color: var(--accent-end);
         }
 
         .quiz-btn.primary {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: var(--accent-end);
+            color: var(--accent-end);
         }
 
         .quiz-btn.primary:hover {
-            background: rgba(0, 217, 255, 0.1);
+            background: rgba(0, 240, 255, 0.1);
         }
 
         .quiz-result {
@@ -1040,21 +1051,28 @@
 <body>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
+
+    <!-- Gradient definition for the updated jackal logo -->
     <svg width="0" height="0" style="position:absolute;">
         <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#e8edf4" />
-                <stop offset="100%" stop-color="#00d9ff" />
+            <linearGradient id="gradient-small" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#9b00ff" />
+                <stop offset="100%" stop-color="#00f0ff" />
             </linearGradient>
         </defs>
     </svg>
 
     <div class="app-container">
+        <!-- TOPBAR – now with refined jackal logo (detailed head, gradient stroke) -->
         <div class="topbar">
             <div class="brand">
-                <!-- MINIMAL JACKAL LOGO -->
+                <!-- Updated logo: detailed jackal head with eyes and nose -->
                 <svg class="jackal-logo" viewBox="0 0 100 100">
-                    <path d="M25,35 L15,15 L30,25 Q50,15 70,25 L85,15 L75,35 Q70,55 50,60 Q30,55 25,35 Z" />
+                    <path
+                        d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
+                    <circle cx="40" cy="38" r="4" />
+                    <circle cx="60" cy="38" r="4" />
+                    <circle cx="50" cy="48" r="3" />
                 </svg>
                 <span class="brand-text"><span class="j">JACKAL</span><span class="a">-</span><span
                         class="r">SYSTEMS</span></span>
@@ -1230,7 +1248,7 @@ StringBuilder uses a mutable char[] buffer that expands as needed.
                         {
                             h: 'Installing the JDK', body: [
                                 { t: 'p', c: 'To develop Java applications, you need the Java Development Kit (JDK). It includes the compiler (<code>javac</code>), the JVM, and standard class libraries.' },
-                                { t: 'p', c: 'Download the latest JDK from <a href="https://www.oracle.com/java/technologies/javase-downloads.html" style="color:var(--accent);">Oracle</a> or use an open‑source build like <a href="https://adoptium.net/" style="color:var(--accent);">Adoptium</a>.' },
+                                { t: 'p', c: 'Download the latest JDK from <a href="https://www.oracle.com/java/technologies/javase-downloads.html" style="color:var(--accent-end);">Oracle</a> or use an open‑source build like <a href="https://adoptium.net/" style="color:var(--accent-end);">Adoptium</a>.' },
                                 { t: 'p', c: 'After installation, verify it with:' },
                                 { t: 'code', lang: 'bash', c: 'java -version\njavac -version' },
                                 { t: 'p', c: 'Set the <code>JAVA_HOME</code> environment variable to the JDK installation path for tools like Maven or Gradle.' },

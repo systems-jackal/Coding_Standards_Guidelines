@@ -63,7 +63,7 @@
             gap: 12px;
         }
 
-        /* jackal logo SVG (small) */
+        /* SIMPLIFIED JACKAL LOGO – matching the minimal landing page */
         .jackal-logo-small {
             width: 2.2rem;
             height: 2.2rem;
@@ -72,8 +72,9 @@
 
         .jackal-logo-small path {
             fill: none;
-            stroke: url(#gradient-small);
-            stroke-width: 6;
+            stroke: url(#gradient);
+            stroke-width: 2;
+            /* slightly thicker for small size */
             stroke-linecap: round;
             stroke-linejoin: round;
         }
@@ -546,27 +547,22 @@
 </head>
 
 <body>
-    <!-- SVG gradient definitions (used by logo and other elements) -->
+    <!-- SVG gradient definition – same as minimal page (id="gradient") -->
     <svg width="0" height="0">
         <defs>
-            <linearGradient id="gradient-small" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#9b00ff" />
                 <stop offset="100%" stop-color="#00f0ff" />
             </linearGradient>
         </defs>
     </svg>
 
-    <!-- TOP BAR with Jackal logo and branded text (updated gradient) -->
+    <!-- TOP BAR with simplified jackal logo (minimal outline) -->
     <div class="topbar">
+        <!-- Simple outline logo (same as landing page) -->
         <svg class="jackal-logo-small" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <!-- Stylized jackal head (simplified) -->
-            <path
-                d="M30 35 L20 15 L35 25 L45 15 L40 30 Q50 40 60 30 L55 15 L70 25 L80 15 L70 35 Q65 55 50 60 Q35 55 30 35 Z" />
-            <!-- Eyes -->
-            <circle cx="40" cy="38" r="4" fill="url(#gradient-small)" />
-            <circle cx="60" cy="38" r="4" fill="url(#gradient-small)" />
-            <!-- Nose -->
-            <circle cx="50" cy="48" r="3" fill="url(#gradient-small)" />
+            <path class="jackal-outline"
+                d="M25,35 L15,15 L30,25 Q50,15 70,25 L85,15 L75,35 Q70,55 50,60 Q30,55 25,35 Z" />
         </svg>
         <div class="brand">
             <span class="j">JACKAL</span><span class="a">-</span><span class="r">SYSTEMS</span>
